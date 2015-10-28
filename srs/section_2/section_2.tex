@@ -1,0 +1,21 @@
+\section{Overall Description}
+This section contains an overall description of \myTaxiService{} software.
+\subsection{Product Perspective}
+The software is a completely new product, not based on other previous ones; in addition it relies on GPS cars signal to handle the service. Several programmatic API are provided in order to permit further improvements and expansions. In this way services like ‘taxi sharing’ could be built on the top of this API.
+\subsection{Product Features}
+MyTaxyService provides functions for both passengers and taxi drivers.
+A passenger can make a taxi request to the system, that has to answers informing the passenger about the code of the incoming taxi and the waiting time.
+On the other hand, taxi drivers should inform the system about their availability and confirm that they are going to take care of a certain call. The system guarantees a fair management of taxi queues. When a request arrives from a certain zone, the system forwards it to the first taxi queuing in that zone. If the taxi confirms, then the system will send a confirmation to the passenger. If not, then the system will forward the request to the second in the queue and will, at the same time, move the first taxi in the last position in the queue.
+\subsection{User Classes and Characteristics}
+This software is dedicated both to passengers and taxi drivers. The main focus is on the passenger, which is a final user of the software, whereas the taxi driver is only an intermediate user. Therefore passengers interface should be more attractive and well-finished, while the taxi drivers interface should more usable.
+Passengers can request a taxi either through a web application or a mobile app.
+Taxi drivers use a mobile application to inform the system about their availability and to confirm that they are going to take care of a certain call.
+Under a certain point of view, we could consider even an additional user class which is the one of the developers that will be using the project API to develop further services based on the provided ones.
+This last class needs an extensive documentation about the programmatic interfaces they will integrate in their development, but no proper user interface is provided for them.
+\subsection{Operating Environment}
+This software will operate on different machines in different environment. It
+TODO: Describe the environment in which the software will operate, including the hardware platform, operating system and versions, and any other software components or applications with which it must peacefully coexist.
+\subsection{Design and Implementation Constraints}
+TODO: Describe any items or issues that will limit the options available to the developers. These might include: corporate or regulatory policies; hardware limitations (timing requirements, memory requirements); interfaces to other applications; specific technologies, tools, and databases to be used; parallel operations; language requirements; communications protocols; security considerations; design conventions or programming standards (for example, if the customer’s organization will be responsible for maintaining the delivered software).
+\subsection{Assumptions and Dependencies}
+TODO: List any assumed factors (as opposed to known facts) that could affect the requirements stated in the SRS. These could include third-party or commercial components that you plan to use, issues around the development or operating environment, or constraints. The project could be affected if these assumptions are incorrect, are not shared, or change. Also identify any dependencies the project has on external factors, such as software components that you intend to reuse from another project, unless they are already documented elsewhere (for example, in the vision and scope document or the project plan).

@@ -1,0 +1,23 @@
+\documentclass{article}      % Specifies the document class
+                             % The preamble begins here.
+%\newcommand{\newCommandName}[parametersNumber]{a_string_that_replaces_the_"\newCommandName{params}"}
+%refer to params as #1, #2 etc.
+\newcommand{\myTaxiService}[0]{\emph{myTaxiService}}
+\newcommand{\setDepth}[1]{\setcounter{tocdepth}{#1}\setcounter{secnumdepth}{#1}}
+\newcommand{\sectionBaseDir}[1]{./section_#1}
+
+\newcommand{\sectionTexPath}[1]{\sectionBaseDir{#1}/section_#1.tex}
+\newcommand{\inputSection}[1]{\newpage\input{\sectionTexPath{#1}}}
+\setDepth{4}
+\title{Software Requirements Specifications}    % Declares the document's title.
+\author{Alberto Pirovano \and Alessandro Vetere}      % Declares the author's name.
+\date{October 26, 2015}      % Deleting this command produces today's date.
+\begin{document}             % End of preamble and beginning of text.
+\maketitle                   % Produces the title.
+Software Requirements Specifications of \myTaxiService{} project.
+\newpage
+\tableofcontents             % Prints the TOC
+\inputSection{1}
+\inputSection{2}
+\inputSection{3}
+\end{document}               % End of document.
