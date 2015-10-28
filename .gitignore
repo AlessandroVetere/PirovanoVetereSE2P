@@ -8,3 +8,4 @@
 !./srs/section_1/*.tex
 !./srs/section_2/*.tex
 !./srs/section_3/*.tex
+!./srs/section_3/uml/*.mdj
