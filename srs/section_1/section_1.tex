@@ -1,33 +1,36 @@
-\section{Introduction}      % Produces section heading.  Lower-level
-                             % sections are begun with similar
-                             % \subsection and \subsubsection commands.
-TODO: Introduction to \myTaxiService{} SRS document.
+\section{Introduction}      % Produces section heading.  Lower-level sections are begun with similar \subsection and \subsubsection commands.
+What follows is an introduction to \myTaxiService{} SRS document.
 \subsection{Purpose}
-The purpose of this document is to serve as a guide to software designers, developers and testers who are responsible for the engineering of the \myTaxiService{} project. Moreover, throw typical use cases and diagrams, it will show the interaction between the different agents involved in the application, in order to better explain the situation in which the software will interact with real world situation.
-It should give the engineers all of the information necessary to design, develop and test the software. In addition, it is an important tool for \myTaxiService{} stakeholders to check whether the product matches their initial demands, and to serve as a further contractual basis.
+The purpose of this document is to serve as a guide to software designers, developers and testers who are responsible for the engineering of the \myTaxiService{} project.
+Moreover, through UML use cases and diagrams, it will show the interaction between the different agents involved in the application, in order to better explain the environment in which the software will work when installed in the real world.
+This document should give the engineers all the necessary informations to design, develop and test the software.
+In addition, it is an important tool for stakeholders to check whether the product matches their initial demands, and to serve as a further contractual basis.
 \subsection{Scope}
 This document provides an overall description of \myTaxiService{} software system, showing its functional and non-functional requirements, constraints and external interfaces.
-It consists of natural language descriptions, UML diagrams and Alloy models of the different scenarios affected.
-%xyz qui mette la descrizione ad altissimo livello di quello che tratta l'applicazione, forse manca il paragrafo assumptions dove mettiamo le assuzioni sulle quali ci basiamo per fare il progetto.
+It consists of natural language descriptions, UML diagrams and Alloy models of the different features given.
 \subsubsection{Actors}
-\begin{itemize}
-	\item Taxi driver: all the owners of a vehicle that have given the availability join the service.
-	\item User: all the people that need to move from a position to another one around the city.
-\end{itemize}
+Below are listed the two main actors that will interact with the application once deployed:
+\begin{description}
+	\item[Taxi driver:]	Owner of a vehicle who is given the permission to provide the service.
+	\item[Non registered passenger:] A person that needs to move from a position to another one among the city and wants to use \myTaxiService{} in order to do so, but has not registered yet to the service.
+	\item[Registered passenger:] A former non registered passenger that has registered to \myTaxiService{}.
+\end{description}
 \subsubsection{Goals}
-\begin{itemize}
-	\item G1: A user can request a taxi ride
-	\item G2: A user can reserve a taxi ride
-	\item G3: A taxi driver can confirm it's availability to take a call
-	\item G4: A taxi driver can deny it's availability to take a call
-	\item G5: A user can register to the service
-	\item G6: A user can login to the service
-	\item G7: A taxi driver that denies availability is put last in his current zone waiting queue
-	\item G8: A user can only take a ride from a taxi driver who is first in his current zone queue
-	\item G9: A taxi driver belongs to at maximum one taxi queue at a time
-	\item G10: A user can use either a web application or a mobile application to access the service
-	\item G11: Further services can be built on the top of the existing one
-\end{itemize}
+This new service will achieve various goals, the main ones being:
+\begin{description}
+	\item[G1:] A user can only register to the service.
+	\item[G2:] A registered user can request a taxi ride only when logged to the service.
+	\item[G3:] A registered user can reserve a taxi ride only when logged to the service.
+	\item[G4:] A taxi driver can accept to give a ride to a registered user.
+	\item[G5:] A taxi driver can deny to give a ride to a user
+	\item[G6:] A user can register to the service
+	\item[G7:] A user can login to the service once registered, and only if registered
+	\item[G8:] A taxi driver that denies availability is put last in his current zone waiting queue
+	\item[G9:] A user can only take a ride from a taxi driver who is first in his current zone queue
+	\item[G10:] A taxi driver belongs to at maximum one taxi queue at a time
+	\item[G11:] A user can use either a web application or a mobile application to access the service
+	\item[G12:] Further services can be built on the top of the existing one
+\end{description}
 \subsection{TODO: Definitions, acronyms, and abbreviations}
 \begin{itemize}
 	\item SRS: Software Requirements Specification
