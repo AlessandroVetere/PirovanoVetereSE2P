@@ -18,27 +18,26 @@ Below are listed the two main actors that will interact with the application onc
 \subsubsection{Goals}
 This new service will achieve various goals, the main ones being:
 \begin{description}
-	\item[G1:] A user can only register to the service.
-	\item[G2:] A registered user can request a taxi ride only when logged to the service.
-	\item[G3:] A registered user can reserve a taxi ride only when logged to the service.
-	\item[G4:] A taxi driver can accept to give a ride to a registered user.
-	\item[G5:] A taxi driver can deny to give a ride to a user
-	\item[G6:] A user can register to the service
-	\item[G7:] A user can login to the service once registered, and only if registered
-	\item[G8:] A taxi driver that denies availability is put last in his current zone waiting queue
-	\item[G9:] A user can only take a ride from a taxi driver who is first in his current zone queue
-	\item[G10:] A taxi driver belongs to at maximum one taxi queue at a time
-	\item[G11:] A user can use either a web application or a mobile application to access the service
-	\item[G12:] Further services can be built on the top of the existing one
+	\item[G1:] A non registered passenger can only register to the service.
+	\item[G2:] A registered passenger can request a taxi ride only when logged to the service.
+	\item[G3:] A registered passenger can reserve a taxi ride only when logged to the service.
+	\item[G4:] A taxi driver can accept to give a ride to a registered user that requested one.
+	\item[G5:] A taxi driver can deny to give a ride to a user that requested one.
+	\item[G6:] A registered passenger can login to the service.
+	\item[G7:] A taxi driver that denies availability is put last in his current zone waiting queue.
+	\item[G8:] A user can only take a ride from a taxi driver who is first in his current zone waiting queue.
+	\item[G9:] A taxi driver belongs to at maximum one waiting queue at a time.
+	\item[G10:] A non registered passenger or a registered passenger can use either a web application or a mobile application to access the service.
+	\item[G11:] Further services can be built on the top of the existing one.
 \end{description}
-\subsection{TODO: Definitions, acronyms, and abbreviations}
+\subsection{Definitions, acronyms, and abbreviations}
 \begin{itemize}
-	\item SRS: Software Requirements Specification
-	\item UML: Unified Modelling Language
-	\item IEEE: Institute of Electrical and Electronics Engineers
-	\item Wi-Fi: Wireless Fidelty
-	\item WiMAX:
-	\item Bluetooth:
+	\item SRS: Software Requirements Specification, document based on IEEE 830.
+	\item UML: Unified Modelling Language.
+	\item IEEE: Institute of Electrical and Electronics Engineers.
+	\item Wi-Fi: Wireless Fidelity, technology for local area wireless computer networking technology based on IEEE 802.11 standard.
+	\item WiMAX: Worldwide Interoperability for Microwave Access, technology based on IEEE 802.16 standard.
+	\item Bluetooth: Wireless technology standard for exchanging data over short distances, once based on IEEE 802.15.1 standard.
 	\item Java:
 	\item Android:
 	\item iOs:
