@@ -15,13 +15,17 @@ In addition, several programmatic API are provided in order to permit further im
 In this way additional services like taxi sharing could be built on the top of this API.
 \subsection{Product Features}
 This project provides interesting features for both passengers and taxi drivers.
-For instance, a passenger can make a taxi request to the system, that has to answers informing the passenger about the code of the incoming taxi and the waiting time.
-On the other hand, taxi drivers should inform the system about their availability and confirm that they are going to take care of a certain call. The system guarantees a fair management of taxi queues.
+Passengers are divided in non registered passenger and registered passengers.
+Non registered passengers can only register to \myTaxiSerice{}, whereas registered passengers can make a taxi request to the system, that has to answers informing the passenger about the code of the incoming taxi and the waiting time.
+On the other hand, taxi drivers should inform the system about their availability and confirm that they are going to take care of a certain call.
+The system then guarantees a fair management of taxi queues.
 When a request arrives from a certain zone, the system forwards it to the first taxi queueing in that zone.
 If the taxi confirms, then the system will send a confirmation to the passenger.
 If not, then the system will forward the request to the second in the queue and will, at the same time, move the first taxi in the last position in the queue.
 \subsection{User Classes and Characteristics}
-This software is dedicated both to passengers and taxi drivers. The main focus is on the passenger, which is a final user of the software, whereas the taxi driver is only an intermediate user. Therefore passengers interface should be more attractive and well-finished, while the taxi drivers interface should more usable.
+This software is dedicated both to passengers and taxi drivers.
+The main focus is passengers, that are final users of the software, whereas taxi drivers are only intermediate users, trained to work with the application provided on their smartphonesW.
+Therefore passengers interface should be more attractive and well-finished, while the taxi drivers interface should more usable.
 Passengers can request a taxi either through a web application or a mobile application.
 Taxi drivers use a mobile application to inform the system about their availability and to confirm that they are going to take care of a certain call.
 Under a certain point of view, we could consider even an additional user class which is the one of the developers that will be using the project API to develop further services based on the provided ones.
