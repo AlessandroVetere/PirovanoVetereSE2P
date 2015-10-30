@@ -15,8 +15,8 @@ In addition, several programmatic API are provided in order to permit further im
 In this way additional services like taxi sharing could be built on the top of this API.
 \subsection{Product Features}
 This project provides interesting features for both passengers and taxi drivers.
-Passengers are divided in non registered passenger and registered passengers.
-Non registered passengers can only register to \myTaxiSerice{}, whereas registered passengers can make a taxi request to the system, that has to answers informing the passenger about the code of the incoming taxi and the waiting time.
+Passengers are divided into two disjoint sets: non registered passenger and registered passengers.
+Non registered passengers can only register to \myTaxiService{}, whereas registered passengers can make a taxi request to the system, that has to answers informing the passenger about the code of the incoming taxi and the waiting time.
 On the other hand, taxi drivers should inform the system about their availability and confirm that they are going to take care of a certain call.
 The system then guarantees a fair management of taxi queues.
 When a request arrives from a certain zone, the system forwards it to the first taxi queueing in that zone.
