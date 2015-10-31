@@ -14,23 +14,25 @@ Below are listed the two main actors that will interact with the application onc
 	%TODO Check actors
 	\itemBold{Taxi driver}	Owner of a vehicle who is given the permission to provide the service.
 	\itemBold{Non registered passenger} A person that needs to move from a position to another one among the city and wants to use \myTaxiService{} in order to do so, but has not registered yet to the service.
-	\itemBold{Registered passenger} A former non registered passenger that has registered to \myTaxiService{}.
+	%TODO Former o formerly?
+	\itemBold{Registered passenger} A formerly non registered passenger that has registered to \myTaxiService{}.
 \end{itemize}
 \subsubsection{Goals}
-This new service will achieve various goals, the main ones being:
+This new service pretends to achieve various goals, the main ones being:
 \begin{itemize}
 	%TODO Check goals
 	\itemBold{G1} A non registered passenger can only register to the service.
+	\itemBold{G6} A registered passenger can login to the service when not logged in.
+	\itemBold{G6} A registered passenger can logout from the service when logged in.
 	\itemBold{G2} A registered passenger can request a taxi ride only when logged to the service.
 	\itemBold{G3} A registered passenger can reserve a taxi ride only when logged to the service.
 	\itemBold{G4} A taxi driver can accept to give a ride to a registered user that requested one.
 	\itemBold{G5} A taxi driver can deny to give a ride to a user that requested one.
-	\itemBold{G6} A registered passenger can login to the service.
-	\itemBold{G7} A taxi driver that denies availability is put last in his current zone waiting queue.
-	\itemBold{G8} A user can only take a ride from a taxi driver who is first in his current zone waiting queue.
+	\itemBold{G7} A taxi driver that denies availability for a ride is put last in his current zone waiting queue.
+	\itemBold{G8} A registered passenger can only take a ride from a taxi driver who is first in his current zone waiting queue.
 	\itemBold{G9} A taxi driver belongs to at maximum one waiting queue at a time.
-	\itemBold{G10} A non registered passenger or a registered passenger can use either a web application or a mobile application to access the service.
-	\itemBold{G11} Further services can be built on the top of the existing one.
+	\itemBold{G10} Both a non registered passenger and a registered passenger can use either a web application or a mobile application to access the service.
+	\itemBold{G11} Further services can be built on the top of the existing one through a set of given APIs.
 \end{itemize}
 \subsection{Definitions, acronyms, and abbreviations}
 \begin{itemize}
@@ -40,10 +42,20 @@ This new service will achieve various goals, the main ones being:
 	\itemBold{Wi-Fi} Wireless Fidelity, technology for local area wireless computer networking technology based on IEEE 802.11 standard.
 	\itemBold{WiMAX} Worldwide Interoperability for Microwave Access, technology based on IEEE 802.16 standard.
 	\itemBold{Bluetooth} Wireless technology standard for exchanging data over short distances, once based on IEEE 802.15.1 standard.
+	\itemBold{LAN} Local Area Network, IEEE
+	%TODO Insert LAN IEEE standard reference
+	\itemBold{API} Application Programmatic Interface, a set of public accessible functions provided by a specific application.
+	\itemBold{GPS} Global Positioning System.
+	\itemBold{DBMS} Database Management System.
+	\itemBold{SDK} Software Development Toolkit.
 	%TODO Complete
-	\itemBold{Java}
-	\itemBold{Android}
-	\itemBold{iOs}
+	\itemBold{Service} The functionalities offered by \myTaxiService{} via software applications to passengers and taxi drivers.
+	\itemBold{System} The whole hardware and software parts that together deliver \myTaxiService{} as a service to passengers and taxi drivers.
+	\itemBold{Server} Also referred as \textbf{backend}, refers to the centralized part of the system installed in a dedicated facilty, that communicates with clients via a network.
+	\itemBold{Client} A part of the system that is not the server, and communicates with the server via network to access a desired service.
+	\itemBold{Smartphone Application} Also referred as \textbf{mobile application}
+	\itemBold{Web Application}
+	\itemBold{Web Server}
 	%TODO Add more definitions
 \end{itemize}
 \subsection{Overview}
