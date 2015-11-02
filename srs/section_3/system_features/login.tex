@@ -1,0 +1,36 @@
+\subsubsection{Login}
+This feature is related to goal \textbf{G3} and \textbf{G13}.
+\begin{itemize}
+	\itemBold{Actors} Registered passenger or a taxi driver (referred as Jim for brevity).
+	\itemBold{Pre condition} Jim is registered but not logged to \myTaxiService{}.
+	\itemBold{Post condition} Jim is logged to \myTaxiService{}.
+	\itemBold{Event Flow}
+	\begin{itemize}
+		\item Jim reaches either \myTaxiService{} web page or application.
+		\item Jim fills the login inputs with his credentials, and selects the confirmation input control.
+		\item The system acknowledges the login of Jim to the service.
+	\end{itemize}
+	\itemBold{Exceptions}
+	\begin{itemize}
+		\item The login credentials inserted are invalid: the system shows an error, reject the login and asks for correct credentials.
+	\end{itemize}
+\end{itemize}
+\paragraph{Description and Priority}
+This feature is of high priority, it is essential for the system to be.\par
+\paragraph{Functional Requirements}
+\begin{itemize}
+	\itemBold{FR9}
+\end{itemize}
+\paragraph{Scenarios}
+\begin{itemize}
+	\item Jack has already registered to \myTaxiService{} and wants to use the service on his smartphone.
+	He opens the mobile application and inserts his login credentials.
+	The password he inserted was not the one he chose during registration, because he made a typo using his keyboard.
+	The systems rejects his login and the application shows an error on-screen.
+	Jim then inserts more carefully the correct password and presses the login button: the systems acknowledges his login and Jim can use \myTaxiService{} as he wanted to do.
+\end{itemize}
+\paragraph{UML Diagrams}
+\subparagraph{UML Sequence Diagram}
+\showUmlImage{LoginSequenceDiagram}{Login UML Sequence Diagram}
+\paragraph{Alloy Model}
+Alloy code:
