@@ -2,12 +2,21 @@
                              % The preamble begins here.
 %\newcommand{\newCommandName}[parametersNumber]{a_string_that_replaces_the_"\newCommandName{params}"}
 %Refer to params as #1, #2 etc.
+\usepackage{graphicx}
+\usepackage{caption}
 \newcommand{\myTaxiService}[0]{\mbox{\emph{myTaxiService}}}
 \newcommand{\setDepth}[1]{\setcounter{tocdepth}{#1}\setcounter{secnumdepth}{#1}}
-\newcommand{\sectionBaseDir}[1]{./section_#1} %\sectionBaseDir{1} ./section_1
+\newcommand{\sectionBaseDir}[1]{./section_#1}
 \newcommand{\sectionTexPath}[1]{\sectionBaseDir{#1}/section_#1.tex}
 \newcommand{\inputSection}[1]{\newpage\input{\sectionTexPath{#1}}}
+\newcommand{\inputSystemFeature}[1]{\input{\sectionBaseDir{3}/system_features/#1.tex}}
 \newcommand{\itemBold}[1]{\item\textbf{#1:}}
+\newcommand{\showUmlImage}[2]{
+	\begin{center}
+		\includegraphics[width=\textwidth,keepaspectratio=true]{\sectionBaseDir{3}/uml/#1.png}
+		\captionof{figure}{#2}
+	\end{center}
+}
 \setDepth{4}
 \title{Requirements Analysis and Specification Document}    % Declares the document's title.
 \author{Alberto Pirovano \and Alessandro Vetere}      % Declares authors' names.
@@ -24,5 +33,4 @@
 \inputSection{2}
 \inputSection{3}
 \end{document}               % End of document.
-
 %TODO Inserire integrazione con servizio di mappe: Google Maps o Open Street Maps

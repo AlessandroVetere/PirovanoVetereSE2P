@@ -1,4 +1,4 @@
-\section{Introduction}      % Produces section heading.  Lower-level sections are begun with similar \subsection and \subsubsection commands.
+\section{Introduction}	% Produces section heading.  Lower-level sections are begun with similar \subsection and \subsubsection commands.
 What follows is an introduction to \myTaxiService{} RASD document.
 \subsection{Purpose}
 The purpose of this document is to serve as a guide to software designers, developers and testers who are responsible for the engineering of the \myTaxiService{} project.\par
@@ -17,18 +17,28 @@ Below are listed the two main actors that will interact with the application onc
 \subsubsection{Goals}
 This new service pretends to achieve various goals, the main ones being:
 \begin{itemize}
-	\itemBold{G1} A non registered passenger can only register to the service.
-	\itemBold{G2} A registered passenger can login to the service when not logged in.
-	\itemBold{G3} A registered passenger can logout from the service when logged in.
-	\itemBold{G4} A registered passenger can request a taxi ride only when logged to the service.
-	\itemBold{G5} A registered passenger can reserve a taxi ride only when logged to the service.
-	\itemBold{G6} A taxi driver can accept to give a ride to a registered user that requested one.
-	\itemBold{G7} A taxi driver can deny to give a ride to a user that requested one.
-	\itemBold{G8} A taxi driver that denies availability for a ride is put last in his current zone waiting queue.
-	\itemBold{G9} A registered passenger can only take a ride from a taxi driver who is first in his current zone waiting queue.
-	\itemBold{G10} A taxi driver belongs to at maximum one waiting queue at a time.
-	\itemBold{G11} Both a non registered passenger and a registered passenger can use either a web application or a mobile application to access the service.
-	\itemBold{G12} Further services can be built on the top of the existing one through a set of given APIs.
+	\itemBold{G1} A non registered passenger can only register once to the service.
+	\itemBold{G2} A registered passenger is registered to the service.
+	\itemBold{G3} A registered passenger can login to the service only when not logged in.
+	\itemBold{G4} A registered passenger can logout from the service only when logged in.
+	\itemBold{G5} A registered passenger can request a taxi ride only when logged to the service.
+	\itemBold{G6} A registered passenger can reserve a taxi ride only when logged to the service.
+	\itemBold{G7} A registered passenger can view his taxi requests when logged to the service.
+	\itemBold{G8} A registered passenger can cancel a taxi request only if he is viewing it.
+	\itemBold{G9} A registered passenger can view his taxi reservations when logged to the service.
+	\itemBold{G10} A registered passenger can cancel a taxi reservation only if he is viewing it.
+	\itemBold{G11} A registered passenger can handle his profile only when logged to the service.
+	\itemBold{G12} A taxi driver is registered to the service.
+	\itemBold{G13} A taxi driver can login to the service only when not logged in.
+	\itemBold{G14} A taxi driver can logout to the service only when not logged in.
+	\itemBold{G15} A taxi driver can accept to give a ride to a registered user that requested one.
+	\itemBold{G16} A taxi driver can deny to give a ride to a user that requested one.
+	\itemBold{G17} A taxi driver can notify the end of a ride.
+	\itemBold{G18} A taxi driver that denies availability for a ride is put last in his current zone waiting queue.
+	\itemBold{G19} A registered passenger can only take a ride from a taxi driver who is first in his current zone waiting queue.
+	\itemBold{G20} A taxi driver belongs to at maximum one waiting queue at a time.
+	\itemBold{G21} Both a non registered passenger and a registered passenger can use either a web application or a mobile application to access the service.
+	\itemBold{G22} Further services can be built on the top of the existing one through a set of given APIs.
 \end{itemize}
 \subsection{Definitions, acronyms, and abbreviations}
 Here are listed some of the necessary definitions, acronyms and abbreviations to make better understandable the content of the document:

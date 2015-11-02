@@ -16,43 +16,15 @@ No additional user interfaces are provided, not graphical nor textual.
 \subsubsection{Communications interfaces}
 %TODO
 \subsection{System Features}
-%TODO: This template illustrates organizing the functional requirements for the product by system features, the major services provided by the product. You may prefer to organize this section by use case, mode of operation, user class, object class, functional hierarchy, or combinations of these, whatever makes the most logical sense for your product.
 The system features are organized by use cases, so each subsection here represent a different use case for \myTaxiService{}.\par
-\subsubsection{Registration}
-This feature is related to goal \textbf{G1}.
-\begin{itemize}
-	\itemBold{Actors} Non registered passenger (referred as Bob for shortness).
-	\itemBold{Pre condition} Bob is not registered to \myTaxiService{} and wants to do so.
-	\itemBold{Post condition} Bob is now registered to \myTaxiService{} and therefore he is a member of registred passenger users class.
-	\itemBold{Event Flow}
-	\begin{itemize}
-		\item Bob reaches either \myTaxiService{} web page or application, and presses the registration input control.
-		\item Bob fills the registration page with his personal data, accepts the treatment of his personal data and presses the confirmation input control.
-		\item The system acknowledges the registration of Bob to the service and sends him a confirmation email.
-	\end{itemize}
-	\itemBold{Exceptions}
-	\begin{itemize}
-		\item The browser or the application is closed at any time: the whole registration process is invalidated.
-		\item The personal data inserted in the registration page are not valid: on confirmation the system asks Bob to correct the necessary informations.
-		\item Bob is already registered: on confirmation the system neglects registration.
-	\end{itemize}
-\end{itemize}
-%TODO
-\paragraph{Description and Priority}
-%TODO: Provide a short description of the feature and indicate whether it is of High, Medium, or Low priority. You could also include specific priority component ratings, such as benefit, penalty, cost, and risk (each rated on a relative scale from a low of 1 to a high of 9).
-\paragraph{Stimulus/Response Sequences}
-%TODO: List the sequences of user actions and system responses that stimulate the behavior defined for this feature. These will correspond to the dialog elements associated with use cases.
-\paragraph{Functional Requirements}
-%TODO: Itemize the detailed functional requirements associated with this feature. These are the software capabilities that must be present in order for the user to carry out the services provided by the feature, or to execute the use case. Include how the product should respond to anticipated error conditions or invalid inputs. Requirements should be concise, complete, unambiguous, verifiable, and necessary. Use “TBD” as a placeholder to indicate when necessary information is not yet available.
-%TODO: Each requirement should be uniquely identified with a sequence number or a meaningful tag of some kind.
-\begin{itemize}
-	\itemBold{FR1} A non registered passenger can register only once.
-	\itemBold{FR2} Personal data inserted during registration must be valid.
-	\itemBold{FR3} In no case can a registration process be resumed after browser or application closure.
-\end{itemize}
-\paragraph{Scenarios}
-\paragraph{UML Diagrams}
-\paragraph{Alloy Models}
+The use case considered are represented in this diagram: 
+
+\showUmlImage{UseCaseDiagram}{UML Use Case Diagram}
+
+\inputSystemFeature{registration}
+\inputSystemFeature{login}
+%\inputSystemFeature{logout}
+
 \subsection{Performance requirements}
 %TODO
 \subsection{Design constraints}
