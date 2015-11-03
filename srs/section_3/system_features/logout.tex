@@ -1,0 +1,32 @@
+\subsubsection{Logout}
+This feature is related to goal \textbf{G4} and \textbf{G14}.
+\begin{itemize}
+	\itemBold{Actors} Registered passenger or a taxi driver (referred as Nick for brevity).
+	\itemBold{Pre condition} Nick is logged to \myTaxiService{}.
+	\itemBold{Post condition} Nick is not logged to \myTaxiService{}.
+	\itemBold{Event Flow}
+	\begin{itemize}
+		\item Nick reaches either \myTaxiService{} mobile application or web page.
+		\item Nick selects the logout input control.
+		\item The system acknowledges Nick's logout and redirects him to the login input control.
+	\end{itemize}
+\end{itemize}
+\paragraph{Description and Priority}
+This feature is of medium priority, it is not essential for the system to be, but can lead to benefit in term of hardware resources utilization.\par
+\paragraph{Functional Requirements}
+\begin{itemize}
+	%TODO Fare
+	\itemBold{FR10}
+\end{itemize}
+\paragraph{Scenarios}
+\begin{itemize}
+	\item Foo is using \myTaxiService{} in his web browser and decides to end his activity to dedicate to something else.
+	He is a good guy and therefore he wants to cleanly logout from \myTaxiService{} before closing the web page.
+	Then, Foo clicks on the logout input control and the system acknowledges his action: he is not logged to \myTaxiService{} anymore and closes peacefully the web browser.
+\end{itemize}
+\paragraph{UML Diagrams}
+\subparagraph{UML Sequence Diagram}
+\showUmlImage{LogoutSequenceDiagram}{Logout UML Sequence Diagram}
+\paragraph{Alloy Model}
+%TODO Fare
+Alloy code:
