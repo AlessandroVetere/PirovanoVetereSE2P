@@ -11,12 +11,14 @@
 \newcommand{\inputSection}[1]{\newpage\input{\sectionTexPath{#1}}}
 \newcommand{\inputSystemFeature}[1]{\input{\sectionBaseDir{3}/system_features/#1.tex}}
 \newcommand{\itemBold}[1]{\item\textbf{#1:}}
-\newcommand{\showUmlImage}[2]{
+\newcommand{\showImage}[2]{
 	\begin{center}
-		\includegraphics[width=\textwidth,keepaspectratio=true]{\sectionBaseDir{3}/uml/#1.png}
+		\includegraphics[width=\textwidth,keepaspectratio=true]{#1}
 		\captionof{figure}{#2}
 	\end{center}
 }
+\newcommand{\showGeneralDiagram}{\showImage{\sectionBaseDir{2}/general_diagram.png}{General Diagram}}
+\newcommand{\showUmlImage}[2]{\showImage{\sectionBaseDir{3}/uml/#1.png}{#2}}
 \setDepth{4}
 \title{Requirements Analysis and Specification Document}    % Declares the document's title.
 \author{Alberto Pirovano \and Alessandro Vetere}      % Declares authors' names.
