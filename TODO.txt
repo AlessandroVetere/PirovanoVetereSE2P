@@ -1,0 +1,10 @@
+Correggere mockup: tasto modify da togliere
+Sequence diagram: rettangoli e starting point
+Spiegare funzionamento della coda e della lista di taxi ride con un diagramma (sequence o state chart da decidere)
+Aggiungere sequence diagram al documento
+Aggiungere mockup al documento
+Completare requisiti sezione 3
+Alloy
+Spiegare disegno struttura generale del sistema
+Integrare class diagram
+Riordinare UML
