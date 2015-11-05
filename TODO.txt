@@ -6,4 +6,21 @@ Alloy
 Spiegare disegno struttura generale del sistema 
 Integrare class diagram 
 Riordinare UML
-Aggiungere TD TAXI DRIVER NELLE ABBREVIATIONS
+
+Aggiungere nelle abbreviations
+TD PTRL TRQ TRS
+
+1)le reservations vanno nella stessa lista delle request? no...
+quindi dobbiamo fare due liste una "pending taxi request list" e una "pending taxi reservation list"
+
+2)quando un tassista viene estratto dalla coda nel ciclo del queue manager prima checka la coda delle request e poi quella delle reservations. il sistema deve avere poi lo schedule delle reservations di ogni tassista in modo tale da permetter di checkare la reservation solo se è concorde con lo schedule del tassita che sta analizzando le code(per evitare che venga proposta al tassista una corsa in un periodo in cui è gia prenotato per un'altra). dopo di che se lo schedule è concorde allora la reservation verrà proposta nell'apposito campo nell'UI del tassista, il quale potrà accettare o meno la reservation. se non la accetta allora la reservation scompare della lista nella sua UI e rimane nella lista delle reservation in attesa che un nuovo tassista la accetti.
+
+2)ho fatto il sequence diagram delle request e mi sono reso conto che noi gestiamo le request in modo asincrono (dovremmo scriverlo nel RASD) perchè quando una request viene aggiunta alla coda il sistema non fa nulla di particolare perchè il sistema è in un loop "infinito" nel quale continua a proporre le req e le res ai tassisti. quello che voglio dire è che quando una res o req viene aggiunta alla lista delle pending nel sequence non viene interessato l'attore tassista, come diceva di aver fatto il tuo friend. la richiesta infatti viene solo aggiunta e basta, il sistema non ha bisogno di comunicare nulla ai tassisti quando una richiesta viene aggiunta alla lista. Il queue manager dispaccia le richieste in un processo continuo indipendente dall'arrivo delle richieste di passaggio.
+
+3)io farei anche il sequence del cambio zona del taxi in modo tale da spiegare il funzionamento del locationmanager(un po esoterico se no). taxi cambia zona-> dequeue(taxista) da zona vecchia e enqueue(tassita) nella zona nuova.(abbastanza veloce)
+
+4)per le reservations quando arriva l'ora della reservation questa viene direttamente posta nella current request.
+
+5)il tassita "x" che viene prelevato dalla coda può 
+a) skippare il processo di check delle richieste e proposte perchè viene prelevato mezz'ora prima o mezz'ora dopo(tempo standard da decidere in base ad una statistica) di una reservation che ha accettato
+b) andare in check
