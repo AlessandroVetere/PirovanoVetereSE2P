@@ -5,5 +5,5 @@ Completare requisiti sezione 3
 Alloy 
 Spiegare disegno struttura generale del sistema 
 Integrare class diagram 
-Riordinare UML 
-tastino opzione modifica profilo
+Riordinare UML
+Aggiungere TD TAXI DRIVER NELLE ABBREVIATIONS
