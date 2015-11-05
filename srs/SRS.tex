@@ -11,18 +11,13 @@
 \newcommand{\inputSection}[1]{\newpage\input{\sectionTexPath{#1}}}
 \newcommand{\inputSystemFeature}[1]{\input{\sectionBaseDir{3}/system_features/#1.tex}}
 \newcommand{\itemBold}[1]{\item\textbf{#1:}}
-\newcommand{\showImage}[2]{
-	\begin{center}
-		\includegraphics[width=\textwidth,keepaspectratio=true]{#1}
-		\captionof{figure}{#2}
-	\end{center}
-}
 \newcommand{\showPercentImage}[3]{
 	\begin{center}
 		\includegraphics[width=#3\textwidth,keepaspectratio=true]{#1}
 		\captionof{figure}{#2}
 	\end{center}
 }
+\newcommand{\showImage}[2]{\showPercentImage{#1}{#2}{1}}
 \newcommand{\showGeneralDiagram}{\showImage{\sectionBaseDir{2}/general_diagram.png}{General Diagram}}
 \newcommand{\showUmlImage}[2]{\showImage{\sectionBaseDir{3}/uml/#1.png}{#2}}
 \newcommand{\showRPMockupImage}[2]{\showImage{\sectionBaseDir{3}/mockups/png_passenger/#1.png}{#2}}
