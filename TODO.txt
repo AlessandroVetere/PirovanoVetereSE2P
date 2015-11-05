@@ -1,9 +1,7 @@
-Spiegare funzionamento della coda e della lista di taxi ride con un diagramma (sequence o state chart da decidere) 
-Aggiungere sequence diagram al documento 
-Aggiungere mockup al documento 
-Completare requisiti sezione 3 
-Alloy 
-Spiegare disegno struttura generale del sistema 
-Integrare class diagram 
-Riordinare UML 
-tastino opzione modifica profilo
+a)Spiegare funzionamento della coda e della lista di taxi ride con un diagramma (sequence o state chart da decidere) -> loc manager e queue manager 
+b)Aggiungere sequence diagram al documento 
+c)Completare requisiti sezione 3 
+d)Alloy 
+e)Integrare class diagram 
+f)Riordinare UML 
+

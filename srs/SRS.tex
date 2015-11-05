@@ -17,8 +17,16 @@
 		\captionof{figure}{#2}
 	\end{center}
 }
+\newcommand{\showPercentImage}[3]{
+	\begin{center}
+		\includegraphics[width=#3\textwidth,keepaspectratio=true]{#1}
+		\captionof{figure}{#2}
+	\end{center}
+}
 \newcommand{\showGeneralDiagram}{\showImage{\sectionBaseDir{2}/general_diagram.png}{General Diagram}}
 \newcommand{\showUmlImage}[2]{\showImage{\sectionBaseDir{3}/uml/#1.png}{#2}}
+\newcommand{\showRPMockupImage}[2]{\showImage{\sectionBaseDir{3}/mockups/png_passenger/#1.png}{#2}}
+\newcommand{\showTDMockupImage}[2]{\showPercentImage{\sectionBaseDir{3}/mockups/png_driver/#1.png}{#2}{0.3}}
 \setDepth{4}
 \title{Requirements Analysis and Specification Document}    % Declares the document's title.
 \author{Alberto Pirovano \and Alessandro Vetere}      % Declares authors' names.
