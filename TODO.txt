@@ -4,4 +4,4 @@ c)Completare requisiti sezione 3
 d)Alloy 
 e)Integrare class diagram 
 f)Riordinare UML 
-
+g)fare state chart stato tassista
