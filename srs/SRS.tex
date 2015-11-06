@@ -4,6 +4,8 @@
 %Refer to params as #1, #2 etc.
 \usepackage{graphicx}
 \usepackage{caption}
+\usepackage{hyperref}
+\usepackage{color}
 \newcommand{\myTaxiService}[0]{\mbox{\emph{myTaxiService}}}
 \newcommand{\setDepth}[1]{\setcounter{tocdepth}{#1}\setcounter{secnumdepth}{#1}}
 \newcommand{\sectionBaseDir}[1]{./section_#1}
@@ -23,6 +25,11 @@
 \newcommand{\showRPMockupImage}[2]{\showImage{\sectionBaseDir{3}/mockups/png_passenger/#1.png}{#2}}
 \newcommand{\showTDMockupImage}[2]{\showPercentImage{\sectionBaseDir{3}/mockups/png_driver/#1.png}{#2}{0.3}}
 \setDepth{4}
+\hypersetup{
+	colorlinks=true, %set true if you want colored links
+	linktoc=all,     %set to all if you want both sections and subsections linked
+	linkcolor=black,
+}
 \title{Requirements Analysis and Specification Document}    % Declares the document's title.
 \author{Alberto Pirovano \and Alessandro Vetere}      % Declares authors' names.
 \date{\today}	% This command produces today's date.
