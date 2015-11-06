@@ -1,7 +1,4 @@
 a)Spiegare funzionamento della coda e della lista di taxi ride con un diagramma (sequence o state chart da decidere) -> loc manager e queue manager 
-b)Aggiungere sequence diagram al documento 
 c)Completare requisiti sezione 3 
-d)Alloy  
-e)fare state chart stato tassista
 f)importare i PNG dei sequence diagram corretti ! sono vecchi quelli nella cartella
 g) aggiungere l'assunzione che i tassisti non finiscono mai la corsa prima o dopo che sia effettivamente finita.
