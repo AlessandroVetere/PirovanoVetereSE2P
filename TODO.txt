@@ -1,4 +1,4 @@
 a)Spiegare funzionamento della coda e della lista di taxi ride con un diagramma (sequence o state chart da decidere) -> loc manager e queue manager 
 c)Completare requisiti sezione 3 
 f)importare i PNG dei sequence diagram corretti ! sono vecchi quelli nella cartella
-g) aggiungere l'assunzione che i tassisti non finiscono mai la corsa prima o dopo che sia effettivamente finita.
+g) aggiungere l'assunzione che i tassisti non finiscono mai la corsa prima o dopo che sia effettivamente finita. dati tassista sono inseriti nel db prima del deploy e possono essere modificati solo dall'amministatore
