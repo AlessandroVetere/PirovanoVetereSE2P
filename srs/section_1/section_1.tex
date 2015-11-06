@@ -30,7 +30,7 @@ This new service pretends to achieve various goals, the main ones being:
 	\itemBold{G11} A registered passenger can handle his profile only when logged to the service.
 	\itemBold{G12} A taxi driver is registered to the service.
 	\itemBold{G13} A taxi driver can login to the service only when not logged in.
-	\itemBold{G14} A taxi driver can logout to the service only when not logged in.
+	\itemBold{G14} A taxi driver can logout to the service only when logged in.
 	\itemBold{G15} A taxi driver can accept to give a ride to a registered user that requested one.
 	\itemBold{G16} A taxi driver can deny to give a ride to a user that requested one.
 	\itemBold{G17} A taxi driver can notify the end of a ride.
@@ -39,6 +39,7 @@ This new service pretends to achieve various goals, the main ones being:
 	\itemBold{G20} A taxi driver belongs to at maximum one waiting queue at a time.
 	\itemBold{G21} Both a non registered passenger and a registered passenger can use either a web application or a mobile application to access the service.
 	\itemBold{G22} Further services can be built on the top of the existing one through a set of given APIs.
+	\itemBold{G23} For a registered passenger that has requested a taxi ride, the system allocates a taxi driver to pick him up 10 minutes before the meeting time.
 \end{itemize}
 \subsection{Definitions, acronyms, and abbreviations}
 Here are listed some of the necessary definitions, acronyms and abbreviations to make better understandable the content of the document:
