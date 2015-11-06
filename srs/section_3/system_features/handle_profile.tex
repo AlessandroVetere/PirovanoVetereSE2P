@@ -1,10 +1,10 @@
 \subsubsection{Handle Personal Profile}
-%TODO: Cancel
+%TODO: Cancel, goals
 This feature is related to goal |, and to | use cases.
 \begin{itemize}
 	\itemBold{Actors} Registered passenger (referred as James for brevity).
 	\itemBold{Pre condition} James is logged to \myTaxiService{}.
-	\itemBold{Post condition} James's personal information are now updated.
+	\itemBold{Post condition} James is still logged to \myTaxiService{} and his personal information are now updated.
 	\itemBold{Event Flow}
 	\begin{itemize}
 		\item James reaches either \myTaxiService{} mobile application or web page and logs in.
@@ -17,8 +17,8 @@ This feature is related to goal |, and to | use cases.
 	\end{itemize}
 	\itemBold{Exceptions}
 	\begin{itemize}
-		\item Adam's requests list is empty: an info message is displayed by the system in place of the empty list.
-		\item Adam's reservations list is empty: an info message is displayed by the system in place of the empty list.
+		\item James inserts incorrect informations: the system sends a notification message.
+		\item James's smart phone connection goes down: she is notified to try again later.
 	\end{itemize}
 \end{itemize}
 \paragraph{Description and Priority}
@@ -30,10 +30,7 @@ This feature is of medium priority, it is not essential for the system to be, bu
 \end{itemize}
 \paragraph{Scenarios}
 \begin{itemize}
-	\item Lucas is using \myTaxiService{} in his web browser and has logged in a moment ago.
-	He is now in front of all his requests and reservations, and he can view all the informations he need.
-	%TODO Quali informazioni?
-	%TODO C'è uno storico?
+	\item James is waiting for his taxi and is navigating \myTaxiService{} application. \par He sees the modify profile button and he decides to change his credentials updating his email with one more used.
 \end{itemize}
 \paragraph{UML Diagrams}
 \subparagraph{UML Sequence Diagram}

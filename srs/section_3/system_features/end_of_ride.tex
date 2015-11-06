@@ -1,23 +1,27 @@
 \subsubsection{End Of Ride}
-%TODO: Cancel
+%TODO: Cancel, goals
 This feature is related to goal |, and to | use cases.
 \begin{itemize}
-	\itemBold{Actors} Registered passenger (referred as Adam for brevity).
-	\itemBold{Pre condition} Adam is logged to \myTaxiService{}.
-	\itemBold{Post condition} Adam is still logged to \myTaxiService{}.
+	\itemBold{Actors} Taxi Driver (referred as Bill for brevity).
+	\itemBold{Pre condition} Bill is logged to \myTaxiService{} and has finished his taxi ride.
+	\itemBold{Post condition} Bill is still logged to \myTaxiService{} and is able to join a new taxi ride.
 	\itemBold{Event Flow}
 	\begin{itemize}
-		\item Adam reaches either \myTaxiService{} mobile application or web page and logs in.
-		\item The system loads automatically into Adam's page all his taxi request and reservations into two separate lists.
+		\item Bill opens \myTaxiService{} mobile application.
+		\item The system loads automatically into Bill's page.
+		\item Bill sees the "Current Ride" area populated.
+		\item Bill pushes the "Notify End Of Ride" button.
+		\item The system marks the ride as terminated.
+		\item The system enqueues Bill to the queue of the zone in which the destination address is located, using the Location Manager service.
+		\item Bill receives a message about the confirmation of the termination of the ride. 
 	\end{itemize}
 	\itemBold{Exceptions}
 	\begin{itemize}
-		\item Adam's requests list is empty: an info message is displayed by the system in place of the empty list.
-		\item Adam's reservations list is empty: an info message is displayed by the system in place of the empty list.
+		\item Bill's smart phone connection goes down: she is notified to try again later.
 	\end{itemize}
 \end{itemize}
 \paragraph{Description and Priority}
-This feature is of medium priority, it is not essential for the system to be, but can increase by far the overall usability of \myTaxiService{} for registered passengers.\par
+This feature is of high priority, it is essential for the system to be: in fact without this feature the ride can't be completely handled and the system will never know when a ride is finished.\par In addition Bill can't accept another ride if he doesn't complete his current one.
 \paragraph{Functional Requirements}
 \begin{itemize}
 	%TODO Fare
@@ -25,10 +29,7 @@ This feature is of medium priority, it is not essential for the system to be, bu
 \end{itemize}
 \paragraph{Scenarios}
 \begin{itemize}
-	\item Lucas is using \myTaxiService{} in his web browser and has logged in a moment ago.
-	He is now in front of all his requests and reservations, and he can view all the informations he need.
-	%TODO Quali informazioni?
-	%TODO C'è uno storico?
+	\item Bill is arrived at the destination of his current ride. So the RP goes down from the taxi and, after he has paid, Bill has to notify he has completed his current request. \par So he holds his smart phone, he selects \myTaxiService{} mobile application and once he is logged in he holds the "Notify End Of Ride" button. \par He waits some seconds and the system responds him with the confirmation message.
 \end{itemize}
 \paragraph{UML Diagrams}
 \subparagraph{UML Sequence Diagram}

@@ -1,23 +1,35 @@
 \subsubsection{Notify Problem}
-%TODO: Cancel
+%TODO: Cancel, goals
 This feature is related to goal |, and to | use cases.
 \begin{itemize}
-	\itemBold{Actors} Registered passenger (referred as Adam for brevity).
-	\itemBold{Pre condition} Adam is logged to \myTaxiService{}.
-	\itemBold{Post condition} Adam is still logged to \myTaxiService{}.
+	\itemBold{Actors} Taxi Driver (referred as Amy for brevity) and Registerd Passenger (referred as Frank for brevity).
+	\itemBold{Pre condition} Amy is logged to \myTaxiService{}.
+	\itemBold{Post condition} Amy is still logged to \myTaxiService{} and her problem has been resolved.
 	\itemBold{Event Flow}
 	\begin{itemize}
-		\item Adam reaches either \myTaxiService{} mobile application or web page and logs in.
-		\item The system loads automatically into Adam's page all his taxi request and reservations into two separate lists.
+		\item Amy opens \myTaxiService{} mobile application.
+		\item The system loads automatically into Amy's page.
+		\item Amy decides to press the "Notify problem" button.
+		\item The system loads the dedicated screen.
+		\item Amy describes the problem using the dedicated text area.
+		\item Amy checks the combo box if the problem can be resolved without changing taxi.
+		\item Amy sends the report.
+		\item If the problem is not resolvable without changing taxi the system automatically creates e new taxi request.
+		\item The system puts it in the correct queue.
+		\item The system notify Amy that the service is finished.
+		\item The system waits for the first available taxi to join the request.
+		\item If the taxi is found Frank's interfaces is updated.
+		\item Else if the taxi is not found the system will notify Frank that no taxi can join his request.
+		\item Else if the system responds with the requested information and the ride can continue.
 	\end{itemize}
 	\itemBold{Exceptions}
 	\begin{itemize}
-		\item Adam's requests list is empty: an info message is displayed by the system in place of the empty list.
-		\item Adam's reservations list is empty: an info message is displayed by the system in place of the empty list.
+		\item Amy's smart phone connection goes down: she is notified to try again later.
+		\item The system crashes while is searching for a new taxi: Amy is notified with a notification message.
 	\end{itemize}
 \end{itemize}
 \paragraph{Description and Priority}
-This feature is of medium priority, it is not essential for the system to be, but can increase by far the overall usability of \myTaxiService{} for registered passengers.\par
+This feature is of high priority for the service to be. In fact without this feature the taxi driver could not handle all the problems and the final offered service will not be the best one.
 \paragraph{Functional Requirements}
 \begin{itemize}
 	%TODO Fare
@@ -25,10 +37,7 @@ This feature is of medium priority, it is not essential for the system to be, bu
 \end{itemize}
 \paragraph{Scenarios}
 \begin{itemize}
-	\item Lucas is using \myTaxiService{} in his web browser and has logged in a moment ago.
-	He is now in front of all his requests and reservations, and he can view all the informations he need.
-	%TODO Quali informazioni?
-	%TODO C'è uno storico?
+	\item Amy is taking Frank to the other part of the city. They are talking about Mauro Icardi's last goal when the car stops with no advice. \par Amy tries to turn it on but she can't. Then she takes her phone and reports the problem to the central back-end specifying that the problem is not solvable. \par The report is processed and the system sends Amy a notification saying that a new taxi is coming. \par Amy waits till the taxi arrived, greets Frank and they gather at the stadium. Frank takes the new taxi and heads to his destination.
 \end{itemize}
 \paragraph{UML Diagrams}
 \subparagraph{UML Sequence Diagram}
