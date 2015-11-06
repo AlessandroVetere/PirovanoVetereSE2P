@@ -1,12 +1,10 @@
-//TODO one != some
-
 /** === SIGNATURES === **/
 
 abstract sig Boolean {}
 
-one sig True extends Boolean {}
+lone sig True extends Boolean {}
 
-one sig False extends Boolean {}
+lone sig False extends Boolean {}
 
 abstract sig TaxiRide
 {
@@ -69,7 +67,7 @@ one sig QueueManager
 	taxiDriversQueue : set TaxiDriversQueue
 }
 
-one sig PendingTaxiRidesList
+lone sig PendingTaxiRides
 {
 	taxiRides : set TaxiRide
 }
@@ -86,6 +84,9 @@ fact
 
 	//No useless Problem
 	TaxiDriver.problem = Problem
+
+	//Problem are unique among TaxiDriver
+	all td1, td2 : TaxiDriver | td1.problem = td2.problem iff td1 = td2
 	
 	//No useless TaxiCar
 	TaxiDriver.taxiCar = TaxiCar
@@ -97,7 +98,7 @@ fact
 	#Address > 1
 
 	//At least a Address per zone
-	all z : Zone | (one a : Address | a.zone = z)
+	all z : Zone | (some a : Address | a.zone = z)
 
 	//No useless City
 	Zone.city = City
@@ -118,13 +119,13 @@ fact
 	all tdq1, tdq2 : TaxiDriversQueue | tdq1 != tdq2 implies tdq1.zone != tdq2.zone	
 
 	//Two different TaxiDriversQueue have no TaxiDriver in common
-	all tdq1, tdq2 : TaxiDriversQueue | (tdq1 != tdq2) implies #(tdq1.taxiDrivers & tdq2.taxiDrivers) = 0
+	all tdq1, tdq2 : TaxiDriversQueue | tdq1 != tdq2 implies #(tdq1.taxiDrivers & tdq2.taxiDrivers) = 0
 
 	//If a TaxiDriver is not doing a TaxiRide and has no Problem, he is in a TaxiDriversQueue
 	all td : TaxiDriver | (#td.problem = 0 and #td.taxiRide = 0) implies (one tdq : TaxiDriversQueue | td in tdq.taxiDrivers)
 
 	//If a TaxiDriver is doing a TaxiRide, he is in no TaxiDriversQueue
-	all td : TaxiDriver | #td.taxiRide > 0 implies not (one tdq : TaxiDriversQueue | td in tdq.taxiDrivers)
+	all td : TaxiDriver | #td.taxiRide > 0 implies not (some tdq : TaxiDriversQueue | td in tdq.taxiDrivers)
 
 	//Each TaxiDriver must drive a different TaxiCar
 	all td1, td2 : TaxiDriver | td1 != td2 implies td1.taxiCar != td2.taxiCar
@@ -136,7 +137,7 @@ fact
 	all tr : TaxiRide | tr.departureAddress != tr.arrivalAddress
 
 	//No TaxiRide is at the same time in the PendingTaxiRidesList and served by a TaxiDriver
-	no tr : TaxiRide | tr in PendingTaxiRidesList.taxiRides and tr in TaxiDriver.taxiRide
+	no tr : TaxiRide | tr in PendingTaxiRides.taxiRides and tr in TaxiDriver.taxiRide
 
 	//All TaxiDriver that are serving a TaxiRide are also driving a TaxiCar
 	all td : TaxiDriver | #td.taxiRide > 0 implies #td.taxiCar > 0
@@ -148,10 +149,13 @@ fact
 	all td : TaxiDriver | (#td.problem > 0 and #td.taxiRide > 0) implies (td.problem.canContinueWorking = True)
 
 	//A TaxiRide is either in PendingTaxiRidesList or being served by a TaxiDriver
-	all tr : TaxiRide | (tr in PendingTaxiRidesList.taxiRides) iff (not (tr in TaxiDriver.taxiRide))
+	all tr : TaxiRide | (tr in PendingTaxiRides.taxiRides) iff (not (tr in TaxiDriver.taxiRide))
+
+	//No useless PendingTaxiRide
+	TaxiDriver.taxiRide = TaxiRide implies #(PendingTaxiRides) = 0
 
 	//Every TaxiRide is either served or pending
-	TaxiDriver.taxiRide + PendingTaxiRidesList.taxiRides = TaxiRide
+	TaxiDriver.taxiRide + PendingTaxiRides.taxiRides = TaxiRide
 
 	//Every TaxiRide is either a requested or reserved
 	RegisteredPassenger.taxiRequest + RegisteredPassenger.taxiReservations = TaxiRide
@@ -159,20 +163,25 @@ fact
 	//Different TaxiDriver are associated to different TaxiRide
 	all td1, td2 : TaxiDriver | td1 != td2 implies td1.taxiRide != td2.taxiRide
 
-	//Different TaxiReservation cannot be served to a single RegisteredPassenger
-	no tr1, tr2 : TaxiReservation | tr1 != tr2 and (tr1 in TaxiDriver.taxiRide) and (tr2 in TaxiDriver.taxiRide) and (one rp : RegisteredPassenger | (tr1 in rp.taxiReservations) and (tr2 in rp.taxiReservations))
+	//Different TaxiReservation cannot be served at the same time to some RegisteredPassenger
+	no tr1, tr2 : TaxiReservation | tr1 != tr2 and (tr1 in TaxiDriver.taxiRide) and (tr2 in TaxiDriver.taxiRide) and (some rp : RegisteredPassenger | (tr1 in rp.taxiReservations) and (tr2 in rp.taxiReservations))
 
 	//No RegisteredPassenged can have served at the same time a TaxiRequest and a TaxiReservation
-	no tres : TaxiReservation, treq : TaxiRequest |  (tres in TaxiDriver.taxiRide) and (treq in TaxiDriver.taxiRide) and (one rp : RegisteredPassenger | (tres in rp.taxiReservations) and (treq in rp.taxiRequest))
-}
+	no tres : TaxiReservation, treq : TaxiRequest |  (tres in TaxiDriver.taxiRide) and (treq in TaxiDriver.taxiRide) and (some rp : RegisteredPassenger | (tres in rp.taxiReservations) and (treq in rp.taxiRequest))
 
+	//If a TaxiDriver has a Problem that makes him unable to continue working, he must be outside every TaxiDriversQueue
+	no td : TaxiDriver | #(td.problem) > 0 and td.problem.canContinueWorking = False and (td in TaxiDriversQueue.taxiDrivers)
+
+	//If there are TaxiRide in PendingTaxiRides for a given Zone, then there must be no TaxiDriver in that Zone related TaxiDriversQueue
+	all tr : TaxiRide | (tr in PendingTaxiRides.taxiRides) implies (no tdq : TaxiDriversQueue | tdq.zone = tr.departureAddress.zone and #(tdq.taxiDrivers) > 0)
+}
 
 /** === ASSERTIONS === **/
 
 //A TaxiCar is driven by only a TaxiDriver
 assert TaxiCarOnlyDrivenByOneTaxiDriver
 {
-	all tc : TaxiCar | one td : TaxiDriver | td.taxiCar = tc and (all td1 : TaxiDriver | td1 != td implies td1.taxiCar != tc)
+	all tc : TaxiCar | one td : TaxiDriver | td.taxiCar = tc
 }
 
 //No TaxiDriver can have a serious Problem and be serving a TaxiRide
@@ -184,18 +193,29 @@ assert NoTaxiDriverWithSeriousProblemCanBeServingATaxiDrive
 //All TaxiRides are RegisteredPassenger's generate (by at least one RegisteredPassenger, given the possibility of having TaxiSharing)
 assert RideAreIssuedByAtLeastARegisteredPassenger
 {
-	all tr : TaxiRide | one rp : RegisteredPassenger | (tr in rp.taxiRequest) or (tr in rp.taxiReservations)
+	all tr : TaxiRide | some rp : RegisteredPassenger | (tr in rp.taxiRequest) or (tr in rp.taxiReservations)
 }
-
-/** === FUNCTIONS === **/
 
 /** === PREDICATES === **/
 
-pred show
+pred SimpleWorld
 {
-	#TaxiRide > 4
-	#TaxiDriver.taxiRide > 0
-	#Zone > 2
+	#TaxiDriver = 1
+	#TaxiDriver.taxiRide = 1
+	#TaxiDriver.problem = 0
+	#RegisteredPassenger = 1
+	#RegisteredPassenger.taxiRequest = 1
+	#RegisteredPassenger.taxiReservations = 2
+	#TaxiRide = 3
+	#Zone = 1
+}
+
+pred RealWorld
+{
+	#RegisteredPassenger > 0
+	#TaxiDriver > 0
+	#TaxiRide > 0
+	#Zone = 6
 }
 
 /** === EXECUTIONS === **/
@@ -206,4 +226,6 @@ check NoTaxiDriverWithSeriousProblemCanBeServingATaxiDrive for 6
 
 check RideAreIssuedByAtLeastARegisteredPassenger for 6
 
-run show for 6
+run  SimpleWorld for 6
+
+run  RealWorld for 6
