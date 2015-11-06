@@ -22,6 +22,7 @@
 \newcommand{\showImage}[2]{\showPercentImage{#1}{#2}{1}}
 \newcommand{\showGeneralDiagram}{\showImage{\sectionBaseDir{2}/general_diagram.png}{General Diagram}}
 \newcommand{\showUmlImage}[2]{\showImage{\sectionBaseDir{3}/uml/#1.png}{#2}}
+\newcommand{\showAlloyImage}[3]{\showPercentImage{\sectionBaseDir{3}/alloy/#1.png}{#2}{#3}}
 \newcommand{\showRPMockupImage}[2]{\showImage{\sectionBaseDir{3}/mockups/png_passenger/#1.png}{#2}}
 \newcommand{\showTDMockupImage}[2]{\showPercentImage{\sectionBaseDir{3}/mockups/png_driver/#1.png}{#2}{0.3}}
 \setDepth{4}
@@ -31,7 +32,7 @@
 	linkcolor=black,
 }
 \title{Requirements Analysis and Specification Document}    % Declares the document's title.
-\author{Alberto Pirovano \and Alessandro Vetere}      % Declares authors' names.
+\author{Alberto Mario Pirovano \and Alessandro Vetere}      % Declares authors' names.
 \date{\today}	% This command produces today's date.
 \begin{document}	% End of preamble and beginning of text.
 \maketitle
@@ -44,5 +45,6 @@
 \inputSection{1}
 \inputSection{2}
 \inputSection{3}
+\inputSection{4}
 \end{document}               % End of document.
 %TODO Inserire integrazione con servizio di mappe: Google Maps
