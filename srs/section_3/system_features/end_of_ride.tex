@@ -14,7 +14,7 @@ This feature is related \textbf{Notify End of Ride} use case
 	\end{itemize}
 	\itemBold{Exceptions}
 	\begin{itemize}
-		\item Bill's smart phone connection goes down: he is notified to try again later.
+		\item Bill's Internet connection goes down: he is notified to try again later.
 	\end{itemize}
 \end{itemize}
 \paragraph{Description and Priority}
@@ -24,6 +24,7 @@ This feature is of high priority, it is essential for the system to be: in fact 
 	\itemBold{FR**} A taxi driver must be capable of notifying the end of a taxi ride he is serving.
 	\itemBold{FR**} The system must automatically re-enqueue the taxi driver that notifies the end of his current taxi ride in the queue of his current zone.
 	\itemBold{FR**} A notification must be sent from the system to the taxi driver to inform him about the result of his action.
+	\itemBold{FR**} The system must peacefully handle a connection error and notify the user of the problem.
 \end{itemize}
 \paragraph{Scenarios}
 \begin{itemize}

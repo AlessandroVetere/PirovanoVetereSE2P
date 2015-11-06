@@ -1,5 +1,5 @@
 \subsubsection{Login}
-This feature is related to goal \textbf{G3} and \textbf{G13}.
+This feature is related to goal \textbf{G3} and \textbf{G13} and to \textbf{Login} use case.
 \begin{itemize}
 	\itemBold{Actors} Registered passenger or a taxi driver (referred as Jim for brevity).
 	\itemBold{Pre condition} Jim is registered but not logged to \myTaxiService{}.
@@ -13,18 +13,21 @@ This feature is related to goal \textbf{G3} and \textbf{G13}.
 	\itemBold{Exceptions}
 	\begin{itemize}
 		\item The login credentials inserted are invalid: the system shows an error, reject the login and asks for correct credentials.
+		\item Jim's Internet connection goes down: he is not logged out.
 	\end{itemize}
 \end{itemize}
 \paragraph{Description and Priority}
 This feature is of high priority, it is essential for the system to be.\par
 \paragraph{Functional Requirements}
 \begin{itemize}
-	%TODO Fare
-	\itemBold{FR9}
+	\itemBold{FR**} The system must check the correctness of the user's inserted data.
+	\itemBold{FR**} The system must correctly handle internally the login token assignment to the user.
+	\itemBold{FR**} The system must notify the user about the result of his login.
+	\itemBold{FR**} The system must peacefully handle a connection error and notify the user of the problem.
 \end{itemize}
 \paragraph{Scenarios}
 \begin{itemize}
-	\item Jack has already registered to \myTaxiService{} and wants to use the service on his smartphone.
+	\item Jim has already registered to \myTaxiService{} and wants to use the service on his smartphone.
 	He opens the mobile application and inserts his login credentials.
 	The password he inserted was not the one he chose during registration, because he made a typo using his keyboard.
 	The systems rejects his login and the application shows an error on-screen.

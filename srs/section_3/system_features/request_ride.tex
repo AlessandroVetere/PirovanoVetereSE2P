@@ -1,10 +1,9 @@
 \subsubsection{Taxi Request}
-%TODO: Cancel, goals
-This feature is related to goal |, and to | use cases.
+This feature is related to goal \textbf{G5}, and to \textbf{Request Taxi Ride} use case.
 \begin{itemize}
 	\itemBold{Actors} Registered passenger (referred as Sarah for brevity).
 	\itemBold{Pre condition} Sarah is logged to \myTaxiService{}.
-	\itemBold{Post condition} Sarah is still logged to \myTaxiService{}, she has received a Notification Message and she is now waiting for the a system message with a Taxi ID and a waiting time.
+	\itemBold{Post condition} Sarah is still logged to \myTaxiService{}, she has received a Notification Message and she is now waiting for a system message with a Taxi ID and a waiting time.
 	\itemBold{Event Flow}
 	\begin{itemize}
 		\item Sarah reaches either \myTaxiService{} mobile application or web page and logs in.
@@ -19,15 +18,17 @@ This feature is related to goal |, and to | use cases.
 	\itemBold{Exceptions}
 	\begin{itemize}
 		\item Sarah provides incorrect information in the request form: she has to reinsert the informations.
-		\item Sarah's smart phone connection goes down: she is notified to try again later.
+		\item Sarah's Internet connection goes down: she is notified to try again later.
 	\end{itemize}
 \end{itemize}
 \paragraph{Description and Priority}
 This feature is of high priority, it is essential for \myTaxiService{} system to be. It is the main service that the application offers.
 \paragraph{Functional Requirements}
 \begin{itemize}
-	%TODO Fare
-	\itemBold{FR10}
+	\itemBold{FR**} The system must check the data inserted by a RP into the Request a Ride Page and notify the RP in case of problems.
+	\itemBold{FR**} The system must correctly handle internally a taxi ride that is successfully issued by a RP.
+	\itemBold{FR**} The RP must be notified about the result of his request.
+	\itemBold{FR**} The system must peacefully handle a connection error and notify the user of the problem.
 \end{itemize}
 \paragraph{Scenarios}
 \begin{itemize}
