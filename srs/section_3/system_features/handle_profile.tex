@@ -1,0 +1,40 @@
+\subsubsection{Handle Personal Profile}
+%TODO: Cancel
+This feature is related to goal |, and to | use cases.
+\begin{itemize}
+	\itemBold{Actors} Registered passenger (referred as James for brevity).
+	\itemBold{Pre condition} James is logged to \myTaxiService{}.
+	\itemBold{Post condition} James's personal information are now updated.
+	\itemBold{Event Flow}
+	\begin{itemize}
+		\item James reaches either \myTaxiService{} mobile application or web page and logs in.
+		\item James decides to modify his personal profile.
+		\item The system loads James's personal page.
+		\item James fills the box with the modifications he wants to perform.
+		\item James holds the "Modify Personal Profile" button.
+		\item James confirm to update his data.
+		\item If the modifications are correct the system responds with a confirmation message.
+	\end{itemize}
+	\itemBold{Exceptions}
+	\begin{itemize}
+		\item Adam's requests list is empty: an info message is displayed by the system in place of the empty list.
+		\item Adam's reservations list is empty: an info message is displayed by the system in place of the empty list.
+	\end{itemize}
+\end{itemize}
+\paragraph{Description and Priority}
+This feature is of medium priority, it is not essential for the system to be, but can increase by far the overall usability of \myTaxiService{} for registered passengers.\par
+\paragraph{Functional Requirements}
+\begin{itemize}
+	%TODO Fare
+	\itemBold{FR10}
+\end{itemize}
+\paragraph{Scenarios}
+\begin{itemize}
+	\item Lucas is using \myTaxiService{} in his web browser and has logged in a moment ago.
+	He is now in front of all his requests and reservations, and he can view all the informations he need.
+	%TODO Quali informazioni?
+	%TODO C'è uno storico?
+\end{itemize}
+\paragraph{UML Diagrams}
+\subparagraph{UML Sequence Diagram}
+\showUmlImage{HandleProfileSequenceDiagram}{Handle Profile UML Sequence Diagram}

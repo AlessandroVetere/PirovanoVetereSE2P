@@ -1,0 +1,35 @@
+\subsubsection{Notify Problem}
+%TODO: Cancel
+This feature is related to goal |, and to | use cases.
+\begin{itemize}
+	\itemBold{Actors} Registered passenger (referred as Adam for brevity).
+	\itemBold{Pre condition} Adam is logged to \myTaxiService{}.
+	\itemBold{Post condition} Adam is still logged to \myTaxiService{}.
+	\itemBold{Event Flow}
+	\begin{itemize}
+		\item Adam reaches either \myTaxiService{} mobile application or web page and logs in.
+		\item The system loads automatically into Adam's page all his taxi request and reservations into two separate lists.
+	\end{itemize}
+	\itemBold{Exceptions}
+	\begin{itemize}
+		\item Adam's requests list is empty: an info message is displayed by the system in place of the empty list.
+		\item Adam's reservations list is empty: an info message is displayed by the system in place of the empty list.
+	\end{itemize}
+\end{itemize}
+\paragraph{Description and Priority}
+This feature is of medium priority, it is not essential for the system to be, but can increase by far the overall usability of \myTaxiService{} for registered passengers.\par
+\paragraph{Functional Requirements}
+\begin{itemize}
+	%TODO Fare
+	\itemBold{FR10}
+\end{itemize}
+\paragraph{Scenarios}
+\begin{itemize}
+	\item Lucas is using \myTaxiService{} in his web browser and has logged in a moment ago.
+	He is now in front of all his requests and reservations, and he can view all the informations he need.
+	%TODO Quali informazioni?
+	%TODO C'è uno storico?
+\end{itemize}
+\paragraph{UML Diagrams}
+\subparagraph{UML Sequence Diagram}
+\showUmlImage{NotifyProblem}{TD Notify Problem UML Sequence Diagram}

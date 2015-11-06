@@ -1,23 +1,29 @@
-\subsubsection{View Request and Reservations}
-%TODO: Cancel
-This feature is related to goal \textbf{G5}, \textbf{G6}, \textbf{G7} and \textbf{G8}, and to \textbf{View Request}, \textbf{Cancel Request}, \textbf{View Reservation}, \textbf{Cancel Reservation} use cases.
+\subsubsection{Taxi Reservation}
+%TODO: Cancel, goals
+This feature is related to goal |, and to | use cases.
 \begin{itemize}
-	\itemBold{Actors} Registered passenger (referred as Adam for brevity).
-	\itemBold{Pre condition} Adam is logged to \myTaxiService{}.
-	\itemBold{Post condition} Adam is still logged to \myTaxiService{}.
+	\itemBold{Actors} Registered passenger (referred as Dylan for brevity).
+	\itemBold{Pre condition} Dylan is logged to \myTaxiService{}.
+	\itemBold{Post condition} Dylan is still logged to \myTaxiService{}, he has received a Notification Message and he is now waiting for the a system message with a Taxi ID and a waiting time.
 	\itemBold{Event Flow}
 	\begin{itemize}
-		\item Adam reaches either \myTaxiService{} mobile application or web page and logs in.
-		\item The system loads automatically into Adam's page all his taxi request and reservations into two separate lists.
+		\item Dylan reaches either \myTaxiService{} mobile application or web page and logs in.
+		\item The system loads automatically into Dylan's page.
+		\item Dylan pushes the "RESERVE A RIDE" button.
+		\item The system loads automatically into "RESERVE A RIDE" page.
+		\item Dylan inserts the origin, the destination, the date and the time of the Taxi reservation.
+		\item Dylan pushes the "Reserve" button.
+		\item The system adds the Taxi reservation to the Pending Taxi Ride Set.
+		\item Dylan receives a notification message about the correct processing of the reservation. 
 	\end{itemize}
 	\itemBold{Exceptions}
 	\begin{itemize}
-		\item Adam's requests list is empty: an info message is displayed by the system in place of the empty list.
-		\item Adam's reservations list is empty: an info message is displayed by the system in place of the empty list.
+		\item Dylan provides incorrect information in the reservation form: he has to reinsert the informations.
+		\item Dylan smart phone's connection goes down: he is notified to try again later.  
 	\end{itemize}
 \end{itemize}
 \paragraph{Description and Priority}
-This feature is of medium priority, it is not essential for the system to be, but can increase by far the overall usability of \myTaxiService{} for registered passengers.\par
+This feature is of high priority, it is essential for \myTaxiService{} system to be. It is the main service that the application offers.
 \paragraph{Functional Requirements}
 \begin{itemize}
 	%TODO Fare
@@ -25,11 +31,8 @@ This feature is of medium priority, it is not essential for the system to be, bu
 \end{itemize}
 \paragraph{Scenarios}
 \begin{itemize}
-	\item Lucas is using \myTaxiService{} in his web browser and has logged in a moment ago.
-	He is now in front of all his requests and reservations, and he can view all the informations he need.
-	%TODO Quali informazioni?
-	%TODO C'è uno storico?
+	\item Dylan is going to reach a friend by metro and he is taking a look to his e-mails. Scrolling them he sees a reply e-mail from a hiring newsletter asking him to show up to their office in 5 hours. \par So he decides to book a taxi in two hours from his stop to the location of the hiring office using \myTaxiService{} dedicated interface, so he can meet his friend and then he can go to he hiring interview.
 \end{itemize}
 \paragraph{UML Diagrams}
 \subparagraph{UML Sequence Diagram}
-\showUmlImage{ViewResRegSequenceDiagram}{View Requests and Reservations UML Sequence Diagram}
+\showUmlImage{ReserveTaxiSequenceDiagram}{Taxi Reservation UML Sequence Diagram}
