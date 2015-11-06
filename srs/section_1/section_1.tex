@@ -42,20 +42,33 @@ This new service pretends to achieve various goals, the main ones being:
 \end{itemize}
 \subsection{Definitions, acronyms, and abbreviations}
 Here are listed some of the necessary definitions, acronyms and abbreviations to make better understandable the content of the document:
+\subsubsection{Acronyms}
+As commonly used, some acronyms are included in the document and here explained:
 \begin{itemize}
 	\itemBold{IEEE} Institute of Electrical and Electronics Engineers.
 	\itemBold{SRS} Software Requirements Specification, document based on IEEE 830.
 	\itemBold{RASD} Requirements Analysis and Specification Document, also known as SRS.
 	\itemBold{UML} Unified Modelling Language.
-	\itemBold{Ethernet} Family of computer networking technologies for local area networks (LANs) and metropolitan area networks (MANs), first standardized in 1983 as IEEE 802.3.
 	\itemBold{Wi-Fi} Wireless Fidelity, technology for local area wireless computer networking technology based on IEEE 802.11 standard.
 	\itemBold{WiMAX} Worldwide Interoperability for Microwave Access, technology based on IEEE 802.16 standard.
-	\itemBold{Bluetooth} Wireless technology standard for exchanging data over short distances, once based on IEEE 802.15.1 standard.
-	\itemBold{Internet} The Internet is the global system of interconnected computer networks that use the Internet protocol suite (TCP/IP) to link billions of devices worldwide.
 	\itemBold{API} Application Programming Interface, a set of public accessible functions, protocols and tools provided by a specific application for building software applications.
 	\itemBold{GPS} Global Positioning System.
 	\itemBold{DBMS} DataBase Management System.
 	\itemBold{SDK} Software Development Toolkit.
+	\itemBold{URI} Uniform Resource Identifier, a string of characters used to identify the name of a resource.
+	\itemBold{URL} Uniform Resource Locator, a specific type of URI that reference to a web resource that specifies its location on a computer network and a mechanism for retrieving it.
+	\itemBold{HTTP} The Hypertext Transfer Protocol is an application protocol for distributed, collaborative, hypermedia information systems; HTTP is the foundation of data communication for the World Wide Web.
+	\itemBold{HTTPS} Communication protocol over HTTP within a connection encrypted by Transport Layer Security.
+	\itemBold{GUI} Graphical User Interface.
+	\itemBold{LAN} Local Area Network.
+	\itemBold{MAN} Metropolitan Area Network.
+\end{itemize}
+\subsubsection{Definitions}
+What follows is a list of definitions of some terms used in the document:
+\begin{itemize}
+	\itemBold{Ethernet} Family of computer networking technologies for LANs and MANs, first standardized in 1983 as IEEE 802.3.
+	\itemBold{Bluetooth} Wireless technology standard for exchanging data over short distances, once based on IEEE 802.15.1 standard.
+	\itemBold{Internet} The Internet is the global system of interconnected computer networks that use the Internet protocol suite (TCP/IP) to link billions of devices worldwide.
 	\itemBold{Service} The functionalities offered by \myTaxiService{} via software applications to passengers and taxi drivers.
 	\itemBold{System} The whole hardware and software parts that together deliver \myTaxiService{} as a service to passengers and taxi drivers.
 	\itemBold{Server} The centralized part of the system installed in a dedicated facility, that communicates with clients via a network.
@@ -63,23 +76,21 @@ Here are listed some of the necessary definitions, acronyms and abbreviations to
 	\itemBold{Smartphone} A mobile phone with an advanced mobile operating systems, which combines features of a personal computer operating system with other features useful for mobile or handheld use.
 	\itemBold{Application} A computer program (i.e. a piece of software) that performs a group of coordinated functions, tasks, or activities for the benefit of the user.
 	\itemBold{Smartphone Application} Also referred as \textbf{mobile application}, is an application designed to run on smartphones.
-	\itemBold{URI} Uniform Resource Identifier, a string of characters used to identify the name of a resource.
-	\itemBold{URL} Uniform Resource Locator, a specific type of URI that reference to a web resource that specifies its location on a computer network and a mechanism for retrieving it.
 	\itemBold{World Wide Web} Also referred as \textbf{web}, is an information space where documents and other web resources are identified by URLs, interlinked by hypertext links, and can be accessed via the Internet.
 	\itemBold{Web Browser} Software application for retrieving, presenting, and traversing information resources on the World Wide Web.
-	\itemBold{HTTP} The Hypertext Transfer Protocol is an application protocol for distributed, collaborative, hypermedia information systems; HTTP is the foundation of data communication for the World Wide Web.
-	\itemBold{HTTPS} Communication protocol over HTTP within a connection encrypted by Transport Layer Security.
 	\itemBold{Web Page} A web document that is suitable for the World Wide Web and the web browser.
 	\itemBold{Web Server} An information technology that processes requests via HTTP and stores, processes and deliver web pages to clients.
 	\itemBold{Web Application} A client-server software application in which the client (or user interface) runs in a web browser.
-	\itemBold{GUI} Graphical User Interface.
-	%TODO Separare
-	\itemBold{RP} Registered passenger.
-	\itemBold{TD} Taxi driver
-	\itemBold{PTRS} Pending Taxi Ride Set
-	\itemBold{TRQ} Taxi Request
-	\itemBold{TRS} Taxi Reservation
 \end{itemize}
+\subsubsection{Abbreviations}
+For the sake of brevity, some abbreviations are adopted:
+\begin{itemize}
+	\itemBold{RP} Registered passenger.
+	\itemBold{TD} Taxi driver.
+	\itemBold{PTRS} Pending Taxi Ride Set.
+	\itemBold{TRQ} Taxi Request.
+	\itemBold{TRS} Taxi Reservation.
+\end{itemize}	
 \subsection{Overview}
 This document is structured in 3 main parts:
 \begin{itemize}
