@@ -74,6 +74,13 @@ The use case considered are represented in this diagram:
 \inputSystemFeature{end_of_ride}
 \subsubsection{UML Class Diagram}
 \showUmlImage{ClassDiagram}{UML Class Diagram}
+\subsubsection{State Chart Diagram}
+The state chart diagram proposed below has te aim of better explaining the different states in which the TD can be during the use of \myTaxiService{}. \par
+Moreover there are two particular states, "TD Not Able To Work Connection Error" and "TD Working Connection Error", that are included with the aim of better showing the software behaviour when some unexpected problem occurs. \par
+In these cases TD is redirected to a login screen in which he remains till the problem is resolved(for example the connections returns up).\par 
+In particular the system is built to store and periodically update a session object in order to restore the application when TD logs in once the problem is resolved. \par 
+In this way the login procedure  brings the TD exactly in the same state in which he was after the problem.
+\showUmlImage{StateChartDiagram}{Taxi Driver State Chart Diagram}
 \subsubsection{Alloy Model}
 %TODO: Inserire modello alloy
 \subsection{Performance requirements}
