@@ -164,19 +164,23 @@ fact
 	all td1, td2 : TaxiDriver | td1 != td2 implies td1.taxiRide != td2.taxiRide
 
 	//Different TaxiReservation cannot be served at the same time to some RegisteredPassenger
-	no tr1, tr2 : TaxiReservation | tr1 != tr2 and (tr1 in TaxiDriver.taxiRide) and (tr2 in TaxiDriver.taxiRide) and (some rp : RegisteredPassenger | (tr1 in rp.taxiReservations) and (tr2 in rp.taxiReservations))
+	no tr1, tr2 : TaxiReservation | tr1 != tr2 and (tr1 in TaxiDriver.taxiRide) and (tr2 in TaxiDriver.taxiRide) and
+							(some rp : RegisteredPassenger | (tr1 in rp.taxiReservations) and (tr2 in rp.taxiReservations))
 
 	//No RegisteredPassenged can have served at the same time a TaxiRequest and a TaxiReservation
-	no tres : TaxiReservation, treq : TaxiRequest |  (tres in TaxiDriver.taxiRide) and (treq in TaxiDriver.taxiRide) and (some rp : RegisteredPassenger | (tres in rp.taxiReservations) and (treq in rp.taxiRequest))
+	no tres : TaxiReservation, treq : TaxiRequest |  (tres in TaxiDriver.taxiRide) and (treq in TaxiDriver.taxiRide) and
+							(some rp : RegisteredPassenger | (tres in rp.taxiReservations) and (treq in rp.taxiRequest))
 
 	//If a TaxiDriver has a Problem that makes him unable to continue working, he must be outside every TaxiDriversQueue
 	no td : TaxiDriver | #(td.problem) > 0 and td.problem.canContinueWorking = False and (td in TaxiDriversQueue.taxiDrivers)
 
 	//If there are TaxiRide in PendingTaxiRides for a given Zone, then there must be no TaxiDriver in that Zone related TaxiDriversQueue
-	all tr : TaxiRide | (tr in PendingTaxiRides.taxiRides) implies (no tdq : TaxiDriversQueue | tdq.zone = tr.departureAddress.zone and #(tdq.taxiDrivers) > 0)
+	all tr : TaxiRide | (tr in PendingTaxiRides.taxiRides) implies
+							(no tdq : TaxiDriversQueue | tdq.zone = tr.departureAddress.zone and #(tdq.taxiDrivers) > 0)
 
 	//If a RegisteredPassenger has a TaxiReservation being served, he can have no TaxiRequest
-	all rp : RegisteredPassenger | some tr : TaxiReservation | ((tr in rp.taxiReservations) and (tr in TaxiDriver.taxiRide)) implies #(rp.taxiRequest) = 0
+	all rp : RegisteredPassenger | some tr : TaxiReservation | ((tr in rp.taxiReservations) and
+							(tr in TaxiDriver.taxiRide)) implies #(rp.taxiRequest) = 0
 }
 
 /** === ASSERTIONS === **/
