@@ -86,7 +86,7 @@ fact
 	TaxiDriver.problem = Problem
 
 	//Problem are unique among TaxiDriver
-	all td1, td2 : TaxiDriver | td1.problem = td2.problem iff td1 = td2
+	all td1, td2 : TaxiDriver | (#(td1.problem) > 0 and #(td2.problem) > 0 and td1 != td2) implies td1.problem != td2.problem
 	
 	//No useless TaxiCar
 	TaxiDriver.taxiCar = TaxiCar
@@ -110,7 +110,7 @@ fact
 	QueueManager.taxiDriversQueue = TaxiDriversQueue
 
 	//Unique username for all users
-	all u1, u2 : User | u1 != u2 iff u1.username != u2.username	
+	all u1, u2 : User | u1 != u2 implies u1.username != u2.username	
 
 	//Every zone is associated to a to at least one TaxiDriversQueue
 	all z : Zone | z in TaxiDriversQueue.zone
@@ -174,6 +174,9 @@ fact
 
 	//If there are TaxiRide in PendingTaxiRides for a given Zone, then there must be no TaxiDriver in that Zone related TaxiDriversQueue
 	all tr : TaxiRide | (tr in PendingTaxiRides.taxiRides) implies (no tdq : TaxiDriversQueue | tdq.zone = tr.departureAddress.zone and #(tdq.taxiDrivers) > 0)
+
+	//If a RegisteredPassenger has a TaxiReservation being served, he can have no TaxiRequest
+	all rp : RegisteredPassenger | some tr : TaxiReservation | ((tr in rp.taxiReservations) and (tr in TaxiDriver.taxiRide)) implies #(rp.taxiRequest) = 0
 }
 
 /** === ASSERTIONS === **/
@@ -196,28 +199,35 @@ assert RideAreIssuedByAtLeastARegisteredPassenger
 	all tr : TaxiRide | some rp : RegisteredPassenger | (tr in rp.taxiRequest) or (tr in rp.taxiReservations)
 }
 
+//There are as many Username as TaxiDriver plus RegisteredPassenger
+assert AsManyUsernameAsManyAsUsers
+{
+	#Username = #TaxiDriver + #RegisteredPassenger
+}
+
+
 /** === PREDICATES === **/
 
 pred SimpleWorld
 {
-	#TaxiDriver = 1
+	#TaxiDriver = 2
 	#TaxiDriver.taxiRide = 1
 	#TaxiDriver.problem = 0
-	#RegisteredPassenger = 1
+	#RegisteredPassenger = 2
 	#RegisteredPassenger.taxiRequest = 1
-	#RegisteredPassenger.taxiReservations = 2
 	#TaxiRide = 3
-	#Zone = 1
+	#Zone = 2
 }
 
 pred RealWorld
 {
-	#RegisteredPassenger > 0
-	#TaxiDriver > 0
-	#TaxiRide > 0
+	#TaxiDriver > 1
+	#Problem > 1
+	#RegisteredPassenger > 1
+	#TaxiRide > 1
 	#Zone = 6
 }
-
+	
 /** === EXECUTIONS === **/
 
 check TaxiCarOnlyDrivenByOneTaxiDriver for 6
@@ -226,6 +236,8 @@ check NoTaxiDriverWithSeriousProblemCanBeServingATaxiDrive for 6
 
 check RideAreIssuedByAtLeastARegisteredPassenger for 6
 
-run  SimpleWorld for 6
+check AsManyUsernameAsManyAsUsers for 6
 
-run  RealWorld for 6
+run SimpleWorld for 6
+
+run RealWorld for 6
