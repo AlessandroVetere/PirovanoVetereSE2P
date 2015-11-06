@@ -112,7 +112,12 @@ In this way the login procedure  brings the TD exactly in the same state in whic
 	\showAlloyImage{real_world}{Alloy Real World.}{0.45}
 \end{itemize}
 \subsection{Performance requirements}
-In this subsection are specified the most important non functional requirement.
+In this subsection are specified the most important non functional requirement.\par
+\begin{itemize}
+	\item The system must perform every operation in less than 10 seconds.
+	\item The system must handle 1000 users and 400 taxi drivers connected at the same time.
+	\item The system must handle a number of Registered Passenger equals to 10 time the number of the taxi drivers in the town.
+\end{itemize}
 \subsubsection{Reliability}
 The service must be available 7 days a week 24 hours a day. \par The server must support parallel processing in order to guarantee a fast and continuous service.
 \subsubsection{Availability}
@@ -123,9 +128,3 @@ Internet connection must be encrypted with a recognized SSL certificate (HTTPS p
 The software must be build accompanied with proper documentation and it must comply with Model-View-Controller programmative pattern. In fact using this pattern ensures great opportunities of extension.
 \subsubsection{Portability}
 The system must support the integration between different OS, OSX, Windows, Ubuntu. \par Moreover the user experience must be the same if user decide to access the service via IE, Opera,Chrome and Firefox. In the case the user decides to use the mobile application the system must guarantee the same feature in Android base system and IOS base system.
-\subsection{Design constraints}
-%TODO
-\subsection{Software system attributes}
-%TODO
-\subsection{Other requirements}
-%TODO
