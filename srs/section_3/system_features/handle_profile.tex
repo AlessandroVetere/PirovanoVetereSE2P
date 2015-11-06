@@ -1,6 +1,5 @@
 \subsubsection{Handle Personal Profile}
-%TODO: Cancel, goals
-This feature is related to goal |, and to | use cases.
+This feature is related to \textbf{Handle Profile} use case.
 \begin{itemize}
 	\itemBold{Actors} Registered passenger (referred as James for brevity).
 	\itemBold{Pre condition} James is logged to \myTaxiService{}.
@@ -18,15 +17,17 @@ This feature is related to goal |, and to | use cases.
 	\itemBold{Exceptions}
 	\begin{itemize}
 		\item James inserts incorrect informations: the system sends a notification message.
-		\item James's smart phone connection goes down: she is notified to try again later.
+		\item James' Internet connection goes down: she is notified to try again later.
 	\end{itemize}
 \end{itemize}
 \paragraph{Description and Priority}
-This feature is of medium priority, it is not essential for the system to be, but can increase by far the overall usability of \myTaxiService{} for registered passengers.\par
+This feature is of medium priority, it is not essential for the system to be, but can increase by far the overall usability of \myTaxiService{} for registered passengers.
 \paragraph{Functional Requirements}
 \begin{itemize}
-	%TODO Fare
-	\itemBold{FR10}
+	\itemBold{FR**} The system must check the correctness of a RP's inserted data.
+	\itemBold{FR**} The system must be coherent with the RP inserted data modification, if the modification goes fine.
+	\itemBold{FR**} The system must inform a RP about the result of his modification.
+	\itemBold{FR**} The system must peacefully handle a connection error and notify the user of the problem.
 \end{itemize}
 \paragraph{Scenarios}
 \begin{itemize}

@@ -1,5 +1,5 @@
 \subsubsection{Logout}
-This feature is related to goal \textbf{G4} and \textbf{G14}.
+This feature is related to goal \textbf{G4} and \textbf{G14}, and to \textbf{Logout} use case.
 \begin{itemize}
 	\itemBold{Actors} Registered passenger or a taxi driver (referred as Nick for brevity).
 	\itemBold{Pre condition} Nick is logged to \myTaxiService{}.
@@ -7,16 +7,22 @@ This feature is related to goal \textbf{G4} and \textbf{G14}.
 	\itemBold{Event Flow}
 	\begin{itemize}
 		\item Nick reaches either \myTaxiService{} mobile application or web page.
+		\item The system loads automatically Nick's personal home page.
 		\item Nick selects the logout input control.
-		\item The system acknowledges Nick's logout and redirects him to the login input control.
+		\item The system acknowledges Nick's logout and redirects him to the home page.
+	\end{itemize}
+	\itemBold{Exceptions}
+	\begin{itemize}
+		\item Nick's Internet connection goes down: he is not logged out.
 	\end{itemize}
 \end{itemize}
 \paragraph{Description and Priority}
 This feature is of medium priority, it is not essential for the system to be, but can lead to benefit in term of hardware resources utilization.\par
 \paragraph{Functional Requirements}
 \begin{itemize}
-	%TODO Fare
-	\itemBold{FR10}
+	\itemBold{FR**} The system must offer the possibility to logout to a given RP.
+	\itemBold{FR**} After the logout, the system must redirect the RP to the \myTaxiService{} home page.
+	\itemBold{FR**} The system must peacefully handle a connection error and notify the user of the problem.
 \end{itemize}
 \paragraph{Scenarios}
 \begin{itemize}
