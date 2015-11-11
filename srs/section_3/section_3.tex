@@ -14,48 +14,48 @@ Firstly are shown the screens of the passenger interface, putting beside the app
 \newpage
 \paragraph{Passenger mockups}
 \begin{itemize}
-	\item Homepage
-	\showRPMockupImage{Homepage}{\myTaxiService{} homepage.}
-	\item Registration
-	\showRPMockupImage{Registration}{Registration screens.}
-	\item Login
-	\showRPMockupImage{Login}{Login screens.}
-	\item Empty registered passenger home page
-	\showRPMockupImage{RegisteredPassengerHomePage}{State 1 of RP home page.}
-	\item Request a taxi home page
-	\showRPMockupImage{RequestTaxi}{Taxi request.}
-	\item Reserve a taxi home page
-	\showRPMockupImage{ReserveTaxi}{Taxi Reservation.}
-	\item Registered passenger home page
-	\showRPMockupImage{RegisteredPassengerHomePage2}{State 2 of RP home page.}
-	\item Cancellation of a ride in registered passenger home page
-	\showRPMockupImage{RegisteredPassengerHomePage3}{State 3 of RP home page.}
+	\unbreakableItem{Homepage
+	\showRPMockupImage{Homepage}{\myTaxiService{} homepage.}}
+	\unbreakableItem{Registration
+	\showRPMockupImage{Registration}{Registration screens.}}
+	\unbreakableItem{Login
+	\showRPMockupImage{Login}{Login screens.}}
+	\unbreakableItem{Empty registered passenger home page
+	\showRPMockupImage{RegisteredPassengerHomePage}{State 1 of RP home page.}}
+	\unbreakableItem{Request a taxi home page
+	\showRPMockupImage{RequestTaxi}{Taxi request.}}
+	\unbreakableItem{Reserve a taxi home page
+	\showRPMockupImage{ReserveTaxi}{Taxi Reservation.}}
+    \unbreakableItem{Registered passenger home page
+	\showRPMockupImage{RegisteredPassengerHomePage2}{State 2 of RP home page.}}
+	\unbreakableItem{Cancellation of a ride in registered passenger home page
+	\showRPMockupImage{RegisteredPassengerHomePage3}{State 3 of RP home page.}}
 \end{itemize}
 \newpage
 \paragraph{Taxi Driver mockups}
 \begin{itemize}
-	\item Homepage
-	\showTDMockupImage{HomePageDriver}{TD homepage.}
-	\item Login
-	\showTDMockupImage{LoginDriver}{TD login page.}
-	\item Empty driver home page
-	\showTDMockupImage{TaxiDriverScreen3}{State 1 of TD personal page.}
-	\item Taxi driver home page with a pending request
-	\showTDMockupImage{TaxiDriverScreen1}{State 2 of TD personal page.}
-	\item Taxi driver home page while is serving a request
-	\showTDMockupImage{TaxiDriverScreen2}{State 3 of TD personal page.}
-	\item Report problem
-	\showTDMockupImage{ReportProblem}{TD report problem screen.}
-	\item Report solution
-	\showTDMockupImage{ReportSolution}{TD report solution screen.}
+	\unbreakableItem{Homepage
+	\showTDMockupImage{HomePageDriver}{TD homepage.}}
+	\unbreakableItem{Login
+	\showTDMockupImage{LoginDriver}{TD login page.}}
+	\unbreakableItem{Empty driver home page
+	\showTDMockupImage{TaxiDriverScreen3}{State 1 of TD personal page.}}
+	\unbreakableItem{Taxi driver home page with a pending request
+	\showTDMockupImage{TaxiDriverScreen1}{State 2 of TD personal page.}}
+	\unbreakableItem{Taxi driver home page while serving a request
+	\showTDMockupImage{TaxiDriverScreen2}{State 3 of TD personal page.}}
+	\unbreakableItem{Report problem
+	\showTDMockupImage{ReportProblem}{TD report problem screen.}}
+	\unbreakableItem{Report solution
+	\showTDMockupImage{ReportSolution}{TD report solution screen.}}
 \end{itemize}
 
-\subsection{System Features}
+\unbreakableBlock{\subsection{System Features}
 The system features are organized by use cases, so each subsection here represent a different use case for \myTaxiService{}.\par
 \subsubsection{UML Use Case Diagram}
 The use case considered are represented in this diagram: 
-\showUmlImage{UseCaseDiagram}{UML Use Case Diagram}
-
+\showUmlImage{UseCaseDiagram}{UML Use Case Diagram}}
+\newpage
 \inputSystemFeature{registration}\newpage
 \inputSystemFeature{login}\newpage
 \inputSystemFeature{logout}\newpage
@@ -70,8 +70,8 @@ The use case considered are represented in this diagram:
 \subsubsection{State Chart Diagram}
 \begin{itemize}
 	\itemBold{Taxi Driver State Chart}
-\par The state chart diagram proposed below has te aim of better explaining the different states in which the TD can be during the use of \myTaxiService{}. \par
-Moreover there are two particular states, "TD Not Able To Work Connection Error" and "TD Working Connection Error", that are included with the aim of better showing the software behaviour when some unexpected problem occurs. \par
+\par The state chart diagram proposed below has the aim of better explaining the different states in which the TD can be during the use of \myTaxiService{}. \par
+Moreover there are two particular states, "TD Not Able To Work Connection Error" and "TD Working Connection Error", that are included with the aim of better showing the software behavior when some unexpected problem occurs. \par
 In these cases TD is redirected to a login screen in which he remains till the problem is resolved(for example the connections returns up).\par 
 In particular the system is built to store and periodically update a session object in order to restore the application when TD logs in once the problem is resolved. \par 
 In this way the login procedure  brings the TD exactly in the same state in which he was after the problem.
@@ -114,7 +114,7 @@ In this way the login procedure  brings the TD exactly in the same state in whic
 In this subsection are specified the most important non functional requirement.\par
 \begin{itemize}
 	\item The system must perform every operation in less than 10 seconds.
-	\item The system must handle 1000 users and 400 taxi drivers connected at the same time.
+	\item The system must handle at least 1000 users and 400 taxi drivers connected at the same time.
 	\item The system must handle a number of Registered Passenger equals to 10 time the number of the taxi drivers in the town.
 \end{itemize}
 \subsubsection{Reliability}
@@ -122,8 +122,10 @@ The service must be available 7 days a week 24 hours a day. \par The server must
 \subsubsection{Availability}
 The service must be up with a probability of failure less than 0.01 percent and must be able to resist to 9 security attack out of 10.
 \subsubsection{Security}
-Internet connection must be encrypted with a recognized SSL certificate (HTTPS protocol). The handling of users data must be protected by SQL data stealing. \par Moreover the DMBS must guarantee a Serializable SQL isolation level.
-\subsubsection{Mantainability}
-The software must be build accompanied with proper documentation and it must comply with Model-View-Controller programmative pattern. In fact using this pattern ensures great opportunities of extension.
+Internet connection must be encrypted with a recognized SSL certificate (HTTPS protocol). The handling of users data must be protected by SQL data stealing.\par Moreover the DBMS must guarantee a Serializable SQL isolation level.
+\subsubsection{Maintainability}
+The software must be build accompanied with proper documentation and it must comply with Model-View-Controller programming pattern. In fact using this pattern ensures great opportunities of extension.
 \subsubsection{Portability}
-The system must support the integration between different OS, OSX, Windows, Ubuntu. \par Moreover the user experience must be the same if user decide to access the service via IE, Opera,Chrome and Firefox. In the case the user decides to use the mobile application the system must guarantee the same feature in Android base system and IOS base system.
+The passengers web site must be capable of running on main consumer OS: OS X, Windows, Ubuntu.\par
+Moreover the user experience must be the same if the user decides to access the web site via IE, Opera, Chrome or Firefox.\par
+In the case the passenger or the taxi driver uses the mobile application, the system must guarantee him the same features on Android and iOS.
