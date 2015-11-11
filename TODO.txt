@@ -1,1 +1,0 @@
-g) aggiungere l'assunzione che i tassisti non finiscono mai la corsa prima o dopo che sia effettivamente finita. dati tassista sono inseriti nel db prima del deploy e possono essere modificati solo dall'amministatore
