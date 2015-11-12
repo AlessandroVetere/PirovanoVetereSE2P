@@ -21,8 +21,12 @@
 \newcommand{\unbreakableItem}[1]{\unbreakableBlock{\item #1}}
 \newcommand{\showPercentImage}[3]{
 	\begin{center}
-		\includegraphics[width=#3\textwidth,keepaspectratio=true]{#1}
-		\captionof{figure}{#2}
+		\unbreakableBlock{
+			\begin{center}
+				\includegraphics[width=#3\textwidth,keepaspectratio=true]{#1}
+				\captionof{figure}{#2}
+			\end{center}
+		}
 	\end{center}
 }
 \newcommand{\showImage}[2]{\showPercentImage{#1}{#2}{1}}
@@ -34,3 +38,4 @@
 }
 \author{Alberto Mario Pirovano \and Alessandro Vetere}      % Declares authors' names.
 \date{\today}	% This command produces today's date.
+\newcommand{\titleToc}{\maketitle\newpage\tableofcontents\newpage}

@@ -84,8 +84,7 @@
 
 % \pgfdeclareimage[height=0.5cm]{university-logo}{university-logo-filename}
 % \logo{\pgfuseimage{university-logo}}
-\newcommand{\commonDir}{../common}
-\pgfdeclareimage[height=0.75cm]{university-logo}{\commonDir/pictures/logo_polimi.png}
+\pgfdeclareimage[height=0.75cm]{university-logo}{../common/pictures/logo_polimi.png}
 \logo{\pgfuseimage{university-logo}}
 
 % Delete this, if you do not want the table of contents to pop up at
@@ -95,4 +94,15 @@
 	\begin{frame}<beamer>{Outline}
 		\tableofcontents[currentsection,currentsubsection]
 	\end{frame}
+}
+
+\newcommand{\titleToc}{
+		\begin{frame}
+			\titlepage
+		\end{frame}
+		
+		\begin{frame}{Outline}
+			\tableofcontents
+			% You might wish to add the option [pausesections]
+		\end{frame}
 }
