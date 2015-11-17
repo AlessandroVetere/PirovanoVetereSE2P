@@ -1,11 +1,12 @@
 \ProvidesClass{pdf_document}
 
-\LoadClass{article}
+\LoadClass[titlepage]{article}
 
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{hyperref}
 \usepackage{color}
+\usepackage{titlepic}
 
 \newcommand{\myTaxiService}[0]{\mbox{\emph{myTaxiService}}}
 \newcommand{\setDepth}[1]{\setcounter{tocdepth}{#1}\setcounter{secnumdepth}{#1}}
@@ -38,4 +39,5 @@
 }
 \author{Alberto Mario Pirovano \and Alessandro Vetere}      % Declares authors' names.
 \date{\today}	% This command produces today's date.
+\titlepic{\includegraphics[width=0.7\textwidth]{../common/pictures/logo_polimi.png}}
 \newcommand{\titleToc}{\maketitle\newpage\tableofcontents\newpage}

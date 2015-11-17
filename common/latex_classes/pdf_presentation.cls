@@ -106,3 +106,5 @@
 			% You might wish to add the option [pausesections]
 		\end{frame}
 }
+
+\newcommand{\myTaxiService}[0]{\mbox{\emph{myTaxiService}}}
