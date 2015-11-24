@@ -1,0 +1,9 @@
+Mockups:
+- Bisogna mettere i vari tasti refresh.
+- Fare mockups per l'admin.
+
+RASD:
+- Aggiungere admin nelle varie sezioni.
+
+DD:
+- Vedi cartella.
