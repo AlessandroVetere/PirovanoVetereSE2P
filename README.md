@@ -9,5 +9,5 @@ Project contributors:
  - Alessandro Vetere (Mat. 854865)
 
 Productions:
- - Requirement Analysis and Specification Document: (./Deliveries/RASD3.pdf)
+ - Requirement Analysis and Specification Document: [link](./Deliveries/RASD3.pdf)
  - Design Document: not yet available
