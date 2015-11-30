@@ -2,11 +2,16 @@
 \subsection{Overview}
 %TODO descrizione del disegno dell'architettura generale(vedi rasd quasi uguale)
 \subsection{High level components and their interaction}
-%TODO spiegazione di come interagiscono le varie parti del software guardandolo come insieme di quadratoni del component diagram. spiegazione del mvc e come interagisce la view con il controller e il controller con il model. application server non puo essere acceduto dall'esterno solo il web server ha interfacce di rete. solo l'admin può accedere all'application server tramite la rete perche si impotizza che sia un accesso protetto. gli sviluppatori esterni accedono alle api connettendosi al web server e facendo delle richieste di api specifiche al restful service. il controller parla con il modello tramite rmi
+%TODO spiegazione di come interagiscono le varie parti del software guardandolo come insieme di quadratoni del component diagram. spiegazione del mvc e come interagisce la view con il controller e il controller con il model. application server non puo essere acceduto dall'esterno solo il web server ha interfacce di rete. solo l'admin può accedere all'application server tramite la rete perche si impotizza che sia un accesso protetto. gli sviluppatori esterni accedono alle api connettendosi al web server e facendo delle richieste di api specifiche al restful service. il controller parla con il modello tramite rmi.accenno alla suddivisione tra layer e tier. client server. diversi tipi di comunicazione. un flusso client server e un flusso point to point (dispatcher e receiver). il location manager fa da dispatcher per i messaggi di localizzazione.
+Nella sezione architectural design sono spiegati approfonditamente gli aspetti software che dovranno caratterizzare il software. 
+In particolare qui viene spiegato come è stata pensata la suddivisione tra layer e tier, i protocolli di comunicazione scelti e i pattern utilizzati. 
+Per chiarificare il più possibile questi aspetti vengono forniti anche numerosi diagrammi UML: 
+\begin{itemize}
+	\item {Component View}  qui vengono descritti tutti i componenti software che sono 
 \subsection{Component view}
-%TODO inserire il component diagram e spiegare ogni componente che scopo ha e dove sta (dispatcher e restful service sono su web server e locationmanager )
+%TODO inserire il component diagram e spiegare ogni componente che scopo ha e dove sta (dispatcher e restful service sono su web server e locationmanager ). spiegazione dei layer software
 \subsection{Deployment view}
-%TODO inserire il deployment diagram (spiega la suddivisione in tier)
+%TODO inserire il deployment diagram (spiega la suddivisione in tier). spiegazione dei tier hardware
 \subsection{Runtime view}
 %TODO You can use sequence diagrams to describe the way components interact to accomplish specific tasks typically related to your use cases.
 \subsection{Component interfaces}
