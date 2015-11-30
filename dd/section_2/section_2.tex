@@ -1,11 +1,16 @@
 \section{Architectural Design}
 \subsection{Overview}
+%TODO descrizione del disegno dell'architettura generale(vedi rasd quasi uguale)
 \subsection{High level components and their interaction}
+%TODO spiegazione di come interagiscono le varie parti del software guardandolo come insieme di quadratoni del component diagram. spiegazione del mvc e come interagisce la view con il controller e il controller con il model. application server non puo essere acceduto dall'esterno solo il web server ha interfacce di rete. solo l'admin può accedere all'application server tramite la rete perche si impotizza che sia un accesso protetto. gli sviluppatori esterni accedono alle api connettendosi al web server e facendo delle richieste di api specifiche al restful service. il controller parla con il modello tramite rmi
 \subsection{Component view}
+%TODO inserire il component diagram e spiegare ogni componente che scopo ha e dove sta (dispatcher e restful service sono su web server e locationmanager )
 \subsection{Deployment view}
+%TODO inserire il deployment diagram (spiega la suddivisione in tier)
 \subsection{Runtime view}
 %TODO You can use sequence diagrams to describe the way components interact to accomplish specific tasks typically related to your use cases.
 \subsection{Component interfaces}
+%TODO web socket porte https. come funzionano le interfacce tra componenti, perchè le abbiamo scelte e che vantaggi portano all'architettura che abbiamo scelto.
 \subsection{Selected architectural styles and patterns}
 %TODO Please explain which styles/patterns you used, why, and how
 \subsection{Other design decisions}
