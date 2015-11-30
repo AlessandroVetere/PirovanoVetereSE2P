@@ -54,6 +54,69 @@ Inoltre è presente un livello controller che riceve tutte le richieste fatte da
 %TODO You can use sequence diagrams to describe the way components interact to accomplish specific tasks typically related to your use cases.
 \subsection{Component interfaces}
 %TODO web socket porte https. come funzionano le interfacce tra componenti, perchè le abbiamo scelte e che vantaggi portano all'architettura che abbiamo scelto.
+Being our system composed of different software components that need to interact together, several interfaces have been put among them.
+Subsequently are listed all the main software components and their interfaces, each one described in detail:
+\begin{itemize}
+	\itemBold{Passenger View}
+	This component implements 1 interface:
+	\begin{itemize}
+		\itemBold{Receive PS Update} An interface over the \textbf{Web Socket} technology that is implemented by the \textbf{Passenger View} and called by the \textbf{Controller} in order to deliver updates to a particular Passenger.
+		It is required that a \textbf{Web Socket} is opened by the \textbf{Passenger View} to the \textbf{Controller} in order to permit the last one the sending of messages.
+		Message delivery is intended to be asynchronous but in some cases the \textbf{Controller} waits the \textbf{Passenger View} to respond with some kind of information to a particular message sent to it, and in this case the communication is synchronous.
+	\end{itemize}
+	This component utilizes 1 interface:
+	\begin{itemize}
+		\itemBold{Receive PS Request} An interface implemented by the \textbf{Controller} that exposes the necessary methods to build up a \textbf{RESTful Service} over the \textbf{HTTPS} protocol.
+		Through this interface the \textbf{Passenger View} can send specific requests to the \textbf{Controller}, that synchronously responds with the necessary information.
+	\end{itemize}
+	\itemBold{Taxi Driver View}
+	This component implements 2 interfaces:
+	\begin{itemize}
+		\itemBold{Receive TD Updated} As for the \textbf{Receive PS Update} interface, this interface over \textbf{Web Socket} technology is called by the \textbf{Controller} to deliver messages and requests to a particular Taxi Driver.
+		It is required that a \textbf{Web Socket} is opened by the \textbf{Taxi Driver View} to the \textbf{Controller} in order to permit it to send messages.
+		The delivery of message is asynchronous when a direct answer by the \textbf{Taxi Driver View} is not needed, in other cases the \textbf{Controller} makes a synchronous call to the \textbf{Taxi Driver View} and waits for it to send back the desired data.
+		\itemBold{Get TD Position} This interface over \textbf{Web Socket} is called synchronously by the \textbf{Controller} to get the last position registered in the \textbf{Taxi Driver View}.
+		This could be a crucial part of the system and therefore it is intended that no Taxi Driver hacks his own smartphone GPS location system in order to deliver wrong position (maybe introducing an important fee to be paid in case of this misbehaviour).
+		The \textbf{Taxi Driver Web} must open a \textbf{Web Socket} connection to the \textbf{Controller} in order to permit him to ask the position.
+	\end{itemize}
+	This component utilizes 2 interfaces:
+	\begin{itemize}
+		\itemBold{Receive TD Request} An interface over \textbf{HTTPS} that is implemented by the \textbf{Controller} and like the \textbf{Receive PS Request} does for the Passenger, allows the Taxi Driver to send request to the \textbf{Controller}, while waiting synchronously for a response.
+		\itemBold{Get GPS Data} An interface implemented by the \textbf{Taxi Driver Model}, and is used to obtain the latest valid GPS position when the \textbf{Controller} asks for it via the \textbf{Get TD Position} interface.
+		It can be easily seen as an abstraction over the operating system GPS drivers.
+	\end{itemize}
+	\itemBold{Taxi Driver Model}
+	This component implements 1 interface:
+	\begin{itemize}
+		\itemBold{Get GPS Data} That is the interface offered to the \textbf{Taxi Driver View} and it is needed to obtain the most recent GPS position located by the GPS antenna installed in the Taxi Driver smartphone.
+		In facts it wraps up the operating system GPS drivers in order to deliver a clean and meaningful interface to be utilized in the system to be.
+	\end{itemize}
+	\itemBold{Administration View}
+	This component utilizes 1 interface:
+	\begin{itemize}
+		\itemBold{Administrator Queries} This interface is provided by the \textbf{Controller} via \textbf{RPC} technology (whose implementation could be \textbf{RMI}) and allows the \textbf{Administrator View} to perform some crucial activities and queries on the \myTaxiService{} model in a more direct and powerful way. Through this interface it is allowed the registration of a new Taxi Driver.
+		This interface is not intended to be publicly accessible, and therefore it is better not to expose it through a public IP.
+		In addition, it is intended that the Administrators are trained personnel and are very discouraged to damage or break the system they are interacting with.
+	\end{itemize}
+	\itemBold{Model}
+	This component implements 1 interface:
+	\begin{itemize}
+		\itemBold{Query Model} It is an interface over \textbf{RPC} technology (could as well be \textbf{RMI}) that allows the \textbf{Controller} to do all kind of interesting relational queries on the \myTaxiService{} model, through a set of exposed and controlled methods.
+		It abstracts the concept of relational query to a higher level of usability and security.
+		The model to which the interface refers is at its core a relational database, that is accessed through a \textbf{Database Driver Adapter}, that could wrap up a database driver like \textbf{JDBC}.
+	\end{itemize}
+	\itemBold{Controller}
+	This is the central part of \myTaxiService{} system and has the greatest number of implemented and utilized interfaces.
+	It implements 4 different interfaces:
+	\begin{itemize}
+		\itemBold{\myTaxiSharing{} API} This interface provided through \textBf{HTTPS} is intended to be utilized by the developers that wants to further develop \myTaxiService{}, adding the Taxi Sharing capability.
+		It is not intended to be accessible publicly and therefore it must be protected using firewalls and access control management, with credential authentication.
+		A developer that wants to utilize the API, must request the permission to the Administrator, that creates valid credentials, configures the system accordingly, and communicate to him/her those credentials.
+		\itemBold{Receive PS Request} Already presented above in \textbf{Passenger View} interfaces analysis.
+		\itemBold{Receive TD Request} Already presented above in \textbf{Taxi Driver View} interfaces analysis.
+		\itemBold{Administrator Queries} Already presented above in \textbf{Administrator View} interfaces analysis.
+	\end{itemize}
+\end{itemize}
 \subsection{Selected architectural styles and patterns}
 %TODO Please explain which styles/patterns you used, why, and how
 \subsection{Other design decisions}
