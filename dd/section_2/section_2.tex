@@ -1,7 +1,11 @@
 \section{Architectural Design}
+
 \subsection{Overview}
 %TODO descrizione del disegno dell'architettura generale(vedi rasd quasi uguale)
+\showGeneralDiagram{General Diagram}{1.0}
+
 \subsection{High level components and their interaction}
+%TODO TRADURRE
 Nella sezione architectural design sono spiegati approfonditamente gli aspetti programmativi che dovranno caratterizzare il software. 
 In particolare qui viene spiegato come è stata pensata la suddivisione tra layer e tier, i protocolli di comunicazione scelti e i pattern utilizzati. 
 Per chiarificare il più possibile questi aspetti vengono forniti anche numerosi diagrammi UML integrati con esaurienti spiegazioni dei componenti software: 
@@ -21,7 +25,7 @@ Il software progettato potrà poi fare uso di quattro \textbf{Tier} fisici:
 	In questo modo si riesce a garantire un ulteriore livello di sicurezza rendendo inaccessibili le porzioni di codice più importanti.
 	\itemBold {Database Server} In questo tier è ospitata la base di dati che permette la persistenza dei dati del servizio.
 \end{itemize}
-\subsubsection{MVC architectural pattern and Layer suddivision}
+\subsubsection{MVC architectural pattern and Layer subdivision}
 L'architettura dovrà rispettare il pattern \textbf{MVC (Model View Controller)}, e dovrà rispettare il paradigma di comunicazione \textbf{Client-Server} per la gestione delle richieste generate dalle view dei \textbf{Client} e rivolte al \textbf{Server} per essere gestite. 
 E' inoltre necessaria l'implementazione di un canale \textbf{Point to Point} che verrà utilizzato dal \textbf{Server} per poter gestire la necessità di inviare al \textbf{Client} generici messaggi di notifica, messaggi di servizio e, nel caso in cui il \textbf{Client} sia un \textbf{Taxi Driver}, messaggi di associazione con una \textbf{Taxi Ride} e messaggi di richiesta di posizione.
 E' quindi necessario implementare tre \textbf{Layer} che garantiscano la stratifcazione necessaria per avere un \textbf{Client Server} con \textbf{Fat Server} e \textbf{Thin Client}.
@@ -46,8 +50,11 @@ Il secondo \textbf{Layer} è composto da due famiglie con funzionalità speciali
 \paragraph{Model} 
 Il terzo \textbf{Layer} è il \textbf{Model}, il quale deve invece garantire un'interfaccia predefinita con la \textbf{Base di Dati} composta da query predefinite che vengono chiamate dal \textbf{Controller} per aggiornare il modello. 
 Inoltre deve essere garantita una rappresentazione dei dati che l'applicazione gestisce tramite \textbf{Modello Relazionale}.
+
 \subsection{Component view}
+%TODO TRADURRE
 %TODO inserire il component diagram e spiegare ogni componente che scopo ha e dove sta (dispatcher e restful service sono su web server e locationmanager ). spiegazione dei layer software
+\showComponentDiagram{UML Component Diagram}{1.0}
 Di seguito sono descritti i sub-components che interoperano all'interno di ogni component e le interfaces interne che permettono loro di comunicare uno con l'altro.
 \begin{itemize}
 	\itemBold{Passenger View}
@@ -211,16 +218,20 @@ Di seguito sono descritti i sub-components che interoperano all'interno di ogni 
 		Those methods are exposed in a interface that is called Query Database, and the various DB Adapters calls them in a way that depends on the caller component itself.
 	\end{itemize}
 \end{itemize} 
-\subsubsection{UML Component Diagram}
-%TODO ale inserisci il diagramma che non posso compilare e non posso vedere la preview
 
 \subsection{Deployment view}
 %TODO inserire il deployment diagram (spiega la suddivisione in tier). spiegazione dei tier hardware
+\showDeploymentDiagram{UML Deployment Diagram}{1.0}
 
 \subsection{Runtime view}
 %TODO You can use sequence diagrams to describe the way components interact to accomplish specific tasks typically related to your use cases.
+\showSequenceDiagram{admin_td_reg}{UML Sequence Diagram - TD Registration}{1.0}
+\showSequenceDiagram{ps_registration}{UML Sequence Diagram - PS Registration}{1.0}
+\showSequenceDiagram{ps_login}{UML Sequence Diagram - PS Login}{1.0}
+\showSequenceDiagram{queue}{UML Sequence Diagram - Queue Management}{1.0}
+\showSequenceDiagram{taxi_ride_arrived_handling}{UML Sequence Diagram - Taxi Ride Handling}{1.0}
+\showSequenceDiagram{td_position_association}{UML Sequence Diagram - TD Position Management}{1.0}
 \subsection{Component interfaces}
-%TODO web socket porte https. come funzionano le interfacce tra componenti, perchè le abbiamo scelte e che vantaggi portano all'architettura che abbiamo scelto.
 Being our system composed of different software components that need to interact together, several interfaces have been put among them.
 Subsequently are listed all the main software components and their interfaces, each one described in detail:
 \begin{itemize}
@@ -284,8 +295,9 @@ Subsequently are listed all the main software components and their interfaces, e
 		\itemBold{Administrator Queries} Already presented above in \textbf{Administrator View} interfaces analysis.
 	\end{itemize}
 \end{itemize}
+
 \subsection{Selected architectural styles and patterns}
-%TODO Please explain which styles/patterns you used, why, and how
+%TODO Grassetti e a capo
 Several architectural styles and patterns were chosen in order to build \myTaxiService{} as a modern software.
 The main pattern that were recursively adopted is the Model View Controller architectural pattern:
 \begin{itemize}
@@ -314,7 +326,9 @@ These layer, as already said, are mapped into four different tiers:
 	\itemBold{Application Server} This tier maps the purely logic part of the System Level Controller.
 	\itemBold{Database Server} It maps the System Level Model.
 \end{itemize}
+
 \subsection{Other design decisions}
+%TODO Grassetti e a capo
 There have been chosen several technologies that best fit the needs of the system to be. Not all the required functionalities of \myTaxiService{} are already mapped onto specific products because in those cases the choice done would matter less.
 But for the cases in which a technology has already been proposed, it is because a clear design decision was mandatory.
 As for the communication protocols between clients (excluded the Administrator client) and the server have been chosen:
