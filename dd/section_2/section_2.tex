@@ -2,7 +2,6 @@
 \subsection{Overview}
 %TODO descrizione del disegno dell'architettura generale(vedi rasd quasi uguale)
 \subsection{High level components and their interaction}
-%TODO spiegazione di come interagiscono le varie parti del software guardandolo come insieme di quadratoni del component diagram. spiegazione del mvc e come interagisce la view con il controller e il controller con il model. application server non puo essere acceduto dall'esterno solo il web server ha interfacce di rete. solo l'admin può accedere all'application server tramite la rete perche si impotizza che sia un accesso protetto. gli sviluppatori esterni accedono alle api connettendosi al web server e facendo delle richieste di api specifiche al restful service. il controller parla con il modello tramite rmi.accenno alla suddivisione tra layer e tier. client server. diversi tipi di comunicazione. un flusso client server e un flusso point to point (dispatcher e receiver). il location manager fa da dispatcher per i messaggi di localizzazione.
 Nella sezione architectural design sono spiegati approfonditamente gli aspetti programmativi che dovranno caratterizzare il software. 
 In particolare qui viene spiegato come è stata pensata la suddivisione tra layer e tier, i protocolli di comunicazione scelti e i pattern utilizzati. 
 Per chiarificare il più possibile questi aspetti vengono forniti anche numerosi diagrammi UML integrati con esaurienti spiegazioni dei componenti software: 
@@ -11,14 +10,7 @@ Per chiarificare il più possibile questi aspetti vengono forniti anche numerosi
 	\itemBold {Deployment View} Qui viene invece descritta la suddivisione in tier e accompagnandla con un UML deployment diagram.
 	\itemBold {Runtime View} Qui viene spiegato come i componenti interagiscono l'uno con l'altro. Per spiegare l'ordine di chiamata dei metodi tra i vari componenti vengono forniti gli UML sequence diagrams dei casi più interessanti.
 \end{itemize}
-\subsubsection{Layer and Tier suddivision}
-Il software dovrà essere suddiviso in quattro \textbf{Layer} software: 
-\begin{itemize}
-	\itemBold {Client View} Riceve i comandi dell'utente, genera le richieste da inviare al servere e tramite un sottolivello di comunicazione invia le richieste generate alla \textbf{Server View}.
-	\itemBold {Server View} Riceve le richieste generate dal \textbf{Client} e le smista agli oggetti del \textbf{Server Controller}. Inoltre invia al \textbf{Client} le risposte generate dal \textbf{Controller}.
-	\itemBold {Server Controller} Processa le richieste e genera le risposte da inviare al \textbf{Client} tramite la \textbf{Server View}.
-	\itemBold {Server Model} Deve essere presente una interfaccia con query predefinite che vengono chiamate dal \textbf{Controller} per aggiornare il modello. Inoltre deve essere garantita una rappresentazione dei dati che l'applicazione gestisce tramite \textbf{Modello Relazionale}. In conclusione il \textbf{Server Model} notifica il \textbf{Controller} quando è stato apportato un cambiamento al modello.
-\end{itemize}
+\subsubsection{Tier suddivision}
 Il software progettato potrà poi fare uso di quattro \textbf{Tier} fisici:
 \begin{itemize}
 	\itemBold {Passenger Web Browser or Passenger Smartphone} Deve essere garantita la compatibilità del sito web con ogni tipo di \textbf{Browser} ( Safari, Firefox, Opera, IE, Chrome).
@@ -26,28 +18,126 @@ Il software progettato potrà poi fare uso di quattro \textbf{Tier} fisici:
 	\itemBold {Application Server} Questo è il livello tier sul quale si basa maggiormente l'applicazione. 
 	Infatti qui vengono fatti tutti i calcoli e viene contenuta la logica che sta alla base di \myTaxiService{}. 
 	E' importante sottolineare che è necessario avere due tier per la gestione delle richieste e delle risposte. Infatti grazie a questa suddivisione le \textbf{Classi} dei componenti software che interagiscono con la rete sono mantenute sul \textbf{Web Server} e quelli che sono di pura logica sono invece hostate nell' \textbf{Application Server}.
-	 In questo modo si riesce a garantire un ulteriore livello di sicurezza rendendo inaccessibili le porzioni di codice più importanti.
-	 \itemBold {Database Server} In questo tier è ospitata la base di dati che permette la persistenza dei dati del servizio.
+	In questo modo si riesce a garantire un ulteriore livello di sicurezza rendendo inaccessibili le porzioni di codice più importanti.
+	\itemBold {Database Server} In questo tier è ospitata la base di dati che permette la persistenza dei dati del servizio.
 \end{itemize}
-\subsubsection{MVC architectural pattern}
-L'architettura dovrà seguire il pattern \textbf{MVC (Model View Controller)}, e dovrà rispettare il paradigma di comunicazione \textbf{Client-Server} per la gestione delle richieste generate dalle view dei \textbf{Client} e rivolte al \textbf{Server} per essere gestite. 
-E' inoltre previsto un canale diretto dal \textbf{Server} verso il \textbf{Client} per poter gestire la necessità di inviare ai Taxi Drivers la notifica di associazione con una corsa, e permettere loro di accettare o rifiutare la richiesta.
-\paragraph{Client View}
-Guardando l'architettura software ad alto livello, il \textbf{Client} è composto solo dalla \textbf{View}, e per questo motivo si parla di \textbf{Thin Client}. 
-La \textbf{Client View} può essere di quattro tipi, a seconda dell'utente che la utilizza: 
+\subsubsection{MVC architectural pattern and Layer suddivision}
+L'architettura dovrà rispettare il pattern \textbf{MVC (Model View Controller)}, e dovrà rispettare il paradigma di comunicazione \textbf{Client-Server} per la gestione delle richieste generate dalle view dei \textbf{Client} e rivolte al \textbf{Server} per essere gestite. 
+E' inoltre necessaria l'implementazione di un canale \textbf{Point to Point} che verrà utilizzato dal \textbf{Server} per poter gestire la necessità di inviare al \textbf{Client} generici messaggi di notifica, messaggi di servizio e, nel caso in cui il \textbf{Client} sia un \textbf{Taxi Driver}, messaggi di associazione con una \textbf{Taxi Ride} e messaggi di richiesta di posizione.
+E' quindi necessario implementare tre \textbf{Layer} che garantiscano la stratifcazione necessaria per avere un \textbf{Client Server} con \textbf{Fat Server} e \textbf{Thin Client}.
+Guardando l'architettura software ad alto livello, il \textbf{Client} è composto solo dalla \textbf{View}, e per questo motivo si parla appunto di \textbf{Thin Client}. 
+Il server invece è suddiviso in due \textbf{Layer}, uno per la parte di \textbf{Controller} e uno per la gestione del \textbf{Model}.
+\paragraph{View}
+Il ruolo di questo primo \textbf{Layer} è quello di ricevere i comandi dell'utente, generare le richieste da inviare al server e, tramite un sottolivello di comunicazione, inviare le richieste costriute al \textbf{Controller}.
+La \textbf{View} può essere di quattro tipi, a seconda dell'utente che la utilizza: 
 \begin{itemize}
 	\itemBold {Passenger Web View} Interfaccia con \myTaxiService{} rivolta all'utente finale accessibile via browser.
 	\itemBold {Passenger Application View} Interfaccia con \myTaxiService{} rivolta all'utente finale accessibile tramite una applicazione dedicata.
 	\itemBold {Taxi Driver Application View} Interfaccia con \myTaxiService{} rivolta ai taxisti accessibile tramite applicazione dedicata.
-	\itemBold {Admin View} Interfaccia con l'Application Tier di \myTaxiService{} rivolta all'admin del servizio.
+	\itemBold {Admin View} Interfaccia con il \textbf{Web Server Tier} di \myTaxiService{} rivolta all'admin del servizio.
 \end{itemize}
-\paragraph{Server View}
-La \textbf{Server View} consiste in quelle \textbf{Classi} che si occupano di ricevere e inviare i messaggi
-\paragraph{Server Controller}
-Inoltre è presente un livello controller che riceve tutte le richieste fatte dalle varie view, riconosce di che richiesta di tratta e chiama l'oggetto relativo 
-\paragraph{Server Model}
+\paragraph{Controller}
+Il secondo \textbf{Layer} è composto da due famiglie con funzionalità specializzate:
+\begin{itemize}
+	\itemBold {Networking Family}Questa famiglia comprende quei componenti che si occupano di inviare i messaggi ai vari \textbf{Client}, in base alla logica implementata dai componenti della \textbf{Business Family}.
+	Inoltre in questo \textbf{Layer} vengono ricevute le richieste generate dal \textbf{Client} per venire poi smistate agli oggetti della \textbf{Business Family}. 
+	\itemBold {Business Family} In questa famiglia sono contenuti componenti che processano le richieste e generano le risposte da inviare al \textbf{Client} tramite i componenti della \textbf{Networking Family}. 
+\end{itemize}
+\paragraph{Model} 
+Il terzo \textbf{Layer} è il \textbf{Model}, il quale deve invece garantire un'interfaccia predefinita con la \textbf{Base di Dati} composta da query predefinite che vengono chiamate dal \textbf{Controller} per aggiornare il modello. 
+Inoltre deve essere garantita una rappresentazione dei dati che l'applicazione gestisce tramite \textbf{Modello Relazionale}.
 \subsection{Component view}
 %TODO inserire il component diagram e spiegare ogni componente che scopo ha e dove sta (dispatcher e restful service sono su web server e locationmanager ). spiegazione dei layer software
+Di seguito sono descritti i sub-components che interoperano all'interno di ogni component e le interfaces interne che permettono loro di comunicare uno con l'altro.
+\begin{itemize}
+	\itemBold{Passenger View}
+	In questo componente sono raggruppati i seguenti sotto componenti:
+	\begin{itemize}
+		\itemBold{PS Application View and PS Web View} Sono i componenti software che permettono di intercettare gli eventi di interazione tra software e utente finale, come ad esempio click di un pulsante o lo scroll. 
+		Inoltre sono in grado di mostrare i dati di risposta ricevuti via rete.
+		\itemBold{PS Request Creator} Tramite questo componente viene effettuato un mapping completo tra eventi performabili dall'utente sulla \textbf{Application o Web View} e richieste da inviare al server. 
+		E' un componente \textbf{Observer} che si risveglia quando un evento è generato e lo traduce in una richiesta ben formata. 
+		\itemBold{PS Receiver} Tramite questo componente vengono tradotte le risposte in eventi di ritorno.
+		E' un componente \textbf{Observable} del quale la \textbf{View} si registra come \textbf{Listener}.
+	\end{itemize}
+	\itemBold{Taxi Driver View}
+	In questo componente sono raggruppati i seguenti sotto componenti:
+	\begin{itemize}
+		\itemBold{TD Application View} E' il componente software che permette di intercettare gli eventi di interazione tra software e il \textbf{Taxi Driver}, come ad esempio click di un pulsante o lo scroll. 
+		Inoltre è in grado di mostrare i dati di risposta ricevuti via rete.
+		\itemBold{TD Request Creator} vedi \textbf{PS Request Creator}.
+		\itemBold{TD Receiver} vedi \textbf{PS Receiver}
+		\itemBold{TD Locator} E' il componente software che ha accesso all'interfaccia con il GPS dello smartphone del \textbf{Taxi Driver} e che, una volta invocato dal \textbf{Location Manager}, può richiedere al GPS la posizione di un determinato tassista. 
+		E' fondamentale nel momento in cui il server, per avere una modello sempre consistente con la posizione reale dei tassisti, invia richieste di aggiornamento del mapping tra tassita e zona della città.
+	\end{itemize}	
+	\itemBold{Taxi Driver Model}
+	In questo componente sono raggruppati i seguenti sotto componenti:
+	\begin{itemize}
+		\itemBold{GPS Data Source} E' un oggetto che rappresenta la posizione più recente inviata dal segnale GPS; è composto da molti dati, tra i quali i più imporntanti sono \textbf{Latitudine} e \textbf{Longitudine}.
+		Infatti tramite questi dati è possibile determinare univocamente la posizione del \textbf{Taxi Driver}.
+	\end{itemize}
+	
+	\itemBold{Controller}
+	In questo componente sono raggruppati i seguenti sotto componenti:
+	\begin{itemize}
+		\itemBold{RESTful Service} Questo \textbf{Software Component} si occupa di ricevere le richieste dai \textbf{Client} e le distribuisce ai vari \textbf{Manager Components} appartententi alla \textbf{Busines Family}. 
+		Inoltre garantisce che vengano gestite un numero massimo, prefissato e configurabile di richieste in parallelo.
+		\itemBold{Dispatcher} Questo \textbf{Software Component} si occupa di dispacciare i messaggi di notifica, di sistema, di associazione tra \textbf{Taxi Ride} e \textbf{Taxi Driver} dal \textbf{Server} verso il relativo \textbf{Client}.
+		\itemBold{Location Manager} Questo \textbf{Software Component} espone le seguenti \textit{interfaces}:
+		\begin{itemize}
+			\item Fornisce la funzionalità di associare una \textit{city zone} a partire da un \textit{city address}, utile quando bisogna categorizzare una \textbf{Taxi Ride} appena arrivata.
+			\item Fornisce la funzionalità per richiedere ad un \textbf{Taxi Driver} il \textit{actual city address}, per aggiornare la mappa interna al server tra \textbf{Taxi Driver} e \textbf{City Address}.
+			\item Fornisce la funzionalità di calcolare il tempo di percorrenza tra due \textit{city addresses}.
+		\end{itemize}
+		Inoltre utilizza le seguenti \textit{interfaces}:
+		\begin{itemize}
+			\item Richiedere la posizione GPS al \textbf{Taxi Driver} che viene scelto dal \textbf{Taxi Driver Manager}.
+			\item Utilizza le \textbf{API} di \textit{Google Maps} necessarie per calcolare il \textbf{Travel Time} e per associare un indirizzo ai dati GPS.	
+		\end{itemize}
+		\itemBold{Queue Manager} (il td manager avvisa q manager che un td ha cambiato zona e il q manager provvede a spostare il td nella coda della zona attuale del td) (ridistribuisce le richieste ai taxi delle zone limitrofe)
+		\itemBold{Queue Manager} Questo \textbf{Software Component} si occupa di 
+		\begin{itemize}
+			\item Gestire le code dei \textbf{Taxi Driver}, una coda per zona della città.
+			\item Genera i messaggi di notifica ,contenenti \textit{Taxi Driver ID} e \textit{Travel Time}, da inviare ai \textbf{Passenger} nel momento in cui la richiesta che hanno fatto viene accettata da un \textbf{Taxi Driver}. 
+			Per fare questo deve chiamare il \textbf{Location Manager} e richiedere il \textbf{Travel Time}.
+			\item Ridistribuisce le \textbf{Taxi Ride} che non hanno nessuno a cui essere inoltrate, cioè le \textbf{Taxi Ride} richieste in una zona la cui coda è vuota.
+			\item Ridistribuisce le\textbf{Taxi Ride}. 
+			Infatti quando viene servita una richiesta di \textbf{taxi rideTaxi Ride} associata ad una zona la cui relativa coda è vuota, scatta un timeout dopo la scadenza del quale la taxi ride viene ridistribuita in una delle code delle zone ad essa limitrofe.
+		\end{itemize}
+			espone le seguenti \textit{interfaces}:
+		\begin{itemize}
+			\item Fornisce la funzionalità di associare una \textit{city zone} a partire da un \textit{city address}, utile quando bisogna categorizzare una \textbf{Taxi Ride} appena arrivata.
+			\item Fornisce la funzionalità per richiedere ad un \textbf{Taxi Driver} il \textit{actual city address}, per aggiornare la mappa interna al server tra \textbf{Taxi Driver} e \textbf{City Address}.
+			\item Fornisce la funzionalità di calcolare il tempo di percorrenza tra due \textit{city addresses}.
+		\end{itemize}
+		Inoltre utilizza le seguenti \textit{interfaces}:
+		\begin{itemize}
+			\item Richiedere la posizione GPS al \textbf{Taxi Driver} che viene scelto dal \textbf{Taxi Driver Manager}.
+			\item Utilizza le \textbf{API} di \textit{Google Maps} necessarie per calcolare il \textbf{Travel Time} e per associare un indirizzo ai dati GPS.	
+		\end{itemize}
+		\itemBold{Session Manager} E' il componente software che si occupa di modificare il modello relativo alle sessioni attive degli utenti di \myTaxiService{}.
+		\itemBold{Profile Manager} Si occupa di modificare la porzione del modello relativa al profilo degli utenti registrati a \myTaxiService{}.
+		\itemBold{Taxi Driver Manager} 
+		\itemBold{Taxi Ride Manager}
+		\itemBold{Taxi Sharing Manager}
+		\itemBold{Query Manager}
+	\end{itemize}
+	
+	\itemBold{Model}
+	In questo componente sono raggruppati i seguenti sotto componenti:
+	\begin{itemize}
+		\itemBold{Model Query Service}
+		\itemBold{Passenger DB Adapter}
+		\itemBold{Taxi Ride DB Adapter}
+		\itemBold{Taxi Driver DB Adapter}
+		\itemBold{Zone DB Adapter}
+		\itemBold{Queue DB Adapter}
+		\itemBold{Database Driver Adapter}
+	\end{itemize}
+	
+\end{itemize} 
+Di seguito c'è l' \textbf{UML Component Diagram}:
+%TODO ale inserisci il diagramma che non posso compilare e non posso vedere la preview
 \subsection{Deployment view}
 %TODO inserire il deployment diagram (spiega la suddivisione in tier). spiegazione dei tier hardware
 \subsection{Runtime view}
