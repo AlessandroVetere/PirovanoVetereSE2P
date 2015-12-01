@@ -82,42 +82,107 @@ Di seguito sono descritti i sub-components che interoperano all'interno di ogni 
 	\begin{itemize}
 		\itemBold{RESTful Service} Questo \textbf{Software Component} si occupa di ricevere le richieste dai \textbf{Client} e le distribuisce ai vari \textbf{Manager Components} appartententi alla \textbf{Busines Family}. 
 		Inoltre garantisce che vengano gestite un numero massimo, prefissato e configurabile di richieste in parallelo.
-		\itemBold{Dispatcher} Questo \textbf{Software Component} si occupa di dispacciare i messaggi di notifica, di sistema, di associazione tra \textbf{Taxi Ride} e \textbf{Taxi Driver} dal \textbf{Server} verso il relativo \textbf{Client}.
-		\itemBold{Location Manager} Questo \textbf{Software Component} espone le seguenti \textit{interfaces}:
+		Per permettere agli altri \textbf{Software Components} di interagire espone le seguenti \textit{interfaces}:
 		\begin{itemize}
-			\item Fornisce la funzionalità di associare una \textit{city zone} a partire da un \textit{city address}, utile quando bisogna categorizzare una \textbf{Taxi Ride} appena arrivata.
-			\item Fornisce la funzionalità per richiedere ad un \textbf{Taxi Driver} il \textit{actual city address}, per aggiornare la mappa interna al server tra \textbf{Taxi Driver} e \textbf{City Address}.
-			\item Fornisce la funzionalità di calcolare il tempo di percorrenza tra due \textit{city addresses}.
+			\itemBold{Receive TD Request} Permette ai \textbf{Client} di inviare le richieste.
+			\itemBold{Receive PS Request} vedi \textit{Receive TD Request}.
 		\end{itemize}
 		Inoltre utilizza le seguenti \textit{interfaces}:
 		\begin{itemize}
-			\item Richiedere la posizione GPS al \textbf{Taxi Driver} che viene scelto dal \textbf{Taxi Driver Manager}.
-			\item Utilizza le \textbf{API} di \textit{Google Maps} necessarie per calcolare il \textbf{Travel Time} e per associare un indirizzo ai dati GPS.	
+			\itemBold{Login} Utilizzata per gestire una richiesta di login proveniente dal PS.
+			\itemBold{Logout} Utilizzata per gestire una richiesta di logout proveniente dal PS.
+			\itemBold{Register} Utilizzata per gestire una richiesta di registrazione proveniente dal PS.
+			\itemBold{Modify Profile} Utilizzata per gestire una richiesta di modifica del profilo proveniente dal PS.
+			\itemBold{Report Problem} Utilizza questa interfaccia per gestire una richiesta di report problem proveniente dal TD.
+			\itemBold{Add Taxi Ride} Utilizza questa interfaccia per gestire una richiesta di Taxi Ride proveniente dal PS.
+			\itemBold{Remove Taxi Ride} Utilizza questa interfaccia per gestire una richiesta di cancellazione della Taxi Ride proveniente dal PS.
 		\end{itemize}
-		\itemBold{Queue Manager} (il td manager avvisa q manager che un td ha cambiato zona e il q manager provvede a spostare il td nella coda della zona attuale del td) (ridistribuisce le richieste ai taxi delle zone limitrofe)
-		\itemBold{Queue Manager} Questo \textbf{Software Component} si occupa di 
+
+		\itemBold{Dispatcher} Questo \textbf{Software Component} si occupa di dispacciare i messaggi di notifica, di sistema, di associazione tra \textbf{Taxi Ride} e \textbf{Taxi Driver} dal \textbf{Server} verso il relativo \textbf{Client}.
+		Per permettere agli altri \textbf{Software Components} di interagire espone le seguenti \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{Dispatch Message} Permette ai componenti interni al \textbf{Controller} di inviare messaggi ai \textbf{Client}. 
+		\end{itemize}
+		Inoltre utilizza le seguenti \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{Receive PS Update} Utilizza questa interfaccia per permettere ai \textbf{Clients} di ricevere messaggi provenienti dai componenti interni al \textbf{Controller}.
+			\itemBold{Receive TD Update} vedi \textit{Receive TD Update}.	
+		\end{itemize}
+		
+		\itemBold{Location Manager} Questo \textbf{Software Component} espone le seguenti \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{Get Zone From Address} Permette di associare una \textit{city zone} a partire da un \textit{city address}, utile quando bisogna categorizzare una \textbf{Taxi Ride} appena arrivata.
+			\itemBold{Get TD Address} Fornisce la funzionalità per richiedere ad un \textbf{Taxi Driver} il \textit{actual city address}, per aggiornare la mappa interna al server tra \textbf{Taxi Driver} e \textbf{City Address}.
+			\itemBold{Compute Travel Time} Permette di calcolare il tempo di percorrenza tra due \textit{city addresses}.
+		\end{itemize}
+		Inoltre utilizza le seguenti \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{Get TD Position} Utilizza questa interfaccia per richiedere la posizione GPS al \textbf{Taxi Driver} che viene scelto dal \textbf{Taxi Driver Manager}.
+			\itemBold{Google Maps API} Utilizza questa interfaccia per effettuare le richieste necessarie per calcolare il \textbf{Travel Time} e per associare un indirizzo ai dati GPS.	
+		\end{itemize}
+		
+		\itemBold{Queue Manager} (il td manager avvisa q manager che un td ha cambiato zona e il q manager provvede a spostare il td nella coda della zona attuale del td)
+		\itemBold{Queue Manager} Questo \textbf{Software Component} si occupa di :
 		\begin{itemize}
 			\item Gestire le code dei \textbf{Taxi Driver}, una coda per zona della città.
 			\item Genera i messaggi di notifica ,contenenti \textit{Taxi Driver ID} e \textit{Travel Time}, da inviare ai \textbf{Passenger} nel momento in cui la richiesta che hanno fatto viene accettata da un \textbf{Taxi Driver}. 
 			Per fare questo deve chiamare il \textbf{Location Manager} e richiedere il \textbf{Travel Time}.
-			\item Ridistribuisce le \textbf{Taxi Ride} che non hanno nessuno a cui essere inoltrate, cioè le \textbf{Taxi Ride} richieste in una zona la cui coda è vuota.
-			\item Ridistribuisce le\textbf{Taxi Ride}. 
-			Infatti quando viene servita una richiesta di \textbf{taxi rideTaxi Ride} associata ad una zona la cui relativa coda è vuota, scatta un timeout dopo la scadenza del quale la taxi ride viene ridistribuita in una delle code delle zone ad essa limitrofe.
+			\item Provvede a cambiare la coda del \textbf{Taxi Driver} che ha cambiato zona.
+			\item Ridistribuisce le\textbf{Taxi Ride}. Infatti quando viene servita una richiesta di \textbf{taxi rideTaxi Ride} associata ad una zona la cui relativa coda è vuota, scatta un timeout dopo la scadenza del quale la taxi ride viene ridistribuita in una delle code delle zone ad essa limitrofe.
 		\end{itemize}
-			espone le seguenti \textit{interfaces}:
+		Per performare queste funzionalità il \textbf{Queue Manager} espone le seguenti \textit{interfaces}:
 		\begin{itemize}
-			\item Fornisce la funzionalità di associare una \textit{city zone} a partire da un \textit{city address}, utile quando bisogna categorizzare una \textbf{Taxi Ride} appena arrivata.
-			\item Fornisce la funzionalità per richiedere ad un \textbf{Taxi Driver} il \textit{actual city address}, per aggiornare la mappa interna al server tra \textbf{Taxi Driver} e \textbf{City Address}.
-			\item Fornisce la funzionalità di calcolare il tempo di percorrenza tra due \textit{city addresses}.
+			\itemBold{TD Zone Changed} Permette di cambiare coda ad un certo \textbf{Taxi Driver}.
 		\end{itemize}
 		Inoltre utilizza le seguenti \textit{interfaces}:
 		\begin{itemize}
-			\item Richiedere la posizione GPS al \textbf{Taxi Driver} che viene scelto dal \textbf{Taxi Driver Manager}.
-			\item Utilizza le \textbf{API} di \textit{Google Maps} necessarie per calcolare il \textbf{Travel Time} e per associare un indirizzo ai dati GPS.	
+			\itemBold{Query Queue Model} Utilizza questa interfaccia sul \textbf{Model} per spostare un \textbf{Taxi Driver} da una coda ad una altra coda quando quest'ultimo ha cambiato zona. 
+			Inoltre questa interface ha un metodo per prelevare un \textbf{Taxi Driver} da una coda per associarlo ad una \textbf{Taxi Ride}.
+			\itemBold{Compute Travel Time} Utilizza questa interfaccia per richiedere al \textbf{Location Manager} il \textbf{Travel Time} relativo ad una \textbf{Taxi Ride} che sta servendo.
+			\itemBold{Dispatch Message} Utilizza questa interfaccia per inviare una notifica per confermare l'associazione di una \textbf{Taxi Ride} con un \textbf{Taxi Driver}.
 		\end{itemize}
+		
 		\itemBold{Session Manager} E' il componente software che si occupa di modificare il modello relativo alle sessioni attive degli utenti di \myTaxiService{}.
+		Per performare queste funzionalità il \textbf{Session Manager} espone le seguenti \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{Login} Permette di cambiare iniziare la procedura di login per un utente di \myTaxiService{}.
+			\itemBold{Logout} Permette di cambiare iniziare la procedura di logout per un utente di \myTaxiService{}.
+		\end{itemize}
+		Inoltre utilizza le seguenti \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{Query Passenger Model} Utilizza questa interfaccia sul \textbf{Model} per modificare il modello aggiungendo una sessione per il \textbf{Passenger} che ha chiesto di fare login e restituendo un Token che identifichi la sessione appena aperta.
+			\itemBold{Query Taxi Driver Model} Utilizza questa interfaccia sul \textbf{Model} per modificare il modello aggiungendo una sessione per il \textbf{Taxi Driver} che ha chiesto di fare login e restituendo un Token che identifichi la sessione appena aperta.
+		\end{itemize}
+		
 		\itemBold{Profile Manager} Si occupa di modificare la porzione del modello relativa al profilo degli utenti registrati a \myTaxiService{}.
-		\itemBold{Taxi Driver Manager} 
+		Per performare queste funzionalità il \textbf{Profile Manager} espone le seguenti \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{Register} Permette di effettuare la registrazione a \myTaxiService{}.
+			\itemBold{Modify Profile} Permette di modificare un profilo precedentemente creato presso \myTaxiService{}.
+		\end{itemize}
+		Inoltre utilizza le seguenti \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{Query Passenger Model} Utilizza questa interfaccia sul \textbf{Model} per modificare il modello aggiungendo un utente registrato o modificare il profilo di un utente precedentemente registrato.
+		\end{itemize}
+		
+		\itemBold{Taxi Driver Manager} inviare ride ai tassisti, aggiornare la posizione, notifica il Queue manager di spostare un td.
+		\itemBold{Taxi Driver Manager} Si occupa di gestire tutto ciò che riguarda i \textbf{Taxi Driver}. In particolare espone le seguenti interfaces:
+		\begin{itemize}
+			\itemBold{Report Problem} Permette ad un \textbf{Taxi Driver} di notificare l'avvenimento di un problema durante una \textbf{Taxi Ride} o di notificare che un certo probema è stato risolto.
+		\end{itemize}
+		Inoltre utilizza le seguenti \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{TD Zone Changed} Utilizza questa interfaccia per notificare al \textbf{Queue Manager} di spostare un \textbf{Taxi Driver} da una coda ad un'altra perchè il relativo \textbf{Taxi Driver} ha cambiato zona.
+			\itemBold{Query Taxi Driver Model} Utilizza questa interfaccia sul \textbf{Model} per modificare il modello nei seguenti casi: 
+			\begin{itemize}
+				\item Dopo aver ricevuto l'aggiornamento riguardante l'indirizzo di un \textbf{Taxi Driver} viene chiamato un metodo per aggiornare l'indirizzo nella base di dati.
+				\item Per aggiungere un problema alla lista dei problemi.
+				\item Per marcare un problema come risolto.
+			\end{itemize}
+			\itemBold{Dispatch Message}
+			\itemBold{Get TD Address}
+		\end{itemize}
+		
 		\itemBold{Taxi Ride Manager}
 		\itemBold{Taxi Sharing Manager}
 		\itemBold{Query Manager}
