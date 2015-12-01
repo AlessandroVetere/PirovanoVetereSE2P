@@ -120,26 +120,38 @@ Di seguito sono descritti i sub-components che interoperano all'interno di ogni 
 		\itemBold{Taxi Driver Manager} 
 		\itemBold{Taxi Ride Manager}
 		\itemBold{Taxi Sharing Manager}
+		This component is in charge of managing the Taxi Sharing
 		\itemBold{Query Manager}
 	\end{itemize}
 	
 	\itemBold{Model}
-	In questo componente sono raggruppati i seguenti sotto componenti:
+	In this component are included the following subcomponents:
 	\begin{itemize}
 		\itemBold{Model Query Service}
+		This component provides an aggregated interface rich of methods to access the relational model underlying with a high level of abstraction, protection and security.
+		The interface that it implements is called Query Model and it is used by the Query Manager to query the model via RPC.
 		\itemBold{Passenger DB Adapter}
+		It is a utility component that implements and exposes Passenger related query methods, built above the Query Database interface to the Database Driver Adatper.
 		\itemBold{Taxi Ride DB Adapter}
+		It is a utility component that implements and exposes Taxi Ride related query methods, built above the Query Database interface to the Database Driver Adatper.
 		\itemBold{Taxi Driver DB Adapter}
+		It is a utility component that implements and exposes Taxi Driver related query methods, built above the Query Database interface to the Database Driver Adatper.
 		\itemBold{Zone DB Adapter}
+		It is a utility component that implements and exposes Zone related query methods, built above the Query Database interface to the Database Driver Adatper.
 		\itemBold{Queue DB Adapter}
+		It is a utility component that implements and exposes Queue related query methods, built above the Query Database interface to the Database Driver Adatper.
 		\itemBold{Database Driver Adapter}
+		This component is a wrapper built on the Database Driver (that can be JDBC) that provides a set of methods to perform the common operations that could be done on a relational database.
+		In fact it connects to the Database Management System via a Database Driver.
+		Those methods are exposed in a interface that is called Query Database, and the various DB Adapters calls them in a way that depends on the caller component itself.
 	\end{itemize}
-	
 \end{itemize} 
-Di seguito c'è l' \textbf{UML Component Diagram}:
+\subsubsection{UML Component Diagram}
 %TODO ale inserisci il diagramma che non posso compilare e non posso vedere la preview
+
 \subsection{Deployment view}
 %TODO inserire il deployment diagram (spiega la suddivisione in tier). spiegazione dei tier hardware
+
 \subsection{Runtime view}
 %TODO You can use sequence diagrams to describe the way components interact to accomplish specific tasks typically related to your use cases.
 \subsection{Component interfaces}
