@@ -119,4 +119,61 @@ Subsequently are listed all the main software components and their interfaces, e
 \end{itemize}
 \subsection{Selected architectural styles and patterns}
 %TODO Please explain which styles/patterns you used, why, and how
+Several architectural styles and patterns were chosen in order to build \myTaxiService{} as a modern software.
+The main pattern that were recursively adopted is the Model View Controller architectural pattern:
+\begin{itemize}
+	\itemBold{System Level} All the clients that use \myTaxiService{}, the Passengers, the Taxi Drivers, and the Administrator, are seen as Views, that following the Cocoa MVC pattern, connects to a Controller, the Web Server or the Application Server, that is itself connected to the Model that is hosted on the Database Server.
+	\itemBold{Client Level} The views in the various clients are designed internally to conform to the MVC pattern. For instance the Passenger View is composed by a Model that is an internal representation of the data received by the Web Server, a Controller that performs network activities and connects to the Model and to the View, and the View that is either a Mobile Application GUI or a Web Page.
+	\itemBold{Server Level} The server part of \myTaxiService{} is divided also physically into the three different entities of the MVC pattern:
+	\begin{itemize}
+		\itemBold{Web Server} It is the View of the server part of the application, and gives to clients a representation of the internal data. The Web Server is connected only to the Application Server. It contains all the assets included in the web portal. On its external interface, it can handle properly HTTPS requests and manage communication over Web Sockets. On its internal interface it sends and receives objects via RPC from the Application Server, that is in charge of the application logic.
+		\itemBold{Application Server} That is the Controller of the server and connects to the Web Server and the Database Server via RPC. It contains most of the business logic behind \myTaxiService{} and therefore it is a core part of the system. It should be reachable only within the enterprise network, and not via public IP. The connection to the Web Server is used to receive requests and deliver responses to clients and to send asynchronous requests to them, when it is needed. On the other hand, the connection to the Database Server is necessary to connect the Controller to the Model, and it is used to store all the important data and react to some data modifications that occurs during the execution of the application.
+		\itemBold{Database Server} It is the Model of the server, and infact the Model of the whole \myTaxiService{} system. It relies on an RPC connection with the Application Server and it is not directly reachable via a public IP. The Database Server is connected to a relational database via a Database Driver Adapter, that is a wrapper built over the DBMS installed on the Database Server Operating System. Following the Cocoa MVC pattern, it is not directly connected to the View of the server, that is the Web Server, but only to the Controller, that is the Application Server.
+	\end{itemize}
+\end{itemize}
+Alongside the MVC architectural pattern, also the Client Server style is used for all the requests done by the various clients that can connect to the Web Server of \myTaxiService{}. The Taxi Driver Application and the Passenger Application can use a standardized Client Server protocol via HTTPS that is follows the principle of a RESTful service. The Administrator application its connected via RPC to the Web Server and can perform more critical requests, like the registration of a new Taxi Driver into the system. It is required that the Administrator application opens a RPC connection to the server to start the communication.
+A Point to Point bidirectional messaging system is established between the clients and the Web Server at the startup of the client application. The client should explicitly request a connection to the server that is listening for clients to connect. It is a connection over Web Socket that allows the Web Server to send asynchronous messages and requests to which the client can respond using the same channel. It's main functions are the one that allows the server to send a Taxi Ride proposal to a given Taxi Driver, that can either accept or deny the proposal, and the one that allows the server to ask the Taxi Driver an updated geolocalization data.
+The Client Server style and Point to Point bidirectional messaging system are used to implement properly the MVC pattern in this three layers, four tiers system.
+The three layers have already been discussed and are:
+\begin{itemize}
+	\itemBold{Data Layer} That is the System Level Model
+	\itemBold{Business Logic Layer} That is the System Level Controller
+	\itemBold{Presentation Layer} That is the System Level View
+\end{itemize}
+These layer, as already said, are mapped into four different tiers:
+\begin{itemize}
+	\itemBold{Clients} They map the System Level View.
+	\itemBold{Web Server} It maps a portion of the System Level Controller, that is the one of the RESTful Service, Dispatcher, and part of the Location Manager, onto software objects that provide the required network capabilities.
+	\itemBold{Application Server} This tier maps the purely logic part of the System Level Controller.
+	\itemBold{Database Server} It maps the System Level Model.
+\end{itemize}
 \subsection{Other design decisions}
+There have been chosen several technologies that best fit the needs of the system to be. Not all the required functionalities of \myTaxiService{} are already mapped onto specific products because in those cases the choice done would matter less.
+But for the cases in which a technology has already been proposed, it is because a clear design decision was mandatory.
+As for the communication protocols between clients (excluded the Administrator client) and the server have been chosen:
+\begin{itemize}
+	\itemBold{HTTPS} The secure version of HTTP was a mandatory choice as security and privacy concerns are of major importance nowadays.
+	\itemBold{Web Socket} This innovative socket technology has been chosen although is relatively new because it implements a full duplex socket communication channel using web technology and therefore using the port 80, which is in almost every case not blocked by any firewall.
+\end{itemize}
+For what concerns the network reachability has been chosen to make discoverable only the Web Server through the assignment to it of a public IP.
+All the other servers in \myTaxiService{} system should be reachable only within the enterprise network.
+Between the Web Server and the external network is installed a firewall that controls all the incoming connections.
+In particular it must accept only incoming HTTPS connections, Web Socket connections and RPC connections.
+A firewall is also used to protected the Database Server from the Application Server in the unlikely case that the Application Server is attacked through the Web Server or the Application Server for some reasons stops working correctly and start behaving in a way that will damage the application Model.
+Also, another interesting design choice that has been made concerns the way in which the GPS coordinates obtained from a given Taxi Driver are mapped into a specific Zone.
+It could have been possible, but not feasible, to do such a thing:
+\begin{enumerate}
+	\item Obtain GPS Data via Web Socket from the selected Taxi Driver
+	\item Calculate the nearest Address of the given GPS Data using Google Maps HTTPS API
+	\item Query the Model to obtain the Zone to which belongs the given Address
+\end{enumerate}
+But this solution required to have a precomputed data structure that associate every Address in the City to the corresponding Zone (that could have been a relational table with as many tuples inside as Addresses in the City), that is heavy to manage and mantain, although if correctly installed and filled, it gives for certain good performances.
+A less heavy weight solution has been found and that is a solution that expects every Zone of the city to be divided in several convex Polygon, for instance Triangles, that have interesting properties for our application.
+The polygonal shape of the Zone could be almost as complex as one can imagine and be decomposed in a finite number of Triangles in all the interesting applications.
+In \myTaxiService{} Zones of regular shape are intended to be used, and therefore the number of Triangles in which a Zone will be decomposed is limited.
+So such a flow is followed:
+\begin{enumerate}
+	\item Obtain GPS Data via Web Socket from the selected Taxi Driver
+	\item For each Zone, check if the the Point that the Longitude and Latitude from GPS Data identify is contained inside any Triangle in which the Zone is divided. If that is true, that the Zone is found. If that is false, than another Zone could contain the given Point. If no Zone contains the Point, then we can assume that the Point refers to GPS Data that locate a geographical point outside of the City.
+\end{enumerate}
+The computation of the Point in Triangle test is simple but efficient and an algorithm implementation in Java is provided in the following section.
