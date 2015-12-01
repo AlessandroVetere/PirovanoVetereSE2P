@@ -2,7 +2,6 @@
 \subsection{Overview}
 %TODO descrizione del disegno dell'architettura generale(vedi rasd quasi uguale)
 \subsection{High level components and their interaction}
-%TODO spiegazione di come interagiscono le varie parti del software guardandolo come insieme di quadratoni del component diagram. spiegazione del mvc e come interagisce la view con il controller e il controller con il model. application server non puo essere acceduto dall'esterno solo il web server ha interfacce di rete. solo l'admin può accedere all'application server tramite la rete perche si impotizza che sia un accesso protetto. gli sviluppatori esterni accedono alle api connettendosi al web server e facendo delle richieste di api specifiche al restful service. il controller parla con il modello tramite rmi.accenno alla suddivisione tra layer e tier. client server. diversi tipi di comunicazione. un flusso client server e un flusso point to point (dispatcher e receiver). il location manager fa da dispatcher per i messaggi di localizzazione.
 Nella sezione architectural design sono spiegati approfonditamente gli aspetti programmativi che dovranno caratterizzare il software. 
 In particolare qui viene spiegato come è stata pensata la suddivisione tra layer e tier, i protocolli di comunicazione scelti e i pattern utilizzati. 
 Per chiarificare il più possibile questi aspetti vengono forniti anche numerosi diagrammi UML integrati con esaurienti spiegazioni dei componenti software: 
@@ -11,14 +10,7 @@ Per chiarificare il più possibile questi aspetti vengono forniti anche numerosi
 	\itemBold {Deployment View} Qui viene invece descritta la suddivisione in tier e accompagnandla con un UML deployment diagram.
 	\itemBold {Runtime View} Qui viene spiegato come i componenti interagiscono l'uno con l'altro. Per spiegare l'ordine di chiamata dei metodi tra i vari componenti vengono forniti gli UML sequence diagrams dei casi più interessanti.
 \end{itemize}
-\subsubsection{Layer and Tier suddivision}
-Il software dovrà essere suddiviso in quattro \textbf{Layer} software: 
-\begin{itemize}
-	\itemBold {Client View} Riceve i comandi dell'utente, genera le richieste da inviare al servere e tramite un sottolivello di comunicazione invia le richieste generate alla \textbf{Server View}.
-	\itemBold {Server View} Riceve le richieste generate dal \textbf{Client} e le smista agli oggetti del \textbf{Server Controller}. Inoltre invia al \textbf{Client} le risposte generate dal \textbf{Controller}.
-	\itemBold {Server Controller} Processa le richieste e genera le risposte da inviare al \textbf{Client} tramite la \textbf{Server View}.
-	\itemBold {Server Model} Deve essere presente una interfaccia con query predefinite che vengono chiamate dal \textbf{Controller} per aggiornare il modello. Inoltre deve essere garantita una rappresentazione dei dati che l'applicazione gestisce tramite \textbf{Modello Relazionale}. In conclusione il \textbf{Server Model} notifica il \textbf{Controller} quando è stato apportato un cambiamento al modello.
-\end{itemize}
+\subsubsection{Tier suddivision}
 Il software progettato potrà poi fare uso di quattro \textbf{Tier} fisici:
 \begin{itemize}
 	\itemBold {Passenger Web Browser or Passenger Smartphone} Deve essere garantita la compatibilità del sito web con ogni tipo di \textbf{Browser} ( Safari, Firefox, Opera, IE, Chrome).
@@ -26,26 +18,33 @@ Il software progettato potrà poi fare uso di quattro \textbf{Tier} fisici:
 	\itemBold {Application Server} Questo è il livello tier sul quale si basa maggiormente l'applicazione. 
 	Infatti qui vengono fatti tutti i calcoli e viene contenuta la logica che sta alla base di \myTaxiService{}. 
 	E' importante sottolineare che è necessario avere due tier per la gestione delle richieste e delle risposte. Infatti grazie a questa suddivisione le \textbf{Classi} dei componenti software che interagiscono con la rete sono mantenute sul \textbf{Web Server} e quelli che sono di pura logica sono invece hostate nell' \textbf{Application Server}.
-	 In questo modo si riesce a garantire un ulteriore livello di sicurezza rendendo inaccessibili le porzioni di codice più importanti.
-	 \itemBold {Database Server} In questo tier è ospitata la base di dati che permette la persistenza dei dati del servizio.
+	In questo modo si riesce a garantire un ulteriore livello di sicurezza rendendo inaccessibili le porzioni di codice più importanti.
+	\itemBold {Database Server} In questo tier è ospitata la base di dati che permette la persistenza dei dati del servizio.
 \end{itemize}
-\subsubsection{MVC architectural pattern}
-L'architettura dovrà seguire il pattern \textbf{MVC (Model View Controller)}, e dovrà rispettare il paradigma di comunicazione \textbf{Client-Server} per la gestione delle richieste generate dalle view dei \textbf{Client} e rivolte al \textbf{Server} per essere gestite. 
-E' inoltre previsto un canale diretto dal \textbf{Server} verso il \textbf{Client} per poter gestire la necessità di inviare ai Taxi Drivers la notifica di associazione con una corsa, e permettere loro di accettare o rifiutare la richiesta.
+\subsubsection{MVC architectural pattern and Layer suddivision}
+L'architettura dovrà rispettare il pattern \textbf{MVC (Model View Controller)}, e dovrà rispettare il paradigma di comunicazione \textbf{Client-Server} per la gestione delle richieste generate dalle view dei \textbf{Client} e rivolte al \textbf{Server} per essere gestite. 
+E' inoltre necessaria l'implementazione di un canale \textbf{Point to Point} che verrà utilizzato dal \textbf{Server} per poter gestire la necessità di inviare al \textbf{Client} generici messaggi di notifica, messaggi di servizio e, nel caso in cui il \textbf{Client} sia un \textbf{Taxi Driver}, messaggi di associazione con una \textbf{Taxi Ride}.
+E' quindi necessario implementare quattro \textbf{Layer} che garantiscano la stratifcazione necessaria per avere un \textbf{Client Server} con \textbf{Fat Server} e \textbf{Thin Client}.
+Guardando l'architettura software ad alto livello, il \textbf{Client} è composto solo dalla \textbf{View}, e per questo motivo si parla appunto di \textbf{Thin Client}. 
+Il server invece è suddiviso in tre \textbf{Layer}, uno per la \textbf{View}, uno per la parte di \textbf{Controller} e uno per la gestione del \textbf{Model}.
 \paragraph{Client View}
-Guardando l'architettura software ad alto livello, il \textbf{Client} è composto solo dalla \textbf{View}, e per questo motivo si parla di \textbf{Thin Client}. 
+Il ruolo di questo \textbf{Layer} è quello di ricevere i comandi dell'utente, generare le richieste da inviare al server e, tramite un sottolivello di comunicazione, inviare le richieste costriute alla \textbf{Server View}.
 La \textbf{Client View} può essere di quattro tipi, a seconda dell'utente che la utilizza: 
 \begin{itemize}
 	\itemBold {Passenger Web View} Interfaccia con \myTaxiService{} rivolta all'utente finale accessibile via browser.
 	\itemBold {Passenger Application View} Interfaccia con \myTaxiService{} rivolta all'utente finale accessibile tramite una applicazione dedicata.
 	\itemBold {Taxi Driver Application View} Interfaccia con \myTaxiService{} rivolta ai taxisti accessibile tramite applicazione dedicata.
-	\itemBold {Admin View} Interfaccia con l'Application Tier di \myTaxiService{} rivolta all'admin del servizio.
+	\itemBold {Admin View} Interfaccia con il \textbf{Web Server Tier} di \myTaxiService{} rivolta all'admin del servizio.
 \end{itemize}
 \paragraph{Server View}
-La \textbf{Server View} consiste in quelle \textbf{Classi} che si occupano di ricevere e inviare i messaggi
+La \textbf{Server View} consiste in quelle \textbf{Classi} che si occupano di inviare i messaggi ai vari \textbf{Client}, in base alla logica implementata dalle \textbf{Classi} del \textbf{Server Controller}.
+Inoltre in questo \textbf{Layer} vengono ricevute le richieste generate dal \textbf{Client} per venire poi smistate agli oggetti del \textbf{Server Controller}. 
 \paragraph{Server Controller}
-Inoltre è presente un livello controller che riceve tutte le richieste fatte dalle varie view, riconosce di che richiesta di tratta e chiama l'oggetto relativo 
-\paragraph{Server Model}
+Il \textbf{Server Controller} processa le richieste e genera le risposte da inviare al \textbf{Client} tramite la \textbf{Server View}. 
+\paragraph{Server Model} 
+Il \textbf{Server Model} deve invece garantire una interfaccia predefinita con la \textbf{Base di Dati} con query predefinite che vengono chiamate dal \textbf{Controller} per aggiornare il modello. 
+Inoltre deve essere garantita una rappresentazione dei dati che l'applicazione gestisce tramite \textbf{Modello Relazionale}.
+\end{itemize}
 \subsection{Component view}
 %TODO inserire il component diagram e spiegare ogni componente che scopo ha e dove sta (dispatcher e restful service sono su web server e locationmanager ). spiegazione dei layer software
 \subsection{Deployment view}
