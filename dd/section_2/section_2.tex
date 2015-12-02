@@ -64,39 +64,41 @@ This architecture, with three different \textbf{Layers} and four different \text
 %TODO TRADURRE
 %TODO inserire il component diagram e spiegare ogni componente che scopo ha e dove sta (dispatcher e restful service sono su web server e locationmanager ). spiegazione dei layer software
 \showComponentDiagram{UML Component Diagram}{1.0}
-Di seguito sono descritti i sub-components che interoperano all'interno di ogni component e le interfaces interne che permettono loro di comunicare uno con l'altro.
+Below are described all the software component that interact inside every subsystem; for the most important ones is also provided a description of the internal interfaces that they use to communicate one with each other.
+The identified subsystems are:
 \begin{itemize}
 	\itemBold{Passenger View}
-	In questo componente sono raggruppati i seguenti sotto componenti:
+	In this subsystem are contained the following components:
 	\begin{itemize}
-		\itemBold{PS Application View and PS Web View} Sono i componenti software che permettono di intercettare gli eventi di interazione tra software e utente finale, come ad esempio click di un pulsante o lo scroll. 
-		Inoltre sono in grado di mostrare i dati di risposta ricevuti via rete.
-		\itemBold{PS Request Creator} Tramite questo componente viene effettuato un mapping completo tra eventi performabili dall'utente sulla \textbf{Application o Web View} e richieste da inviare al server. 
-		E' un componente \textbf{Observer} che si risveglia quando un evento è generato e lo traduce in una richiesta ben formata. 
-		\itemBold{PS Receiver} Tramite questo componente vengono tradotte le risposte in eventi di ritorno.
-		E' un componente \textbf{Observable} del quale la \textbf{View} si registra come \textbf{Listener}.
+		\itemBold{PS Application View and PS Web View} These are the software components that catch \textbf{Passenger} generated events, like the click on a button. In addition they are capable of showing responses and notifications received via network.
+		It is an \textbf{Observable} component, which \textbf{Observer} is \textbf{PS Request Creator}.
+		\itemBold{PS Request Creator} This software component translates each \textbf{Passenger} generated event into a request that is intended to be sent to the server, and is capable of handling the server response.
+		It is an \textbf{Observer} component that is notified when specific events occur.
+		\itemBold{PS Receiver} This component is in charge of handling asynchronous server notifications or requests.
+		It is an \textbf{Observable} component which \textbf{Observer} is the \textbf{PS Application View and PS Web View}.
 	\end{itemize}
 	\itemBold{Taxi Driver View}
-	In questo componente sono raggruppati i seguenti sotto componenti:
+	In this subsystem are contained the following components:
 	\begin{itemize}
-		\itemBold{TD Application View} E' il componente software che permette di intercettare gli eventi di interazione tra software e il \textbf{Taxi Driver}, come ad esempio click di un pulsante o lo scroll. 
-		Inoltre è in grado di mostrare i dati di risposta ricevuti via rete.
-		\itemBold{TD Request Creator} vedi \textbf{PS Request Creator}.
-		\itemBold{TD Receiver} vedi \textbf{PS Receiver}
-		\itemBold{TD Locator} E' il componente software che ha accesso all'interfaccia con il GPS dello smartphone del \textbf{Taxi Driver} e che, una volta invocato dal \textbf{Location Manager}, può richiedere al GPS la posizione di un determinato tassista. 
-		E' fondamentale nel momento in cui il server, per avere una modello sempre consistente con la posizione reale dei tassisti, invia richieste di aggiornamento del mapping tra tassita e zona della città.
+		\itemBold{TD Application View} These are the software components that catch \textbf{Taxi Driver} generated events, like the click on a button. In addition they are capable of showing responses and notifications received via network.
+		\itemBold{TD Request Creator} See \textbf{PS Request Creator}.
+		\itemBold{TD Receiver} See \textbf{PS Receiver}
+		\itemBold{TD Locator} This is the software component that accesses the interface to the \textbf{Taxi Driver GPS Data Source}. Once invoked by the \textbf{Location Manager}, it retrieves the \textbf{GPS Data} that identify the \textbf{Taxi Driver Position}. It is a fundamental part of the \textbf{Taxi Driver View} because it makes possible for the server to have a constantly updated \textbf{Model}.
 	\end{itemize}	
 	\itemBold{Taxi Driver Model}
-	In questo componente sono raggruppati i seguenti sotto componenti:
+	In this subsystem are contained the following components:
 	\begin{itemize}
-		\itemBold{GPS Data Source} E' un oggetto che rappresenta la posizione più recente inviata dal segnale GPS; è composto da molti dati, tra i quali i più imporntanti sono \textbf{Latitudine} e \textbf{Longitudine}.
-		Infatti tramite questi dati è possibile determinare univocamente la posizione del \textbf{Taxi Driver}.
+		\itemBold{GPS Data Source} It is a software component that connects to the \textbf{GPS Driver} of the \textbf{Taxi Driver Smartphone}.
+		It provides an object that represents the most recent position retrieved by the GPS Antenna; this object contains many data, among which the most important are \textbf{Latitude} and \textbf{Longitude}.
+		In fact through these data it is possible to determine in a precise way the \textbf{Taxi Driver} position.
 	\end{itemize}
-	
 	\itemBold{Controller}
-	In questo componente sono raggruppati i seguenti sotto componenti:
+	In this subsystem are contained the following components:
 	\begin{itemize}
-		\itemBold{RESTful Service} Questo \textbf{Software Component} si occupa di ricevere le richieste dai \textbf{Client} e le distribuisce ai vari \textbf{Manager Components} appartententi alla \textbf{Busines Family}. 
+		\itemBold{RESTful Service}
+		This software component receives 
+		
+		 Questo \textbf{Software Component} si occupa di ricevere le richieste dai \textbf{Client} e le distribuisce ai vari \textbf{Manager Components} appartententi alla \textbf{Busines Family}. 
 		Inoltre garantisce che vengano gestite un numero massimo, prefissato e configurabile di richieste in parallelo.
 		Per permettere agli altri \textbf{Software Components} di interagire espone le seguenti \textit{interfaces}:
 		\begin{itemize}
