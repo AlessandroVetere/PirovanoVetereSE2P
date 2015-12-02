@@ -1,55 +1,64 @@
 \section{Architectural Design}
+This section exposes \myTaxiService{} Architectural Design in a complete e comprehensible way.
 
 \subsection{Overview}
 %TODO descrizione del disegno dell'architettura generale(vedi rasd quasi uguale)
-\showGeneralDiagram{General Diagram}{1.0}
+A quick but meaningful overview on the system architectural design is presented with the help of the following diagram, which is self explanatory:
+\showGeneralDiagram{Overview Diagram}{1.0}
+In addition are given many \textbf{UML Diagrams} integrated with complete descriptions of the software components in the following subsections:
+\begin{itemize}
+	\itemBold{Component View} Describes the division of the system in \textbf{Layers} and how the work flow is organized through them. It contains a \textbf{UML Component Diagram} that best delivers a comprehensive overlook.
+	\itemBold{Deployment View} Explains how the division of system in \textbf{Tiers} is done with the help of an \textbf{UML Deployment Diagram}.
+	\itemBold{Runtime View} Describes how each software components interacts with each other. To better explain the method call order and which component is used to obtain a given functionality, a set of \textbf{UML Sequence Diagram} is presented.
+\end{itemize}
 
 \subsection{High level components and their interaction}
-%TODO TRADURRE
-Nella sezione architectural design sono spiegati approfonditamente gli aspetti programmativi che dovranno caratterizzare il software. 
-In particolare qui viene spiegato come è stata pensata la suddivisione tra layer e tier, i protocolli di comunicazione scelti e i pattern utilizzati. 
-Per chiarificare il più possibile questi aspetti vengono forniti anche numerosi diagrammi UML integrati con esaurienti spiegazioni dei componenti software: 
-\begin{itemize}
-	\itemBold {Component View} Qui viene descritta la suddivisione in layer e vengono descritti tutti i componenti software tramite i quali viene sviluppato il flusso di lavoro desiderato e viene proposto un UML component diagram per rendere la comprensione piu immediata.
-	\itemBold {Deployment View} Qui viene invece descritta la suddivisione in tier e accompagnandla con un UML deployment diagram.
-	\itemBold {Runtime View} Qui viene spiegato come i componenti interagiscono l'uno con l'altro. Per spiegare l'ordine di chiamata dei metodi tra i vari componenti vengono forniti gli UML sequence diagrams dei casi più interessanti.
-\end{itemize}
-\subsubsection{Tier suddivision}
-Il software progettato potrà poi fare uso di quattro \textbf{Tier} fisici:
-\begin{itemize}
-	\itemBold {Passenger Web Browser or Passenger Smartphone} Deve essere garantita la compatibilità del sito web con ogni tipo di \textbf{Browser} ( Safari, Firefox, Opera, IE, Chrome).
-	\itemBold {Web Server} Deve essere un sever che si occupa di generare le pagine web dinamicamente e di ricevere le richieste dei passeggeri. Inoltre è il server dove sono hostati gli \textbf{Assets} del sito web. In questa macchina devono essere contenute le \textbf{Classi} relative agli oggetti del \textbf{Server Controller} che ricevono e inviano dati ai \textbf{Client} (Dispatcher, RESTful Service, ...).
-	\itemBold {Application Server} Questo è il livello tier sul quale si basa maggiormente l'applicazione. 
-	Infatti qui vengono fatti tutti i calcoli e viene contenuta la logica che sta alla base di \myTaxiService{}. 
-	E' importante sottolineare che è necessario avere due tier per la gestione delle richieste e delle risposte. Infatti grazie a questa suddivisione le \textbf{Classi} dei componenti software che interagiscono con la rete sono mantenute sul \textbf{Web Server} e quelli che sono di pura logica sono invece hostate nell' \textbf{Application Server}.
-	In questo modo si riesce a garantire un ulteriore livello di sicurezza rendendo inaccessibili le porzioni di codice più importanti.
-	\itemBold {Database Server} In questo tier è ospitata la base di dati che permette la persistenza dei dati del servizio.
-\end{itemize}
-\subsubsection{MVC architectural pattern and Layer subdivision}
-L'architettura dovrà rispettare il pattern \textbf{MVC (Model View Controller)}, e dovrà rispettare il paradigma di comunicazione \textbf{Client-Server} per la gestione delle richieste generate dalle view dei \textbf{Client} e rivolte al \textbf{Server} per essere gestite. 
-E' inoltre necessaria l'implementazione di un canale \textbf{Point to Point} che verrà utilizzato dal \textbf{Server} per poter gestire la necessità di inviare al \textbf{Client} generici messaggi di notifica, messaggi di servizio e, nel caso in cui il \textbf{Client} sia un \textbf{Taxi Driver}, messaggi di associazione con una \textbf{Taxi Ride} e messaggi di richiesta di posizione.
-E' quindi necessario implementare tre \textbf{Layer} che garantiscano la stratifcazione necessaria per avere un \textbf{Client Server} con \textbf{Fat Server} e \textbf{Thin Client}.
-Guardando l'architettura software ad alto livello, il \textbf{Client} è composto solo dalla \textbf{View}, e per questo motivo si parla appunto di \textbf{Thin Client}. 
-Il server invece è suddiviso in due \textbf{Layer}, uno per la parte di \textbf{Controller} e uno per la gestione del \textbf{Model}.
+In the following section are deeply covered all the architectural aspects that characterize the software to be.
+In particular, here it is explained at a high level of abstraction how is designed the division of the system into \textbf{Layers} and \textbf{Tiers}.
+
+\subsubsection{Layers}
+The software architecture that has been chosen follows the principles of the \textbf{Model View Controller} architectural pattern.
+Therefore three main software components have been identified and those are without any coup de theatre: the \textbf{Model}, the \textbf{View} and the \textbf{Controller}.
+As already mentioned and explained through the \textbf{Overview Diagram}, the system has many distributed components: those will communicate with a \textbf{Client-Server} style and through \textbf{Point to Point} messaging system.
+The \textbf{Client-Server} style is used in order to receive different requests (e.g. a \textbf{Taxi Reservation} request) from the many \textbf{Clients} connected to the \textbf{Server} to use the service.
+The \textbf{Point to Point} bidirectional communication channel is made necessary to enable the \textbf{Server} the delivery of various messages and requests to the \textbf{Clients}.
+These message could be generic notifications and service messages, or in the particular case in which the connected client is a \textbf{Taxi Driver}, the request of serving a \textbf{Taxi Ride} and the request of an updated \textbf{GPS Data}.
+
+\textbf{Model, View and Controller} are then mapped to three different relevant \textbf{Layers}:
+
 \paragraph{View}
-Il ruolo di questo primo \textbf{Layer} è quello di ricevere i comandi dell'utente, generare le richieste da inviare al server e, tramite un sottolivello di comunicazione, inviare le richieste costriute al \textbf{Controller}.
-La \textbf{View} può essere di quattro tipi, a seconda dell'utente che la utilizza: 
+The role of this \textbf{Layer} is the one of processing remote \textbf{Clients} commands, and convert them into requests addressed to the \textbf{Controller} layer, that is connected to the \textbf{View} through a communication facility (e.g. The Internet).
+There exists four different types of \textbf{View}, each one designed specifically for the particular \textbf{Client}:
 \begin{itemize}
-	\itemBold {Passenger Web View} Interfaccia con \myTaxiService{} rivolta all'utente finale accessibile via browser.
-	\itemBold {Passenger Application View} Interfaccia con \myTaxiService{} rivolta all'utente finale accessibile tramite una applicazione dedicata.
-	\itemBold {Taxi Driver Application View} Interfaccia con \myTaxiService{} rivolta ai taxisti accessibile tramite applicazione dedicata.
-	\itemBold {Admin View} Interfaccia con il \textbf{Web Server Tier} di \myTaxiService{} rivolta all'admin del servizio.
+	\itemBold{Passenger Web View} Interface developed for the \textbf{Passengers}, accessible via a \textbf{Web Browser}.
+	\itemBold{Passenger Application View} Interface developed for the \textbf{Passengers}, accessible via a dedicated \textbf{Mobile Application}.
+	\itemBold{Taxi Driver Application View} Interface developed for the \textbf{Taxi Drivers}, accessible via a dedicated \textbf{Mobile Application}.
+	\itemBold{Administrator View} Interface developed for \myTaxiService{} \textbf{Administrator}, accessible via the dedicated \textbf{Administrator Workstation}.
 \end{itemize}
+
 \paragraph{Controller}
-Il secondo \textbf{Layer} è composto da due famiglie con funzionalità specializzate:
+This second \textbf{Layer} is composed itself of two families of components with specialized functionalities:
 \begin{itemize}
-	\itemBold {Networking Family}Questa famiglia comprende quei componenti che si occupano di inviare i messaggi ai vari \textbf{Client}, in base alla logica implementata dai componenti della \textbf{Business Family}.
-	Inoltre in questo \textbf{Layer} vengono ricevute le richieste generate dal \textbf{Client} per venire poi smistate agli oggetti della \textbf{Business Family}. 
-	\itemBold {Business Family} In questa famiglia sono contenuti componenti che processano le richieste e generano le risposte da inviare al \textbf{Client} tramite i componenti della \textbf{Networking Family}. 
+	\itemBold{Networking Components Family} This family groups the software components that are involved in sending messages to the various \textbf{Views}, following the logic implements in the \textbf{Business Components Family}.
+	This is also the entry point for requests generated by the \textbf{Views}, that are then dispatched to the various business components.
+	\itemBold{Business Components Family} In this family are included all the software components that implement the system logic, processing requests and generating responses and asynchronous events.
 \end{itemize}
-\paragraph{Model} 
-Il terzo \textbf{Layer} è il \textbf{Model}, il quale deve invece garantire un'interfaccia predefinita con la \textbf{Base di Dati} composta da query predefinite che vengono chiamate dal \textbf{Controller} per aggiornare il modello. 
-Inoltre deve essere garantita una rappresentazione dei dati che l'applicazione gestisce tramite \textbf{Modello Relazionale}.
+
+\paragraph{Model}
+The third and last \textbf{Layer} is the \textbf{Model}, that should guarantee a high level interface to store and manage all the \myTaxiService{} relevant data.
+It abstracts a \textbf{Relational Database} to a software components that is in direct connection to the \textbf{Controller}.
+
+\subsubsection{Tiers}
+Then it comes the division of the software in different \textbf{Tiers}:
+\begin{itemize}
+	\itemBold{Clients} The distributed clients of the application. The \textbf{View} layer is mapped only to this \textbf{Tier}.
+	\itemBold{Web Server} A server that is in charge of dynamically generate web pages and receive requests through the web. It is also the server where are hosted the \textbf{Assets} of the web portal. The \textbf{Networking Components Family} of the \textbf{Controller} is mapped to this \textbf{Tier}.
+	\itemBold{Application Server} This is the most important \textbf{Tier} of the system. Here are done all the logics and calculations that constitute the core part of \myTaxiService{}. The \textbf{Business Components Family} is hosted on this server and therefore it is a part of the \textbf{Controller} that is separated from the \textbf{Web Server}. It is necessary to have the \textbf{Controller} divided into two different \textbf{Tiers} in order to separate the most important software parts, that are the business logic components, from the network components, for security concerns.
+	\itemBold {Database Server}
+	In this \textbf{Tier} it is hosted the \textbf{Database} that allows the service data persistence. The \textbf{Model} layer is entirely mapped to this \textbf{Tier}.
+\end{itemize}
+
+This architecture, with three different \textbf{Layers} and four different \textbf{Tiers}, makes possible to have a \textbf{Client-Server} style with a \textbf{Fat-Server} and a \textbf{Thin-Client}: this is due to the mapping of the \textbf{View} to the \textbf{Clients} and the mapping of the \textbf{Controller} and the \textbf{Model} to the \textbf{Server}.
 
 \subsection{Component view}
 %TODO TRADURRE
@@ -229,7 +238,6 @@ Di seguito sono descritti i sub-components che interoperano all'interno di ogni 
 \showSequenceDiagram{ps_registration}{UML Sequence Diagram - PS Registration}{1.0}
 \showSequenceDiagram{ps_login}{UML Sequence Diagram - PS Login}{1.0}
 \showSequenceDiagram{queue}{UML Sequence Diagram - Queue Management}{1.0}
-\showSequenceDiagram{taxi_ride_arrived_handling}{UML Sequence Diagram - Taxi Ride Handling}{1.0}
 \showSequenceDiagram{taxi_ride_arrived_handling}{UML Sequence Diagram - Taxi Ride Handling}{1.0}
 \showSequenceDiagram{tr_timer_expired}{UML Sequence Diagram - Taxi Reservation Timer Expired}{1.0}
 \subsection{Component interfaces}
