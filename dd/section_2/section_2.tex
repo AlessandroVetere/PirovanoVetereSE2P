@@ -2,7 +2,6 @@
 This section exposes \myTaxiService{} Architectural Design in a complete e comprehensible way.
 
 \subsection{Overview}
-%TODO descrizione del disegno dell'architettura generale(vedi rasd quasi uguale)
 A quick but meaningful overview on the system architectural design is presented with the help of the following diagram, which is self explanatory:
 \showGeneralDiagram{Overview Diagram}{1.0}
 In addition are given many \textbf{UML Diagrams} integrated with complete descriptions of the software components in the following subsections:
@@ -62,7 +61,6 @@ This architecture, with three different \textbf{Layers} and four different \text
 
 \subsection{Component view}
 %TODO TRADURRE
-%TODO inserire il component diagram e spiegare ogni componente che scopo ha e dove sta (dispatcher e restful service sono su web server e locationmanager ). spiegazione dei layer software
 \showComponentDiagram{UML Component Diagram}{1.0}
 Below are described all the software component that interact inside every subsystem; for the most important ones is also provided a description of the internal interfaces that they use to communicate one with each other.
 The identified subsystems are:
@@ -143,73 +141,78 @@ The identified subsystems are:
 		
 		\itemBold{Queue Manager} This software component is in charge of:
 		\begin{itemize}
-			\item Manage \textbf{Taxi Driver Queue}, that are one per each \textbf{Zone} in the \textbf{City}.
-			\item Genera i messaggi di notifica ,contenenti \textit{Taxi Driver ID} e \textit{Travel Time}, da inviare ai \textbf{Passenger} nel momento in cui la richiesta che hanno fatto viene accettata da un \textbf{Taxi Driver}. 
-			Per fare questo deve chiamare il \textbf{Location Manager} e richiedere il \textbf{Travel Time}.
-			\item Provvede a cambiare la coda del \textbf{Taxi Driver} che ha cambiato zona.
-			\item Ridistribuisce le\textbf{Taxi Ride}. Infatti quando viene servita una richiesta di \textbf{taxi rideTaxi Ride} associata ad una zona la cui relativa coda è vuota, scatta un timeout dopo la scadenza del quale la taxi ride viene ridistribuita in una delle code delle zone ad essa limitrofe.
+			\item Manage \textbf{Taxi Driver Queues}, that are one per each \textbf{Zone} in the \textbf{City}, and contains only \textbf{Available Taxi Drivers}.
+			\item Generates notification message, that refers to a \textbf{Taxi Driver} that has just accepted a \textbf{Taxi Ride} request and contains the \textbf{Travel Time} remaining for the given \textbf{Taxi Driver} to reach the \textbf{Passenger} that is waiting.
+			To compute the \textbf{Travel Time}, is calls the \textbf{Location Manager} dedicated interface.
+			\item It changes the \textbf{Queue} in which a \textbf{Taxi Driver} is inside, when he/she moves from one \textbf{Zone} to another.
+			\item Serves a given number of \textbf{Taxi Rides} in parallel. That number is configurable. The exceeding request are put into a queue waiting to be served.
+			\item Redistribute the \textbf{Taxi Rides}. When the \textbf{Queue} associated to the starting \textbf{Zone} of a served \textbf{Taxi Ride} is empty, the system waits a given timeout. After the If no \textbf{Taxi Driver} can be found in the current \textbf{Queue}, the \textbf{Queue Manager} searches for a \textbf{Taxi Driver} in \textbf{Queues} of the neighbour \textbf{Zones}.
+			\item Redistribute \textbf{Taxi Drivers}. When a \textbf{Taxi Driver} refuses a \textbf{Taxi Ride} request, it is dequeued from the current \textbf{Queue} and then enqueued in the same \textbf{Queue}: this moves him to the last position.
 		\end{itemize}
-		Per performare queste funzionalità il \textbf{Queue Manager} espone le seguenti \textit{interfaces}:
+		This software component implements and exposes the following \textit{interfaces}:
 		\begin{itemize}
-			\itemBold{TD Zone Changed} Permette di cambiare coda ad un certo \textbf{Taxi Driver}.
+			\itemBold{TD Zone Changed} Allows the \textbf{Taxi Driver Manager} to notify that a given \textbf{Taxi Driver} has moved to a different \textbf{Zone}.
 		\end{itemize}
-		Inoltre utilizza le seguenti \textit{interfaces}:
+		In addition it uses the following \textit{interfaces}:
 		\begin{itemize}
-			\itemBold{Query Queue Model} Utilizza questa interfaccia sul \textbf{Model} per spostare un \textbf{Taxi Driver} da una coda ad una altra coda quando quest'ultimo ha cambiato zona. 
-			Inoltre questa interface ha un metodo per prelevare un \textbf{Taxi Driver} da una coda per associarlo ad una \textbf{Taxi Ride}.
-			\itemBold{Compute Travel Time} Utilizza questa interfaccia per richiedere al \textbf{Location Manager} il \textbf{Travel Time} relativo ad una \textbf{Taxi Ride} che sta servendo.
-			\itemBold{Dispatch Message} Utilizza questa interfaccia per inviare una notifica per confermare l'associazione di una \textbf{Taxi Ride} con un \textbf{Taxi Driver}.
-		\end{itemize}
-		
-		\itemBold{Session Manager} E' il componente software che si occupa di modificare il modello relativo alle sessioni attive degli utenti di \myTaxiService{}.
-		Per performare queste funzionalità il \textbf{Session Manager} espone le seguenti \textit{interfaces}:
-		\begin{itemize}
-			\itemBold{Login} Permette di cambiare iniziare la procedura di login per un utente di \myTaxiService{}.
-			\itemBold{Logout} Permette di cambiare iniziare la procedura di logout per un utente di \myTaxiService{}.
-		\end{itemize}
-		Inoltre utilizza le seguenti \textit{interfaces}:
-		\begin{itemize}
-			\itemBold{Query Passenger Model} Utilizza questa interfaccia sul \textbf{Model} per modificare il modello aggiungendo una sessione per il \textbf{Passenger} che ha chiesto di fare login e restituendo un Token che identifichi la sessione appena aperta.
-			\itemBold{Query Taxi Driver Model} Utilizza questa interfaccia sul \textbf{Model} per modificare il modello aggiungendo una sessione per il \textbf{Taxi Driver} che ha chiesto di fare login e restituendo un Token che identifichi la sessione appena aperta.
+			\itemBold{Query Queue Model} Used for moving a \textbf{Taxi Driver} from a \textbf{Queue} to another one, when he/she has changed \textbf{Zone}.
+			In addition this interface allows to pick a \textbf{Taxi Driver} from the related \textbf{Queue} and associate he/she to a given \textbf{Taxi Ride}.
+			\itemBold{Compute Travel Time} Used to calculate the \textbf{Travel Time} needed by the \textbf{Taxi Driver} for moving from his/her actual position to the \textbf{Taxi Ride Start Address}.
+			\itemBold{Dispatch Message}	Used to send a notification to a \textbf{Taxi Driver} that has been associated to a given \textbf{Taxi Ride}.
 		\end{itemize}
 		
-		\itemBold{Profile Manager} Si occupa di modificare la porzione del modello relativa al profilo degli utenti registrati a \myTaxiService{}.
-		Per performare queste funzionalità il \textbf{Profile Manager} espone le seguenti \textit{interfaces}:
+		\itemBold{Session Manager}
+		It is in charge of handling the sessions of \myTaxiService{} users.
+		This software component implements and exposes the following \textit{interfaces}:
 		\begin{itemize}
-			\itemBold{Register} Permette di effettuare la registrazione a \myTaxiService{}.
-			\itemBold{Modify Profile} Permette di modificare un profilo precedentemente creato presso \myTaxiService{}.
+			\itemBold{Login} Allows a \textbf{Client} to login to \myTaxiService{} and therefore start a valid session.
+			\itemBold{Logout} Allows a \textbf{Client} to logout from \myTaxiService{} and therefore terminate the current session.
 		\end{itemize}
-		Inoltre utilizza le seguenti \textit{interfaces}:
+		In addition it uses the following \textit{interfaces}:
 		\begin{itemize}
-			\itemBold{Query Passenger Model} Utilizza questa interfaccia sul \textbf{Model} per modificare il modello aggiungendo un utente registrato o modificare il profilo di un utente precedentemente registrato.
+			\itemBold{Query Passenger Model} Used to manage \textbf{Passenger} active sessions (e.g. retrieve valid session tokens) in the \textbf{Model}.
+			\itemBold{Query Taxi Driver Model} Used to manage \textbf{Taxi Driver} active sessions (e.g. retrieve valid session tokens) in the \textbf{Model}.
+		\end{itemize}
+		
+		\itemBold{Profile Manager}
+		It handles the registration of a new \textbf{Passenger} to the system and the modification of a given \textbf{Registered Passenger}'s profile.
+		This software component implements and exposes the following \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{Register} Allows registration to \myTaxiService{} for \textbf{Non Registered Passengers}.
+			\itemBold{Modify Profile} Allows profile modification to \textbf{Registered Passengers}.
+		\end{itemize}
+		In addition it uses the following \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{Query Passenger Model} Used to manage the \textbf{Model} part related to \textbf{Registered Passenger}, inserting new entries or modifying existing ones.
 		\end{itemize}
 
-		\itemBold{Taxi Driver Manager} Si occupa di gestire tutto ciò che riguarda i \textbf{Taxi Driver}. 
-		Questo componente è molto importante perchè ha il compito di richiedere periodicamente  la posizione ai \textbf{Taxi Drivers} in modo tale da garantire che il modello sia sempre aggiornato e consistente.
-		In particolare espone le seguenti \textit{interfaces}:
+		\itemBold{Taxi Driver Manager} It is in charge of manage all the business logic behind \textbf{Taxi Drivers}.
+		This is a core component that, among the other things, periodically asks \textbf{GPS Data} to \textbf{Taxi Drivers}.
+		It implements and exposes the following \textit{interfaces}:
 		\begin{itemize}
-			\itemBold{Report Problem} Permette ad un \textbf{Taxi Driver} di notificare l'avvenimento di un problema durante una \textbf{Taxi Ride} o di notificare che un certo probema è stato risolto.
+			\itemBold{Report Problem} Allows \textbf{Taxi Driver} to report a \textbf{Problem} and its subsequent \textbf{Solution}.
 		\end{itemize}
-		Inoltre utilizza le seguenti \textit{interfaces}:
+		In addition it uses the following \textit{interfaces}:
 		\begin{itemize}
-			\itemBold{TD Zone Changed} Utilizza questa \textit{interface} per notificare al \textbf{Queue Manager} di spostare un \textbf{Taxi Driver} da una coda ad un'altra perchè il relativo \textbf{Taxi Driver} ha cambiato zona. Il \textbf{Queue Manager} avrà anche il compito di aggiornare il modello.
-			\itemBold{Query Taxi Driver Model} Utilizza questa \textit{interface} sul \textbf{Model} nei seguenti casi: 
+			\itemBold{TD Zone Changed} Used as a shortcut to notify the \textbf{Queue Manager} that a given \textbf{Taxi Driver} has moved from one \textbf{Zone} to another one.
+			\itemBold{Query Taxi Driver Model} A useful interface to the \textbf{Model}.
+			It is used in the following cases:
 			\begin{itemize}
-				\item Utilizza questa interface dopo la terminazione della procedura di aggionamento dell'indirizzo di un \textbf{Taxi Driver} per garantire la \textbf{Consistency} e la \textbf{Durability} del \textbf{Database}.
-				\item Utilizza questa interface per aggiungere un problema alla lista dei problemi.
-				\item Utilizza questa interface per marcare un problema come risolto.
+				\item When the update of a given \textbf{Taxi Driver} geolocation data is retrieved, in order to maintain coherent the \textbf{Model}.
+				\item When a \textbf{Problem} is reported, in order to store it in the \textbf{Model}.
+				\item When a \textbf{Problem} is notified as \textbf{Solved} by the relevant \textbf{Taxi Driver}, in order to update the \textbf{Model}.
 			\end{itemize}
-			\itemBold{Dispatch Message} Utilizzata per inviare messaggi personalizzati al \textbf{Taxi Driver}.
-			\itemBold{Get TD Address} Utilizza questa interface per inviare una richiesta di posizione al \textbf{Taxi Driver} che è stato selezionato.
+			\itemBold{Dispatch Message} Used to send personalized messages to a given \textbf{Taxi Driver}.
+			\itemBold{Get TD Address} Used to ask a given \textbf{Taxi Driver} his/her current location.
 		\end{itemize}
 		
 		\itemBold{Taxi Ride Manager} Si occupa di gestire tutto ciò che riguarda le \textbf{Taxi Ride}.
-		In particolare espone le seguenti \textit{interfaces}:
+		This software component implements and exposes the following \textit{interfaces}:
 		\begin{itemize}
 			\itemBold{Add Taxi Ride} Permette al \textbf{RESTful Service} di aggiungere una \textbf{Taxi Ride} alla lista di \textbf{Taxi Ride} contenuta nel \textbf{Model}.
 			\itemBold{Remove Taxi Ride}Permette al \textbf{RESTful Service} di rimuovere una \textbf{Taxi Ride} dalla lista di \textbf{Taxi Ride} contenuta nel \textbf{Model}.
 		\end{itemize}
-		Inoltre utilizza le seguenti \textit{interfaces}:
+		In addition it uses the following \textit{interfaces}:
 		\begin{itemize}
 			\itemBold{Get Zone From TD Address} Permette di associare la zona ad una \textbf{Taxi Ride} appena arrivata in modo tale da categorizzarla e in modo tale da renderla associabile ad un \textbf{Taxi Driver}.
 			\itemBold{Query Taxi Ride Model} Permette di aggiungere o di rimuovere una \textbf{Taxi Ride} dalla lista di \textbf{Taxi Ride} contenuta nel \textbf{Model}.
@@ -217,18 +220,18 @@ The identified subsystems are:
 		
 		\itemBold{Taxi Sharing Manager}
 		This component is in charge of managing the Taxi Sharing future 
-		In particolare espone le seguenti \textit{interfaces}:
+		This software component implements and exposes the following \textit{interfaces}:
 		\begin{itemize}
 			\itemBold{myTaxiSharing API} Permette agli sviluppatori esterni di utilizzare le API predefinite  di \textbf{Taxi Sharing} fornite da \myTaxiService{}.
 		\end{itemize}
-		Inoltre utilizza le seguenti \textit{interfaces}:
+		In addition it uses the following \textit{interfaces}:
 		\begin{itemize}
 			\itemBold{Query Shareable Taxi Ride} Utilizza questa \textit{interface} per richiedere al \textbf{Model} le \textbf{Taxi Ride} che è possibile rendere disponibili a più utenti. 
 			Il risultato di questa query sarà utilizzato per costriuire le API pubbliche.
 		\end{itemize}
 		
 		\itemBold{Query Manager}
-		In particolare espone le seguenti \textit{interfaces}:
+		This software component implements and exposes the following \textit{interfaces}:
 		\begin{itemize}
 			\itemBold{Query Queue Model} Permette al \textbf{Queue Manager} di modificare e leggere lo stato delle code memorizzate nel \textbf{Model}.
 			\itemBold{Query Zone Model} Permette al \textbf{Location Manager} di richiedere l'esecuzione dell'algoritmo di ricerca di una posizione GPS all'interno di una  determinata zona.
@@ -239,7 +242,7 @@ The identified subsystems are:
 			\itemBold{Administrator Queries} Permette all \textbf{Administrator} di performare query predefinite per analizzare lo stato interno del sistema.
 			Inoltre sono rese possibili speciali query di ripristino del sistema.
 		\end{itemize}
-		Inoltre utilizza le seguenti \textit{interfaces}:
+		In addition it uses the following \textit{interfaces}:
 		\begin{itemize}
 			\itemBold{Query Model} Utilizza questa interface per chiamare query predefinite sul \textbf{Model} in modo tale da eseguire le procedure di aggiornamento del \textbf{Model} richieste.
 		\end{itemize}
