@@ -5,7 +5,7 @@
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{hyperref}
-\usepackage{titlepic}
+%\usepackage{titlepic}
 \usepackage{listings}
 \usepackage{color}
 
@@ -61,6 +61,6 @@
 }
 \author{Alberto Mario Pirovano \and Alessandro Vetere}      % Declares authors' names.
 \date{\today}	% This command produces today's date.
-\titlepic{\includegraphics[width=0.7\textwidth]{../common/pictures/logo_polimi.png}}
+%\titlepic{\includegraphics[width=0.7\textwidth]{../common/pictures/logo_polimi.png}}
 \newcommand{\titleSubtitle}[2]{\title{#1 \\ \vspace{1cm} \large{#2}}}
 \newcommand{\titleToc}{\maketitle\newpage\tableofcontents}
