@@ -91,59 +91,59 @@ The identified subsystems are:
 		\itemBold{GPS Data Source} It is a software component that connects to the \textbf{GPS Driver} of the \textbf{Taxi Driver Smartphone}.
 		It provides an object that represents the most recent position retrieved by the GPS Antenna; this object contains many data, among which the most important are \textbf{Latitude} and \textbf{Longitude}.
 		In fact through these data it is possible to determine in a precise way the \textbf{Taxi Driver} position.
-	\end{itemize}
+	\end{itemize}	
+	
 	\itemBold{Controller}
 	In this subsystem are contained the following components:
 	\begin{itemize}
 		\itemBold{RESTful Service}
-		This software component receives 
-		
-		 Questo \textbf{Software Component} si occupa di ricevere le richieste dai \textbf{Client} e le distribuisce ai vari \textbf{Manager Components} appartententi alla \textbf{Busines Family}. 
-		Inoltre garantisce che vengano gestite un numero massimo, prefissato e configurabile di richieste in parallelo.
-		Per permettere agli altri \textbf{Software Components} di interagire espone le seguenti \textit{interfaces}:
+		This \textbf{Networking Family} component receives requests from the \textbf{Clients}, elaborates them and then forwards related requests to components of the \textbf{Business Family}.
+		It can handle a given number of requests in parallel: this number is configurable.
+		In order to allow interaction with other components, it implements and exposes the following \textit{interfaces}:
 		\begin{itemize}
-			\itemBold{Receive TD Request} Permette ai \textbf{Client} di inviare le richieste.
-			\itemBold{Receive PS Request} vedi \textit{Receive TD Request}.
+			\itemBold{Receive TD Request} Allows \textbf{Clients} to send requests.
+			\itemBold{Receive PS Request} See \textbf{Receive TD Request}.
 		\end{itemize}
-		Inoltre utilizza le seguenti \textit{interfaces}:
+		In addition it uses the following \textit{interfaces}:
 		\begin{itemize}
-			\itemBold{Login} Utilizzata per gestire una richiesta di login proveniente dal PS.
-			\itemBold{Logout} Utilizzata per gestire una richiesta di logout proveniente dal PS.
-			\itemBold{Register} Utilizzata per gestire una richiesta di registrazione proveniente dal PS.
-			\itemBold{Modify Profile} Utilizzata per gestire una richiesta di modifica del profilo proveniente dal PS.
-			\itemBold{Report Problem} Utilizza questa interfaccia per gestire una richiesta di report problem proveniente dal TD.
-			\itemBold{Add Taxi Ride} Utilizza questa interfaccia per gestire una richiesta di Taxi Ride proveniente dal PS.
-			\itemBold{Remove Taxi Ride} Utilizza questa interfaccia per gestire una richiesta di cancellazione della Taxi Ride proveniente dal PS.
-		\end{itemize}
-
-		\itemBold{Dispatcher} Questo \textbf{Software Component} si occupa di dispacciare i messaggi di notifica, di sistema, di associazione tra \textbf{Taxi Ride} e \textbf{Taxi Driver} dal \textbf{Server} verso il relativo \textbf{Client}.
-		Per permettere agli altri \textbf{Software Components} di interagire espone le seguenti \textit{interfaces}:
-		\begin{itemize}
-			\itemBold{Dispatch Message} Permette ai componenti interni al \textbf{Controller} di inviare messaggi ai \textbf{Client}. 
-		\end{itemize}
-		Inoltre utilizza le seguenti \textit{interfaces}:
-		\begin{itemize}
-			\itemBold{Receive PS Update} Utilizza questa interfaccia per permettere ai \textbf{Clients} di ricevere messaggi provenienti dai componenti interni al \textbf{Controller}.
-			\itemBold{Receive TD Update} vedi \textit{Receive TD Update}.	
+			\itemBold{Login} Used to manage a login request made by a \textbf{Passenger} or a \textbf{Taxi Driver}.
+			\itemBold{Logout} Used to handle a logout request made by a \textbf{Passenger} or a \textbf{Taxi Driver}.
+			\itemBold{Register} Used to manage a registration request made by a \textbf{Passenger}.
+			\itemBold{Modify Profile} Used to manage a profile modification request made by a \textbf{Passenger}.
+			\itemBold{Report Problem} Used to manage a report problem request coming from a \textbf{Taxi Driver}.
+			\itemBold{Add Taxi Ride} Used to handle a \textbf{Taxi Request} or \textbf{Taxi Reservation} request made by a \textbf{Passenger}.
+			\itemBold{Remove Taxi Ride} Used to manage a \textbf{Taxi Ride} cancellation request coming from a \textbf{Passenger}.
 		\end{itemize}
 		
-		\itemBold{Location Manager} Questo \textbf{Software Component} espone le seguenti \textit{interfaces}:
+		\itemBold{Dispatcher} This software component is in charge of dispatching notification messages, system messages, and asynchronous requests (e.g. the request of accepting a \textbf{Taxi Ride} to a \textbf{Taxi Driver}) from the \textbf{Server} to the designed \textbf{Client}.
+		In order to allow interaction with other components, it implements and exposes the following \textit{interfaces}:
 		\begin{itemize}
-			\itemBold{Get Zone From Address} Permette di associare una \textit{city zone} a partire da un \textit{city address}, utile quando bisogna categorizzare una \textbf{Taxi Ride} appena arrivata.
-			\itemBold{Get TD Address} Fornisce la funzionalità per richiedere ad un \textbf{Taxi Driver} il \textit{actual city address}, per aggiornare la mappa interna al server tra \textbf{Taxi Driver} e \textbf{City Address}.
-			\itemBold{Compute Travel Time} Permette di calcolare il tempo di percorrenza tra due \textit{city addresses}.
+			\itemBold{Dispatch Message} Allows other \textbf{Controller} software components to send many type of messages to the designated \textbf{Client}.
 		\end{itemize}
-		Inoltre utilizza le seguenti \textit{interfaces}:
+			In addition it uses the following \textit{interfaces}:
 		\begin{itemize}
-			\itemBold{Get TD Position} Utilizza questa interfaccia per richiedere la posizione GPS al \textbf{Taxi Driver} che viene scelto dal \textbf{Taxi Driver Manager}.
-			\itemBold{Google Maps API} Utilizza questa interfaccia per effettuare le richieste necessarie per calcolare il \textbf{Travel Time} e per associare un indirizzo ai dati GPS.	
-			\itemBold{Query Zone Model} Utilizza questa interface per richiedere al \textbf{Model} la zona che corrisponde ad un certo dato GPS che viene fornito dal \textbf{Taxi Driver}. 
-			Questa interface viene utilizzata dopo la chiamata all'interface \textbf{Get TD Position}.
+			\itemBold{Receive PS Update} Used to make possible for \textbf{Clients} to receive messages coming from \textbf{Controller} internal software components.
+			\itemBold{Receive TD Update} See \textbf{Receive TD Update}.	
 		\end{itemize}
 		
-		\itemBold{Queue Manager} Questo \textbf{Software Component} si occupa di :
+		\itemBold{Location Manager}
+		This software component implements and exposes the following \textit{interfaces}:
 		\begin{itemize}
-			\item Gestire le code dei \textbf{Taxi Driver}, una coda per zona della città.
+			\itemBold{Get Zone From Address} Associate a \textbf{Zone} of the \textbf{City} to a specific \textbf{Address}. It is used to categorize a \textbf{Taxi Ride} just arrived.
+			\itemBold{Get TD Address} Allows the \textbf{Taxi Driver Manager} to request the actual \textbf{Address} of a given \textbf{Taxi Driver}, in order to store it in the \textbf{Model}.
+			\itemBold{Compute Travel Time} Allows the calculation of the travel time between two \textbf{Addresses}.
+		\end{itemize}
+		In addition it uses the following \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{Get TD Position} Used to request \textbf{GPS Data} to a given \textbf{Taxi Driver}.
+			\itemBold{Google Maps API} Used to request travel time between two \textbf{Addresses} and to associate \textbf{GPS Data} to the nearest \textbf{Address}.
+			\itemBold{Query Zone Model} Used to query the \textbf{Model} which \textbf{Zone} contains a given \textbf{Point} made of the \textbf{Longitude} and \textbf{Latitude} of a \textbf{GPS Data} object.
+			This interface is called to associate the \textbf{GPS Data} received from a \textbf{Taxi Driver} to a given \textbf{Zone}.
+		\end{itemize}
+		
+		\itemBold{Queue Manager} This software component is in charge of:
+		\begin{itemize}
+			\item Manage \textbf{Taxi Driver Queue}, that are one per each \textbf{Zone} in the \textbf{City}.
 			\item Genera i messaggi di notifica ,contenenti \textit{Taxi Driver ID} e \textit{Travel Time}, da inviare ai \textbf{Passenger} nel momento in cui la richiesta che hanno fatto viene accettata da un \textbf{Taxi Driver}. 
 			Per fare questo deve chiamare il \textbf{Location Manager} e richiedere il \textbf{Travel Time}.
 			\item Provvede a cambiare la coda del \textbf{Taxi Driver} che ha cambiato zona.
