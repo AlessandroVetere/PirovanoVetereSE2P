@@ -22,18 +22,31 @@ In this section are mapped all the functional requirements identified in the \te
 		\hline
 	}
 
-\subsection{Handle Personal Profile}
+\subsection{Login}
 \reqTracTab{
-		FR18 &
-		%The system must check the correctness of a RP's inserted data.
+		FR7 &
+		%The system must check the correctness of the user's inserted data.
 		\\
-		FR19 &
-		%The system must be coherent with the RP inserted data modification, if the modification goes fine.
+		FR8 &
+		%The system must correctly handle internally the login token assignment to the user.
 		\\
-		FR20 &
-		%The system must inform a RP about the result of his modification.
+		FR9 &
+		%The system must notify the user about the result of his login.
 		\\
-		FR21 &
+		FR10 &
 		%The system must peacefully handle a connection error and notify the user of the problem.
 		\\
 	}
+	
+\subsection{Logout}
+\reqTracTab{
+	FR11 &
+	%The system must offer the possibility to logout to a given RP.
+	\\
+	FR12 &
+	%After the logout, the system must redirect the RP to the \myTaxiService{} home page.
+	\\
+	FR13 &
+	%The system must peacefully handle a connection error and notify the user of the problem.
+	\\
+}
