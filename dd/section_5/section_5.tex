@@ -18,7 +18,7 @@ In this section are mapped all the functional requirements identified in the \te
 		\hline
 		FR38 &
 		%The system must peacefully handle a connection error and notify the user of the problem.
-		The TD Request Creator and the RESTful Service are capable of handling connection error problem without making the relevant system crash. \\
+		The TD Request Creator and the RESTful Service are capable of handling connection error problem without making the relevant systems crash. \\
 		\hline
 	}
 
@@ -49,4 +49,90 @@ In this section are mapped all the functional requirements identified in the \te
 	FR13 &
 	%The system must peacefully handle a connection error and notify the user of the problem.
 	\\
+}
+
+\subsection{Notify Problem}
+\reqTracTab{
+	FR30 &
+	%The system must offer the possibility to report a problem with a dedicated text area and a combo box to specify whether the problem is solvable without interrupting the taxi driver's work.
+	\\
+	FR31 &
+	%The system must be capable of automatically issuing a new taxi request for the passenger that is involved in a non solvable problem during his taxi ride.
+	\\
+	FR32 &
+	%The system must be capable of notifying Amy about the result of her problem reporting.
+	\\
+	FR33 &
+	%The system must be capable of notifying Frank about the evolving of his automatically issued request.
+	\\
+	FR34 &
+	%The system must peacefully handle a connection error and notify the user of the problem.
+	\\
+}
+
+\subsection{Registration}
+\reqTracTab{
+	FR1 &
+	%A non registered passenger can register only once.
+	\\
+	FR2 &
+	%Personal data inserted during registration must be valid.
+	\\
+	FR3 &
+	%In no case can a registration process be resumed after browser or application closure.
+	\\
+	FR4 &
+	%The system must acknowledge the non registered passenger whether the registration process ends successfully or fails.
+	\\
+	FR5 &
+	%The system must send an email to the non registered passenger that has completed the registration.
+	\\
+	FR6 &
+	%After the registration is completed successfully, the non registered passenger involved in the process must be considered a registered passenger.
+	\\
+}
+
+\subsection{Taxi Request}
+\reqTracTab{
+	FR26 &
+	%The system must check the data inserted by a RP into the Request a Ride Page and notify the RP in case of problems.
+	\\
+	FR27 &
+	%The system must correctly handle internally a taxi ride that is successfully issued by a RP.
+	\\
+	FR28 &
+	%The RP must be notified about the result of his request.
+	\\
+	FR29 &
+	%The system must peacefully handle a connection error and notify the user of the problem.
+}
+
+\subsection{Taxi Reservation}
+\reqTracTab{
+	FR22 &
+	%The system must check the correctness of the RP's inserted data.
+	\\
+	FR23 &
+	%The system must correctly handle internally the added taxi reservation.
+	\\
+	FR24 &
+	%The system must notify the RP about the result of his operation.
+	\\
+	FR25 &
+	%The system must peacefully handle a connection error and notify the user of the problem.
+}
+
+\subsection{View Request and Reservations}
+\reqTracTab{
+	FR14 &
+	%The system must be capable of loading a given RP data at any time.
+	\\
+	FR15 &
+	%The system must ask a RP for cancel confirmation before actually canceling a taxi ride.
+	\\
+	FR16 &
+	%A message must be displayed in place of an empty list in case there's not Taxi Request to display or in case the Taxi Reservations list is empty for a given RP.
+	\\
+	FR17 &
+	%The system must peacefully handle a connection error and notify the user of the problem.
 }
