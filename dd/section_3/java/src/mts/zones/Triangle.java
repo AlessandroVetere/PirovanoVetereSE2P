@@ -14,7 +14,7 @@ public class Triangle {
 		this.p1 = p1;
 		this.p2 = p2;
 		this.p3 = p3;
-		
+
 		this.a = p1.getX() - p3.getX();
 		this.b = p2.getX() - p3.getX();
 		this.c = p1.getY() - p3.getY();
@@ -26,29 +26,29 @@ public class Triangle {
 		double f = p.getY() - p3.getY();
 
 		double delta = a * d - b * c;
-		
+
 		if (delta == 0)
 			return false;
 
 		double delta_alpha_1 = e * d - f * b;
-		
+
 		double alpha_1 = delta_alpha_1 / delta;
-		
+
 		if (alpha_1 < 0)
 			return false;
 
 		double delta_alpha_2 = a * f - c * e;
 
 		double alpha_2 = delta_alpha_2 / delta;
-		
+
 		if (alpha_2 < 0)
 			return false;
-		
+
 		double alpha_3 = 1 - alpha_1 - alpha_2;
-		
+
 		if (alpha_3 < 0)
 			return false;
-		
+
 		return true;
 	}
 }

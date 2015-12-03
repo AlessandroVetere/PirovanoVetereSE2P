@@ -1,3 +1,4 @@
+%TODO Remove comments.
 \ProvidesClass{pdf_document}
 
 \LoadClass[titlepage]{article}

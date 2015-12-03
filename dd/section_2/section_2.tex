@@ -2,7 +2,6 @@
 This section exposes \myTaxiService{} Architectural Design in a complete e comprehensible way.
 
 \subsection{Overview}
-%TODO descrizione del disegno dell'architettura generale(vedi rasd quasi uguale)
 A quick but meaningful overview on the system architectural design is presented with the help of the following diagram, which is self explanatory:
 \showGeneralDiagram{Overview Diagram}{1.0}
 In addition are given many \textbf{UML Diagrams} integrated with complete descriptions of the software components in the following subsections:
@@ -49,7 +48,7 @@ The third and last \textbf{Layer} is the \textbf{Model}, that should guarantee a
 It abstracts a \textbf{Relational Database} to a software components that is in direct connection to the \textbf{Controller}.
 
 \subsubsection{Tiers}
-Then it comes the division of the software in different \textbf{Tiers}:
+Then it comes the division of the system in different \textbf{Tiers}:
 \begin{itemize}
 	\itemBold{Clients} The distributed clients of the application. The \textbf{View} layer is mapped only to this \textbf{Tier}.
 	\itemBold{Web Server} A server that is in charge of dynamically generate web pages and receive requests through the web. It is also the server where are hosted the \textbf{Assets} of the web portal. The \textbf{Networking Components Family} of the \textbf{Controller} is mapped to this \textbf{Tier}.
@@ -61,8 +60,6 @@ Then it comes the division of the software in different \textbf{Tiers}:
 This architecture, with three different \textbf{Layers} and four different \textbf{Tiers}, makes possible to have a \textbf{Client-Server} style with a \textbf{Fat-Server} and a \textbf{Thin-Client}: this is due to the mapping of the \textbf{View} to the \textbf{Clients} and the mapping of the \textbf{Controller} and the \textbf{Model} to the \textbf{Server}.
 
 \subsection{Component view}
-%TODO TRADURRE
-%TODO inserire il component diagram e spiegare ogni componente che scopo ha e dove sta (dispatcher e restful service sono su web server e locationmanager ). spiegazione dei layer software
 \showComponentDiagram{UML Component Diagram}{1.0}
 Below are described all the software component that interact inside every subsystem; for the most important ones is also provided a description of the internal interfaces that they use to communicate one with each other.
 The identified subsystems are:
@@ -91,157 +88,166 @@ The identified subsystems are:
 		\itemBold{GPS Data Source} It is a software component that connects to the \textbf{GPS Driver} of the \textbf{Taxi Driver Smartphone}.
 		It provides an object that represents the most recent position retrieved by the GPS Antenna; this object contains many data, among which the most important are \textbf{Latitude} and \textbf{Longitude}.
 		In fact through these data it is possible to determine in a precise way the \textbf{Taxi Driver} position.
-	\end{itemize}
+	\end{itemize}	
+	
 	\itemBold{Controller}
 	In this subsystem are contained the following components:
 	\begin{itemize}
 		\itemBold{RESTful Service}
-		This software component receives 
-		
-		 Questo \textbf{Software Component} si occupa di ricevere le richieste dai \textbf{Client} e le distribuisce ai vari \textbf{Manager Components} appartententi alla \textbf{Busines Family}. 
-		Inoltre garantisce che vengano gestite un numero massimo, prefissato e configurabile di richieste in parallelo.
-		Per permettere agli altri \textbf{Software Components} di interagire espone le seguenti \textit{interfaces}:
+		This \textbf{Networking Family} component receives requests from the \textbf{Clients}, elaborates them and then forwards related requests to components of the \textbf{Business Family}.
+		It can handle a given number of requests in parallel: this number is configurable.
+		In order to allow interaction with other components, it implements and exposes the following \textit{interfaces}:
 		\begin{itemize}
-			\itemBold{Receive TD Request} Permette ai \textbf{Client} di inviare le richieste.
-			\itemBold{Receive PS Request} vedi \textit{Receive TD Request}.
+			\itemBold{Receive TD Request} Allows \textbf{Clients} to send requests.
+			\itemBold{Receive PS Request} See \textbf{Receive TD Request}.
 		\end{itemize}
-		Inoltre utilizza le seguenti \textit{interfaces}:
+		In addition it uses the following \textit{interfaces}:
 		\begin{itemize}
-			\itemBold{Login} Utilizzata per gestire una richiesta di login proveniente dal PS.
-			\itemBold{Logout} Utilizzata per gestire una richiesta di logout proveniente dal PS.
-			\itemBold{Register} Utilizzata per gestire una richiesta di registrazione proveniente dal PS.
-			\itemBold{Modify Profile} Utilizzata per gestire una richiesta di modifica del profilo proveniente dal PS.
-			\itemBold{Report Problem} Utilizza questa interfaccia per gestire una richiesta di report problem proveniente dal TD.
-			\itemBold{Add Taxi Ride} Utilizza questa interfaccia per gestire una richiesta di Taxi Ride proveniente dal PS.
-			\itemBold{Remove Taxi Ride} Utilizza questa interfaccia per gestire una richiesta di cancellazione della Taxi Ride proveniente dal PS.
+			\itemBold{Login} Used to manage a login request made by a \textbf{Passenger} or a \textbf{Taxi Driver}.
+			\itemBold{Logout} Used to handle a logout request made by a \textbf{Passenger} or a \textbf{Taxi Driver}.
+			\itemBold{Register} Used to manage a registration request made by a \textbf{Passenger}.
+			\itemBold{Modify Profile} Used to manage a profile modification request made by a \textbf{Passenger}.
+			\itemBold{Report Problem} Used to manage a report problem request coming from a \textbf{Taxi Driver}.
+			\itemBold{Add Taxi Ride} Used to handle a \textbf{Taxi Request} or \textbf{Taxi Reservation} request made by a \textbf{Passenger}.
+			\itemBold{Remove Taxi Ride} Used to manage a \textbf{Taxi Ride} cancellation request coming from a \textbf{Passenger}.
+		\end{itemize}
+		
+		\itemBold{Dispatcher} This software component is in charge of dispatching notification messages, system messages, and asynchronous requests (e.g. the request of accepting a \textbf{Taxi Ride} to a \textbf{Taxi Driver}) from the \textbf{Server} to the designed \textbf{Client}.
+		In order to allow interaction with other components, it implements and exposes the following \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{Dispatch Message} Allows other \textbf{Controller} software components to send many type of messages to the designated \textbf{Client}.
+		\end{itemize}
+			In addition it uses the following \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{Receive PS Update} Used to make possible for \textbf{Clients} to receive messages coming from \textbf{Controller} internal software components.
+			\itemBold{Receive TD Update} See \textbf{Receive TD Update}.	
+		\end{itemize}
+		
+		\itemBold{Location Manager}
+		This software component implements and exposes the following \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{Get Zone From Address} Associate a \textbf{Zone} of the \textbf{City} to a specific \textbf{Address}. It is used to categorize a \textbf{Taxi Ride} just arrived.
+			\itemBold{Get TD Address} Allows the \textbf{Taxi Driver Manager} to request the actual \textbf{Address} of a given \textbf{Taxi Driver}, in order to store it in the \textbf{Model}.
+			\itemBold{Compute Travel Time} Allows the calculation of the travel time between two \textbf{Addresses}.
+		\end{itemize}
+		In addition it uses the following \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{Get TD Position} Used to request \textbf{GPS Data} to a given \textbf{Taxi Driver}.
+			\itemBold{Google Maps API} Used to request travel time between two \textbf{Addresses} and to associate \textbf{GPS Data} to the nearest \textbf{Address}.
+			\itemBold{Query Zone Model} Used to query the \textbf{Model} which \textbf{Zone} contains a given \textbf{Point} made of the \textbf{Longitude} and \textbf{Latitude} of a \textbf{GPS Data} object.
+			This interface is called to associate the \textbf{GPS Data} received from a \textbf{Taxi Driver} to a given \textbf{Zone}.
+		\end{itemize}
+		
+		\itemBold{Queue Manager} This software component is in charge of:
+		\begin{itemize}
+			\item Manage \textbf{Taxi Driver Queues}, that are one per each \textbf{Zone} in the \textbf{City}, and contains only \textbf{Available Taxi Drivers}.
+			\item Generates notification message, that refers to a \textbf{Taxi Driver} that has just accepted a \textbf{Taxi Ride} request and contains the \textbf{Travel Time} remaining for the given \textbf{Taxi Driver} to reach the \textbf{Passenger} that is waiting.
+			To compute the \textbf{Travel Time}, is calls the \textbf{Location Manager} dedicated interface.
+			\item It changes the \textbf{Queue} in which a \textbf{Taxi Driver} is inside, when he/she moves from one \textbf{Zone} to another.
+			\item Serves a given number of \textbf{Taxi Rides} in parallel. That number is configurable. The exceeding request are put into a queue waiting to be served.
+			\item Redistribute the \textbf{Taxi Rides}. When the \textbf{Queue} associated to the starting \textbf{Zone} of a served \textbf{Taxi Ride} is empty, the system waits a given timeout. After the If no \textbf{Taxi Driver} can be found in the current \textbf{Queue}, the \textbf{Queue Manager} searches for a \textbf{Taxi Driver} in \textbf{Queues} of the neighbour \textbf{Zones}.
+			\item Redistribute \textbf{Taxi Drivers}. When a \textbf{Taxi Driver} refuses a \textbf{Taxi Ride} request, it is dequeued from the current \textbf{Queue} and then enqueued in the same \textbf{Queue}: this moves him to the last position.
+		\end{itemize}
+		This software component implements and exposes the following \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{TD Zone Changed} Allows the \textbf{Taxi Driver Manager} to notify that a given \textbf{Taxi Driver} has moved to a different \textbf{Zone}.
+		\end{itemize}
+		In addition it uses the following \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{Query Queue Model} Used for moving a \textbf{Taxi Driver} from a \textbf{Queue} to another one, when he/she has changed \textbf{Zone}.
+			In addition this interface allows to pick a \textbf{Taxi Driver} from the related \textbf{Queue} and associate he/she to a given \textbf{Taxi Ride}.
+			\itemBold{Compute Travel Time} Used to calculate the \textbf{Travel Time} needed by the \textbf{Taxi Driver} for moving from his/her actual position to the \textbf{Taxi Ride Start Address}.
+			\itemBold{Dispatch Message}	Used to send a notification to a \textbf{Taxi Driver} that has been associated to a given \textbf{Taxi Ride}.
+		\end{itemize}
+		
+		\itemBold{Session Manager}
+		It is in charge of handling the sessions of \myTaxiService{} users.
+		This software component implements and exposes the following \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{Login} Allows a \textbf{Client} to login to \myTaxiService{} and therefore start a valid session.
+			\itemBold{Logout} Allows a \textbf{Client} to logout from \myTaxiService{} and therefore terminate the current session.
+		\end{itemize}
+		In addition it uses the following \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{Query Passenger Model} Used to manage \textbf{Passenger} active sessions (e.g. retrieve valid session tokens) in the \textbf{Model}.
+			\itemBold{Query Taxi Driver Model} Used to manage \textbf{Taxi Driver} active sessions (e.g. retrieve valid session tokens) in the \textbf{Model}.
+		\end{itemize}
+		
+		\itemBold{Profile Manager}
+		It handles the registration of a new \textbf{Passenger} to the system and the modification of a given \textbf{Registered Passenger}'s profile.
+		This software component implements and exposes the following \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{Register} Allows registration to \myTaxiService{} for \textbf{Non Registered Passengers}.
+			\itemBold{Modify Profile} Allows profile modification to \textbf{Registered Passengers}.
+		\end{itemize}
+		In addition it uses the following \textit{interfaces}:
+		\begin{itemize}
+			\itemBold{Query Passenger Model} Used to manage the \textbf{Model} part related to \textbf{Registered Passenger}, inserting new entries or modifying existing ones.
 		\end{itemize}
 
-		\itemBold{Dispatcher} Questo \textbf{Software Component} si occupa di dispacciare i messaggi di notifica, di sistema, di associazione tra \textbf{Taxi Ride} e \textbf{Taxi Driver} dal \textbf{Server} verso il relativo \textbf{Client}.
-		Per permettere agli altri \textbf{Software Components} di interagire espone le seguenti \textit{interfaces}:
+		\itemBold{Taxi Driver Manager} It is in charge of manage all the business logic behind \textbf{Taxi Drivers}.
+		This is a core component that, among the other things, periodically asks \textbf{GPS Data} to \textbf{Taxi Drivers}.
+		It implements and exposes the following \textit{interfaces}:
 		\begin{itemize}
-			\itemBold{Dispatch Message} Permette ai componenti interni al \textbf{Controller} di inviare messaggi ai \textbf{Client}. 
+			\itemBold{Report Problem} Allows \textbf{Taxi Driver} to report a \textbf{Problem} and its subsequent \textbf{Solution}.
 		\end{itemize}
-		Inoltre utilizza le seguenti \textit{interfaces}:
+		In addition it uses the following \textit{interfaces}:
 		\begin{itemize}
-			\itemBold{Receive PS Update} Utilizza questa interfaccia per permettere ai \textbf{Clients} di ricevere messaggi provenienti dai componenti interni al \textbf{Controller}.
-			\itemBold{Receive TD Update} vedi \textit{Receive TD Update}.	
-		\end{itemize}
-		
-		\itemBold{Location Manager} Questo \textbf{Software Component} espone le seguenti \textit{interfaces}:
-		\begin{itemize}
-			\itemBold{Get Zone From Address} Permette di associare una \textit{city zone} a partire da un \textit{city address}, utile quando bisogna categorizzare una \textbf{Taxi Ride} appena arrivata.
-			\itemBold{Get TD Address} Fornisce la funzionalità per richiedere ad un \textbf{Taxi Driver} il \textit{actual city address}, per aggiornare la mappa interna al server tra \textbf{Taxi Driver} e \textbf{City Address}.
-			\itemBold{Compute Travel Time} Permette di calcolare il tempo di percorrenza tra due \textit{city addresses}.
-		\end{itemize}
-		Inoltre utilizza le seguenti \textit{interfaces}:
-		\begin{itemize}
-			\itemBold{Get TD Position} Utilizza questa interfaccia per richiedere la posizione GPS al \textbf{Taxi Driver} che viene scelto dal \textbf{Taxi Driver Manager}.
-			\itemBold{Google Maps API} Utilizza questa interfaccia per effettuare le richieste necessarie per calcolare il \textbf{Travel Time} e per associare un indirizzo ai dati GPS.	
-			\itemBold{Query Zone Model} Utilizza questa interface per richiedere al \textbf{Model} la zona che corrisponde ad un certo dato GPS che viene fornito dal \textbf{Taxi Driver}. 
-			Questa interface viene utilizzata dopo la chiamata all'interface \textbf{Get TD Position}.
-		\end{itemize}
-		
-		\itemBold{Queue Manager} Questo \textbf{Software Component} si occupa di :
-		\begin{itemize}
-			\item Gestire le code dei \textbf{Taxi Driver}, una coda per zona della città.
-			\item Genera i messaggi di notifica ,contenenti \textit{Taxi Driver ID} e \textit{Travel Time}, da inviare ai \textbf{Passenger} nel momento in cui la richiesta che hanno fatto viene accettata da un \textbf{Taxi Driver}. 
-			Per fare questo deve chiamare il \textbf{Location Manager} e richiedere il \textbf{Travel Time}.
-			\item Provvede a cambiare la coda del \textbf{Taxi Driver} che ha cambiato zona.
-			\item Ridistribuisce le\textbf{Taxi Ride}. Infatti quando viene servita una richiesta di \textbf{taxi rideTaxi Ride} associata ad una zona la cui relativa coda è vuota, scatta un timeout dopo la scadenza del quale la taxi ride viene ridistribuita in una delle code delle zone ad essa limitrofe.
-		\end{itemize}
-		Per performare queste funzionalità il \textbf{Queue Manager} espone le seguenti \textit{interfaces}:
-		\begin{itemize}
-			\itemBold{TD Zone Changed} Permette di cambiare coda ad un certo \textbf{Taxi Driver}.
-		\end{itemize}
-		Inoltre utilizza le seguenti \textit{interfaces}:
-		\begin{itemize}
-			\itemBold{Query Queue Model} Utilizza questa interfaccia sul \textbf{Model} per spostare un \textbf{Taxi Driver} da una coda ad una altra coda quando quest'ultimo ha cambiato zona. 
-			Inoltre questa interface ha un metodo per prelevare un \textbf{Taxi Driver} da una coda per associarlo ad una \textbf{Taxi Ride}.
-			\itemBold{Compute Travel Time} Utilizza questa interfaccia per richiedere al \textbf{Location Manager} il \textbf{Travel Time} relativo ad una \textbf{Taxi Ride} che sta servendo.
-			\itemBold{Dispatch Message} Utilizza questa interfaccia per inviare una notifica per confermare l'associazione di una \textbf{Taxi Ride} con un \textbf{Taxi Driver}.
-		\end{itemize}
-		
-		\itemBold{Session Manager} E' il componente software che si occupa di modificare il modello relativo alle sessioni attive degli utenti di \myTaxiService{}.
-		Per performare queste funzionalità il \textbf{Session Manager} espone le seguenti \textit{interfaces}:
-		\begin{itemize}
-			\itemBold{Login} Permette di cambiare iniziare la procedura di login per un utente di \myTaxiService{}.
-			\itemBold{Logout} Permette di cambiare iniziare la procedura di logout per un utente di \myTaxiService{}.
-		\end{itemize}
-		Inoltre utilizza le seguenti \textit{interfaces}:
-		\begin{itemize}
-			\itemBold{Query Passenger Model} Utilizza questa interfaccia sul \textbf{Model} per modificare il modello aggiungendo una sessione per il \textbf{Passenger} che ha chiesto di fare login e restituendo un Token che identifichi la sessione appena aperta.
-			\itemBold{Query Taxi Driver Model} Utilizza questa interfaccia sul \textbf{Model} per modificare il modello aggiungendo una sessione per il \textbf{Taxi Driver} che ha chiesto di fare login e restituendo un Token che identifichi la sessione appena aperta.
-		\end{itemize}
-		
-		\itemBold{Profile Manager} Si occupa di modificare la porzione del modello relativa al profilo degli utenti registrati a \myTaxiService{}.
-		Per performare queste funzionalità il \textbf{Profile Manager} espone le seguenti \textit{interfaces}:
-		\begin{itemize}
-			\itemBold{Register} Permette di effettuare la registrazione a \myTaxiService{}.
-			\itemBold{Modify Profile} Permette di modificare un profilo precedentemente creato presso \myTaxiService{}.
-		\end{itemize}
-		Inoltre utilizza le seguenti \textit{interfaces}:
-		\begin{itemize}
-			\itemBold{Query Passenger Model} Utilizza questa interfaccia sul \textbf{Model} per modificare il modello aggiungendo un utente registrato o modificare il profilo di un utente precedentemente registrato.
-		\end{itemize}
-
-		\itemBold{Taxi Driver Manager} Si occupa di gestire tutto ciò che riguarda i \textbf{Taxi Driver}. 
-		Questo componente è molto importante perchè ha il compito di richiedere periodicamente  la posizione ai \textbf{Taxi Drivers} in modo tale da garantire che il modello sia sempre aggiornato e consistente.
-		In particolare espone le seguenti \textit{interfaces}:
-		\begin{itemize}
-			\itemBold{Report Problem} Permette ad un \textbf{Taxi Driver} di notificare l'avvenimento di un problema durante una \textbf{Taxi Ride} o di notificare che un certo probema è stato risolto.
-		\end{itemize}
-		Inoltre utilizza le seguenti \textit{interfaces}:
-		\begin{itemize}
-			\itemBold{TD Zone Changed} Utilizza questa \textit{interface} per notificare al \textbf{Queue Manager} di spostare un \textbf{Taxi Driver} da una coda ad un'altra perchè il relativo \textbf{Taxi Driver} ha cambiato zona. Il \textbf{Queue Manager} avrà anche il compito di aggiornare il modello.
-			\itemBold{Query Taxi Driver Model} Utilizza questa \textit{interface} sul \textbf{Model} nei seguenti casi: 
+			\itemBold{TD Zone Changed} Used as a shortcut to notify the \textbf{Queue Manager} that a given \textbf{Taxi Driver} has moved from one \textbf{Zone} to another one.
+			\itemBold{Query Taxi Driver Model} A useful interface to the \textbf{Model}.
+			It is used in the following cases:
 			\begin{itemize}
-				\item Utilizza questa interface dopo la terminazione della procedura di aggionamento dell'indirizzo di un \textbf{Taxi Driver} per garantire la \textbf{Consistency} e la \textbf{Durability} del \textbf{Database}.
-				\item Utilizza questa interface per aggiungere un problema alla lista dei problemi.
-				\item Utilizza questa interface per marcare un problema come risolto.
+				\item When the update of a given \textbf{Taxi Driver} geolocation data is retrieved, in order to maintain coherent the \textbf{Model}.
+				\item When a \textbf{Problem} is reported, in order to store it in the \textbf{Model}.
+				\item When a \textbf{Problem} is notified as \textbf{Solved} by the relevant \textbf{Taxi Driver}, in order to update the \textbf{Model}.
 			\end{itemize}
-			\itemBold{Dispatch Message} Utilizzata per inviare messaggi personalizzati al \textbf{Taxi Driver}.
-			\itemBold{Get TD Address} Utilizza questa interface per inviare una richiesta di posizione al \textbf{Taxi Driver} che è stato selezionato.
+			\itemBold{Dispatch Message} Used to send personalized messages to a given \textbf{Taxi Driver}.
+			\itemBold{Get TD Address} Used to ask a given \textbf{Taxi Driver} his/her current location.
 		\end{itemize}
 		
-		\itemBold{Taxi Ride Manager} Si occupa di gestire tutto ciò che riguarda le \textbf{Taxi Ride}.
-		In particolare espone le seguenti \textit{interfaces}:
+		\itemBold{Taxi Ride Manager} It is in charge of manage all the business logic behind \textbf{Taxi Rides}.
+		This software component implements and exposes the following \textit{interfaces}:
 		\begin{itemize}
-			\itemBold{Add Taxi Ride} Permette al \textbf{RESTful Service} di aggiungere una \textbf{Taxi Ride} alla lista di \textbf{Taxi Ride} contenuta nel \textbf{Model}.
-			\itemBold{Remove Taxi Ride}Permette al \textbf{RESTful Service} di rimuovere una \textbf{Taxi Ride} dalla lista di \textbf{Taxi Ride} contenuta nel \textbf{Model}.
+			\itemBold{Add Taxi Ride} Allows to add \textbf{Taxi Ride} request to the \textbf{Model}.
+			A \textbf{Taxi Ride} can be of two different types: \textbf{Taxi Request} and \textbf{Taxi Reservation}.
+			The software behaves differently, basing of the request nature:
+			\begin{itemize}
+				\itemBold{Taxi Request} The request is added to a dedicated data structure in the \textbf{Model}, and it will be then served as soon as possible by the \textbf{Queue Manager}.
+				\itemBold{Taxi Reservation} The request is added to a different dedicated data structure in the \textbf{Model}, and a timer is set to wake up a routine that, 10 minutes before the \textbf{Start Time} of the given \textbf{Taxi Reservation}, builds a \textbf{Taxi Request} out of the same \textbf{Taxi Reservation}, preserving all the relevant data.
+				The timer uses the interface itself to perform its task.
+			\end{itemize}
+			\itemBold{Remove Taxi Ride} Allows \textbf{RESTful Service} to remove a \textbf{Taxi Ride} request already present in the \textbf{Model}.
 		\end{itemize}
-		Inoltre utilizza le seguenti \textit{interfaces}:
+		In addition it uses the following \textit{interfaces}:
 		\begin{itemize}
-			\itemBold{Get Zone From TD Address} Permette di associare la zona ad una \textbf{Taxi Ride} appena arrivata in modo tale da categorizzarla e in modo tale da renderla associabile ad un \textbf{Taxi Driver}.
-			\itemBold{Query Taxi Ride Model} Permette di aggiungere o di rimuovere una \textbf{Taxi Ride} dalla lista di \textbf{Taxi Ride} contenuta nel \textbf{Model}.
+			\itemBold{Get Zone From TD Address} Used to compute the \textbf{Zone} to which a given \textbf{Address} belongs, in order to associate a \textbf{Starting Zone} to a given \textbf{Taxi Ride}, that is the \textbf{Zone} whose \textbf{Queue} will be first asked to serve it.
+			\itemBold{Query Taxi Ride Model} Used to add and remove \textbf{Taxi Rides} from the \textbf{Model}.
 		\end{itemize} 
 		
-		\itemBold{Taxi Sharing Manager}
-		This component is in charge of managing the Taxi Sharing future 
-		In particolare espone le seguenti \textit{interfaces}:
+		\itemBold{Taxi Sharing Manager} It is in charge on handling all the necessary operation related to \textbf{Taxi Sharing}.
+		This software component implements and exposes the following \textit{interfaces}:
 		\begin{itemize}
-			\itemBold{myTaxiSharing API} Permette agli sviluppatori esterni di utilizzare le API predefinite  di \textbf{Taxi Sharing} fornite da \myTaxiService{}.
+			\itemBold{\textit{myTaxiSharing} API} Allows \textbf{External Developers} to standard API to access the \textit{myTaxiSharing} functionality.
 		\end{itemize}
-		Inoltre utilizza le seguenti \textit{interfaces}:
+		In addition it uses the following \textit{interfaces}:
 		\begin{itemize}
-			\itemBold{Query Shareable Taxi Ride} Utilizza questa \textit{interface} per richiedere al \textbf{Model} le \textbf{Taxi Ride} che è possibile rendere disponibili a più utenti. 
-			Il risultato di questa query sarà utilizzato per costriuire le API pubbliche.
+			\itemBold{Query Shareable Taxi Ride} Used to manage the \textbf{Model} part that is related to \textbf{Shareable Taxi Rides}.
 		\end{itemize}
 		
-		\itemBold{Query Manager}
-		In particolare espone le seguenti \textit{interfaces}:
+		\itemBold{Query Manager} It is a \textbf{Controller} component that acts as a uniform layer built above the \textbf{Model}, that is in fact located in to a different machine.
+		This software component implements and exposes the following \textit{interfaces}:
 		\begin{itemize}
-			\itemBold{Query Queue Model} Permette al \textbf{Queue Manager} di modificare e leggere lo stato delle code memorizzate nel \textbf{Model}.
-			\itemBold{Query Zone Model} Permette al \textbf{Location Manager} di richiedere l'esecuzione dell'algoritmo di ricerca di una posizione GPS all'interno di una  determinata zona.
-			\itemBold{Query Passenger Model} Permette al \textbf{Session Manager} e al \textbf{Profile Manager} di modificare e leggere lo stato dei dati relativi agli utenti memorizzati nel \textbf{Model}.
-			\itemBold{Query Taxi Driver Model} Permette al \textbf{Taxi Driver Manager} di modificare e leggere lo stato dei dati relativi ai \textbf{Taxi Driver} memorizzati nel \textbf{Model}.
-			\itemBold{Query Taxi Ride Model} Permette al \textbf{Taxi Ride Manager} di modificare e leggere lo stato dei dati relativi alle corse memorizzate nel \textbf{Model}.
-			\itemBold{Query Shareable Taxi Ride} Permette al \textbf{Taxi Sharing Manager} di performare query predefinite di lettura sulle \textbf{Shareable Taxi Ride} memorizzate nel \textbf{Model}.
-			\itemBold{Administrator Queries} Permette all \textbf{Administrator} di performare query predefinite per analizzare lo stato interno del sistema.
-			Inoltre sono rese possibili speciali query di ripristino del sistema.
+			\itemBold{Query Queue Model} Allows the \textbf{Queue Manager} to manage \textbf{Queues}.
+			\itemBold{Query Zone Model} Allows the \textbf{Location Manager} to retrieve the \textbf{Zone} associated to a given \textbf{GPS Data}.
+			\itemBold{Query Passenger Model} Allows the \textbf{Session Manager} and the \textbf{Profile Manager} to manage the data related to \textbf{Registered Passengers}, and insert new ones.
+			\itemBold{Query Taxi Driver Model} Allows the \textbf{Taxi Driver Manager} to retrieve, store and modify the data related to \textbf{Taxi Drivers}.
+			\itemBold{Query Taxi Ride Model} Allows the \textbf{Taxi Ride Manager} to read, update and insert data data related to \textbf{Taxi Rides}.
+			\itemBold{Query Shareable Taxi Ride} Allows the \textbf{Taxi Sharing Manager} to manage data related to \textbf{Shareable Taxi Rides}.
+			\itemBold{Administrator Queries} Allows the \textbf{Administrator} to perform queries related to \textbf{Taxi Driver} profile management and \textbf{Taxi Driver} registration.
 		\end{itemize}
-		Inoltre utilizza le seguenti \textit{interfaces}:
+		In addition it uses the following \textit{interfaces}:
 		\begin{itemize}
-			\itemBold{Query Model} Utilizza questa interface per chiamare query predefinite sul \textbf{Model} in modo tale da eseguire le procedure di aggiornamento del \textbf{Model} richieste.
+			\itemBold{Query Model} Used to forward the method calls received by this component to the \textbf{Model} itself.
 		\end{itemize}
 	\end{itemize}
 	
@@ -269,14 +275,14 @@ The identified subsystems are:
 \end{itemize} 
 
 \subsection{Deployment view}
-%TODO inserire il deployment diagram (spiega la suddivisione in tier). spiegazione dei tier hardware
+In this subsection is proposed a \textbf{UML Deployment Diagram} that shows how the software components are mapped into different \textbf{Tiers} that compose the system.
 \showDeploymentDiagram{UML Deployment Diagram}{1.0}
 
 \subsection{Runtime view}
-%TODO You can use sequence diagrams to describe the way components interact to accomplish specific tasks typically related to your use cases.
-\showSequenceDiagram{admin_td_reg}{UML Sequence Diagram - TD Registration}{1.0}
-\showSequenceDiagram{ps_registration}{UML Sequence Diagram - PS Registration}{1.0}
-\showSequenceDiagram{ps_login}{UML Sequence Diagram - PS Login}{1.0}
+In this subsection is proposed a \textbf{UML Sequence Diagrams} that shows how the software components that compose the system interacts in order to deliver the requested functionality.
+\showSequenceDiagram{admin_td_reg}{UML Sequence Diagram - Taxi Driver Registration}{1.0}
+\showSequenceDiagram{ps_registration}{UML Sequence Diagram - Passenger Registration}{1.0}
+\showSequenceDiagram{ps_login}{UML Sequence Diagram - Passenger Login}{1.0}
 \showSequenceDiagram{queue}{UML Sequence Diagram - Queue Management}{1.0}
 \showSequenceDiagram{taxi_ride_arrived_handling}{UML Sequence Diagram - Taxi Ride Handling}{1.0}
 \showSequenceDiagram{tr_timer_expired}{UML Sequence Diagram - Taxi Reservation Timer Expired}{1.0}
@@ -346,64 +352,62 @@ Subsequently are listed all the main software components and their interfaces, e
 \end{itemize}
 
 \subsection{Selected architectural styles and patterns}
-%TODO Grassetti e a capo
 Several architectural styles and patterns were chosen in order to build \myTaxiService{} as a modern software.
-The main pattern that were recursively adopted is the Model View Controller architectural pattern:
+The main pattern that were recursively adopted is the \textbf{Model View Controller} architectural pattern:
 \begin{itemize}
-	\itemBold{System Level} All the clients that use \myTaxiService{}, the Passengers, the Taxi Drivers, and the Administrator, are seen as Views, that following the Cocoa MVC pattern, connects to a Controller, the Web Server or the Application Server, that is itself connected to the Model that is hosted on the Database Server.
-	\itemBold{Client Level} The views in the various clients are designed internally to conform to the MVC pattern. For instance the Passenger View is composed by a Model that is an internal representation of the data received by the Web Server, a Controller that performs network activities and connects to the Model and to the View, and the View that is either a Mobile Application GUI or a Web Page.
-	\itemBold{Server Level} The server part of \myTaxiService{} is divided also physically into the three different entities of the MVC pattern:
+	\itemBold{System Level} All the clients that use \myTaxiService{}, the \textbf{Passengers}, the \textbf{Taxi Drivers}, and the \textbf{Administrator}, are seen as \textbf{Views}, that following the \textbf{Cocoa MVC} pattern, connects to a \textbf{Controller}, the \textbf{Web Server} or the \textbf{Application Server}, that is itself connected to the \textbf{Model} that is hosted on the \textbf{Database Server}.
+	\itemBold{Client Level} The \textbf{Views} in the various \textbf{Clients} are designed internally to conform to the \textbf{MVC} pattern. For instance the \textbf{Passenger View} is composed by a \textbf{Model} that is an internal representation of the data received by the \textbf{Web Server}, a \textbf{Controller} that performs network activities and connects to the \textbf{Model} and to the \textbf{View}, and the \textbf{View} that is either a \textbf{Mobile Application GUI} or a \textbf{Web Page}.
+	\itemBold{Server Level} The server part of \myTaxiService{} is divided also physically into the three different entities of the \textbf{MVC} pattern:
 	\begin{itemize}
-		\itemBold{Web Server} It is the View of the server part of the application, and gives to clients a representation of the internal data. The Web Server is connected only to the Application Server. It contains all the assets included in the web portal. On its external interface, it can handle properly HTTPS requests and manage communication over Web Sockets. On its internal interface it sends and receives objects via RPC from the Application Server, that is in charge of the application logic.
-		\itemBold{Application Server} That is the Controller of the server and connects to the Web Server and the Database Server via RPC. It contains most of the business logic behind \myTaxiService{} and therefore it is a core part of the system. It should be reachable only within the enterprise network, and not via public IP. The connection to the Web Server is used to receive requests and deliver responses to clients and to send asynchronous requests to them, when it is needed. On the other hand, the connection to the Database Server is necessary to connect the Controller to the Model, and it is used to store all the important data and react to some data modifications that occurs during the execution of the application.
-		\itemBold{Database Server} It is the Model of the server, and infact the Model of the whole \myTaxiService{} system. It relies on an RPC connection with the Application Server and it is not directly reachable via a public IP. The Database Server is connected to a relational database via a Database Driver Adapter, that is a wrapper built over the DBMS installed on the Database Server Operating System. Following the Cocoa MVC pattern, it is not directly connected to the View of the server, that is the Web Server, but only to the Controller, that is the Application Server.
+		\itemBold{Web Server} It is the \textbf{View} of the server part of the application, and gives to clients a representation of the internal data. The \textbf{Web Server} is connected only to the \textbf{Application Server}. It contains all the assets included in the web portal. On its external interface, it can handle properly \textbf{HTTPS} requests and manage communication over \textbf{Web Sockets}. On its internal interface it sends and receives objects via \textbf{RPC} from the \textbf{Application Server}, that is in charge of the application logic.
+		\itemBold{Application Server} That is the \textbf{Controller} of the server and connects to the \textbf{Web Server} and the \textbf{Database Server} via \textbf{RPC}. It contains most of the business logic behind \myTaxiService{} and therefore it is a core part of the system. It should be reachable only within the enterprise network, and not via public IP. The connection to the \textbf{Web Server} is used to receive requests and deliver responses to clients and to send asynchronous requests to them, when it is needed. On the other hand, the connection to the \textbf{Database Server} is necessary to connect the \textbf{Controller} to the \textbf{Model}, and it is used to store all the important data and react to some data modifications that occurs during the execution of the application.
+		\itemBold{Database Server} It is the \textbf{Model} of the server, and infact the \textbf{Model} of the whole \myTaxiService{} system. It relies on an \textbf{RPC} connection with the \textbf{Application Server} and it is not directly reachable via a public IP. The \textbf{Database Server} is connected to a relational database via a \textbf{Database Driver Adapter}, that is a wrapper built over the \textbf{DBMS} installed on the \textbf{Database Server Operating System}. Following the \textbf{Cocoa MVC} pattern, it is not directly connected to the \textbf{View} of the server, that is the \textbf{Web Server}, but only to the \textbf{Controller}, that is the \textbf{Application Server}.
 	\end{itemize}
 \end{itemize}
-Alongside the MVC architectural pattern, also the Client Server style is used for all the requests done by the various clients that can connect to the Web Server of \myTaxiService{}. The Taxi Driver Application and the Passenger Application can use a standardized Client Server protocol via HTTPS that is follows the principle of a RESTful service. The Administrator application its connected via RPC to the Web Server and can perform more critical requests, like the registration of a new Taxi Driver into the system. It is required that the Administrator application opens a RPC connection to the server to start the communication.
-A Point to Point bidirectional messaging system is established between the clients and the Web Server at the startup of the client application. The client should explicitly request a connection to the server that is listening for clients to connect. It is a connection over Web Socket that allows the Web Server to send asynchronous messages and requests to which the client can respond using the same channel. It's main functions are the one that allows the server to send a Taxi Ride proposal to a given Taxi Driver, that can either accept or deny the proposal, and the one that allows the server to ask the Taxi Driver an updated geolocalization data.
-The Client Server style and Point to Point bidirectional messaging system are used to implement properly the MVC pattern in this three layers, four tiers system.
-The three layers have already been discussed and are:
+Alongside the \textbf{MVC} architectural pattern, also the \textbf{Client-Server} style is used for all the requests done by the various clients that can connect to the Web Server of \myTaxiService{}. The \textbf{Taxi Driver Application} and the \textbf{Passenger Application} can use a standardized \textbf{Client-Server} protocol via \textbf{HTTPS} that follows the principle of a \textbf{RESTful Service}. The \textbf{Administrator} application its connected via \textbf{RPC} to the \textbf{Web Server} and can perform more critical requests, like the registration of a new \textbf{Taxi Driver} into the system. It is required that the \textbf{Administrator} application opens a \textbf{RPC} connection to the \textbf{Web Server} to start the communication.
+A \textbf{Point to Point} bidirectional messaging system is established between the \textbf{Clients} and the \textbf{Web Server} at the startup of the client application. The client should explicitly request a connection to the server that is listening for clients to connect. It is a connection over \textbf{Web Socket} that allows the \textbf{Web Server} to send asynchronous messages and requests to which the client can respond using the same channel. Its main functions are the one that allows the server to send a \textbf{Taxi Ride} proposal to a given \textbf{Taxi Driver}, that can either accept or deny the proposal, and the one that allows the server to ask the \textbf{Taxi Driver} an updated geolocation data.
+The \textbf{Client-Server} style and \textbf{Point to Point} bidirectional messaging system are used to implement properly the \textbf{MVC} pattern in this three \textbf{Layers}, four \textbf{Tiers} system.
+The three \textbf{Layers} have already been discussed and are:
 \begin{itemize}
-	\itemBold{Data Layer} That is the System Level Model
-	\itemBold{Business Logic Layer} That is the System Level Controller
-	\itemBold{Presentation Layer} That is the System Level View
+	\itemBold{Data Layer} That is the System Level \textbf{Model}
+	\itemBold{Business Logic Layer} That is the System Level \textbf{Controller}
+	\itemBold{Presentation Layer} That is the System Level \textbf{View}
 \end{itemize}
-These layer, as already said, are mapped into four different tiers:
+These \textbf{Layers}, as already said, are mapped into four different \textbf{Tiers}:
 \begin{itemize}
-	\itemBold{Clients} They map the System Level View.
-	\itemBold{Web Server} It maps a portion of the System Level Controller, that is the one of the RESTful Service, Dispatcher, and part of the Location Manager, onto software objects that provide the required network capabilities.
-	\itemBold{Application Server} This tier maps the purely logic part of the System Level Controller.
-	\itemBold{Database Server} It maps the System Level Model.
+	\itemBold{Clients} They map the System Level \textbf{View}.
+	\itemBold{Web Server} It maps a portion of the System Level \textbf{Controller}, that is the one of the \textbf{RESTful Service}, \textbf{Dispatcher}, and part of the \textbf{Location Manager}, onto software objects that provide the required network capabilities.
+	\itemBold{Application Server} This \textbf{Tier} maps the purely logical part of the System Level \textbf{Controller}.
+	\itemBold{Database Server} It maps the System Level \textbf{Model}.
 \end{itemize}
 
 \subsection{Other design decisions}
-%TODO Grassetti e a capo
 There have been chosen several technologies that best fit the needs of the system to be. Not all the required functionalities of \myTaxiService{} are already mapped onto specific products because in those cases the choice done would matter less.
 But for the cases in which a technology has already been proposed, it is because a clear design decision was mandatory.
 As for the communication protocols between clients (excluded the Administrator client) and the server have been chosen:
 \begin{itemize}
-	\itemBold{HTTPS} The secure version of HTTP was a mandatory choice as security and privacy concerns are of major importance nowadays.
+	\itemBold{HTTPS} The secure version of \textbf{HTTP} was a mandatory choice as security and privacy concerns are of major importance nowadays.
 	\itemBold{Web Socket} This innovative socket technology has been chosen although is relatively new because it implements a full duplex socket communication channel using web technology and therefore using the port 80, which is in almost every case not blocked by any firewall.
 \end{itemize}
 For what concerns the network reachability has been chosen to make discoverable only the Web Server through the assignment to it of a public IP.
 All the other servers in \myTaxiService{} system should be reachable only within the enterprise network.
-Between the Web Server and the external network is installed a firewall that controls all the incoming connections.
-In particular it must accept only incoming HTTPS connections, Web Socket connections and RPC connections.
-A firewall is also used to protected the Database Server from the Application Server in the unlikely case that the Application Server is attacked through the Web Server or the Application Server for some reasons stops working correctly and start behaving in a way that will damage the application Model.
-Also, another interesting design choice that has been made concerns the way in which the GPS coordinates obtained from a given Taxi Driver are mapped into a specific Zone.
+Between the \textbf{Web Server} and the external network is installed a firewall that controls all the incoming connections.
+In particular it must accept only incoming \textbf{HTTPS} connections, \textbf{Web Socket} connections and \textbf{RPC} connections.
+A firewall is also used to protected the Database Server from the \textbf{Application Server} in the unlikely case that the \textbf{Application Server} is attacked through the \textbf{Web Server} or the \textbf{Application Server} for some reasons stops working correctly and start behaving in a way that will damage the application \textbf{Model}.
+Also, another interesting design choice that has been made concerns the way in which the \textbf{GPS coordinates} obtained from a given \textbf{Taxi Driver} are mapped into a specific \textbf{Zone}.
 It could have been possible, but not feasible, to do such a thing:
 \begin{enumerate}
-	\item Obtain GPS Data via Web Socket from the selected Taxi Driver
-	\item Calculate the nearest Address of the given GPS Data using Google Maps HTTPS API
-	\item Query the Model to obtain the Zone to which belongs the given Address
+	\item Obtain \textbf{GPS Data} via \textbf{Web Socket} from the selected \textbf{Taxi Driver}.
+	\item Calculate the nearest \textbf{Address} of the given \textbf{GPS Data} using \textbf{Google Maps HTTPS API}.
+	\item Query the \textbf{Model} to obtain the \textbf{Zone} to which belongs the given \textbf{Address}.
 \end{enumerate}
-But this solution required to have a precomputed data structure that associate every Address in the City to the corresponding Zone (that could have been a relational table with as many tuples inside as Addresses in the City), that is heavy to manage and mantain, although if correctly installed and filled, it gives for certain good performances.
-A less heavy weight solution has been found and that is a solution that expects every Zone of the city to be divided in several convex Polygon, for instance Triangles, that have interesting properties for our application.
-The polygonal shape of the Zone could be almost as complex as one can imagine and be decomposed in a finite number of Triangles in all the interesting applications.
-In \myTaxiService{} Zones of regular shape are intended to be used, and therefore the number of Triangles in which a Zone will be decomposed is limited.
+But this solution required to have a precomputed data structure that associate every \textbf{Address} in the \textbf{City} to the corresponding \textbf{Zone} (that could have been a relational table with as many tuples inside as \textbf{Addresses} in the \textbf{City}), that is heavy to manage and maintain, although if correctly installed and filled, it gives for certain good performances.
+A less heavy weight solution has been found and that is a solution that expects every \textbf{Zone} of the \textbf{City} to be divided in several convex \textbf{Polygon}, for instance \textbf{Triangles}, that have interesting properties for our application.
+The polygonal shape of the \textbf{Zone} could be almost as complex as one can imagine and be decomposed in a finite number of Triangles in all the interesting applications.
+In \myTaxiService{} \textbf{Zones} of regular shape are intended to be used, and therefore the number of \textbf{Triangles} in which a \textbf{Zone} will be decomposed is limited.
 So such a flow is followed:
 \begin{enumerate}
-	\item Obtain GPS Data via Web Socket from the selected Taxi Driver
-	\item For each Zone, check if the the Point that the Longitude and Latitude from GPS Data identify is contained inside any Triangle in which the Zone is divided. If that is true, that the Zone is found. If that is false, than another Zone could contain the given Point. If no Zone contains the Point, then we can assume that the Point refers to GPS Data that locate a geographical point outside of the City.
+	\item Obtain \textbf{GPS Data} via \textbf{Web Socket} from the selected Taxi Driver
+	\item For each \textbf{Zone}, check if the the \textbf{Point} that the \textbf{Longitude} and \textbf{Latitude} from \textbf{GPS Data} identify is contained inside any \textbf{Triangle} in which the \textbf{Zone} is divided. If that is true, that the \textbf{Zone} is found. If that is false, than another \textbf{Zone} could contain the given Point. If no \textbf{Zone} contains the Point, then we can assume that the \textbf{Point} refers to \textbf{GPS Data} that locate a geographical point outside of the \textbf{City}.
 \end{enumerate}
-The computation of the Point in Triangle test is simple and efficient and an algorithm implementation in Java is provided in the following section.
+The computation of the \textbf{Point in Triangle} test is simple and efficient and an algorithm implementation in \textbf{Java} is provided in the following section.
