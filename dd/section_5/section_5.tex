@@ -6,19 +6,19 @@ In this section are mapped all the functional requirements identified in the \te
 \reqTracTab{
 		FR35 & 
 		%A taxi driver must be capable of notifying the end of a taxi ride he is serving.
-		The Taxi Driver pushes a button on the TD Application View that calls the TD Request Creator, which sends a request to the RESTful Service. The request is then forwarded to the Taxi Ride Manager by the RESTful Service. The Taxi Ride Manager handles the operation. \\
+		The Taxi Driver pushes a button on the \textbf{TD Application View} that calls the \textbf{TD Request Creator}, which sends a request to the \textbf{RESTful Service}. The request is then forwarded to the \textbf{Taxi Ride Manager} by the \textbf{RESTful Service}. The \textbf{Taxi Ride Manager} handles the operation. \\
 		\hline
 		FR36 &
 		%The system must automatically re-enqueue the taxi driver that notifies the end of his current taxi ride in the queue of his current zone.
-		When a Taxi Driver has notified the end of his current Ride, he is associated to a Available status. Then the Queue Manager is waiting for Taxi Drivers to become Available to enqueue them into their current Zone. \\
+		When a \textbf{Taxi Driver} has notified the end of his current Ride, he is associated to a Available status. Then the \textbf{Queue Manager} is waiting for Taxi Drivers to become Available to enqueue them into their current Zone. \\
 		\hline
 		FR37 &
 		%A notification must be sent from the system to the taxi driver to inform him about the result of his action.
-		The response to the request made to achieve FR35 contains the result of the Taxi Driver action. \\
+		The response to the request made to achieve FR35 contains the result of the \textbf{Taxi Driver} action. \\
 		\hline
 		FR38 &
 		%The system must peacefully handle a connection error and notify the user of the problem.
-		The TD Request Creator and the RESTful Service are capable of handling connection error problem without making the relevant systems crash. \\
+		The \textbf{TD Request Creator} and the \textbf{RESTful Service} are capable of handling connection error problem without making the relevant systems crash. \\
 		\hline
 	}
 
