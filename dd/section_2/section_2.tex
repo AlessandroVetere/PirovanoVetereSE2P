@@ -366,14 +366,14 @@ The main pattern that were recursively adopted is the \textbf{Model View Control
 		\itemBold{Database Server} It is the \textbf{Model} of the server, and in fact is the \textbf{Model} of the whole \myTaxiService{} system. It relies on an \textbf{RPC} connection with the \textbf{Application Server} and it is not directly reachable via a public IP. The \textbf{Database Server} is connected to a relational database via a \textbf{Database Driver Adapter}, that is a wrapper built over the \textbf{DBMS} installed on the \textbf{Database Server Operating System}. Following the \textbf{Cocoa MVC} pattern, it is not directly connected to the \textbf{View} of the server, that is the \textbf{Web Server}, but only to the \textbf{Controller}, that is the \textbf{Application Server}.
 	\end{itemize}
 \end{itemize}
-Alongside the \textbf{MVC} architectural pattern, also the \textbf{Client-Server} style is used for all the requests done by the various clients that can connect to the Web Server of \myTaxiService{}. The \textbf{Taxi Driver Application} and the \textbf{Passenger Application} can use a standardized \textbf{Client-Server} protocol via \textbf{HTTPS} that follows the principle of a \textbf{RESTful Service}. The \textbf{Administrator} application its connected via \textbf{RPC} to the \textbf{Web Server} and can perform more critical requests, like the registration of a new \textbf{Taxi Driver} into the system. It is required that the \textbf{Administrator} application opens a \textbf{RPC} connection to the \textbf{Web Server} to start the communication.
-A \textbf{Point to Point} bidirectional messaging system is established between the \textbf{Clients} and the \textbf{Web Server} at the startup of the client application. The client should explicitly request a connection to the server that is listening for clients to connect. It is a connection over \textbf{Web Socket} that allows the \textbf{Web Server} to send asynchronous messages and requests to which the client can respond using the same channel. Its main functions are the one that allows the server to send a \textbf{Taxi Ride} proposal to a given \textbf{Taxi Driver}, that can either accept or deny the proposal, and the one that allows the server to ask the \textbf{Taxi Driver} an updated geolocation data.
+Alongside the \textbf{MVC} architectural pattern, also the \textbf{Client-Server} style is used for all the requests done by the various clients connected to the Web Server of \myTaxiService{}. The \textbf{Taxi Driver Application} and the \textbf{Passenger Application} can use a standardized \textbf{Client-Server} protocol via \textbf{HTTPS} that follows the principle of a \textbf{RESTful Service}. The \textbf{Administrator} application its connected via \textbf{RPC} to the \textbf{Web Server} and can perform more critical requests, like the registration of a new \textbf{Taxi Driver} into the system. It is required that the \textbf{Administrator} application opens a \textbf{RPC} connection to the \textbf{Web Server} to start the communication.
+A \textbf{Point to Point} bidirectional messaging system is established between the \textbf{Clients} and the \textbf{Web Server} at the \textit{boot} of the client application. The client should explicitly request a connection to the server that is listening for clients's connections. It is the connection over \textbf{Web Socket} paradigm that allows the \textbf{Web Server} to send asynchronous messages and requests to which the client can respond using the same channel. The main reasons why this paradigm is used are sending a \textbf{Taxi Ride} proposal to a given \textbf{Taxi Driver}, that can either accept or deny the proposal, and allowing the server to ask the \textbf{Taxi Driver} an updated geolocation data.
 The \textbf{Client-Server} style and \textbf{Point to Point} bidirectional messaging system are used to implement properly the \textbf{MVC} pattern in this three \textbf{Layers}, four \textbf{Tiers} system.
 The three \textbf{Layers} have already been discussed and are:
 \begin{itemize}
-	\itemBold{Data Layer} That is the System Level \textbf{Model}
-	\itemBold{Business Logic Layer} That is the System Level \textbf{Controller}
-	\itemBold{Presentation Layer} That is the System Level \textbf{View}
+	\itemBold{Data Layer} That is the System Level \textbf{Model}.
+	\itemBold{Business Logic Layer} That is the System Level \textbf{Controller}.
+	\itemBold{Presentation Layer} That is the System Level \textbf{View}.
 \end{itemize}
 These \textbf{Layers}, as already said, are mapped into four different \textbf{Tiers}:
 \begin{itemize}
@@ -384,7 +384,7 @@ These \textbf{Layers}, as already said, are mapped into four different \textbf{T
 \end{itemize}
 
 \subsection{Other design decisions}
-There have been chosen several technologies that best fit the needs of the system to be. Not all the required functionalities of \myTaxiService{} are already mapped onto specific products because in those cases the choice done would matter less.
+For best fitting the needs of the system to be,  we have chosen several technologies. Not all the required functionalities of \myTaxiService{} are already mapped onto specific products because in those cases the choice done would matter less.
 But for the cases in which a technology has already been proposed, it is because a clear design decision was mandatory.
 As for the communication protocols between clients (excluded the Administrator client) and the server have been chosen:
 \begin{itemize}
@@ -403,9 +403,9 @@ It could have been possible, but not feasible, to do such a thing:
 	\item Calculate the nearest \textbf{Address} of the given \textbf{GPS Data} using \textbf{Google Maps HTTPS API}.
 	\item Query the \textbf{Model} to obtain the \textbf{Zone} to which belongs the given \textbf{Address}.
 \end{enumerate}
-But this solution required to have a precomputed data structure that associate every \textbf{Address} in the \textbf{City} to the corresponding \textbf{Zone} (that could have been a relational table with as many tuples inside as \textbf{Addresses} in the \textbf{City}), that is heavy to manage and maintain, although if correctly installed and filled, it gives for certain good performances.
-A less heavy weight solution has been found and that is a solution that expects every \textbf{Zone} of the \textbf{City} to be divided in several convex \textbf{Polygon}, for instance \textbf{Triangles}, that have interesting properties for our application.
-The polygonal shape of the \textbf{Zone} could be almost as complex as one can imagine and be decomposed in a finite number of Triangles in all the interesting applications.
+But this solution requires to have a precomputed data structure that associates every \textbf{Address} in the \textbf{City} to the corresponding \textbf{Zone} (that could have been a relational table with as many rows inside as \textbf{Addresses} in the \textbf{City}, each address associated with the corresponding \textbf{Zone}), that is heavy to manage and maintain, although if correctly installed and filled, it gives for certain good performances.
+A less heavy weight solution has been found: this solution expects every \textbf{Zone} of the \textbf{City} to be divided in several convex \textbf{Polygon}, for instance \textbf{Triangles}, that have interesting properties for our application.
+The polygonal shape of the \textbf{Zone} could be almost as complex as one can imagine but, in all the interesting applications, can always be decomposed in a finite number of Triangles.
 In \myTaxiService{} \textbf{Zones} of regular shape are intended to be used, and therefore the number of \textbf{Triangles} in which a \textbf{Zone} will be decomposed is limited.
 So such a flow is followed:
 \begin{enumerate}
