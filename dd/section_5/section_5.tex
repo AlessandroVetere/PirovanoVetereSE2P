@@ -42,7 +42,7 @@ In this section are mapped all the functional requirements identified in the \te
 		FR10 &
 		%The system must peacefully handle a connection error and notify the user of the problem.
 		The internal software architecture of the \textbf{Session Manager} is built in order to catch exceptions and to handle them in a proper way. 
-		The \textbf{Point to Point} communication channel is used for delivering from the \textbf{Server} to the \textbf{Client} some notification about error's state.
+		The \textbf{Point to Point} communication channel is used for delivering some notification about error's state from the \textbf{Server} to the \textbf{Client}.
 		\\
 		\hline
 	}
@@ -62,7 +62,7 @@ In this section are mapped all the functional requirements identified in the \te
 		FR13 &
 		%The system must peacefully handle a connection error and notify the user of the problem.
 		The internal software architecture of the \textbf{Passenger Web or Application View} is built in order to catch exceptions and to handle them in a proper way. 
-		The \textbf{Point to Point} communication channel is used for delivering from the \textbf{Server} to the \textbf{Client} some notification about error's state.
+		The \textbf{Point to Point} communication channel is used for delivering some notification about error's state from the \textbf{Server} to the \textbf{Client}.
 		\\
 		\hline
 	}
@@ -71,6 +71,8 @@ In this section are mapped all the functional requirements identified in the \te
 \reqTracTab{
 		FR30 &
 		%The system must offer the possibility to report a problem with a dedicated text area and a combo box to specify whether the problem is solvable without interrupting the taxi driver's work.
+		The \textbf{Taxi Driver Web and application View} is provided with a specific screen that allows the \textbf{Taxi Driver} to communicate the problems that he is facing with.
+		In addition the \textbf{Taxi Driver} must have the possibility of specifying the solubility of the problem. This data are sent to the \textbf{RESTful Service} in order to be processed by the \textbf{Taxi Driver Manager}.
 		\\
 		\hline
 		FR31 &
@@ -87,6 +89,8 @@ In this section are mapped all the functional requirements identified in the \te
 		\hline
 		FR34 &
 		%The system must peacefully handle a connection error and notify the user of the problem.
+		The internal software architecture of the \textbf{Taxi Driver Web or Application View} is built in order to catch exceptions and to handle them in a proper way. 
+		The \textbf{Point to Point} communication channel is used for delivering some notification about error's state from the \textbf{Server} to the \textbf{Client}.
 		\\
 		\hline
 	}
@@ -123,7 +127,7 @@ In this section are mapped all the functional requirements identified in the \te
 \reqTracTab{
 		FR26 &
 		%The system must check the data inserted by a RP into the Request a Ride Page and notify the RP in case of problems.
-		The formal constraints are handled by the \textbf{Taxi Ride Manager}: this component has the responsability of checking the request details validity. If the request doesn't respect the constraints, than the \textbf{Taxi Ride Manger} has to inform the related \textbf{Passenger} of the failure.
+		The formal constraints of the \textbf{Taxi Request} are checked by the \textbf{Taxi Ride Manager}: this component has the responsability of checking the request details validity. If the request doesn't respect the constraints, than the \textbf{Taxi Ride Manger} has to inform the related \textbf{Passenger} of the failure.
 		\\
 		\hline
 		FR27 &
@@ -139,7 +143,7 @@ In this section are mapped all the functional requirements identified in the \te
 		FR29 &
 		%The system must peacefully handle a connection error and notify the user of the problem.
 		The internal software architecture of the \textbf{Taxi Ride Manager} is built in order to catch exceptions and to handle them in a proper way. 
-		The \textbf{Point to Point} communication channel is used for delivering from the \textbf{Server} to the \textbf{Client} some notification about error's state.
+		The \textbf{Point to Point} communication channel is used for delivering some notification about error's state from the \textbf{Server} to the \textbf{Client}.
 		\\
 		\hline
 	}
