@@ -384,7 +384,8 @@ These \textbf{Layers}, as already said, are mapped into four different \textbf{T
 \end{itemize}
 
 \subsection{Other design decisions}
-For best fitting the needs of the system to be,  we have chosen several technologies. Not all the required functionalities of \myTaxiService{} are already mapped onto specific products because in those cases the choice done would matter less.
+Several technologies have been chosen in order to best fit the needs of the system to be.
+Not all the required functionalities of \myTaxiService{} are already mapped onto specific products because in those cases the choice done would matter less.
 But for the cases in which a technology has already been proposed, it is because a clear design decision was mandatory.
 As for the communication protocols between clients (excluded the Administrator client) and the server have been chosen:
 \begin{itemize}
@@ -404,9 +405,9 @@ It could have been possible, but not feasible, to do such a thing:
 	\item Query the \textbf{Model} to obtain the \textbf{Zone} to which belongs the given \textbf{Address}.
 \end{enumerate}
 But this solution requires to have a precomputed data structure that associates every \textbf{Address} in the \textbf{City} to the corresponding \textbf{Zone} (that could have been a relational table with as many rows inside as \textbf{Addresses} in the \textbf{City}, each address associated with the corresponding \textbf{Zone}), that is heavy to manage and maintain, although if correctly installed and filled, it gives for certain good performances.
-A less heavy weight solution has been found: this solution expects every \textbf{Zone} of the \textbf{City} to be divided in several convex \textbf{Polygon}, for instance \textbf{Triangles}, that have interesting properties for our application.
+A less heavy weight solution has been found: this solution expects every \textbf{Zone} of the \textbf{City} to be divided in several convex \textbf{Polygons}, for instance \textbf{Triangles}, that have interesting properties for our application.
 The polygonal shape of the \textbf{Zone} could be almost as complex as one can imagine but, in all the interesting applications, can always be decomposed in a finite number of Triangles.
-In \myTaxiService{} \textbf{Zones} of regular shape are intended to be used, and therefore the number of \textbf{Triangles} in which a \textbf{Zone} will be decomposed is limited.
+In \myTaxiService{} \textbf{Zones} of regular shape are intended to be used, and therefore the number of \textbf{Triangles} in which a \textbf{Zone} will be decomposed is very limited.
 So such a flow is followed:
 \begin{enumerate}
 	\item Obtain \textbf{GPS Data} via \textbf{Web Socket} from the selected Taxi Driver
