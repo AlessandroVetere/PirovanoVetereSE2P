@@ -26,27 +26,40 @@ In this section are mapped all the functional requirements identified in the \te
 \reqTracTab{
 		FR7 &
 		%The system must check the correctness of the user's inserted data.
+		The validation of \textbf{Passenger} inserted data is done by the \textbf{Session Manager} after checking the eventually duplication of the user session.
 		\\
+		\hline
 		FR8 &
 		%The system must correctly handle internally the login token assignment to the user.
+		The \textbf{Session Manager} generates the \textbf{Login Token} once it is sure of the correctness of the login data. This token is delivered by the \textbf{Dispatcher}.
 		\\
+		\hline
 		FR9 &
 		%The system must notify the user about the result of his login.
+		The notification of the result of the login procedure is produced in the \textbf{Session Manager} and is sent by the \textbf{Dispatcher}.
 		\\
+		\hline
 		FR10 &
 		%The system must peacefully handle a connection error and notify the user of the problem.
+		The internal software architecture of the \textbf{Session Manager} is built in order to catch exceptions and to handle them in a proper way. 
+		The \textbf{Point to Point} communication channel is used for delivering from the \textbf{Server} to the \textbf{Client} some notification about error's state.
 		\\
+		\hline
 	}
 	
 \subsection{Logout}
 \reqTracTab{
 	FR11 &
 	%The system must offer the possibility to logout to a given RP.
+	The \textbf{Passenger} can perform the \textbf{Logout} procedure by interacting with the \textbf{Passenger Web or Application View}.
 	\\
 	FR12 &
 	%After the logout, the system must redirect the RP to the \myTaxiService{} home page.
+	All the logic about the navigation inside the application and in general about the building of the \textbf{View} is contained into the \textbf{Passenger Web or Application View}.It is defined through client side languages such as \textbf{Javascript} or \textbf{HTML} directives.
 	\\
 	FR13 &
 	%The system must peacefully handle a connection error and notify the user of the problem.
+	The internal software architecture of the \textbf{Passenger Web or Application View} is built in order to catch exceptions and to handle them in a proper way. 
+	The \textbf{Point to Point} communication channel is used for delivering from the \textbf{Server} to the \textbf{Client} some notification about error's state.
 	\\
 }
