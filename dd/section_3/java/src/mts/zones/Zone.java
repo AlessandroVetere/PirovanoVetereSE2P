@@ -1,14 +1,12 @@
 package mts.zones;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class Zone {
 	private final Set<Triangle> triangles;
 
 	public Zone(Set<Triangle> triangles) {
-		this.triangles = new HashSet<>();
-		this.triangles.addAll(triangles);
+		this.triangles = triangles;
 	}
 
 	public boolean contains(Point p) {
