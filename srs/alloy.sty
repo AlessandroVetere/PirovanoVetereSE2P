@@ -44,16 +44,16 @@
 
 % inline
 \def\A{%
-    \lstinline[language=alloy,basicstyle=\ttfamily,columns=fixed]}
+    \lstinline[language=alloy,basicstyle=\ttfamily\small,columns=fixed]}
 
 % paragraph
 \lstnewenvironment{alloy}[1][]{%
   \lstset{language=alloy,
     floatplacement={tbp},captionpos=b,
-    xleftmargin=8pt,xrightmargin=8pt,basicstyle=\ttfamily,#1}}{}
+    xleftmargin=8pt,xrightmargin=8pt,basicstyle=\ttfamily\small,#1}}{}
 
 % paragraph from file
 \newcommand{\alloyfile}[1]{
   \lstinputlisting[language=alloy,%
-    frame=lines,xleftmargin=8pt,xrightmargin=8pt,basicstyle=\ttfamily,columns=fixed]{#1}
+    frame=lines,xleftmargin=8pt,xrightmargin=8pt,basicstyle=\ttfamily\small,columns=fixed]{#1}
 }
