@@ -113,12 +113,21 @@
 
 % Delete this, if you do not want the table of contents to pop up at
 % the beginning of each subsection:
-\AtBeginSubsection[]
+%\AtBeginSubsection[]
+%{
+%	\begin{frame}<beamer>{Outline}
+%		\tableofcontents[currentsection,currentsubsection]
+%	\end{frame}
+%}
+
+\AtBeginSection[]
 {
-	\begin{frame}<beamer>{Outline}
-		\tableofcontents[currentsection,currentsubsection]
+	\begin{frame}<beamer>
+		\frametitle{Outline}
+		\tableofcontents[currentsection]
 	\end{frame}
 }
+
 
 \newcommand{\titleToc}{
 		\begin{frame}
