@@ -14,23 +14,32 @@
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
-\lstset{frame=tb,
-  language=Java,
-  aboveskip=3mm,
-  belowskip=3mm,
-  showstringspaces=false,
-  columns=flexible,
-  basicstyle={\small\ttfamily},
-  numbers=none,
-  numberstyle=\tiny\color{gray},
-  keywordstyle=\color{blue},
-  commentstyle=\color{dkgreen},
-  stringstyle=\color{mauve},
-  breaklines=true,
-  breakatwhitespace=true,
-  tabsize=3
+\newcommand{\versionHistoryTab}[1]{
+	\begin{tabulary}{\linewidth\tymin=70pt}{C|C|L}
+		\textbf{\textit{Version Number}} & \textbf{\textit{Release Date}} & \textbf{\textit{Changelog}} \\
+		\hline
+		#1
+	\end{tabulary}
 }
 
+\newcommand{\configureJava}{
+	\lstset{frame=tb,
+		language=Java,
+		aboveskip=3mm,
+		belowskip=3mm,
+		showstringspaces=false,
+		columns=flexible,
+		basicstyle={\small\ttfamily},
+		numbers=none,
+		numberstyle=\tiny\color{gray},
+		keywordstyle=\color{blue},
+		commentstyle=\color{dkgreen},
+		stringstyle=\color{mauve},
+		breaklines=true,
+		breakatwhitespace=true,
+		tabsize=3
+	}
+}
 \newcommand{\myTaxiService}[0]{\mbox{\emph{myTaxiService}}}
 \newcommand{\setDepth}[1]{\setcounter{tocdepth}{#1}\setcounter{secnumdepth}{#1}}
 \newcommand{\sectionBaseDir}[1]{./section_#1}
