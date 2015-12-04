@@ -10,11 +10,11 @@ In this section are mapped all the functional requirements identified in the \te
 	\hline
 	FR3 &
 	%In no case can a registration process be resumed after browser or application closure.
-	The registration process must be atomic and the procedure in charge of handling it has to be developed in such a way that, if stopped, there are no choices of resuming. \\
+	The registration process is handled as atomic by the \textbf{Profile Manager}: if the registration process is stopped, there are no choices of resuming. \\
 	\hline
 	FR4 &
 	%The system must acknowledge the non registered passenger whether the registration process ends successfully or fails.
-	\\
+	Through the response to the registration request sent to the \textbf{RESTful Service}, the passenger is informed about the result of the process. \\
 	\hline
 	FR5 &
 	%The system must send an email to the non registered passenger that has completed the registration.
@@ -22,26 +22,27 @@ In this section are mapped all the functional requirements identified in the \te
 	\hline
 	FR6 &
 	%After the registration is completed successfully, the non registered passenger involved in the process must be considered a registered passenger.
-	If the registration process is completed successfully, then the \textbf{Profile Manager} has to call a method of the \textbf{Query Passenger Model} in order to make the registration effective and persistent. From this moment, if that \textbf{Passenger} tries to login, the system must recognize him as a user of the service and allow him to use all the features of \myTaxiService{}. \\
+	If the registration process is completed successfully, then the \textbf{Profile Manager} has to call a method of the \textbf{Query Passenger Model} in order to make the registration effective and persistent. From this moment, if that Passenger tries to login, the system must recognize him as a user of the service and allow him to use all the features of \myTaxiService{}. \\
 }
 
 \subsection{Login}
 \reqTracTab{
 	FR7 &
 	%The system must check the correctness of the user's inserted data.
-	The validation of Passenger inserted data is done by the \textbf{Session Manager} after checking the eventually duplication of the user session. \\
+	The validation of Passenger inserted data is done by the \textbf{Session Manager} after checking for a possible duplication of the user session. \\
 	\hline
 	FR8 &
 	%The system must correctly handle internally the login token assignment to the user.
-	The \textbf{Session Manager} generates the Login Token once it is sure of the correctness of the login data. This token is delivered by the \textbf{Dispatcher}. \\
+	The \textbf{Session Manager} generates the Login Token once it is sure of the correctness of the login data, and associates it to the user via the \textbf{Query Manager}. \\
 	\hline
 	FR9 &
 	%The system must notify the user about the result of his login.
-	The notification of the result of the login procedure is produced in the \textbf{Session Manager} and is sent by the \textbf{Dispatcher}. \\
+	The notification of the result of the login procedure is produced in the \textbf{Session Manager} and sent as response to the user that requested the login. \\
 	\hline
 	FR10 &
 	%The system must peacefully handle a connection error and notify the user of the problem.
-	The internal software architecture of the \textbf{Session Manager} is built in order to catch exceptions and to handle them in a proper way. \\	
+	The \textbf{PS Request Creator}, \textbf{TD Request Creator} and the \textbf{RESTful Service} are capable of handling connection errors without making the relevant systems crash. \\
+	%The internal software architecture of the \textbf{Session Manager} is built in order to catch exceptions and to handle them in a proper way. \\	
 	%The \textbf{Point to Point} communication channel is used for delivering from the \textbf{Server} to the \textbf{Client} some notification about error's state. \\
 }
 
@@ -58,8 +59,9 @@ In this section are mapped all the functional requirements identified in the \te
 	\hline
 	FR13 &
 	%The system must peacefully handle a connection error and notify the user of the problem.
-	The internal software architecture of the \textbf{PS Web View} or \textbf{PS Application View} is built in order to catch exceptions and to handle them in a proper way. \\
-	%The \textbf{Point to Point} communication channel is used for delivering from the \textbf{Server} to the \textbf{Client} some notification about error's state.
+	The \textbf{PS Request Creator}, \textbf{TD Request Creator} and the \textbf{RESTful Service} are capable of handling connection errors without making the relevant systems crash. \\
+	%The internal software architecture of the \textbf{PS Web View} or \textbf{PS Application View} is built in order to catch exceptions and to handle them in a proper way. \\
+	%The \textbf{Point to Point} communication channel is used for delivering from the \textbf{Server} to the \textbf{Client} some notification about error's state. \\
 }
 
 \subsection{View Request and Reservations}
@@ -70,98 +72,105 @@ In this section are mapped all the functional requirements identified in the \te
 	\hline
 	FR15 &
 	%The system must ask a RP for cancel confirmation before actually canceling a taxi ride.
-	\textbf{PS Application View} and \textbf{PS Web View} handles this interface logic. \\
+	\textbf{PS Application View} and \textbf{PS Web View} handle this interface logic. \\
 	\hline
 	FR16 &
 	%A message must be displayed in place of an empty list in case there's not Taxi Request to display or in case the Taxi Reservations list is empty for a given RP.
-	\textbf{PS Application View} and \textbf{PS Web View} handles this interface logic. \\
+	\textbf{PS Application View} and \textbf{PS Web View} handle this interface logic. \\
 	\hline
 	FR17 &
 	%The system must peacefully handle a connection error and notify the user of the problem.
-	The \textbf{PS Request Creator} and the \textbf{RESTful Service} are capable of handling connection error problem without making the relevant systems crash. \\
+	The \textbf{PS Request Creator} and the \textbf{RESTful Service} are capable of handling connection errors without making the relevant systems crash. \\
 }
 
 \subsection{Handle Personal Profile}
 \reqTracTab{
 	FR18 & 
 	%The system must check the correctness of a RP's inserted data.
-	\\
+	This validation is done by the \textbf{Profile Manager}. \\
 	\hline
 	FR19 &
 	%The system must be coherent with the RP inserted data modification, if the modification goes fine.
-	\\
+	The \textbf{Profile Manager} uses the interfaces exposed by the \textbf{Query Manager} to guarantee so. \\
 	\hline
 	FR20 &
 	%The system must inform a RP about the result of his modification.
-	\\
+	This information is sent as a response to a profile modification request by the \textbf{RESTful Service} \\
 	\hline
 	FR21 &
 	%The system must peacefully handle a connection error and notify the user of the problem.
-	\\
+	The \textbf{PS Request Creator} and the \textbf{RESTful Service} are capable of handling connection errors without making the relevant systems crash. \\
 }
 
 \subsection{Taxi Reservation}
 \reqTracTab{
 	FR22 &
 	%The system must check the correctness of the RP's inserted data.
-	\\
+	This validation is done by the \textbf{Taxi Ride Manager}. \\
 	\hline
 	FR23 &
 	%The system must correctly handle internally the added taxi reservation.
-	\\
+	The \textbf{Taxi Ride Manager} uses the interfaces exposed by the \textbf{Query Manager} to guarantee so. \\
 	\hline
 	FR24 &
 	%The system must notify the RP about the result of his operation.
-	\\
+	This information is sent as a response to a Taxi Reservation request by the \textbf{RESTful Service} \\
 	\hline
 	FR25 &
 	%The system must peacefully handle a connection error and notify the user of the problem.
-	\\
+	The \textbf{PS Request Creator} and the \textbf{RESTful Service} are capable of handling connection errors without making the relevant systems crash. \\
 }
 
 \subsection{Taxi Request}
 \reqTracTab{
 		FR26 &
 		%The system must check the data inserted by a RP into the Request a Ride Page and notify the RP in case of problems.
-		The formal constraints of the \textbf{Taxi Request} are checked by the \textbf{Taxi Ride Manager}: this component has the responsability of checking the request details validity. If the request doesn't respect the constraints, than the \textbf{Taxi Ride Manger} has to inform the related \textbf{Passenger} of the failure. \\
+		Data validation is done by the \textbf{Taxi Ride Manager}. If the data don't respect the constraints, then the \textbf{Taxi Ride Manger} informs the related Passenger of the issue. \\
 		\hline
 		FR27 &
 		%The system must correctly handle internally a taxi ride that is successfully issued by a RP.
-		When a \textbf{Passenger} sends a \textbf{Taxi Ride} to \myTaxiService{} the \textbf{RESTful Service} handles the reception of it; than the \textbf{Taxi Ride Manager} handles the enriching of the \textbf{Taxi Ride} by adding the Zone of the \textbf{Starting Address}. In addition this component keeps the model updated by adding the ride to the persistent data layer. Later on the \textbf{Queue Manager} pools the ride from the \textbf{Model} and associates it with a \textbf{Taxi Driver}. In conclusion this component uses the \textbf{Dispatcher} for notifying the \textbf{Passenger} with notification message, containing the \textbf{Taxi Driver ID} and \textbf{Travel Time}. \\
+		When a Passenger sends a Taxi Ride request to \myTaxiService{}, the \textbf{RESTful Service} handles it.
+		Then the \textbf{Taxi Ride Manager} completes the \textbf{Taxi Ride} request by adding the Zone of the Starting Address.
+		In addition, this component keeps the model updated by adding the ride to the persistent data layer.
+		Later on the \textbf{Queue Manager} picks the ride from the Model and associates it to a Taxi Driver.
+		In conclusion this component uses the \textbf{Dispatcher} to notify the Passenger with notification message that contains the Taxi Driver ID and Travel Time. \\
 		\hline
 		FR28 &
 		%The RP must be notified about the result of his request.
-		Through the \textbf{Dispatcher} the users can be reached in every moment by notification messages. \\
+		Through the \textbf{Dispatcher}, users can be reached in every moment by notification messages. \\
 		\hline
 		FR29 &
 		%The system must peacefully handle a connection error and notify the user of the problem.
-		The internal software architecture of the \textbf{Taxi Ride Manager} is built in order to catch exceptions and to handle them in a proper way. 
-		The \textbf{Point to Point} communication channel is used for delivering some notification about error's state from the \textbf{Server} to the \textbf{Client}. \\
+		%The internal software architecture of the \textbf{Taxi Ride Manager} is built in order to catch exceptions and to handle them in a proper way. 
+		%The \textbf{Point to Point} communication channel is used for delivering some notification about error's state from the \textbf{Server} to the \textbf{Client}. \\
+		The \textbf{PS Request Creator}, the \textbf{PS Receiver}, the \textbf{RESTful Service} and the \textbf{Dispatcher} are capable of handling connection errors without making the relevant systems crash. \\
 }
 
 \subsection{Notify Problem}
 \reqTracTab{
 	FR30 &
 	%The system must offer the possibility to report a problem with a dedicated text area and a combo box to specify whether the problem is solvable without interrupting the taxi driver's work.
-	The \textbf{Taxi Driver Web and application View} is provided with a specific screen that allows the \textbf{Taxi Driver} to communicate the problems that he is facing with.
-	In addition the \textbf{Taxi Driver} must have the possibility of specifying the solubility of the problem. This data are sent to the \textbf{RESTful Service} in order to be processed by the \textbf{Taxi Driver Manager}. \\
+	The \textbf{TD Application View} is provided with a specific screen that allows the Taxi Driver to report a problem.
+	In addition, Taxi Driver has a chance to specify whether or not he can solve the given problem
+	These data are then sent to the \textbf{RESTful Service} in order to be processed by the \textbf{Taxi Driver Manager}. \\
 	\hline
 	FR31 &
 	%The system must be capable of automatically issuing a new taxi request for the passenger that is involved in a non solvable problem during his taxi ride.
-	\\
+	This task is done by the \textbf{Taxi Driver Manager}. \\
 	\hline
 	FR32 &
 	%The system must be capable of notifying Amy about the result of her problem reporting.
-	\\
+	This is sent a response to a Notify Problem request by the \textbf{RESTful Service}. \\
 	\hline
 	FR33 &
 	%The system must be capable of notifying Frank about the evolving of his automatically issued request.
-	\\
+	This is done by the \textbf{Taxi Driver Manager} via the \textbf{Dispatcher}. \\
 	\hline
 	FR34 &
 	%The system must peacefully handle a connection error and notify the user of the problem.
-	The internal software architecture of the \textbf{Taxi Driver Web or Application View} is built in order to catch exceptions and to handle them in a proper way. 
-	The \textbf{Point to Point} communication channel is used for delivering some notification about error's state from the \textbf{Server} to the \textbf{Client}. \\
+	%The internal software architecture of the \textbf{Taxi Driver Web or Application View} is built in order to catch exceptions and to handle them in a proper way. 
+	%The \textbf{Point to Point} communication channel is used for delivering some notification about error's state from the \textbf{Server} to the \textbf{Client}. \\
+	The \textbf{TD Request Creator}, the \textbf{TD Receiver}, the \textbf{RESTful Service} and the \textbf{Dispatcher} are capable of handling connection errors without making the relevant systems crash. \\
 }
 	
 \subsection{End of Ride}
