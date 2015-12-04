@@ -1,18 +1,17 @@
 \section{Specific requirements}
-This section contains the system requirements presented in a a level of detail sufficient to enable the design of such a system.\par
+This section contains the system requirements presented in a a level of detail sufficient to enable the design of such a system.
 These requirements have several properties: Correct, Unambiguous, Complete, Consistent, Ranked, Verifiable, Modifiable and Traceable.
 \subsection{External interface requirements}
-The software \myTaxiService{} provides several external interfaces, both software and hardware.\par
+The software \myTaxiService{} provides several external interfaces, both software and hardware.
 A detailed coverage over those interfaces requirements is given in the following subsections.
 \subsubsection{User interfaces}
-Three different graphical user interfaces are provided: two of them for both registered and non registered passengers and one for the taxi drivers.\par
-One of the two graphical interfaces provided for both kind of passengers is web based and uses web pages to present the content of a web application, and the other one is that of a smartphone application\par
-The GUI provided for taxi drivers is that of a smartphone application.\par
+Three different graphical user interfaces are provided: two of them for both registered and non registered passengers and one for the taxi drivers.
+One of the two graphical interfaces provided for both kind of passengers is web based and uses web pages to present the content of a web application, and the other one is that of a smartphone application.
+The GUI provided for taxi drivers is that of a smartphone application.
 No additional user interfaces are provided, not graphical nor textual.
-Below are provided the mockups of the  most significant features guaranteed by the application.\par
-Firstly are shown the screens of the passenger interface, putting beside the application and the web-application ones, with the aim of showing an example of the different space management. \par 
-\newpage
-\paragraph{Passenger mockups}
+Below are provided the mockups of the  most significant features guaranteed by the application.
+Firstly are shown the screens of the passenger interface, putting beside the application and the web-application ones, with the aim of showing an example of the different space management. 
+agraph{Passenger mockups}
 \begin{itemize}
 	\unbreakableItem{Homepage
 	\showRPMockupImage{Homepage}{\myTaxiService{} homepage.}}
@@ -32,7 +31,7 @@ Firstly are shown the screens of the passenger interface, putting beside the app
 	\showRPMockupImage{RegisteredPassengerHomePage3}{State 3 of RP home page.}}
 \end{itemize}
 \newpage
-\paragraph{Taxi Driver mockups}
+agraph{Taxi Driver mockups}
 \begin{itemize}
 	\unbreakableItem{Homepage
 	\showTDMockupImage{HomePageDriver}{TD homepage.}}
@@ -51,11 +50,10 @@ Firstly are shown the screens of the passenger interface, putting beside the app
 \end{itemize}
 
 \unbreakableBlock{\subsection{System Features}
-The system features are organized by use cases, so each subsection here represent a different use case for \myTaxiService{}.\par
+The system features are organized by use cases, so each subsection here represent a different use case for \myTaxiService{}.
 \subsubsection{UML Use Case Diagram}
 The use case considered are represented in this diagram: 
-\showUmlImage{UseCaseDiagram}{UML Use Case Diagram}}
-\newpage
+\showUmlImage{UseCaseDiagram}{UML Use Case Diagram}}\newpage
 \inputSystemFeature{registration}\newpage
 \inputSystemFeature{login}\newpage
 \inputSystemFeature{logout}\newpage
@@ -66,38 +64,26 @@ The use case considered are represented in this diagram:
 \inputSystemFeature{notify_problem}\newpage
 \inputSystemFeature{end_of_ride}\newpage
 \subsubsection{UML Class Diagram}
-\showUmlImage{ClassDiagram}{UML Class Diagram}
+\showUmlImage{ClassDiagram}{UML Class Diagram}\newpage
 \subsubsection{State Chart Diagram}
 \begin{itemize}
 	\itemBold{Taxi Driver State Chart}
-\par The state chart diagram proposed below has the aim of better explaining the different states in which the TD can be during the use of \myTaxiService{}. \par
-Moreover there are two particular states, "TD Not Able To Work Connection Error" and "TD Working Connection Error", that are included with the aim of better showing the software behavior when some unexpected problem occurs. \par
-In these cases TD is redirected to a login screen in which he remains till the problem is resolved(for example the connections returns up).\par 
-In particular the system is built to store and periodically update a session object in order to restore the application when TD logs in once the problem is resolved. \par 
+ The state chart diagram proposed below has the aim of better explaining the different states in which the TD can be during the use of \myTaxiService{}. 
+Moreover there are two particular states, "TD Not Able To Work Connection Error" and "TD Working Connection Error", that are included with the aim of better showing the software behavior when some unexpected problem occurs. 
+In these cases TD is redirected to a login screen in which he remains till the problem is resolved(for example the connections returns up). 
+In particular the system is built to store and periodically update a session object in order to restore the application when TD logs in once the problem is resolved.  
 In this way the login procedure  brings the TD exactly in the same state in which he was after the problem.
 \showUmlImage{TaxiDriverStateChartDiagram}{Taxi Driver State Chart Diagram}
 	\itemBold{Passenger Mockup State Chart}
-\par The state chart diagram proposed below is a complete description of the navigation into \myTaxiService{} application. \par In fact the mockups proposed in section [3.1.1] are not completely mapping this diagram.
+ The state chart diagram proposed below is a complete description of the navigation into \myTaxiService{} application.  In fact the mockups proposed in section [3.1.1] are not completely mapping this diagram.
 \showUmlImage{PassengerMockupStateChart}{Passenger Mockup State Chart Diagram}
 \end{itemize}
 \newpage
 \subsubsection{Alloy Model}
+In this section is presented an Alloy Model and its execution results.
+\alloyfile{./section_3/alloy/model.als}
+agraph{Alloy Model Execution Results}
 \begin{itemize}
-	\itemBold{Alloy Signatures}
-	\showAlloyImage{alloy_signatures_1}{Alloy Signature 1.}{0.4}
-	\showAlloyImage{alloy_signatures_2}{Alloy Signature 2.}{0.5}
-	\newpage
-	\itemBold{Alloy Facts}
-	\showAlloyImage{alloy_facts_1}{Alloy Facts 1.}{1}
-	\showAlloyImage{alloy_facts_2}{Alloy Facts 2.}{1}
-	\newpage
-	\itemBold{Alloy Assertions}
-	\showAlloyImage{alloy_assertions_1}{Alloy Assertions.}{1}
-	\itemBold{Alloy Predicates}
-	\showAlloyImage{alloy_predicates}{Alloy Predicate.}{0.6}
-	\newpage
-	\itemBold{Alloy Executions}
-	\showAlloyImage{alloy_executions}{Alloy Execution.}{0.5}
 	\itemBold{Alloy Console}
 	\showAlloyImage{alloy_console}{Alloy Console.}{0.9}
 	\newpage
@@ -112,21 +98,21 @@ In this way the login procedure  brings the TD exactly in the same state in whic
 	\newpage
 \end{itemize}
 \subsection{Performance requirements}
-In this subsection are specified the most important non functional requirement.\par
+In this subsection are specified the most important non functional requirement.
 \begin{itemize}
 	\item The system must perform every operation in less than 10 seconds.
 	\item The system must handle at least 1000 users and 400 taxi drivers connected at the same time.
 	\item The system must handle a number of Registered Passenger equals to 10 time the number of the taxi drivers in the town.
 \end{itemize}
 \subsubsection{Reliability}
-The service must be available 7 days a week 24 hours a day. \par The server must support parallel processing in order to guarantee a fast and continuous service.
+The service must be available 7 days a week 24 hours a day.  The server must support parallel processing in order to guarantee a fast and continuous service.
 \subsubsection{Availability}
 The service must be up with a probability of failure less than 0.01 percent and must be able to resist to 9 security attack out of 10.
 \subsubsection{Security}
-Internet connection must be encrypted with a recognized SSL certificate (HTTPS protocol). The handling of users data must be protected by SQL data stealing.\par Moreover the DBMS must guarantee a Serializable SQL isolation level.
+Internet connection must be encrypted with a recognized SSL certificate (HTTPS protocol). The handling of users data must be protected by SQL data stealing. Moreover the DBMS must guarantee a Serializable SQL isolation level.
 \subsubsection{Maintainability}
 The software must be build accompanied with proper documentation and it must comply with Model-View-Controller programming pattern. In fact using this pattern ensures great opportunities of extension.
 \subsubsection{Portability}
-The passengers web site must be capable of running on main consumer OS: OS X, Windows, Ubuntu.\par
-Moreover the user experience must be the same if the user decides to access the web site via IE, Opera, Chrome or Firefox.\par
+The passengers web site must be capable of running on main consumer OS: OS X, Windows, Ubuntu.
+Moreover the user experience must be the same if the user decides to access the web site via IE, Opera, Chrome or Firefox.
 In the case the passenger or the taxi driver uses the mobile application, the system must guarantee him the same features on Android and iOS.
