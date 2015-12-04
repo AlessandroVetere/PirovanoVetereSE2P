@@ -23,21 +23,23 @@
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
-\lstset{frame=tb,
-  language=Java,
-  aboveskip=3mm,
-  belowskip=3mm,
-  showstringspaces=false,
-  columns=flexible,
-  basicstyle={\small\ttfamily},
-  numbers=none,
-  numberstyle=\tiny\color{gray},
-  keywordstyle=\color{blue},
-  commentstyle=\color{dkgreen},
-  stringstyle=\color{mauve},
-  breaklines=true,
-  breakatwhitespace=true,
-  tabsize=3
+\newcommand{\configureJava}{
+	\lstset{frame=tb,
+		language=Java,
+		aboveskip=3mm,
+		belowskip=3mm,
+		showstringspaces=false,
+		columns=flexible,
+		basicstyle={\small\ttfamily},
+		numbers=none,
+		numberstyle=\tiny\color{gray},
+		keywordstyle=\color{blue},
+		commentstyle=\color{dkgreen},
+		stringstyle=\color{mauve},
+		breaklines=true,
+		breakatwhitespace=true,
+		tabsize=3
+	}
 }
 
 % There are many different themes available for Beamer. A comprehensive
@@ -125,7 +127,7 @@
 \AtBeginSection[]
 {
 	\begin{frame}<beamer>
-		\frametitle{Outline}
+		\frametitle{Outline - \insertsection}
 		\tableofcontents[currentsection]
 	\end{frame}
 }
@@ -143,6 +145,11 @@
 }
 
 \newcommand{\myTaxiService}[0]{\mbox{\emph{myTaxiService}}}
+\newcommand{\unbreakableBlock}[1]{
+	\begin{minipage}{\linewidth}% Following stays together
+		#1
+	\end{minipage}
+}
 \newcommand{\showPercentImage}[3]{
 	\begin{center}
 		\unbreakableBlock{
@@ -153,12 +160,5 @@
 		}
 	\end{center}
 }
+
 \newcommand{\showImage}[2]{\showPercentImage{#1}{#2}{1}}
-\newcommand{\showGeneralDiagram}[2]{\showPercentImage{./section_2/general_diagram_dd.png}{#1}{#2}}
-\newcommand{\showComponentDiagram}[2]{\showPercentImage{./section_2/component_diagram/component_diagram.png}{#1}{#2}}
-\newcommand{\showDeploymentDiagram}[2]{\showPercentImage{./section_2/deployment_diagram/deployment_diagram.png}{#1}{#2}}
-\newcommand{\showSequenceDiagram}[3]{\showPercentImage{./section_2/sequence_diagrams/#1_sequence_diagram.png}{#2}{#3}}
-\newcommand{\inputJava}[1]{\lstinputlisting{./section_3/java/src/mts/#1.java}}
-\newcommand{\showRPMockupImage}[2]{\showImage{../srs/section_3/mockups/png_passenger/#1.png}{#2}}
-\newcommand{\showTDMockupImage}[2]{\showPercentImage{../srs/section_3/mockups/png_driver/#1.png}{#2}{0.3}}
-\newcommand{\showAdminMockupImage}[2]{\showPercentImage{../dd/section_4/mockups/administrator_mockups/#1.png}{#2}{0.95}}
