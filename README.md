@@ -9,5 +9,5 @@ Project contributors:
  - Alessandro Vetere (Mat. 854865)
 
 Productions:
- - Requirement Analysis and Specification Document: [link](./Deliveries/RASD3.pdf)
- - Design Document: not yet available
+ - Requirement Analysis and Specification Document: [Link to PDF v1.2](./Deliveries/RASD/myTaxiService_RASD_v1.2_Pirovano_Vetere.pdf)
+ - Design Document: [Link to PDF v1.0](./Deliveries/DD/myTaxiService_DD_v1.0_Pirovano_Vetere.pdf)
