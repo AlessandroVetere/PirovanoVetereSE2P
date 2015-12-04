@@ -1,16 +1,15 @@
 \section{Requirements Traceability}
-%TODO Explain how the requirements you have defined in the RASD map into the design elements that you have defined in this document.
 In this section are mapped all the functional requirements identified in the \textbf{RASD}, grouped by the \textbf{Use Case} they refer to.
 
 \subsection{Registration}
 \reqTracTab{
-	FR1 and FR2 &
+	FR1, FR2 &
 	%A non registered passenger can register only once.
-	The registration constraints are handled by the \textbf{Profile Manager}: this component is in charge of creating and of modifying the user's profiles. Inside of it are checked either the duplication constraint or the validation data constraint. \\
+	The \textbf{Profile Manager} perform data validation and checks if the passenger is already registered to \myTaxiService{}. \\
 	\hline
 	FR3 &
 	%In no case can a registration process be resumed after browser or application closure.
-	The registration process is handled as atomic by the \textbf{Profile Manager}: if the registration process is stopped, there are no choices of resuming. \\
+	The registration process is handled as an atomic procedure by the \textbf{Profile Manager}: if the registration process is stopped, there are no choices of resuming. \\
 	\hline
 	FR4 &
 	%The system must acknowledge the non registered passenger whether the registration process ends successfully or fails.

@@ -1,16 +1,13 @@
 \section{Algorithm Design}
-%TODO Quando Finisce la ride, al tassista viene indicato in che zona si trova e gli viene quindi ordinato di spostarsi fisicamente nell'unico punto di ritrovo presente nella sua zona (i punti di ritrovo sono unici per ogni zona) -> VA NEL RASD O NEL DD? SE NEL DD DOVE?
 
 This section presents two of the most important algorithms used in \myTaxiService{} software system.
 The algorithms are reported with a level of detail that is enough high to give software developer a predefined route to follow when developing the system.
 
-%TODO Javadoc on interfaces
 \subsection{Taxi Rides Serving Management}
 In this subsection is presented some Java code that implements in a naive but meaningful way the algorithm that is used to handle the association of a Taxi Ride to a Taxi Driver.
 \subsubsection{Queue Manager}
 \inputJava{queue/QueueManager}
 
-%TODO Javadoc and algorithm explanation
 \subsection{Geolocation}
 This subsection presents a naive implementation of the algorithm used to associate a given GPS Data to a Zone, or to show that the GPS Data is not contained in the City.
 \subsubsection{Point}
