@@ -16,6 +16,8 @@
 
 \usepackage{listings}
 \usepackage{color}
+\usepackage{graphicx}
+\usepackage{caption}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -132,3 +134,22 @@
 }
 
 \newcommand{\myTaxiService}[0]{\mbox{\emph{myTaxiService}}}
+\newcommand{\showPercentImage}[3]{
+	\begin{center}
+		\unbreakableBlock{
+			\begin{center}
+				\includegraphics[width=#3\textwidth,keepaspectratio=true]{#1}
+				\captionof{figure}{#2}
+			\end{center}
+		}
+	\end{center}
+}
+\newcommand{\showImage}[2]{\showPercentImage{#1}{#2}{1}}
+\newcommand{\showGeneralDiagram}[2]{\showPercentImage{./section_2/general_diagram_dd.png}{#1}{#2}}
+\newcommand{\showComponentDiagram}[2]{\showPercentImage{./section_2/component_diagram/component_diagram.png}{#1}{#2}}
+\newcommand{\showDeploymentDiagram}[2]{\showPercentImage{./section_2/deployment_diagram/deployment_diagram.png}{#1}{#2}}
+\newcommand{\showSequenceDiagram}[3]{\showPercentImage{./section_2/sequence_diagrams/#1_sequence_diagram.png}{#2}{#3}}
+\newcommand{\inputJava}[1]{\lstinputlisting{./section_3/java/src/mts/#1.java}}
+\newcommand{\showRPMockupImage}[2]{\showImage{../srs/section_3/mockups/png_passenger/#1.png}{#2}}
+\newcommand{\showTDMockupImage}[2]{\showPercentImage{../srs/section_3/mockups/png_driver/#1.png}{#2}{0.3}}
+\newcommand{\showAdminMockupImage}[2]{\showPercentImage{../dd/section_4/mockups/administrator_mockups/#1.png}{#2}{0.95}}
