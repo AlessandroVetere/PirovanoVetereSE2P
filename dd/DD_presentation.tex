@@ -1,5 +1,6 @@
 \documentclass{../common/latex_classes/pdf_presentation}
 
+\newcommand{\itemBold}[1]{\item\textbf{#1:}}
 \newcommand{\showGeneralDiagram}[2]{\showPercentImage{./section_2/general_diagram_dd.png}{#1}{#2}}
 \newcommand{\showComponentDiagram}[2]{\showPercentImage{./section_2/component_diagram/component_diagram.png}{#1}{#2}}
 \newcommand{\showDeploymentDiagram}[2]{\showPercentImage{./section_2/deployment_diagram/deployment_diagram.png}{#1}{#2}}
@@ -24,48 +25,112 @@
 	\begin{frame}{Overview Diagram}
 		\showGeneralDiagram{Overview Diagram}{1.0}
 	\end{frame}
-	\begin{frame}{Overview Diagram - Explanation}
-	\end{frame}
-	
 	
 	\subsection{High level components and their interaction}
 	
 	\begin{frame}{High level components and their interaction}
+		The system has many distributed components: those will communicate with a \textbf{Client-Server} style and through \textbf{Point to Point} messaging system. 
+		\begin{itemize}
+			\item The \textbf{Client-Server} style is used in order to receive different requests (e.g. a Taxi Reservation request) from the many Clients connected to the Server to use the service. 
+			
+			\item The \textbf{Point to Point} bidirectional communication channel is made necessary to enable the Server the delivery of various messages and requests to the Clients:
+			\begin{itemize}
+				\item Generic notifications
+				\item Service messages
+				\item The request of serving a Taxi Ride
+				\item The request of an updating GPS Data.
+			\end{itemize}
+		\end{itemize}
 	\end{frame}
 	
 	\begin{frame}{Layers}
+		The software architecture that has been chosen follows the principles of the Model View Controller architectural pattern. 
+		
+		Therefore three main software components have been identified and those are:
+		\begin{itemize}
+			\item The Model
+			\item The View 
+			\item The Controller.
+		\end{itemize}
+		
+		\textbf{Model}, \textbf{View} and \textbf{Controller} are then mapped to three different relevant software Layers:
 	\end{frame}
 	
 	\begin{frame}{Layers - View}
+		The role of this Layer is the one of processing remote \textbf{Clients} commands, and convert them into requests addressed to the \textbf{Controller} layer, that is connected to the \textbf{View} through a communication facility (e.g. The Internet).
+		There exists four different types of View, each one designed specifically for the particular Client:
+		\begin{itemize}
+			\item Passenger Web View
+			\item Passenger Application View
+			\item Taxi Driver Application View
+			\item Administrator View
+		\end{itemize}
 	\end{frame}
 	
 	\begin{frame}{Layers - Controller}
+		This second Layer is composed itself of two families of components with specialized functionalities:
+		\begin{itemize}
+			\item \textbf{Networking Components Family:}
+			\begin{itemize}
+				\item Groups the software components that are involved in sending messages to the various Views, following the logic implements in the Business Components Family. 
+				\item Dispatches to the various business components.
+			\end{itemize}
+			\item \textbf{Business Components Family:} In this family are included all the software components that implement the system logic.
+			Their role is:
+			\begin{itemize}
+				\item Processing requests 
+				\item Generating either responses or asynchronous events.
+			\end{itemize}
+		\end{itemize}
 	\end{frame}
 	
-	\begin{frame}{Layers - View}
+	\begin{frame}{Layers - Model}
+		The third and last Layer is the \textbf{Model}: it should:
+		\begin{itemize}
+			\item Guarantee a high level interface to store and manage all the myTaxiService relevant data. 
+			\item It abstracts a \textbf{Relational Database} in a software component that is in direct connection with the \textbf{Controller}.
+		\end{itemize}
 	\end{frame}
 	
 	\begin{frame}{Tiers}
+		The system is divided in \textbf{four} different Tiers:
+		\begin{itemize}
+			\item \textbf{Clients:} The distributed clients of the application.
+			\item \textbf{Web Server:} A server that is in charge of dynamically generate web pages and of receiving requests through the web.
+			\item \textbf{Application Server:} This is the most important Tier of the system. Here are done all the logics and calculations that constitute the core part of myTaxiService.
+			\item \textbf{Database Server:} In this Tier it is hosted the Database that allows the service data persistence.
+		\end{itemize}
 	\end{frame}
 	
 	\subsection{Component View}
 	
 	\begin{frame}{Component View}
+		For better explaining the software modules we provided an \textbf{UML Component Diagram}: this diagram has the role of describing all the software component that interact inside every subsystem.
+		The identified subsystems are:
+		\begin{itemize}
+			\item \textbf{Passenger View}
+			\item \textbf{Controller}
+			\item \textbf{Model}
+		\end{itemize}
+
 	\end{frame}
 	
 	\subsection{Deployment View}
 		
 	\begin{frame}{Deployment View}
+		In this subsection is proposed a \textbf{UML Deployment Diagram} that shows how the software components are mapped into different Tiers that compose the system.
 	\end{frame}
 	
 	\subsection{Runtime View}
 		
 	\begin{frame}{Runtime View}
+		In this subsection is proposed a \textbf{UML Sequence Diagrams} that shows how the software components that compose the system interacts in order to deliver the requested functionality.
 	\end{frame}
 	
 	\subsection{Component Interfaces}
 		
 	\begin{frame}{Component Interfaces}
+		Being our system composed of different software components that need to interact together, several interfaces have been put among them. 
 	\end{frame}
 	
 	\subsection{Selected architectural styles and patterns}
