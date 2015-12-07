@@ -175,18 +175,63 @@
 	\subsection{Component Interfaces}
 		
 	\begin{frame}{Component Interfaces}
-		Being our system composed of different software components that need to interact together, several interfaces have been put among them. 
+		Being our system composed of different software components that need to interact together, several interfaces have been put among them.
+		%TODO Secondo me questa sezione va tolta, si parla una volta sola per tutte delle interfacce usando il UML Component Diagram e poi il UML Deployment Diagram.
 	\end{frame}
 	
 	\subsection{Selected architectural styles and patterns}
+	\begin{frame}{Selected architectural styles and patterns - MVC}
+		Several architectural styles and patterns were chosen in order to build \myTaxiService{} as a modern software.
+		The main pattern that was recursively adopted is the \textbf{Model View Controller} architectural pattern:
+		\begin{itemize}
+			\item \textbf{System Level:} All the clients that use \myTaxiService{} (i.e. the Passengers, the Taxi Drivers, and the Administrator) are seen as Views,
+			that following the Cocoa MVC pattern, are connected to a Controller,
+			the Web Server or the Application Server, that is itself connected to
+			the Model that is hosted on the Database Server.
+			\item \textbf{Client Level}
+			\item \textbf{Server Level}
+			\begin{itemize}
+				\item Web Server
+				\item Application Server
+				\item Database Server
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
 	
-	\begin{frame}{Selected architectural styles and patterns}
+	\begin{frame}{Selected architectural styles and patterns - Client-Server}
+		Alongside the \textbf{MVC} architectural pattern, also the \textbf{Client-Server} style is used for all the requests done by the various clients connected to the Web Server of \myTaxiService{}. The \textbf{Taxi Driver Application} and the \textbf{Passenger Application} can use a standardized \textbf{Client-Server} protocol via \textbf{HTTPS} that follows the principle of a \textbf{RESTful Service}. The \textbf{Administrator} application its connected via \textbf{RPC} to the \textbf{Web Server} and can perform more critical requests, like the registration of a new \textbf{Taxi Driver} into the system. It is required that the \textbf{Administrator} application opens a \textbf{RPC} connection to the \textbf{Web Server} to start the communication.
+	\end{frame}
+	
+	\begin{frame}{Selected architectural styles and patterns - Point to Point}
+		A \textbf{Point to Point} bidirectional messaging system is established between the \textbf{Clients} and the \textbf{Web Server} at the \textit{boot} of the client application. The client should explicitly request a connection to the server that is listening for clients' connections. It is the connection over \textbf{Web Socket} protocol that allows the \textbf{Web Server} to send asynchronous messages and requests to which the client can respond using the same channel. The main reasons why this protocol is used are sending a \textbf{Taxi Ride} proposal to a given \textbf{Taxi Driver}, that can either accept or deny the proposal, and allowing the server to ask the \textbf{Taxi Driver} an updated geolocation data.
+	\end{frame}
+	
+	\begin{frame}{Selected architectural styles and patterns - Conclusion}
+		The \textbf{Client-Server} style and \textbf{Point to Point} bidirectional messaging system are used to implement properly the \textbf{MVC} pattern in this three \textbf{Layers}, four \textbf{Tiers} system.
 	\end{frame}
 	
 	\subsection{Other design decisions}
 		
-	\begin{frame}{Other design decisions}
+	\begin{frame}{Other design decisions - HTTPS and Web Socket}
+		Several technologies have been chosen in order to best fit the needs of the system to be.
+		Not all the required functionalities of \myTaxiService{} are already mapped onto specific products because in those cases the choice done would matter less.
+		But for the cases in which a technology has already been proposed, it is because a clear design decision was mandatory.
+		As for the communication protocols between clients (excluded the Administrator client) and the server have been chosen:
+		\begin{itemize}
+			\itemBold{HTTPS} The secure version of \textbf{HTTP} was a mandatory choice as security and privacy concerns are of major importance nowadays.
+			\itemBold{Web Socket} This innovative socket technology has been chosen although is relatively new because it implements a full duplex socket communication channel using web technology and therefore using the port 80, which is in almost every case not blocked by any firewall.
+		\end{itemize}
 	\end{frame}
+	
+	
+	\begin{frame}{Other design decisions - Internet and Firewalls}
+		For what concerns the network reachability has been chosen to make discoverable only the Web Server through the assignment to it of a public IP.
+		All the other servers in \myTaxiService{} system should be reachable only within the enterprise network.
+		Between the \textbf{Web Server} and the external network is installed a firewall that controls all the incoming connections.
+		In particular it must accept only incoming \textbf{HTTPS} connections, \textbf{Web Socket} connections and \textbf{RPC} connections.
+		A firewall is also used to protected the Database Server from the \textbf{Application Server} in the unlikely case that the \textbf{Application Server} is attacked through the \textbf{Web Server} or the \textbf{Application Server} for some reasons stops working correctly and start behaving in a way that will damage the application \textbf{Model}.
+	\end{frame}
+	
 	
 	\section{Algorithm Design}
 	
