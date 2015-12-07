@@ -87,7 +87,7 @@
 	\begin{frame}{Layers - Model}
 		The third and last Layer is the \textbf{Model}: it should:
 		\begin{itemize}
-			\item Guarantee a high level interface to store and manage all the myTaxiService relevant data. 
+			\item Guarantee a high level interface to store and manage all the \myTaxiService{} relevant data. 
 			\item It abstracts a \textbf{Relational Database} in a software component that is in direct connection with the \textbf{Controller}.
 		\end{itemize}
 	\end{frame}
@@ -97,7 +97,7 @@
 		\begin{itemize}
 			\item \textbf{Clients:} The distributed clients of the application.
 			\item \textbf{Web Server:} A server that is in charge of dynamically generate web pages and of receiving requests through the web.
-			\item \textbf{Application Server:} This is the most important Tier of the system. Here are done all the logics and calculations that constitute the core part of myTaxiService.
+			\item \textbf{Application Server:} This is the most important Tier of the system. Here are done all the logics and calculations that constitute the core part of \myTaxiService{}.
 			\item \textbf{Database Server:} In this Tier it is hosted the Database that allows the service data persistence.
 		\end{itemize}
 	\end{frame}
@@ -105,26 +105,71 @@
 	\subsection{Component View}
 	
 	\begin{frame}{Component View}
-		For better explaining the software modules we provided an \textbf{UML Component Diagram}: this diagram has the role of describing all the software component that interact inside every subsystem.
-		The identified subsystems are:
+		Several components has been designed to provide all the functionalities needed for \myTaxiService{} to work.
+		Five mayor subsystems have been found:
 		\begin{itemize}
-			\item \textbf{Passenger View}
-			\item \textbf{Controller}
-			\item \textbf{Model}
+			\item Passenger View, Taxi Driver View, Taxi Driver Model
+			\item Controller
+			\item Model
 		\end{itemize}
-
+	\end{frame}
+	
+	
+	\begin{frame}{Component View - Diagram}
+		This diagram maps system features into different software components, and show how these components are divided in different subsystems.
+		\showComponentDiagram{UML Component Diagram}{0.475}
 	\end{frame}
 	
 	\subsection{Deployment View}
 		
 	\begin{frame}{Deployment View}
-		In this subsection is proposed a \textbf{UML Deployment Diagram} that shows how the software components are mapped into different Tiers that compose the system.
+		The best way found to deploy the software components identified into different machines, is to consider 7 (8 if considering the Google Server contacted to use Google Maps API) different nodes:
+		\begin{itemize}
+			\item Passenger Web Browser, Passenger Smartphone, Taxi Driver Smartphone, Administrator Workstation
+			\item Web Server
+			\item Application Server
+			\item Database Server
+		\end{itemize}
+	\end{frame}		
+		
+	\begin{frame}{Deployment View - Diagram}
+		The following diagram shows how software components are mapped into the physical system.
+		%TODO Collegamento GOOGLE SERVER <-> LOCATION MANAGER andrebbe reso un collegamento GOOGLE SERVER <-> WEB SERVER, per coerenza con quanto deciso di fare, cioè di avere solo il web server collegato ad internet
+		\showDeploymentDiagram{UML Deployment Diagram}{0.625}
 	\end{frame}
 	
 	\subsection{Runtime View}
 		
 	\begin{frame}{Runtime View}
-		In this subsection is proposed a \textbf{UML Sequence Diagrams} that shows how the software components that compose the system interacts in order to deliver the requested functionality.
+		In this subsection are proposed the most meaningful \textbf{UML Sequence Diagrams} to show how software components interacts in order to deliver a specific functionality.
+		These functionalities are:
+		\begin{itemize}
+			\item Taxi Driver Registration (done by an Administrator)
+			\item Passenger Login
+			\item Handling of a new Taxi Ride (2 diagrams)
+			%TODO Il diagramma è mega complesso. Mettiamo o glissiamo?
+			\item Update of Taxi Drivers' positions
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Taxi Driver Registration}
+		\showSequenceDiagram{admin_td_reg}{UML Sequence Diagram}{0.7}
+	\end{frame}
+	
+	\begin{frame}{Passenger Login}
+		\showSequenceDiagram{ps_login}{UML Sequence Diagram}{0.7}
+	\end{frame}
+	
+	\begin{frame}{Handling of a new Taxi Ride - 1/2}
+		\showSequenceDiagram{taxi_ride_arrived_handling}{UML Sequence Diagram}{0.2}
+	\end{frame}
+	
+	\begin{frame}{Handling of a new Taxi Ride - 2/2}
+		\showSequenceDiagram{tr_timer_expired}{UML Sequence Diagram}{0.8}
+	\end{frame}
+	
+	\begin{frame}{Update of Taxi Drivers' positions}
+		\showSequenceDiagram{td_position_association}{UML Sequence Diagram}{0.2}
 	\end{frame}
 	
 	\subsection{Component Interfaces}
