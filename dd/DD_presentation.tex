@@ -270,22 +270,22 @@
 	
 	\section{User Interface Design}
 	
-	\subsection{UI Design}
+	\subsection{GUI Design}
 	
-	\begin{frame}{UI Design}
-		In this section we provide the \textbf{most important an meaningful mockups} for every class of screen we have designed.
-		In particular we provided \textbf{three classes} of UI:
+	\begin{frame}{GUI Design}
+		In this section we provide the \textbf{most important and meaningful mockups} for every class of screens we have designed.
+		In particular we identified \textbf{three classes} of graphical user interfaces:
 		\begin{itemize}
-			\itemBold {Passenger Mockups} this UI can be both Web based and Mobile Application based.
-			\itemBold {Taxi Driver Mockups}
-			\itemBold {Administrator Mockups}
+			\itemBold {Passenger Mockups} both Web based and Mobile Application based.
+			\itemBold {Taxi Driver Mockups} only Mobile Application based.
+			\itemBold {Administrator Mockups} only Desktop Application based.
 		\end{itemize}
 	\end{frame}
 
 	\subsection{Passenger Mockups}
 	\begin{frame}{Passenger Mockups}
-		Below we will show the \textbf{sequence of the graphical states} that the application has to \textbf{render} in order to \textbf{create} and \textbf{handle} a Taxi Ride.
-		Going deep, once logged in, the \textbf{Registered Passenger} will be redirected in the personal \textbf{Home page}: here he/she will be able to request or reserve e \textbf{Taxi Ride} and manage his/her personal profile.
+		Below will be shown the \textbf{sequence of graphical states} that the application has to \textbf{render} in order to \textbf{create} and \textbf{handle} a Taxi Ride.
+		Once logged in, the \textbf{Registered Passenger} will be redirected in his/her personal \textbf{Home page}, where he/she will be able to request or reserve a \textbf{Taxi Ride} and manage his/her personal profile.
 	\end{frame}
 	
 	\begin{frame} {Passenger Mockups - Overview}
@@ -298,14 +298,14 @@
 			\item Throw away a selected Ride
 		\end{itemize}
 		By clicking the \textbf{"Request a ride"} and \textbf{"Reserve a ride"} buttons the user is allowed to perform the relative actions.\\
-		\textbf{Once requested a ride, the "Request a ride" button has to be disabled, in order to prevent multiple requests.}
+		\textbf{Once requested a ride, the "Request a ride" button is disabled, in order to prevent multiple useless requests.}
 	\end{frame}
 	
 	\begin{frame} {Passenger Mockups - Personal Homepage}
-		This is an example of the \textbf{Registered Passenger}' \textbf{Home page}. The screen is divided in two parts:
+		This is an example of the \textbf{Registered Passenger}'s \textbf{Home page}. The screen is divided in two parts:
 		\begin{itemize}
-			\item The \textbf{left} one dedicated to contain the \textbf{Taxi Requests}
-			\item The \textbf{right} one dedicated to contain the \textbf{Taxi Reservations}
+			\item The \textbf{left} one contains \textbf{Taxi Requests}
+			\item The \textbf{right} one contains \textbf{Taxi Reservations}
 		\end{itemize} 
 		\showRPMockupImage{RegisteredPassengerHomePage}{Empty RP home page.}{0.65}
 	\end{frame}
@@ -319,7 +319,7 @@
 	\end{frame}
 	
 	\begin{frame} {Passenger Mockups - Personal Homepage with \textbf{Taxi Rides}}
-		Below is shown a common \textbf{Application State} with one \textbf{Taxi Request} and one \textbf{Taxi Reservation}. 
+		Below is shown a common \textbf{state} with one \textbf{Taxi Request} active and one \textbf{Taxi Reservation} booked. 
 		Through the trash icon the user is allowed to cancel a selected \textbf{Taxi Ride}.
 		\showRPMockupImage{RegisteredPassengerHomePage2}{Populated RP home page.}{0.75}
 	\end{frame}
@@ -327,7 +327,7 @@
 	\subsection{Taxi Driver Mockups}
 	
 	\begin{frame}{Taxi Driver Mockups}
-		Below we will show \textbf{the sequence of the graphical states} that the application has to \textbf{render} in order to make the \textbf{Taxi Driver} able to \textbf{handle} a \textbf{Taxi Ride}.
+		Below will be shown \textbf{the sequence of the graphical states} that the application has to \textbf{render} in order to make the \textbf{Taxi Driver} able to \textbf{handle} a \textbf{Taxi Ride}.
 	\end{frame}
 	
 	\begin{frame} {Taxi Driver Mockups - Overview}
@@ -338,33 +338,34 @@
 		\end{itemize}
 		When the system sends a \textbf{Taxi Ride} to a specific \textbf{Taxi Driver}, it is placed in the \textbf{Pending Requests} space.
 		Here the \textbf{Taxi Rider} can accept or deny it. 
-		If is accepted the \textbf{Taxi Request} is moved from the previous to the second space.
-		Once the ride is finished, the \textbf{Taxi Driver} has to push the \textbf{Notify End Of Ride} button, in order to notify the system to store and close the ride.
-		Through the \textbf{Report Problem} button, the \textbf{Taxi Driver} has the possibility, \textit{in every moment of his/her working time}, to signal an accident or a problem. In order to better handling the problem, the \textbf{Taxi Driver} is asked to \textbf{signal} if the problem is solvable or not.
+		If it is accepted the \textbf{Taxi Request} is moved from the previous to the second space.
+		Once the ride is finished, the \textbf{Taxi Driver} has to push the \textbf{Notify End Of Ride} button, in order to notify the system the ending of the given ride.
+		Through the \textbf{Report Problem} button, the \textbf{Taxi Driver} has the possibility, \textit{in every moment of his/her working time}, to signal an accident or a problem.
+		In order to better handle the problem, the \textbf{Taxi Driver} is asked to \textbf{signal} if the problem is solvable or not.
 		\begin{itemize}
-			\item If it is solvable, the system \textbf{doesn't assign} a new \textbf{Taxi Driver}.
-			\item If it is not solvable, the system \textbf{assigns} the incompleted ride to the next \textbf{Taxi Driver} in the \textbf{Zone Queue}.
+			\item If it is solvable, then the system \textbf{does not assign} a new \textbf{Taxi Driver}.
+			\item If it is not solvable, then the system \textbf{assigns} the incomplete ride to the next \textbf{Taxi Driver} in the \textbf{Zone Queue}.
 		\end{itemize}
 	\end{frame}
 	
 	\begin{frame} {Taxi Driver Mockups - No Requests}
-		\showTDMockupImage{TaxiDriverScreen3}{Taxi Driver' Homepage without pending \textbf{Taxi Requests}.}{0.2}
+		\showTDMockupImage{TaxiDriverScreen3}{Taxi Driver Homepage without pending \textbf{Taxi Requests}.}{0.2}
 	\end{frame}
 	
 	\begin{frame} {Taxi Driver Mockups - A Pending Request}
-		\showTDMockupImage{TaxiDriverScreen1}{Taxi Driver' Homepage with a \textbf{PENDING} \textbf{Taxi Request}.}{0.2}
+		\showTDMockupImage{TaxiDriverScreen1}{Taxi Driver Homepage with a \textbf{PENDING} \textbf{Taxi Request}.}{0.2}
 	\end{frame}
 	
-	\begin{frame} {Taxi Driver Mockups - A Serving Request}
-		\showTDMockupImage{TaxiDriverScreen2}{Taxi Driver' Homepage with a \textbf{SERVING} \textbf{Taxi Request}.}{0.2}
+	\begin{frame} {Taxi Driver Mockups - A Active Request}
+		\showTDMockupImage{TaxiDriverScreen2}{Taxi Driver Homepage with an \textbf{ACTIVE} \textbf{Taxi Request}.}{0.2}
 	\end{frame}
 	
 	\subsection{Administrator Mockups}
 	
 	\begin{frame}{Administrator Mockups}
-		The system architecture does not admit the usage of a textual "working" interface (e.g. a CLI). 
-		For this reason we decided to \textbf{provide the administrator of a thin desktop interface}.
-		Consequently the administrator can perform his actions both using a different channel from the normal application access, and using a intuitive an lightweight UI.
+		The system architecture does not admit the usage of a textual interface (e.g. a CLI). 
+		For this reason we decided to \textbf{provide a thin desktop interface to the Administrator}.
+		Thus, the Administrator can perform his actions using an intuitive, fast, and lightweight GUI.
 		\showAdminMockupImage{admin_mockup_1}{Example of an Administrator screen.}{0.5}
 	\end{frame}
 	
