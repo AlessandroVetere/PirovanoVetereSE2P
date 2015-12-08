@@ -70,7 +70,7 @@ public class QueueManager {
 
 		// This means that no suitable Taxi Driver has been found
 		if (taxiDriver == null) {
-			// Need To reinsert the Taxi Ride in the pending list
+			// Need to reinsert the Taxi Ride in the pending list
 			queryManager.insertTaxiRide(taxiRide);
 			return;
 		}
