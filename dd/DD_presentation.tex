@@ -88,11 +88,12 @@
 		The third and last Layer is the \textbf{Model}. It:
 		\begin{itemize}
 			\item Guarantees a high level interface to store and manage all the \myTaxiService{} relevant data.
-			\item Abstracts a \textbf{Relational Database} in a software component that is in direct connection with the \textbf{Controller} (Model Query Service in our UML Component Diagram proposed in a next section).
+			\item Abstracts a \textbf{Relational Database} in a software component that is in direct connection with the \textbf{Controller}
+			%(Model Query Service in our UML Component Diagram proposed in a next section).
 		\end{itemize}
 		
 		It has the responsibility of \textbf{receiving} and \textbf{handling} all the model updating needs of the \textbf{Business Components}. 
-		Moreover it has to guarantee \textbf{parallelism} and \textbf{high execution speed}.
+		%Moreover it has to guarantee \textbf{parallelism} and \textbf{high execution speed}.
 	\end{frame}
 	
 	\begin{frame}{Tiers}
@@ -109,25 +110,25 @@
 	
 	\begin{frame}{Component View}
 		Several components has been designed to provide all the functionalities needed for \myTaxiService{} to work.
-		\textbf{Five} mayor subsystems have been found:
+		\textbf{Five} mayor subsystems have been identified:
 		\begin{itemize}
 			\item Passenger View, Taxi Driver View, Administrator View
 			\item Controller
 			\item Model
 		\end{itemize}
-		Through this diagram we can see clearly the \textbf{Layers organization} and the \textbf{MVC implementation}.
 	\end{frame}
 	
 	
 	\begin{frame}{Component View - Diagram}
 		This diagram maps system \textbf{features into different software components}, and show \textbf{how these components interact} in order to \textbf{deliver the required functionalities}.
-		\showComponentDiagram{UML Component Diagram}{0.425}
+		It helps showing \textbf{Layers organization} and the \textbf{MVC implementation}.
+		\showComponentDiagram{UML Component Diagram}{0.4}
 	\end{frame}
 	
 	\subsection{Deployment View}
 		
 	\begin{frame}{Deployment View}
-		The best way found to deploy the software components identified into different machines, is to consider 7 (8 if considering the Google Server contacted to use Google Maps API) different nodes:
+		The best way found to \textbf{deploy} the software components identified, is to consider \textbf{7 different nodes} (8 if considering the Google Server contacted to use Google Maps API):
 		\begin{itemize}
 			\item Passenger Web Browser, Passenger Smartphone, Taxi Driver Smartphone, Administrator Workstation
 			\item Web Server
@@ -137,26 +138,26 @@
 	\end{frame}		
 		
 	\begin{frame}{Deployment View - Diagram}
-		The following diagram shows how software components are mapped into the physical system.
+		The following diagram shows how \textbf{software components} are mapped into the \textbf{physical system}.
 		\showDeploymentDiagram{UML Deployment Diagram}{0.3}
 	\end{frame}
 	
 	\subsection{Runtime View}
 		
 	\begin{frame}{Runtime View}
-		In this subsection are proposed some of the most meaningful \textbf{UML Sequence Diagrams} to show how software components interacts in order to deliver a specific functionality.
+		In this subsection are proposed some of the most meaningful \textbf{UML Sequence Diagrams} with respect to show how software components interacts in order to deliver a specific functionality.
 		The chosen functionalities are:
 		\begin{itemize}
 			\item Taxi Driver Registration (done by an Administrator)
 			\item Handling of a Taxi Reservation (done by the Taxi Ride Manager)
 		\end{itemize}
-		There are other functionalities which \textbf{UML Sequence Diagram} is not reported here for space and time constraints:
+		There are other functionalities whose \textbf{UML Sequence Diagram} is not reported here for space and time constraints:
 		\begin{itemize}
 			\item Passenger Login
 			\item Passenger Registration
 			\item Queue Management
-			\item Taxi Driver Report Problem
 			\item Taxi Ride Request Handling
+			\item Taxi Driver Report Problem
 			\item Taxi Driver Position Update
 		\end{itemize}
 	\end{frame}
@@ -186,7 +187,7 @@
 	\end{frame}
 	
 	\begin{frame}{Selected architectural styles and patterns - Client-Server}
-		Alongside the \textbf{MVC} architectural pattern, also the \textbf{Client-Server} style is used for all the requests done by the various clients connected to the Web Server of \myTaxiService{}.
+		The \textbf{Client-Server} style is used for all the requests done by the various clients connected to the Web Server of \myTaxiService{}.
 		The \textbf{Taxi Driver Application} and the \textbf{Passenger Application} can use a standardized \textbf{Client-Server} protocol via \textbf{HTTPS} that follows the principle of a \textbf{RESTful Service}.
 		The \textbf{Administrator} application its connected via \textbf{RPC} to the \textbf{Web Server} and can perform more critical requests, like the registration of a new \textbf{Taxi Driver} into the system.
 		It is required that the \textbf{Administrator} application opens a \textbf{RPC} connection to the \textbf{Web Server} to start the communication.
@@ -218,11 +219,11 @@
 	
 	
 	\begin{frame}{Other design decisions - Internet and Firewalls}
-		For what concerns the network reachability has been chosen to make discoverable only the Web Server through the assignment to it of a public IP.
-		All the other servers in \myTaxiService{} system should be reachable only within the enterprise network.
+		For what concerns the network reachability has been chosen to make discoverable only the Web Server assigning it a public IP.
+		All the other servers in \myTaxiService{} system are reachable only within the enterprise network.
 		Between the \textbf{Web Server} and the external network is installed a firewall that controls all the incoming connections.
 		In particular it must accept only incoming \textbf{HTTPS} connections, \textbf{Web Socket} connections and \textbf{RPC} connections.
-		A firewall is also used to protected the Database Server from the \textbf{Application Server} in the unlikely case that the \textbf{Application Server} is attacked through the \textbf{Web Server} or the \textbf{Application Server} for some reasons stops working correctly and start behaving in a way that will damage the application \textbf{Model}.
+		A firewall is also used to protected the \textbf{Database Server} from the \textbf{Application Server} in the unlikely case that the \textbf{Application Server} is attacked through the \textbf{Web Server} or the \textbf{Application Server} for some reasons stops working correctly and start behaving in a way that will damage the application \textbf{Model}.
 	\end{frame}
 	
 	
@@ -231,7 +232,7 @@
 	\subsection{Queue Management}
 	\configureJava{}
 	\begin{frame}{Queue Management}
-		What will follow are slides containing Java methods that should explain how is managed the association of a Taxi Ride to an Available Taxi Driver, and how that Taxi Driver is found.
+		What will follow are slides containing algorithms (in form of Java methods, without loss of generality) that explain how the association of a Taxi Ride to an Available Taxi Driver is managed, and how that specific Taxi Driver is found.
 	\end{frame}
 	
 	\begin{frame}{Queue Management - Manage Taxi Ride}
@@ -246,8 +247,8 @@
 	\subsection{Geolocation}
 	
 	\begin{frame}{Geolocation - A First Approach}
-		Also, another interesting design choice that has been made concerns the way in which the \textbf{GPS coordinates} obtained from a given \textbf{Taxi Driver} are mapped into a specific \textbf{Zone}.
-		It could have been possible, but not feasible, to do such a thing:
+		Another interesting design choice that has been made concerns the way in which the \textbf{GPS coordinates} obtained from a given \textbf{Taxi Driver} are mapped into a specific \textbf{Zone}.
+		It could have been possible, to do such a thing:
 		\begin{enumerate}
 			\item Obtain \textbf{GPS Data} via \textbf{Web Socket} from the selected \textbf{Taxi Driver}.
 			\item Calculate the nearest \textbf{Address} of the given \textbf{GPS Data} using \textbf{Google Maps HTTPS API}.
@@ -258,14 +259,13 @@
 
 	\begin{frame}{Geolocation - The Chosen Approach}
 		A less heavy weight solution has been found: this solution expects every \textbf{Zone} of the \textbf{City} to be divided in several convex \textbf{Polygons}, for instance \textbf{Triangles}, that have interesting properties for our application.
-		The polygonal shape of the \textbf{Zone} can be decomposed in a finite number of \textbf{Triangles}.
-		In \myTaxiService{} \textbf{Zones} of regular shape are intended to be used, and therefore the number of \textbf{Triangles} in which a \textbf{Zone} will be decomposed is very limited.
-		So such a flow is followed:
+		In \myTaxiService{}, \textbf{Zones} of regular shape are intended to be designed, and therefore the number of \textbf{Triangles} in which a \textbf{Zone} should be decomposed is very limited.
+		So, such a flow is followed:
 		\begin{enumerate}
-			\item Obtain \textbf{GPS Data} via \textbf{Web Socket} from the selected Taxi Driver
-			\item For each \textbf{Zone}, check if the the \textbf{Point} that the \textbf{Longitude} and \textbf{Latitude} from \textbf{GPS Data} identify is contained inside any \textbf{Triangle} in which the \textbf{Zone} is divided. If that is true, that the \textbf{Zone} is found. If that is false, then another \textbf{Zone} could contain the given Point. If no \textbf{Zone} contains the Point, then we can assume that the \textbf{Point} refers to \textbf{GPS Data} that locate a geographical point outside of the \textbf{City}.
+			\item Obtain \textbf{GPS Data} via \textbf{Web Socket} from the selected \textbf{Taxi Driver}
+			\item For each \textbf{Zone}, check if the the \textbf{Point} that the \textbf{Longitude} and \textbf{Latitude} from \textbf{GPS Data} identify is contained inside any \textbf{Triangle} in which the \textbf{Zone} is divided. If it is so, then the \textbf{Zone} is found. If that's not the case, then another \textbf{Zone} could contain the given Point. If no \textbf{Zone} contains the Point, then we can assume that the \textbf{Point} refers to \textbf{GPS Data} that identify a geographical point outside of the \textbf{City}.
 		\end{enumerate}
-		The computation of the \textbf{Point in Triangle} test is simple and efficient using barycentric coordinates.
+		The computation of the \textbf{Point in Triangle} test is simple and efficient (e.g. using barycentric coordinates).
 	\end{frame}
 	
 	\section{User Interface Design}
@@ -284,7 +284,7 @@
 
 	\subsection{Passenger Mockups}
 	\begin{frame}{Passenger Mockups}
-		Below will be shown the \textbf{sequence of graphical states} that the application has to \textbf{render} in order to \textbf{create} and \textbf{handle} a Taxi Ride.
+		In the following slides are shown \textbf{sequence of graphical states} that the application has to \textbf{render} in order to \textbf{create} and \textbf{handle} a Taxi Ride.
 		Once logged in, the \textbf{Registered Passenger} will be redirected in his/her personal \textbf{Home page}, where he/she will be able to request or reserve a \textbf{Taxi Ride} and manage his/her personal profile.
 	\end{frame}
 	
@@ -311,7 +311,7 @@
 	\end{frame}
 	
 	\begin{frame} {Passenger Mockups - Request a Ride}
-			\showRPMockupImage{RequestTaxi}{Taxi request.}{0.9}
+		\showRPMockupImage{RequestTaxi}{Taxi request.}{0.9}
 	\end{frame}
 	
 	\begin{frame} {Passenger Mockups - Reserve a Ride}
@@ -327,7 +327,7 @@
 	\subsection{Taxi Driver Mockups}
 	
 	\begin{frame}{Taxi Driver Mockups}
-		Below will be shown \textbf{the sequence of the graphical states} that the application has to \textbf{render} in order to make the \textbf{Taxi Driver} able to \textbf{handle} a \textbf{Taxi Ride}.
+		In the following slides are shown \textbf{the sequence of the graphical states} that the application has to \textbf{render} in order to make the \textbf{Taxi Driver} able to \textbf{handle} a \textbf{Taxi Ride}.
 	\end{frame}
 	
 	\begin{frame} {Taxi Driver Mockups - Overview}
