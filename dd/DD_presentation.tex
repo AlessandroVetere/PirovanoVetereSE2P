@@ -20,21 +20,17 @@
 	\titleToc{}
 	\section{Architectural Design}
 	
-	\subsection{Overview}
-	
-	\begin{frame}{Overview Diagram}
-		\showGeneralDiagram{Overview Diagram}{1.0}
-	\end{frame}
-	
 	\subsection{High level components and their interaction}
 	
 	\begin{frame}{High level components and their interaction}
-		The system has many distributed components: those will communicate with a \textbf{Client-Server} style and through \textbf{Point to Point} messaging system. 
+		The system we designed is composed by many distributed components: those will communicate with a \textbf{Client-Server} style and through \textbf{Point to Point} messaging system. 
 		\begin{itemize}
 			\item The \textbf{Client-Server} style is used in order to receive different requests (e.g. a Taxi Reservation request) from the many Clients connected to the Server to use the service. 
 			
+			\item The \textbf{Client-Server} style is used to give the the many Clients connected to the Server the opportunity of sending different requests (e.g. a \textbf{Taxi Ride Reservation} or \textbf{Taxi Ride Request}).
 			\item The \textbf{Point to Point} bidirectional communication channel is made necessary to enable the Server the delivery of various messages and requests to the Clients:
 			\begin{itemize}
+				%TODO un esempio per ogni item (e.g. ...)
 				\item Generic notifications
 				\item Service messages
 				\item The request of serving a Taxi Ride
@@ -44,7 +40,7 @@
 	\end{frame}
 	
 	\begin{frame}{Layers}
-		The software architecture that has been chosen follows the principles of the Model View Controller architectural pattern. 
+		The selected software architecture follows the principles of the \textbf{Model View Controller} architectural pattern. 
 		
 		Therefore three main software components have been identified and those are:
 		\begin{itemize}
@@ -58,7 +54,7 @@
 	
 	\begin{frame}{Layers - View}
 		The role of this Layer is the one of processing remote \textbf{Clients} commands, and convert them into requests addressed to the \textbf{Controller} layer, that is connected to the \textbf{View} through a communication facility (e.g. The Internet).
-		There exists four different types of View, each one designed specifically for the particular Client:
+		We imagine four different types of View, each one designed specifically to access \myTaxiService{} system in a different way and by a different kind of users:
 		\begin{itemize}
 			\item Passenger Web View
 			\item Passenger Application View
@@ -68,19 +64,20 @@
 	\end{frame}
 	
 	\begin{frame}{Layers - Controller}
-		This second Layer is composed itself of two families of components with specialized functionalities:
+		This second Layer is conceptually splitted in three families of components with specialized functionalities:
 		\begin{itemize}
 			\item \textbf{Networking Components Family:}
 			\begin{itemize}
-				\item Groups the software components that are involved in sending messages to the various Views, following the logic implements in the Business Components Family. 
-				\item Dispatches to the various business components.
+				\item Groups the \textbf{Communication Components} that are involved in sending messages to the various Views, following the logic implements in the Business Components Family. 
+				\item Dispatches a particular request to the relative \textbf{Business Managing Component}.
 			\end{itemize}
 			\item \textbf{Business Components Family:} In this family are included all the software components that implement the system logic.
 			Their role is:
 			\begin{itemize}
 				\item Processing requests 
-				\item Generating either responses or asynchronous events.
+				\item Generating either \textbf{synchronous responses} (e.g registration or login procedure) or \textbf{asynchronous events} (e.g adding a \textbf{Taxi Ride} and sending a \textbf{Taxi Driver}).
 			\end{itemize}
+			\item \textbf{Query Manager} It has the responsibility of \textbf{receiving} and \textbf{handling} all the model updating needs of the \textbf{Business Components}. Moreover it has to guarantee \textbf{parallelism} and \textbf{execution speed}.
 		\end{itemize}
 	\end{frame}
 	
@@ -88,7 +85,7 @@
 		The third and last Layer is the \textbf{Model}: it should:
 		\begin{itemize}
 			\item Guarantee a high level interface to store and manage all the \myTaxiService{} relevant data. 
-			\item It abstracts a \textbf{Relational Database} in a software component that is in direct connection with the \textbf{Controller}.
+			\item Abstract a \textbf{Relational Database} in a software component that is in direct connection with the \textbf{Controller} (e.g Model Query Service).
 		\end{itemize}
 	\end{frame}
 	
@@ -100,6 +97,12 @@
 			\item \textbf{Application Server:} This is the most important Tier of the system. Here are done all the logics and calculations that constitute the core part of \myTaxiService{}.
 			\item \textbf{Database Server:} In this Tier it is hosted the Database that allows the service data persistence.
 		\end{itemize}
+	\end{frame}
+	
+	\subsection{Overview Diagram}
+		
+	\begin{frame}{Overview Diagram}
+		\showGeneralDiagram{Overview Diagram}{1.0}
 	\end{frame}
 	
 	\subsection{Component View}
@@ -170,13 +173,6 @@
 	
 	\begin{frame}{Update of Taxi Drivers' positions}
 		\showSequenceDiagram{td_position_association}{UML Sequence Diagram}{0.575}
-	\end{frame}
-	
-	\subsection{Component Interfaces}
-		
-	\begin{frame}{Component Interfaces}
-		Being our system composed of different software components that need to interact together, several interfaces have been put among them.
-		%TODO Secondo me questa sezione va tolta, si parla una volta sola per tutte delle interfacce usando il UML Component Diagram e poi il UML Deployment Diagram.
 	\end{frame}
 	
 	\subsection{Selected architectural styles and patterns}
