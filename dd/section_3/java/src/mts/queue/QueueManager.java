@@ -64,7 +64,7 @@ public class QueueManager {
 		return null;
 	}
 
-	private final void manageTaxiRide(TaxiRide taxiRide) {
+	private void manageTaxiRide(TaxiRide taxiRide) {
 		// This method call searches for a suitable Taxi Driver
 		TaxiDriver taxiDriver = getTaxiDriver(taxiRide.getStartingZone());
 
