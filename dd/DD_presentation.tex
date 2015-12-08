@@ -23,10 +23,8 @@
 	\subsection{High level components and their interaction}
 	
 	\begin{frame}{High level components and their interaction}
-		The system we designed is composed by many distributed components: those will communicate with a \textbf{Client-Server} style and through \textbf{Point to Point} messaging system. 
+		The system is composed by many \textbf{distributed} components: those will communicate with a \textbf{Client-Server} style and through \textbf{Point to Point} messaging system. 
 		\begin{itemize}
-			\item The \textbf{Client-Server} style is used in order to receive different requests (e.g. a Taxi Reservation request) from the many Clients connected to the Server to use the service. 
-			
 			\item The \textbf{Client-Server} style is used to give the the many Clients connected to the Server the opportunity of sending different requests (e.g. a \textbf{Taxi Ride Reservation} or \textbf{Taxi Ride Request}).
 			\item The \textbf{Point to Point} bidirectional communication channel is made necessary to enable the Server the delivery of various messages and requests to the Clients:
 			\begin{itemize}
