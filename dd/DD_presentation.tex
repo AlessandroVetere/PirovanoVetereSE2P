@@ -28,7 +28,6 @@
 			\item The \textbf{Client-Server} style is used to give the the many Clients connected to the Server the opportunity of sending different requests (e.g. a \textbf{Taxi Ride Reservation} or \textbf{Taxi Ride Request}).
 			\item The \textbf{Point to Point} bidirectional communication channel is made necessary to enable the Server the delivery of various messages and requests to the Clients:
 			\begin{itemize}
-				%TODO un esempio per ogni item (e.g. ...)
 				\item Generic notifications
 				\item Service messages
 				\item The request of serving a Taxi Ride
@@ -109,7 +108,7 @@
 		Several components has been designed to provide all the functionalities needed for \myTaxiService{} to work.
 		Five mayor subsystems have been found:
 		\begin{itemize}
-			\item Passenger View, Taxi Driver View, Taxi Driver Model
+			\item Passenger View, Taxi Driver View, Taxi Driver Model and Administrator View
 			\item Controller
 			\item Model
 		\end{itemize}
@@ -117,7 +116,7 @@
 	
 	
 	\begin{frame}{Component View - Diagram}
-		This diagram maps system features into different software components, and show how these components are divided in different subsystems.
+		This diagram maps system features into different software components, and show how these components interact in order to guarantee the software functionalities.
 		\showComponentDiagram{UML Component Diagram}{0.475}
 	\end{frame}
 	
