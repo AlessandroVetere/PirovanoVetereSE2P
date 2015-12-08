@@ -6,9 +6,11 @@ A quick but meaningful overview on the system architectural design is presented 
 \showGeneralDiagram{Overview Diagram}{1.0}
 In addition are given many \textbf{UML Diagrams} integrated with complete descriptions of the software components in the following subsections:
 \begin{itemize}
-	\itemBold{Component View} Describes the division of the system in \textbf{Layers} and how the work flow is organized through them. It contains a \textbf{UML Component Diagram} that best delivers a comprehensive overlook.
+	\itemBold{Component View} Describes the division of the system in \textbf{Layers} and how the work flow is organized through them.
+		It contains a \textbf{UML Component Diagram} that best delivers a comprehensive overlook.
 	\itemBold{Deployment View} Explains how the division of system in \textbf{Tiers} is done with the help of an \textbf{UML Deployment Diagram}.
-	\itemBold{Runtime View} Describes how each software components interacts with each other. To better explain the method call order and which component is used to obtain a given functionality, a set of \textbf{UML Sequence Diagram} is presented.
+	\itemBold{Runtime View} Describes how each software components interacts with each other.
+		To better explain the method call order and which component is used to obtain a given functionality, a set of \textbf{UML Sequence Diagram} is presented.
 \end{itemize}
 
 \subsection{High level components and their interaction}
@@ -21,9 +23,8 @@ Therefore three main software components have been identified and those are with
 As already mentioned and explained through the \textbf{Overview Diagram}, the system has many distributed components: those will communicate with a \textbf{Client-Server} style and through \textbf{Point to Point} messaging system.
 The \textbf{Client-Server} style is used in order to receive different requests (e.g. a \textbf{Taxi Reservation} request) from the many \textbf{Clients} connected to the \textbf{Server} to use the service.
 The \textbf{Point to Point} bidirectional communication channel is made necessary to enable the \textbf{Server} the delivery of various messages and requests to the \textbf{Clients}.
-These messages could be generic notifications, service messages or ,in the particular case in which the connected client is a \textbf{Taxi Driver}, the request of serving a \textbf{Taxi Ride} and the request of an updated \textbf{GPS Data}.
-
-\textbf{Model, View and Controller} are then mapped to three different relevant \textbf{Layers}:
+These messages could be generic notifications, service messages or, in the particular case in which the connected client is a \textbf{Taxi Driver}, the request of serving a \textbf{Taxi Ride} and the request of an updated \textbf{GPS Data}.
+\textbf{Model, View and Controller} are then mapped to three different relevant \textbf{Layers}.
 
 \paragraph{View}
 The role of this \textbf{Layer} is the one of processing remote \textbf{Clients} commands, and convert them into requests addressed to the \textbf{Controller} layer, that is connected to the \textbf{View} through a communication facility (e.g. The Internet).
@@ -50,14 +51,20 @@ It abstracts a \textbf{Relational Database} in a software component that is in d
 \subsubsection{Tiers}
 Then it comes the division of the system in different \textbf{Tiers}:
 \begin{itemize}
-	\itemBold{Clients} The distributed clients of the application. The \textbf{View} layer is mapped only to this \textbf{Tier}.
-	\itemBold{Web Server} A server that is in charge of dynamically generate web pages and receive requests through the web. It is also the server where are hosted the \textbf{Assets} of the web portal. The \textbf{Networking Components Family} of the \textbf{Controller} is mapped to this \textbf{Tier}.
-	\itemBold{Application Server} This is the most important \textbf{Tier} of the system. Here are done all the logics and calculations that constitute the core part of \myTaxiService{}. The \textbf{Business Components Family} is hosted on this server and therefore it is a part of the \textbf{Controller} that is separated from the \textbf{Web Server}. It is necessary to have the \textbf{Controller} divided into two different \textbf{Tiers} in order to separate the most important software parts, that are the business logic components, from the network components, for security concerns.
-	\itemBold {Database Server}
-	In this \textbf{Tier} it is hosted the \textbf{Database} that allows the service data persistence. The \textbf{Model} layer is entirely mapped to this \textbf{Tier}.
+	\itemBold{Clients} The distributed clients of the application.
+		The \textbf{View} layer is mapped only to this \textbf{Tier}.
+	\itemBold{Web Server} A server that is in charge of dynamically generate web pages and receive requests through the web.
+		It is also the server where are hosted the \textbf{Assets} of the web portal.
+		The \textbf{Networking Components Family} of the \textbf{Controller} is mapped to this \textbf{Tier}.
+	\itemBold{Application Server} This is the most important \textbf{Tier} of the system.
+		Here are done all the logics and calculations that constitute the core part of \myTaxiService{}.
+		The \textbf{Business Components Family} is hosted on this server and therefore it is a part of the \textbf{Controller} that is separated from the \textbf{Web Server}.
+		It is necessary to have the \textbf{Controller} divided into two different \textbf{Tiers} in order to separate the most important software parts, that are the business logic components, from the network components, for security concerns.
+	\itemBold{Database Server} In this \textbf{Tier} it is hosted the \textbf{Database} that allows the service data persistence.
+		The \textbf{Model} layer is entirely mapped to this \textbf{Tier}.
 \end{itemize}
 
-This architecture, with three different \textbf{Layers} and four different \textbf{Tiers}, makes possible to have a \textbf{Client-Server} style with a \textbf{Fat-Server} and a \textbf{Thin-Client}: this is due to the mapping of the \textbf{View} in the \textbf{Clients} and the mapping of either the \textbf{Controller} or the \textbf{Model} in the \textbf{Server}.
+This architecture, with three different \textbf{Layers} and four different \textbf{Tiers}, makes possible to have a \textbf{Client-Server} style with a \textbf{Fat-Server} and a \textbf{Thin-Client}: this is due to the mapping of the \textbf{View} to the \textbf{Clients} and the mapping of the \textbf{Controller} and the \textbf{Model} to the \textbf{Server}.
 
 \subsection{Component view}
 \showComponentDiagram{UML Component Diagram}{1.0}
@@ -82,14 +89,10 @@ The identified subsystems are:
 		\itemBold{TD Request Creator} See \textbf{PS Request Creator}.
 		\itemBold{TD Receiver} See \textbf{PS Receiver}
 		\itemBold{TD Locator} This is the software component that accesses the interface to the \textbf{Taxi Driver GPS Data Source}. Once invoked by the \textbf{Location Manager}, it retrieves the \textbf{GPS Data} that identify the \textbf{Taxi Driver Position}. It is a fundamental part of the \textbf{Taxi Driver View} because it makes possible for the server to have a constantly updated \textbf{Model}.
-	\end{itemize}	
-	\itemBold{Taxi Driver Model}
-	In this subsystem are contained the following components:
-	\begin{itemize}
 		\itemBold{GPS Data Source} It is a software component that connects to the \textbf{GPS Driver} of the \textbf{Taxi Driver Smartphone}.
 		It provides an object that represents the most recent position retrieved by the GPS Antenna; this object contains many data, among which the most important are \textbf{Latitude} and \textbf{Longitude}.
 		In fact through these data it is possible to determine in a precise way the \textbf{Taxi Driver} position.
-	\end{itemize}	
+	\end{itemize}
 	
 	\itemBold{Controller}
 	In this subsystem are contained the following components:
@@ -275,10 +278,10 @@ The identified subsystems are:
 		Those methods are exposed in a interface that is called Query Database, and the various DB Adapters calls them in a way that depends on the caller component itself.
 	\end{itemize}
 \end{itemize} 
-
+\newpage
 \subsection{Deployment view}
 In this subsection is proposed a \textbf{UML Deployment Diagram} that shows how the software components are mapped into different \textbf{Tiers} that compose the system.
-\showDeploymentDiagram{UML Deployment Diagram}{1.0}
+\showDeploymentDiagram{UML Deployment Diagram}{0.9}
 
 \subsection{Runtime view}
 In this subsection is proposed a \textbf{UML Sequence Diagrams} that shows how the software components that compose the system interacts in order to deliver the requested functionality.
@@ -314,18 +317,11 @@ Subsequently are listed all the main software components and their interfaces, e
 		This could be a crucial part of the system and therefore it is intended that no Taxi Driver hacks his own smartphone GPS location system in order to deliver wrong position (maybe introducing an important fee to be paid in case of this misbehaviour).
 		The \textbf{Taxi Driver Web} must open a \textbf{Web Socket} connection with the \textbf{Controller} in order to permit him to ask the position.
 	\end{itemize}
-	This component utilizes two interfaces:
+	This component utilizes one interface:
 	\begin{itemize}
 		\itemBold{Receive TD Request} An interface over \textbf{HTTPS} that is implemented by the \textbf{Controller} and like the \textbf{Receive PS Request} does for the Passenger, allows the Taxi Driver to send request to the \textbf{Controller}, while waiting synchronously for a response.
-		\itemBold{Get GPS Data} An interface implemented by the \textbf{Taxi Driver Model}, and used for obtaining the latest valid GPS position when the \textbf{Controller} asks for it via the \textbf{Get TD Position} interface.
-		It can be easily seen as an abstraction over the operating system GPS drivers.
 	\end{itemize}
-	\itemBold{Taxi Driver Model}
-	This component implements one interface:
-	\begin{itemize}
-		\itemBold{Get GPS Data} That is the interface offered to the \textbf{Taxi Driver View} and it is needed to obtain the most recent GPS position located by the GPS antenna installed in the Taxi Driver smartphone.
-		In facts it wraps up the operating system GPS drivers in order to deliver a clean and meaningful interface to be utilized in the system to be.
-	\end{itemize}
+
 	\itemBold{Administration View}
 	This component utilizes one interface:
 	\begin{itemize}
@@ -355,10 +351,10 @@ Subsequently are listed all the main software components and their interfaces, e
 
 \subsection{Selected architectural styles and patterns}
 Several architectural styles and patterns were chosen in order to build \myTaxiService{} as a modern software.
-The main pattern that were recursively adopted is the \textbf{Model View Controller} architectural pattern:
+The main pattern that was recursively adopted is the \textbf{Model View Controller} architectural pattern:
 \begin{itemize}
 	\itemBold{System Level} All the clients that use \myTaxiService{} (i.e. the \textbf{Passengers}, the \textbf{Taxi Drivers}, and the \textbf{Administrator}) are seen as \textbf{Views}, that following the \textbf{Cocoa MVC} pattern, are connected to a \textbf{Controller}, the \textbf{Web Server} or the \textbf{Application Server}, that is itself connected to the \textbf{Model} that is hosted on the \textbf{Database Server}.
-	\itemBold{Client Level} The \textbf{Views} in the various \textbf{Clients} are designed internally to conform to the \textbf{MVC} pattern. For instance the \textbf{Passenger View} is composed by a \textbf{Model} that is an internal representation of the data received by the \textbf{Web Server}, a \textbf{Controller} that performs network activities and connects the \textbf{Model} with the \textbf{View}, and the \textbf{View} that is either a \textbf{Mobile Application GUI} or a \textbf{Web Page}.
+	\itemBold{Client Level} The \textbf{Views} in the various \textbf{Clients} are designed internally to conform to the \textbf{MVC} pattern. For instance the \textbf{Passenger View} is composed of a \textbf{Model} that is an internal representation of the data received by the \textbf{Web Server}, a \textbf{Controller} that performs network activities and connects the \textbf{Model} with the \textbf{View}, and the \textbf{View} that is either a \textbf{Mobile Application GUI} or a \textbf{Web Page}.
 	\itemBold{Server Level} The server part of \myTaxiService{} is divided also physically into the three different entities of the \textbf{MVC} pattern:
 	\begin{itemize}
 		\itemBold{Web Server} It is the \textbf{View} of the server part of the application, and gives to clients a representation of the internal data. The \textbf{Web Server} is connected only to the \textbf{Application Server}. It contains all the assets included in the web portal. On its external interface, it can handle properly \textbf{HTTPS} requests and manage communication over \textbf{Web Sockets}. On its internal interface it sends and receives objects via \textbf{RPC} from the \textbf{Application Server}, that is in charge of the application logic.
@@ -406,11 +402,10 @@ It could have been possible, but not feasible, to do such a thing:
 \end{enumerate}
 But this solution requires to have a precomputed data structure that associates every \textbf{Address} in the \textbf{City} to the corresponding \textbf{Zone} (that could have been a relational table with as many rows inside as \textbf{Addresses} in the \textbf{City}, each address associated with the corresponding \textbf{Zone}), that is heavy to manage and maintain, although if correctly installed and filled, it gives for certain good performances.
 A less heavy weight solution has been found: this solution expects every \textbf{Zone} of the \textbf{City} to be divided in several convex \textbf{Polygons}, for instance \textbf{Triangles}, that have interesting properties for our application.
-The polygonal shape of the \textbf{Zone} could be almost as complex as one can imagine but, in all the interesting applications, can always be decomposed in a finite number of Triangles.
-In \myTaxiService{} \textbf{Zones} of regular shape are intended to be used, and therefore the number of \textbf{Triangles} in which a \textbf{Zone} will be decomposed is very limited.
-So such a flow is followed:
+In \myTaxiService{}, \textbf{Zones} of regular shape are intended to be designed, and therefore the number of \textbf{Triangles} in which a \textbf{Zone} should be decomposed is very limited.
+So, such a flow is followed:
 \begin{enumerate}
 	\item Obtain \textbf{GPS Data} via \textbf{Web Socket} from the selected Taxi Driver
-	\item For each \textbf{Zone}, check if the the \textbf{Point} that the \textbf{Longitude} and \textbf{Latitude} from \textbf{GPS Data} identify is contained inside any \textbf{Triangle} in which the \textbf{Zone} is divided. If that is true, that the \textbf{Zone} is found. If that is false, than another \textbf{Zone} could contain the given Point. If no \textbf{Zone} contains the Point, then we can assume that the \textbf{Point} refers to \textbf{GPS Data} that locate a geographical point outside of the \textbf{City}.
+	\item For each \textbf{Zone}, check if the \textbf{Point} that the \textbf{Longitude} and \textbf{Latitude} from \textbf{GPS Data} identify is contained inside any \textbf{Triangle} in which the \textbf{Zone} is divided. If that is the case, then the \textbf{Zone} is found. If that is not the case, then another \textbf{Zone} could contain the given Point. If no \textbf{Zone} contains the Point, then we can assume that the \textbf{Point} refers to \textbf{GPS Data} that identify a geographical point outside of the \textbf{City}.
 \end{enumerate}
-The computation of the \textbf{Point in Triangle} test is simple and efficient and an algorithm implementation in \textbf{Java} is provided in the following section.
+The computation of the \textbf{Point in Triangle} test is simple and efficient (e.g. using barycentric coordinates) and an algorithm designed in \textbf{Java} is provided in the following section.
