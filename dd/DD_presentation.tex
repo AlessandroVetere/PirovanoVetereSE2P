@@ -58,7 +58,7 @@
 	\begin{frame}{Layers - View}
 		This layer processes \textbf{Clients} commands, and converts them into requests addressed to the \textbf{Controller} layer.
 		The \textbf{View} is connected to the \textbf{Controller} through a communication facility (e.g. The Internet).
-		We imagine four different types of \textbf{View}, each one designed specifically to access \myTaxiService{} system in a different way and by a specific kind of user:
+		We imagined four different types of \textbf{View}, each one designed specifically to access \myTaxiService{} system in a different way and by a specific kind of user:
 		\begin{itemize}
 			\item Passenger Web View
 			\item Passenger Application View
@@ -68,12 +68,12 @@
 	\end{frame}
 	
 	\begin{frame}{Layers - Controller}
-		This second Layer is split in three families of components with specialized functionalities:
+		This second Layer is split in two families of components with specialized functionalities:
 		\begin{itemize}
 			\item \textbf{Networking Components Family:}
 			\begin{itemize}
 				\item Groups the \textbf{Communication Components} that are involved in sending messages to the various Views, following the logic implements in the Business Components Family. 
-				\item Dispatches a particular request to the relative \textbf{Business Managing Component}.
+				\item Dispatches a particular request to the relative \textbf{View}.
 			\end{itemize}
 			\item \textbf{Business Components Family:} In this family are included all the software components that implement the system logic.
 			Their role is:
@@ -88,7 +88,7 @@
 		The third and last Layer is the \textbf{Model}. It:
 		\begin{itemize}
 			\item Guarantees a high level interface to store and manage all the \myTaxiService{} relevant data.
-			\item Abstract a \textbf{Relational Database} in a software component that is in direct connection with the \textbf{Controller} (Model Query Service in our UML Component Diagram proposed in a next section).
+			\item Abstracts a \textbf{Relational Database} in a software component that is in direct connection with the \textbf{Controller} (Model Query Service in our UML Component Diagram proposed in a next section).
 		\end{itemize}
 		
 		It has the responsibility of \textbf{receiving} and \textbf{handling} all the model updating needs of the \textbf{Business Components}. 
