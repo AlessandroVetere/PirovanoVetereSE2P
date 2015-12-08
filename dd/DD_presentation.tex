@@ -20,15 +20,21 @@
 	\titleToc{}
 	\section{Architectural Design}
 	
+	\subsection{Overview Diagram}
+	
+	\begin{frame}{Overview Diagram}
+		\showGeneralDiagram{Overview Diagram}{1.0}
+	\end{frame}
+	
+	
 	\subsection{High level components and their interaction}
 	
 	\begin{frame}{High level components and their interaction}
 		The system is composed of many \textbf{distributed} components: those will communicate with a \textbf{Client-Server} style and through \textbf{Point to Point} messaging system. 
 		\begin{itemize}
-			\item The \textbf{Client-Server} style is used to give the the many Clients connected to the Server the opportunity of sending different requests (e.g. a \textbf{Taxi Ride Reservation} or \textbf{Taxi Ride Request}).
+			\item The \textbf{Client-Server} style is used to give the many Clients connected to the Server the opportunity of sending different requests (e.g. a \textbf{Taxi Ride Reservation} or \textbf{Taxi Ride Request}).
 			\item The \textbf{Point to Point} bidirectional communication channel is made necessary to enable the Server the delivery of various messages and requests to the Clients:
 			\begin{itemize}
-				%TODO un esempio per ogni item (e.g. ...)
 				\item Generic notifications
 				\item Service messages
 				\item The request of serving a Taxi Ride (to a Taxi Driver)
@@ -75,7 +81,6 @@
 				\item Processing requests 
 				\item Generating either \textbf{synchronous responses} (e.g registration or login procedure) or \textbf{asynchronous events} (e.g adding a \textbf{Taxi Ride} and sending a \textbf{Taxi Driver}).
 			\end{itemize}
-			\item \textbf{Query Manager} It has the responsibility of \textbf{receiving} and \textbf{handling} all the model updating needs of the \textbf{Business Components}. Moreover it has to guarantee \textbf{parallelism} and \textbf{execution speed}.
 		\end{itemize}
 	\end{frame}
 	
@@ -85,6 +90,9 @@
 			\item Guarantees a high level interface to store and manage all the \myTaxiService{} relevant data.
 			\item Abstract a \textbf{Relational Database} in a software component that is in direct connection with the \textbf{Controller} (Model Query Service in our UML Component Diagram proposed in a next section).
 		\end{itemize}
+		
+		It has the responsibility of \textbf{receiving} and \textbf{handling} all the model updating needs of the \textbf{Business Components}. 
+		Moreover it has to guarantee \textbf{parallelism} and \textbf{high execution speed}.
 	\end{frame}
 	
 	\begin{frame}{Tiers}
@@ -97,12 +105,6 @@
 		\end{itemize}
 	\end{frame}
 	
-	\subsection{Overview Diagram}
-		
-	\begin{frame}{Overview Diagram}
-		\showGeneralDiagram{Overview Diagram}{1.0}
-	\end{frame}
-	
 	\subsection{Component View}
 	
 	\begin{frame}{Component View}
@@ -113,12 +115,13 @@
 			\item Controller
 			\item Model
 		\end{itemize}
+		Through this diagram we can see clearly the \textbf{Layers organization} and the \textbf{MVC implementation}.
 	\end{frame}
 	
 	
 	\begin{frame}{Component View - Diagram}
-		This diagram maps system features into different software components, and show how these components are divided in different subsystems.
-		\showComponentDiagram{UML Component Diagram}{0.45}
+		This diagram maps system \textbf{features into different software components}, and show \textbf{how these components interact} in order to \textbf{deliver the required functionalities}.
+		\showComponentDiagram{UML Component Diagram}{0.475}
 	\end{frame}
 	
 	\subsection{Deployment View}
@@ -251,9 +254,8 @@
 			\item Query the \textbf{Model} to obtain the \textbf{Zone} to which belongs the given \textbf{Address}.
 		\end{enumerate}
 		But this solution requires to have a precomputed data structure that associates every \textbf{Address} in the \textbf{City} to the corresponding \textbf{Zone} (that could have been a relational table with as many rows inside as \textbf{Addresses} in the \textbf{City}, each address associated with the corresponding \textbf{Zone}), that is heavy to manage and maintain, although if correctly installed and filled, it gives for certain good performances.
-		
 	\end{frame}
-	
+
 	\begin{frame}{Geolocation - The Chosen Approach}
 		A less heavy weight solution has been found: this solution expects every \textbf{Zone} of the \textbf{City} to be divided in several convex \textbf{Polygons}, for instance \textbf{Triangles}, that have interesting properties for our application.
 		The polygonal shape of the \textbf{Zone} can be decomposed in a finite number of \textbf{Triangles}.
@@ -266,12 +268,28 @@
 		The computation of the \textbf{Point in Triangle} test is simple and efficient using barycentric coordinates.
 	\end{frame}
 	
-	\section{Mockups}
+	\section{User Interface Design}
 	
+	\subsection{UI Design}
+	
+	\begin{frame}{UI Design}
+		In this section we provide the \textbf{most important an meaningful mockups} for every class of screen we have designed.
+		In particular we provided \textbf{three classes} of UI:
+		\begin{itemize}
+			\itemBold {Passenger Mockups} this UI can be both Web based and Mobile Application based.
+			\itemBold {Taxi Driver Mockups}
+			\itemBold {Administrator Mockups}
+		\end{itemize}
+	\end{frame}
+
 	\subsection{Passenger Mockups}
+	\begin{frame}{Passenger Mockups}
+		Below we will show the \textbf{sequence of the graphical states} that the application has to \textbf{render} in order to \textbf{create} and \textbf{handle} a Taxi Ride.
+		Going deep, once logged in, the \textbf{Registered Passenger} will be redirected in the personal \textbf{Home page}: here he/she will be able to request or reserve e \textbf{Taxi Ride} and manage his/her personal profile.
+	\end{frame}
 	
 	\begin{frame} {Passenger Mockups - Overview}
-		The \textbf{Registered Passenger} can perform different actions:
+		Here the \textbf{Registered Passenger} can perform different actions:
 		\begin{itemize}
 			\item Request a Ride
 			\item Reserve a Ride
@@ -284,12 +302,12 @@
 	\end{frame}
 	
 	\begin{frame} {Passenger Mockups - Personal Homepage}
-		This is the \textbf{Registered Passenger}' \textbf{Home page}. The screen is divided in two parts:
+		This is an example of the \textbf{Registered Passenger}' \textbf{Home page}. The screen is divided in two parts:
 		\begin{itemize}
-			\item The left one dedicated to contain the \textbf{Taxi Requests}
-			\item The right one dedicated to contain the \textbf{Taxi Reservations}
+			\item The \textbf{left} one dedicated to contain the \textbf{Taxi Requests}
+			\item The \textbf{right} one dedicated to contain the \textbf{Taxi Reservations}
 		\end{itemize} 
-		\showRPMockupImage{RegisteredPassengerHomePage}{Empty state of RP home page.}{0.65}
+		\showRPMockupImage{RegisteredPassengerHomePage}{Empty RP home page.}{0.65}
 	\end{frame}
 	
 	\begin{frame} {Passenger Mockups - Request a Ride}
@@ -301,31 +319,31 @@
 	\end{frame}
 	
 	\begin{frame} {Passenger Mockups - Personal Homepage with \textbf{Taxi Rides}}
-		Below is shown a common \textbf{Application State} with a \textbf{Taxi Request} and \textbf{Taxi Reservation}. 
-		Through the trash icon the user is allowed to cancel the selected \textbf{Taxi Ride}.
-		\showRPMockupImage{RegisteredPassengerHomePage2}{Populated state of RP home page.}{0.75}
+		Below is shown a common \textbf{Application State} with one \textbf{Taxi Request} and one \textbf{Taxi Reservation}. 
+		Through the trash icon the user is allowed to cancel a selected \textbf{Taxi Ride}.
+		\showRPMockupImage{RegisteredPassengerHomePage2}{Populated RP home page.}{0.75}
 	\end{frame}
 	
 	\subsection{Taxi Driver Mockups}
 	
 	\begin{frame}{Taxi Driver Mockups}
-		Below we will show the sequence of the \textbf{graphical states} that the application has to \textbf{render} in order to make the \textbf{Taxi Driver} able to \textbf{handle} a \textbf{Taxi Ride}.
+		Below we will show \textbf{the sequence of the graphical states} that the application has to \textbf{render} in order to make the \textbf{Taxi Driver} able to \textbf{handle} a \textbf{Taxi Ride}.
 	\end{frame}
 	
 	\begin{frame} {Taxi Driver Mockups - Overview}
-		The \textbf{Taxi Driver} personal screen is divided into two sections:
+		The \textbf{Taxi Driver} personal screen is divided into \textbf{two} sections:
 		\begin{itemize}
 			\item Pending Rides Space
-			\item Serving Rides Space
+			\item Serving Ride Space
 		\end{itemize}
 		When the system sends a \textbf{Taxi Ride} to a specific \textbf{Taxi Driver}, it is placed in the \textbf{Pending Requests} space.
-		Here the \textbf{Taxi Request} can accept or deny it. 
+		Here the \textbf{Taxi Rider} can accept or deny it. 
 		If is accepted the \textbf{Taxi Request} is moved from the previous to the second space.
 		Once the ride is finished, the \textbf{Taxi Driver} has to push the \textbf{Notify End Of Ride} button, in order to notify the system to store and close the ride.
-		Through the \textbf{Report Problem} button, the \textbf{Taxi Driver} has the possibility, in every moment of his/her working time, to signal an accident or a problem. In order to better handling the problem, the \textbf{Taxi Driver} is asked to signal if the problem is solvable or not.
+		Through the \textbf{Report Problem} button, the \textbf{Taxi Driver} has the possibility, \textit{in every moment of his/her working time}, to signal an accident or a problem. In order to better handling the problem, the \textbf{Taxi Driver} is asked to \textbf{signal} if the problem is solvable or not.
 		\begin{itemize}
-			\item If it is solvable, the system store it and waits the solution message.
-			\item If it is not solvable, the system assigns the incomplete ride to the next \textbf{Taxi Driver} in the \textbf{Zone Queue}.
+			\item If it is solvable, the system \textbf{doesn't assign} a new \textbf{Taxi Driver}.
+			\item If it is not solvable, the system \textbf{assigns} the incompleted ride to the next \textbf{Taxi Driver} in the \textbf{Zone Queue}.
 		\end{itemize}
 	\end{frame}
 	
@@ -334,18 +352,18 @@
 	\end{frame}
 	
 	\begin{frame} {Taxi Driver Mockups - A Pending Request}
-		\showTDMockupImage{TaxiDriverScreen1}{Taxi Driver' Homepage with a \textbf{PENDING} \textbf{Taxi Requests}.}{0.2}
+		\showTDMockupImage{TaxiDriverScreen1}{Taxi Driver' Homepage with a \textbf{PENDING} \textbf{Taxi Request}.}{0.2}
 	\end{frame}
 	
 	\begin{frame} {Taxi Driver Mockups - A Serving Request}
-		\showTDMockupImage{TaxiDriverScreen2}{Taxi Driver' Homepage with a \textbf{SERVING} \textbf{Taxi Requests}.}{0.2}
+		\showTDMockupImage{TaxiDriverScreen2}{Taxi Driver' Homepage with a \textbf{SERVING} \textbf{Taxi Request}.}{0.2}
 	\end{frame}
 	
 	\subsection{Administrator Mockups}
 	
 	\begin{frame}{Administrator Mockups}
 		The system architecture does not admit the usage of a textual "working" interface (e.g. a CLI). 
-		For this reason we decided to provide the administrator of a thin desktop interface.
+		For this reason we decided to \textbf{provide the administrator of a thin desktop interface}.
 		Consequently the administrator can perform his actions both using a different channel from the normal application access, and using a intuitive an less aggressive UI.
 		\showAdminMockupImage{admin_mockup_1}{Example of an Administrator screen.}{0.5}
 	\end{frame}
