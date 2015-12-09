@@ -1,9 +1,11 @@
 \section{Specific requirements}
 This section contains the system requirements presented in a a level of detail sufficient to enable the design of such a system.
 These requirements have several properties: Correct, Unambiguous, Complete, Consistent, Ranked, Verifiable, Modifiable and Traceable.
+
 \subsection{External interface requirements}
 The software \myTaxiService{} provides several external interfaces, both software and hardware.
 A detailed coverage over those interfaces requirements is given in the following subsections.
+
 \subsubsection{User interfaces}
 Three different graphical user interfaces are provided: two of them for both registered and non registered passengers and one for the taxi drivers.
 One of the two graphical interfaces provided for both kind of passengers is web based and uses web pages to present the content of a web application, and the other one is that of a smartphone application.
@@ -11,48 +13,69 @@ The GUI provided for taxi drivers is that of a smartphone application.
 No additional user interfaces are provided, not graphical nor textual.
 Below are provided the mockups of the  most significant features guaranteed by the application.
 Firstly are shown the screens of the passenger interface, putting beside the application and the web-application ones, with the aim of showing an example of the different space management. 
-\newpage \paragraph{Passenger mockups}
-\begin{itemize}
-	\unbreakableItem{Homepage
-	\showRPMockupImage{Homepage}{\myTaxiService{} homepage.}}
-	\unbreakableItem{Registration
-	\showRPMockupImage{Registration}{Registration screens.}}
-	\unbreakableItem{Login
-	\showRPMockupImage{Login}{Login screens.}}
-	\unbreakableItem{Empty registered passenger home page
-	\showRPMockupImage{RegisteredPassengerHomePage}{State 1 of RP home page.}}
-	\unbreakableItem{Request a taxi home page
-	\showRPMockupImage{RequestTaxi}{Taxi request.}}
-	\unbreakableItem{Reserve a taxi home page
-	\showRPMockupImage{ReserveTaxi}{Taxi Reservation.}}
-    \unbreakableItem{Registered passenger home page
-	\showRPMockupImage{RegisteredPassengerHomePage2}{State 2 of RP home page.}}
-	\unbreakableItem{Cancellation of a ride in registered passenger home page
-	\showRPMockupImage{RegisteredPassengerHomePage3}{State 3 of RP home page.}}
-\end{itemize}
-\newpage \paragraph{Taxi Driver mockups}
-\begin{itemize}
-	\unbreakableItem{Homepage
-	\showTDMockupImage{HomePageDriver}{TD homepage.}}
-	\unbreakableItem{Login
-	\showTDMockupImage{LoginDriver}{TD login page.}}
-	\unbreakableItem{Empty driver home page
-	\showTDMockupImage{TaxiDriverScreen3}{State 1 of TD personal page.}}
-	\unbreakableItem{Taxi driver home page with a pending request
-	\showTDMockupImage{TaxiDriverScreen1}{State 2 of TD personal page.}}
-	\unbreakableItem{Taxi driver home page while serving a request
-	\showTDMockupImage{TaxiDriverScreen2}{State 3 of TD personal page.}}
-	\unbreakableItem{Report problem
-	\showTDMockupImage{ReportProblem}{TD report problem screen.}}
-	\unbreakableItem{Report solution
-	\showTDMockupImage{ReportSolution}{TD report solution screen.}}
-\end{itemize}
+\newpage
 
-\unbreakableBlock{\subsection{System Features}
+\paragraph{Passenger mockups}
+\begin{itemize}
+	\unbreakableItem{Homepage
+		\showRPMockupImage{Homepage}{\myTaxiService{} homepage.}
+	}
+	\unbreakableItem{Registration
+		\showRPMockupImage{Registration}{Registration screens.}
+	}
+	\unbreakableItem{Login
+		\showRPMockupImage{Login}{Login screens.}
+	}
+	\unbreakableItem{Empty registered passenger home page
+		\showRPMockupImage{RegisteredPassengerHomePage}{State 1 of RP home page.}
+	}
+	\unbreakableItem{Request a taxi home page
+		\showRPMockupImage{RequestTaxi}{Taxi request.}
+	}
+	\unbreakableItem{Reserve a taxi home page
+		\showRPMockupImage{ReserveTaxi}{Taxi Reservation.}
+	}
+    \unbreakableItem{Registered passenger home page
+		\showRPMockupImage{RegisteredPassengerHomePage2}{State 2 of RP home page.}
+	}
+	\unbreakableItem{Cancellation of a ride in registered passenger home page
+		\showRPMockupImage{RegisteredPassengerHomePage3}{State 3 of RP home page.}
+	}
+\end{itemize}
+\newpage
+
+\paragraph{Taxi Driver mockups}
+\begin{itemize}
+	\unbreakableItem{Homepage
+		\showTDMockupImage{HomePageDriver}{TD homepage.}
+	}
+	\unbreakableItem{Login
+		\showTDMockupImage{LoginDriver}{TD login page.}
+	}
+	\unbreakableItem{Empty driver home page
+		\showTDMockupImage{TaxiDriverScreen3}{State 1 of TD personal page.}
+	}
+	\unbreakableItem{Taxi driver home page with a pending request
+		\showTDMockupImage{TaxiDriverScreen1}{State 2 of TD personal page.}
+	}
+	\unbreakableItem{Taxi driver home page while serving a request
+		\showTDMockupImage{TaxiDriverScreen2}{State 3 of TD personal page.}
+	}
+	\unbreakableItem{Report problem
+		\showTDMockupImage{ReportProblem}{TD report problem screen.}
+	}
+	\unbreakableItem{Report solution
+		\showTDMockupImage{ReportSolution}{TD report solution screen.}
+	}
+\end{itemize}
+\newpage
+
+\subsection{System Features}
 The system features are organized by use cases, so each subsection here represent a different use case for \myTaxiService{}.
+
 \subsubsection{UML Use Case Diagram}
 The use case considered are represented in this diagram: 
-\showUmlImage{UseCaseDiagram}{UML Use Case Diagram}}\newpage
+\showUmlImage{UseCaseDiagram}{UML Use Case Diagram}\newpage
 \inputSystemFeature{registration}\newpage
 \inputSystemFeature{login}\newpage
 \inputSystemFeature{logout}\newpage
@@ -62,40 +85,37 @@ The use case considered are represented in this diagram:
 \inputSystemFeature{request_ride}\newpage
 \inputSystemFeature{notify_problem}\newpage
 \inputSystemFeature{end_of_ride}\newpage
+
 \subsubsection{UML Class Diagram}
-\showUmlImage{ClassDiagram}{UML Class Diagram}\newpage
+\showUmlImage{ClassDiagram}{UML Class Diagram}
+\newpage
+
 \subsubsection{State Chart Diagram}
 \begin{itemize}
-	\itemBold{Taxi Driver State Chart}
- The state chart diagram proposed below has the aim of better explaining the different states in which the TD can be during the use of \myTaxiService{}. 
-Moreover there are two particular states, "TD Not Able To Work Connection Error" and "TD Working Connection Error", that are included with the aim of better showing the software behavior when some unexpected problem occurs. 
-In these cases TD is redirected to a login screen in which he remains till the problem is resolved(for example the connections returns up). 
-In particular the system is built to store and periodically update a session object in order to restore the application when TD logs in once the problem is resolved.  
-In this way the login procedure  brings the TD exactly in the same state in which he was after the problem.
-\showUmlImage{TaxiDriverStateChartDiagram}{Taxi Driver State Chart Diagram}
-	\itemBold{Passenger Mockup State Chart}
- The state chart diagram proposed below is a complete description of the navigation into \myTaxiService{} application.  In fact the mockups proposed in section [3.1.1] are not completely mapping this diagram.
-\showUmlImage{PassengerMockupStateChart}{Passenger Mockup State Chart Diagram}
+	\itemBold{Taxi Driver State Chart} The state chart diagram proposed below has the aim of better explaining the different states in which the TD can be during the use of \myTaxiService{}. 
+		Moreover there are two particular states, "TD Not Able To Work Connection Error" and "TD Working Connection Error", that are included with the aim of better showing the software behavior when some unexpected problem occurs. 
+		In these cases TD is redirected to a login screen in which he remains till the problem is resolved(for example the connections returns up). 
+		In particular the system is built to store and periodically update a session object in order to restore the application when TD logs in once the problem is resolved.  
+		In this way the login procedure  brings the TD exactly in the same state in which he was after the problem.
+		\showUmlImage{TaxiDriverStateChartDiagram}{Taxi Driver State Chart Diagram}
+	\itemBold{Passenger Mockup State Chart} The state chart diagram proposed below is a complete description of the navigation into \myTaxiService{} application.
+		In fact the mockups proposed in section [3.1.1] are not completely mapping this diagram.
+		\showUmlImage{PassengerMockupStateChart}{Passenger Mockup State Chart Diagram}
 \end{itemize}
 \newpage
+
 \subsubsection{Alloy Model}
 In this section is presented an Alloy Model and its execution results.
 \alloyfile{./section_3/alloy/model.als}
+
 \paragraph{Alloy Model Execution Results}
 \begin{itemize}
-	\itemBold{Alloy Console}
-	\showAlloyImage{alloy_console}{Alloy Console.}{0.9}
-	\newpage
-	\itemBold{Alloy Meta Model}
-	\showAlloyImage{metamodel}{Alloy Meta Model.}{1}
-	\newpage
-	\itemBold{Alloy Simple World}
-	\showAlloyImage{simple_world}{Alloy Simple World.}{0.8}
-	\newpage
-	\itemBold{Alloy Real World}
-	\showAlloyImage{real_world}{Alloy Real World.}{0.45}
-	\newpage
+	\itemBold{Alloy Console} \showAlloyImage{alloy_console}{Alloy Console.}{0.9} \newpage
+	\itemBold{Alloy Meta Model} \showAlloyImage{metamodel}{Alloy Meta Model.}{1} \newpage
+	\itemBold{Alloy Simple World} \showAlloyImage{simple_world}{Alloy Simple World.}{0.8} \newpage
+	\itemBold{Alloy Real World} \showAlloyImage{real_world}{Alloy Real World.}{0.45} \newpage
 \end{itemize}
+
 \subsection{Performance requirements}
 In this subsection are specified the most important non functional requirement.
 \begin{itemize}
@@ -103,14 +123,19 @@ In this subsection are specified the most important non functional requirement.
 	\item The system must handle at least 1000 users and 400 taxi drivers connected at the same time.
 	\item The system must handle a number of Registered Passenger equals to 10 time the number of the taxi drivers in the town.
 \end{itemize}
+
 \subsubsection{Reliability}
 The service must be available 7 days a week 24 hours a day.  The server must support parallel processing in order to guarantee a fast and continuous service.
 \subsubsection{Availability}
+
 The service must be up with a probability of failure less than 0.01 percent and must be able to resist to 9 security attack out of 10.
 \subsubsection{Security}
+
 Internet connection must be encrypted with a recognized SSL certificate (HTTPS protocol). The handling of users data must be protected by SQL data stealing. Moreover the DBMS must guarantee a Serializable SQL isolation level.
 \subsubsection{Maintainability}
+
 The software must be build accompanied with proper documentation and it must comply with Model-View-Controller programming pattern. In fact using this pattern ensures great opportunities of extension.
+
 \subsubsection{Portability}
 The passengers web site must be capable of running on main consumer OS: OS X, Windows, Ubuntu.
 Moreover the user experience must be the same if the user decides to access the web site via IE, Opera, Chrome or Firefox.
