@@ -1,2 +1,43 @@
 \section{Functional Role of Assigned Classes}
 %TODO <Elaborate on the functional role you have identified for the class cluster that was assigned to you, also, elaborate on how you managed to understand this role and provide the necessary evidence, e.g., javadoc, diagrams, etc.>
+
+The class we have been assigned is named IIOPSSLSocketFactory.
+It is included in the org.glassfish.enterprise.iiop.impl package.
+IIOPSSLSocketFactory implements the ORBSocketFactory interface, which is included in the com.sun.corba.ee.spi.transport package.
+ORBSocketFactory is an interface that abstracts some parts of the ORB protocol related to socket creation.
+%TODO Check if it's true
+The IIOP protocol is a particular implementation of the ORB protocol and stands for Internet Inter-ORB Protocol. 
+In the ORB protocol there are two main actors exchanging informations:
+\begin{itemize}
+	\item \textbf{Client:} It requests a method call to an object which interface is exposed by the Server and is known by the Client.
+	The Client has the capability of sending some parameters to the Server for executing the given method call and needs to have back the return value of the method, if any.
+	\item \textbf{Server:} It exposes the interfaces of the objects that can be called by the various Clients allowed to make remote method calls.
+	Through those interfaces, the Clients can make remote method calls, passing objects as parameters if necessary, and receive a return value, if any.
+\end{itemize}
+Then, to allow each actor doing the actions provided by protocol, the IIOPSSLSocketFactory main functions are:
+\begin{itemize}
+	\item \textbf{Socket Creation:} This functionality allows the creation of a socket with some specific characteristics:
+	\begin{itemize}
+		\item \textbf{Plain Socket:} Plain text socket (java.net.Socket) with the option of using a java.nio.channels.SocketChannel (if so is specified in a ORB class object, whose reference is passed at runtime to an object of the class IIOPSSLSocketFactory using a setter).
+		\item \textbf{Secure Socket:} Encrypted socket (javax.net.ssl.SSLSocket) that uses Secure Socket Layer or Transport Secure Layer.
+		In particular, it can use either:
+		\begin{itemize}
+			\item \textbf{SSL1} 
+			\item \textbf{SSL2}
+			\item \textbf{SSL3}
+			\item \textbf{TLS}
+		\end{itemize}
+	\end{itemize}
+	By default, Nagle's algorithm is disabled for \textbf{all and only} the plain sockets built: this is done by setting the "TCP No Delay" property of the java.net.Socket to true, using the given setter.
+	For encrypted sockets, Nagle's algorithm is not disabled and this could lead to severe performance issue.
+	This is because Nagle's algorithm is essentially delaying the delivery of TCP Packets in order to avoid the delivery of several small packets (which obviously increases the overhead to data ratio), preferring less but bigger packets.
+	Thus, a server response that is generated very fast could be delivered later to the client because of this policy.
+	\textbf{For us, the missed disabling of Nagle's algorithm in secure sockets is a major bug.}
+	
+	\item \textbf{Server Socket Creation:} This functionality allows the creation of a server socket.
+	\begin{itemize}
+		\item \textbf{Plain Server Socket:} %TODO Fare
+		\item \textbf{Secure Server Socket:} %TODO Fare
+	\end{itemize}
+\end{itemize}
+%TODO Spiegare quando vengono usate le diverse funzioni dal client e dal server
