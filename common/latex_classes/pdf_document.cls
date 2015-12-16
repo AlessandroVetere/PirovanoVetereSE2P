@@ -62,6 +62,7 @@
 		}
 	\end{center}
 }
+
 \newcommand{\showImage}[2]{\showPercentImage{#1}{#2}{1}}
 \setDepth{4}
 \hypersetup{
