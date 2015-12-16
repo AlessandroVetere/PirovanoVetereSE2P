@@ -1,148 +1,32 @@
 \section{Issues Found}
 %TODO <Report the classes/code fragments that do not fullfill some points in the check list. Explain which point is not fullfilled and why>
-
-Code	inspection	checklist
-Naming	Conventions
-1. All	class	names,	interface	names,	method	names,	class	variables,	method	
-variables,	and	constants	used	should	have	meaningful	names	and	do	what	
-the	name	suggests.
-2. If	 one-character	 variables	 are	 used,	 they	 are	 used	 only	 for	 temporary	
-“throwaway”	variables,	such	as	those	used	in	for	loops.
-3. Class	names	are	nouns,	in	mixed	case,	with	the	first	letter	of	each	word	in	
-capitalized.	Examples:		class	Raster;		class	ImageSprite;	
-4. Interface	names	should	be	capitalized	like	classes.
-5. Method	names	should	be	verbs,	with	the	first	letter	of	each	addition	word	
-capitalized.	Examples:		getBackground();		computeTemperature().
-6. Class	 variables,	 also	 called	 attributes,	 are	 mixed	 case,	 but	 might	 begin	
-with	 an	 underscore	 (‘\_’)	 followed	 by	 a	 lowercase	 first letter.	 	 All	 the	
-remaining	words	in	 the	 variable	 name have	 their	 first	letter capitalized.		
-Examples:			\_windowHeight,		timeSeriesData.
-7. Constants	 are	 declared	 using	 all	 uppercase	 with	 words	 separated	 by	 an	
-underscore.		Examples:			MIN\_WIDTH;		MAX\_HEIGHT;
-Indention
-8. Three	or	four	spaces	are	used	for	indentation	and	done	so	consistently
-9. No	tabs	are	used	to	indent
-Braces
-10. Consistent	bracing	style	is	used,	either	the	preferred	“Allman”	style	(first	
-brace	goes	underneath	the	opening	block)	or	the	“Kernighan	and	Ritchie”	
-style (first	brace	is	on	the	same	line	of	the	instruction	that	opens	the	new	
-block).
-11. All	 if,	 while,	 do-while,	 try-catch,	 and	 for	 statements	 that	 have	 only	 one	
-statement	to	execute	are	surrounded	by	curly	braces.		Example:
-Avoid	this:
-if (	condition	)
-doThis();
-Instead	do	this:
-if	(	condition	)	
-{
-	doThis();
-}
-File	Organization
-12. Blank	 lines	 and	 optional	 comments	 are	 used	 to	 separate	 sections	
-(beginning	 comments,	 package/import	 statements,	 class/interface	
-declarations	 which	 include	 class	 variable/attributes	 declarations,	
-constructors,	and	methods).
-13. Where	practical,	line	length	does	not	exceed	80	characters.
-14. When	 line	 length	 must	 exceed	 80	 characters,	 it	 does	 NOT	 exceed	 120	
-characters.	
-Wrapping	Lines
-15. Line	break	occurs	after	a	comma	or	an	operator.
-16. Higher-level	breaks	are	used.
-17. A	 new	 statement	 is	 aligned	 with	 the	 beginning	 of	 the	 expression	 at	 the	
-same	level	as	the	previous	line.
-Comments
-18. Comments	 are	 used	 to	 adequately	 explain what	 the	 class,	 interface,	
-methods,	and	blocks	of	code	are	doing.
-19. Commented	 out	 code	 contains	a	 reason	 for	 being	 commented	 out	and	a	
-date	it	can	be	removed	 from	 the	source	 file	if	determined	it	is	no	longer	
-needed.
-Java	Source	Files
-20. Each	Java	source	file	contains	a	single	public	class	or	interface.
-21. The	public	class	is	the	first	class	or	interface	in	the	file.
-22. Check	that the	external	program	interfaces are	implemented	consistently	
-with	what	is	described	in	the	javadoc.
-23. Check	that the	javadoc is complete (i.e.,	it covers all	classes	and	files	part	
-of	the	set	of	classes	assigned	to	you).
-Package	and	Import	Statements
-24. If	 any	 package	 statements	 are	 needed,	 they	 should	 be	 the	 first	 noncomment
-statements.		Import	statements	follow.
-Class	and	Interface	Declarations
-25. The	class	or	interface	declarations	shall	be	in	the	following	order:
-A. class/interface	documentation	comment
-B. class	or	interface	statement
-C. class/interface	implementation	comment,	if	necessary
-D. class	(static)	variables
-a. first	public class	variables
-b. next	protected class	variables
-c. next	package	level	(no	access	modifier)
-d. last	private class	variables
-E. instance	variables
-a. first	public	instance	variables
-e. next	protected	instance	variables
-f. next	package	level	(no	access	modifier)
-g. last	private	instance	variables
-F. constructors
-G. methods	
-26. Methods	 are	 grouped	 by	 functionality	 rather	 than	 by	 scope	 or	
-accessibility.
-27. Check	 that the	 code is free	 of	 duplicates,	 long	 methods,	 big	 classes,	
-breaking	encapsulation,	as	well	as	if	coupling	and	cohesion	are	adequate.
-Initialization	and	Declarations
-28. Check	that variables	and	class	members	are	of	the	correct	type.	Check	that	
-they	have	the	right	visibility	(public/private/protected)
-29. Check	that variables	are	declared	in	the	proper	scope	
-30. Check	that constructors	are called	when	a	new	object	is	desired
-31. Check	that all	object	references are initialized	before	use	
-32. Variables	are	initialized	where	they	are	declared,	unless	dependent	upon	
-a	computation
-33. Declarations	 appear	 at	 the	 beginning	 of	 blocks	 (A	 block	 is	 any	 code	
-surrounded	by	curly	braces	“{“	and	“}”	).		The	exception	is	a	variable	can	
-be	declared	in	a	‘for’	loop.
-Method	Calls
-34. Check	that parameters are	presented	in	the	correct	order
-35. Check	 that the	correct	method is being	called,	or	should	it	be	a	different	
-method	with	a	similar	name
-36. Check	that method	returned values	are	used	properly	
-Arrays
-37. Check	 that there	 are	 no	 off-by-one	 errors	 in	 array	 indexing (that	 is,	 all	
-required	array	elements are correctly	accessed	through	the	index)
-38. Check	 that all	 array	 (or	 other	 collection)	 indexes	 have	 been	 prevented	
-from	going	out-of-bounds
-39. Check	that constructors	are called	when	a	new	array	item	is	desired
-Object	Comparison
-40. Check	that all	objects	(including	Strings)	are	compared	with	"equals"	and	
-not with "=="
-Output	Format
-41. Check	that displayed	output	is	free	of	spelling	and	grammatical	errors
-42. Check	that error	messages	are	comprehensive	and	provide	guidance	as to	
-how	to	correct	the	problem
-43. Check	that the	output is formatted	correctly	in	terms	of	line	stepping	and	
-spacing
-Computation,	Comparisons	and	Assignments
-44. Check	 that the	 implementation	 avoids “brutish	 programming:	 (see	
-http://users.csc.calpoly.edu/~jdalbey/SWE/CodeSmells/bonehead.html)
-45. Check	 order	 of	 computation/evaluation,	 operator	 precedence	 and	
-parenthesizing	
-46. Check	the	liberal	use	of	parenthesis	is	used	to	avoid	operator	precedence	
-problems.
-47. Check	that all	denominators	of	a	division	are	prevented	from	being	zero
-48. Check	 that integer	arithmetic,	especially	division,	are	used	appropriately	
-to	avoid	causing unexpected	truncation/rounding
-49. Check	that the	comparison and	Boolean operators	are	correct
-50. Check	 throw-catch	 expressions,	 and	 check	 that the	 error	 condition	 is	
-actually	legitimate	
-51. Check	that the	code is free	of any	implicit type	conversions
-Exceptions
-52. Check	that the	relevant	exceptions	are	caught
-53. Check	that the	appropriate	action are taken	for	each	catch	block	
-Flow	of	Control
-54. In	 a	 switch	 statement,	 check	 that all	 cases	 are	 addressed	 by	 break	 or	
-return
-55. Check	that all	switch statements	have	a	default	branch
-56. Check	 that all	 loops are correctly	 formed,	 with	 the	 appropriate	
-initialization,	increment	and	termination	expressions
-Files
-57. Check	that all	files	are	properly	declared	and	opened
-58. Check	that all	files	are	closed	properly,	even	in	the	case	of	an	error
-59. Check	that EOF	conditions	are	detected	and	handled	correctly
-60. Check	that	all	file	exceptions	are	caught	and	dealt	with	accordingly
+\configureJava{}
+In this section are reported all the code choices that doesn't comply with the \textit{java standard programmative style}.
+\subsection{Class Issues}
+In this subsection are listed the issues related to the whole class and not to a specific method:
+\begin{itemize}
+	\itemBold{Checklist[20]} The main class contains an internal class named \textbf{SSLInfo}:
+	\lstinputlisting [firstline=615,lastline=636]{./common/IIOPSSLSocketFactory.java}
+	\itemBold{Checklist[26]} The implementation of the class named \textbf{SSLInfo} is put in the beginning of the file while is better to put it near the methods that have the role of returning an \textbf{SSLInfo} object. This is an hint for raising up the readability of the code and for avoiding the continous scrolling of the class code
+	\lstinputlisting [firstline=209,lastline=209]{./common/IIOPSSLSocketFactory.java}
+	\lstinputlisting [firstline=219,lastline=219]{./common/IIOPSSLSocketFactory.java}
+ \end{itemize}
+\subsection{Method Issues}
+We have checked the lexical constraint analyzing the assigned file method by method:
+\begin{itemize}
+	\itemBold{public ServerSocket createServerSocket(String type, InetSocketAddress inetSocketAddress) throws IOException}\\
+	In this method we have found the following problems:
+	\begin{itemize}
+		\itemBold{Checklist[8]} 
+		\begin{itemize}
+			\itemBold{From line 277 to line 300} The whole method is not indented ad all.
+			\itemBold{Lines 279, 284, 285, 297, 298} Are indented with one space and one tab command.
+			\itemBold{Lines 280, 290, 292, 294} Are indented with three tab commands.
+			\itemBold{Lines 287, 288, 293, 295} Are indented with two tab commands.
+			\itemBold{Line 291} Is indented with five tab commands.
+			\itemBold{Line 289} Is indented with four tab commands.
+		\end{itemize}
+		\itemBold{Checklist[18]} The provided javadoc is too short and not too much self-explicable. It doesn't completely explain the class functionalities:
+		\lstinputlisting [firstline=266,lastline=274]{./common/IIOPSSLSocketFactory.java}
+	\end{itemize}
+\end{itemize}
