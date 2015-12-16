@@ -5,18 +5,18 @@ The class we have been assigned is named IIOPSSLSocketFactory.
 It is included in the org.glassfish.enterprise.iiop.impl package.
 IIOPSSLSocketFactory implements the ORBSocketFactory interface, which is part of the CORBA (Common Object Request Broker Architecture) standard declined to Java Enterprise Edition.
 %included in the com.sun.corba.ee.spi.transport package.
-ORBSocketFactory is an interface that abstracts some parts of the ORB middleware related to sockets creation.
-The IIOP (Internet Inter-Orb Protocol, a concrete protocol) is an implementation of the GIOP (General Inter-ORB Protocol, an abstract protocol) that ORBs (Object Request Brokers) use to communicate over the Internet, and provides a mapping between GIOP messages and the TCP/IP layer.
+ORBSocketFactory is an interface that abstracts some parts of the ORB (Object Request Broker) Middleware related to sockets creation.
+The IIOP (Internet Inter-Orb Protocol, a concrete protocol) is an implementation of the GIOP (General Inter-ORB Protocol, an abstract protocol) that ORBs use to communicate over the Internet, and provides a mapping between GIOP messages and the TCP/IP layer.
 
 \subsection{ORB Middleware}
 An ORB Middleware provides that there are two main actors exchanging informations:
 \begin{itemize}
 	\item \textbf{Client:}
-		It requests a method call to an object which interface is exposed by the Server and is known by the Client.
-		The Client has the capability of sending some parameters to the Server for executing the given method call and needs to have back the return value of the method, if any.
+		It requests a method call to an object which interface is exposed by the Server and is known to the Client.
+		The Client has the capability of sending some parameters to the Server for executing the given method call and the capability of receiving back the return value of the called method, if any.
 	\item \textbf{Server:}
 		It exposes the interfaces of the objects that can be called by the various Clients allowed to make remote method calls.
-		Through those interfaces, the Clients can make remote method calls, passing objects as parameters if necessary, and receive a return value, if any.
+		Through those interfaces, the Clients can make remote method calls, passing objects as parameters if necessary, and receiving a return value, if any.
 \end{itemize}
 
 \subsection{IIOPSSLSocketFactory functionalities}
@@ -48,12 +48,12 @@ In order to give each actor the capability of performing the actions provided by
 		This functionality allows the creation of a server socket.
 		\begin{itemize}
 			\item \textbf{Plain Server Socket:}
-				A java.net.ServerSocket that accepts incoming \textbf{Plain Socket} connections from clients. If the ORB object set into the given IIOPSSLSocketFactory object is configured accordingly, the server socket is created using java.nio.channels.ServerSocketChannel.
+				A server socket (java.net.ServerSocket) that accepts incoming \textbf{Plain Socket} connections from clients. If the ORB object set into the given IIOPSSLSocketFactory object is configured accordingly, the server socket is created using java.nio.ServerSocketChannel.
 			\item \textbf{Secure Server Socket:}
-				A javax.net.ssl.SSLSocket that accepts incoming \textbf{Secure Socket} connections on a certain port of a given IP address.
+				A secure server socket (javax.net.ssl.SSLSocket) that accepts incoming \textbf{Secure Socket} connections on a certain port of a given IP address.
 				The SSLInfo object necessary to have the informations about how to build the secure server socket are contained into an IIOPSSLSocketFactory attribute of type java.util.Map that associates a given TCP port to the relevant SSLInfo object.
 				This java.util.Map is initialized from global variables (which seems again a bad habit) at IIOPSSLSocketFactory object creation time and stores the association of every IIOP Listener port to the relevant IIOP Listener configuration.
-				An IIOP listener is a server socket that accepts incoming connections from the remote clients of enterprise beans and from other CORBA (Common Object Request Broker Architecture) based clients.
+				An IIOP listener, using server sockets, accepts incoming connections from the remote clients of enterprise beans and from other CORBA (Common Object Request Broker Architecture) based clients.
 		\end{itemize}
 \end{itemize}
 %TODO Spiegare quando vengono usate le diverse funzioni dal client e dal server
