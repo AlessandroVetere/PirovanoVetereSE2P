@@ -40,6 +40,8 @@
 		tabsize=3
 	}
 }
+\newcommand{\enableCodeLineNumbers}{\lstset{numbers=left}}
+\newcommand{\disableCodeLineNumbers}{\lstset{numbers=none}}
 \newcommand{\myTaxiService}[0]{\mbox{\emph{myTaxiService}}}
 \newcommand{\setDepth}[1]{\setcounter{tocdepth}{#1}\setcounter{secnumdepth}{#1}}
 \newcommand{\sectionBaseDir}[1]{./section_#1}
