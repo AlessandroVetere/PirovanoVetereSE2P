@@ -22,11 +22,11 @@ In order to give each actor the capability of performing the actions provided by
 		This functionality allows the creation of a \textbf{Socket} with some specific characteristics.
 		\begin{itemize}
 			\item \textbf{Plain Socket:}
-				Plain Text Socket (\textbf{java.net.Socket}) with \textbf{Nagle's algorithm} disabled.
-				It is created using a \textbf{java.nio.channels.SocketChannel}, if so is specified in the \textbf{ORB} object, whose reference is passed at runtime to a \textbf{IIOPSSLSocketFactory} object using a setter).
+				Plain Text Socket (\textbf{java.net.Socket}) with \textit{Nagle's algorithm disabled}.
+				It is created using \textbf{java.nio.channels.SocketChannel}, if so is specified in the \textbf{ORB} object, whose reference is passed at runtime to a \textbf{IIOPSSLSocketFactory} object using a setter).
 			\item \textbf{Secure Socket:}
 				Encrypted Socket (\textbf{javax.net.ssl.SSLSocket}) that uses \textbf{Secure Socket Layer} or \textbf{Transport Secure Layer}.
-				Its characteristics are defined during the creation of a \textbf{IIOPSSLSocketFactory} object by obtaining data from global variables (which seems to be a bad behaviour) and storing those data into a specific private attribute of type \textbf{IIOPSSLSocketFactory.SSLInfo}.
+				Its characteristics are defined during the creation of a \textbf{IIOPSSLSocketFactory} object by \textit{obtaining data from global variables} (which seems to be a bad behaviour) and storing those data into a specific private attribute of type \textbf{IIOPSSLSocketFactory.SSLInfo}.
 				This private attribute is never modified after \textbf{IIOPSSLSocketFactory} object creation and thus it can be considered as final, although it is not final nor immutable.
 				In particular, a secure socket built by \textbf{IIOPSSLSocketFactory} can use either one of the following cryptographic protocols for data encryption.
 				\begin{itemize}
@@ -37,15 +37,15 @@ In order to give each actor the capability of performing the actions provided by
 				\end{itemize}
 		\end{itemize}
 	\item \textbf{Server Socket Creation:}
-		This functionality allows the creation of a server socket.
+		This functionality allows the creation of a \textbf{Server Socket}.
 		\begin{itemize}
 			\item \textbf{Plain Server Socket:}
-				A server socket (java.net.ServerSocket) that accepts incoming \textbf{Plain Socket} connections from clients. If the ORB object set into the given IIOPSSLSocketFactory object is configured accordingly, the server socket is created using java.nio.ServerSocketChannel.
+				A Server Socket (\textbf{java.net.ServerSocket}) that accepts incoming \textbf{Plain Socket} connections from \textbf{Clients}. If the \textbf{ORB} object set into the given \textbf{IIOPSSLSocketFactory} object is configured accordingly, the \textbf{Server Socket} is created using \textbf{java.nio.ServerSocketChannel}.
 			\item \textbf{Secure Server Socket:}
-				A secure server socket (javax.net.ssl.SSLSocket) that accepts incoming \textbf{Secure Socket} connections on a certain port of a given IP address.
-				The SSLInfo object necessary to have the informations about how to build the secure server socket are contained into an IIOPSSLSocketFactory attribute of type java.util.Map that associates a given TCP port to the relevant SSLInfo object.
-				This java.util.Map is initialized from global variables (which seems again a bad habit) at IIOPSSLSocketFactory object creation time and stores the association of every IIOP Listener port to the relevant IIOP Listener configuration.
-				An IIOP listener, using server sockets, accepts incoming connections from the remote clients of enterprise beans and from other CORBA (Common Object Request Broker Architecture) based clients.
+				A Secure Server Socket (\textbf{javax.net.ssl.SSLSocket}) that accepts incoming \textbf{Secure Socket} connections on a certain \textbf{Port} of a given \textbf{IP} address.
+				The \textbf{SSLInfo} object necessary to have the informations about how to build the \textbf{Secure Server Socket} are contained into an \textbf{IIOPSSLSocketFactory} attribute of type \textbf{java.util.Map} that associates a given \textbf{TCP Port} to the relevant \textbf{SSLInfo} object.
+				This \textbf{java.util.Map} is \textit{initialized from global variables} (which seems a bad habit again) at \textbf{IIOPSSLSocketFactory} object creation time and stores the association of every \textbf{IIOP Listener Port} to the relevant \textbf{IIOP Listener} configuration.
+				An \textbf{IIOP listener}, using \textbf{Server Sockets}, accepts incoming connections from the remote \textbf{Clients} of \textbf{Enterprise Beans} and from other \textbf{CORBA} (Common Object Request Broker Architecture) based \textbf{Clients}.
 		\end{itemize}
 \end{itemize}
 %TODO Spiegare quando vengono usate le diverse funzioni dal client e dal server
@@ -54,12 +54,26 @@ In order to give each actor the capability of performing the actions provided by
 
 %TODO Il client è in realtà l'application server. Quindi è il server che CHIAMA metodi sul server che contiene l'EJB a cui è associato lo IIOPListener.
 
-The entire class behaviour depends on the type of process in which context the IIOPSSLSocketFactory object is built ().
+The entire class behaviour depends on the type of process in which context the \textbf{IIOPSSLSocketFactory} object is built (A extremely bad behaviour).
+There can exists two different types of 
+So, using inference (the class documentation is not enough) on what has been discussed about so far, it can be concluded that the class functional role is 
 %TODO Completare
 
 \subsection{References}
 %TODO Wikipedia, OMG, glassfish, java...
-
+To study the functional role of \textbf{IIOPSSLSocketFactory} and further topics, some references have been consulted:
+\begin{itemize}
+	\item Wikipedia, the free encyclopedia (https://www.wikipedia.org/)
+	\item Expectations, Outcomes, and Challenges Of Modern Code Review by Alberto Bacchelli and Christian Bird (http://research.microsoft.com/pubs/180283/ICSE\%202013-codereview.pdf)
+	\item Object Management Group (OMG) website (http://www.omg.org/)
+	\item Java Platform, Standard Edition 7 API Specification (http://docs.oracle.com/javase/7/docs/api/overview-summary.html)
+	\item Java RMI over IIOP (http://docs.oracle.com/javase/7/docs/technotes/guides/rmi-iiop/index.html)
+	\item GrepCode for navigating the source code (http://grepcode.com/file/repo1.maven.org/maven2/org.glassfish.main.orb/orb-iiop/4.0/org/glassfish/enterprise/iiop/impl/IIOPSSLSocketFactory.java)
+	\item Class JavaDoc
+	\item GlassFish Server Administration Guide: Administering the Object Request Broker (ORB) (http://docs.oracle.com/cd/E26576_01/doc.312/e24928/orb.htm#GSADG00018)
+	\item https://httpd.apache.org/docs/trunk/ssl/ssl_howto.html
+	\item SSL/TLS Strong Encryption: An Introduction (https://httpd.apache.org/docs/trunk/ssl/ssl_intro.html)
+\end{itemize}
 
 
 

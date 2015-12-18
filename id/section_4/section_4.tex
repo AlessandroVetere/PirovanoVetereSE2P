@@ -11,3 +11,13 @@ For encrypted sockets, Nagle's algorithm is not disabled and this could lead to 
 This is because Nagle's algorithm is essentially delaying the delivery of TCP Packets in order to avoid the delivery of several small packets (which obviously increases the overhead to data ratio), preferring less but bigger packets.
 Thus, a server response that is generated very fast could be delivered later to the client because of this policy.
 \textbf{For us, the missed disabling of Nagle's algorithm in secure sockets is a major bug.}
+\subsection{Secure Socket Creation}
+%TODO Modificare rispetto alla sezione 2
+Encrypted Socket (\textbf{javax.net.ssl.SSLSocket}) characteristics are defined during the creation of a \textbf{IIOPSSLSocketFactory} object by \textit{obtaining data from global variables} (which seems to be a bad behaviour) and storing those data into a specific private attribute of type \textbf{IIOPSSLSocketFactory.SSLInfo}.
+\subsection{Secure Server Socket Creation}
+%TODO Modificare rispetto alla sezione 2
+The SSLInfo object necessary to have the informations about how to build the secure server socket are contained into an IIOPSSLSocketFactory attribute of type java.util.Map that associates a given TCP port to the relevant SSLInfo object.
+This java.util.Map is initialized from global variables (which seems again a bad habit) at IIOPSSLSocketFactory object creation time and stores the association of every IIOP Listener port to the relevant IIOP Listener configuration.
+\subsection{Class Context Dependant}
+%TODO Modificare rispetto alla sezione 2
+The entire class behaviour depends on the type of process in which context the \textbf{IIOPSSLSocketFactory} object is built.
