@@ -1,31 +1,15 @@
 \section{Assigned Classes}
 %TODO <State the namespace pattern and the name of the classes that were assigned to you>
 
-%TODO Domande
-%TODO Namespace = package?
-%TODO Namespace pattern?
+\subsection{Class Name and Pattern Explanation}
+The class we have been assigned is named \textbf{IIOPSSLSocketFactory}.
+It is included in the \textbf{org.glassfish.enterprise.iiop.impl} package.
+\textbf{IIOPSSLSocketFactory} implements the \textbf{ORBSocketFactory} interface, which is part of the \textbf{CORBA} (Common Object Request Broker Architecture) standard declined to \textbf{Java Enterprise Edition}.
+The \textbf{ORBSocketFactory} interface is included in the \textbf{com.sun.corba.ee.spi.transport} package, and is an interface that abstracts some parts of the \textbf{ORB} (Object Request Broker) middleware related to sockets creation.
+As the name suggests, the \textbf{ORBSocketFactory} interface is a \textbf{Factory} of \textbf{Sockets} for the \textbf{ORB} middleware.
+The \textbf{IIOP} (Internet Inter-ORB Protocol, a concrete protocol) is an implementation of the \textbf{GIOP} (General Inter-ORB Protocol, an abstract protocol) that \textbf{ORB}s use to communicate over the Internet, and provides a mapping between \textbf{GIOP} messages and the \textbf{TCP/IP} layer.
+Our class is therefore a \textbf{Factory} of \textbf{SSLSockets} for \textbf{IIOP}, and is an \textbf{Implementation} of a the relevant part of the \textbf{IIOP} included in the \textbf{Enterprise} facilities of the \textbf{Glassfish} server.
 
-%TODO Come scaricare il source code corretto?
-
-%TODO Perchè i ciphers sono separati da virgole anzichè da due punti?
-
-%TODO Cosa cambia da RPC a ORB?
-%TODO RMI è RPC o ORB? Wikipedia dice che RMI è un'implementazione di ORB e che ORB sfrutta RPC.
-
-%TODO Stiamo implementando tanti registri (uno per porta) come quelli usati in RMI? RMI Registry == IIOP Listener (su una certa porta)?
-
-Package name: org.glassfish.enterprise.iiop.impl
-
-Class name: IIOPSSLSocketFactory
-
-Factory: crea oggetti di tipo IIOPSSLSocket
-
-1) TLS?
-2) SSL3?
-3) SSL2?
-4) SSL?
-
-Inner class name : IIOPSSLSocketFactory.SSLInfo
-
-1) SSLContext ?
-2) Ciphers ?
+\subsection{Class Code}
+For reader's convenience, the whole content of the \textbf{IIOPSSLSocketFactory} Java class source file is reported below.
+\lstinputlisting{./common/IIOPSSLSocketFactory.java}

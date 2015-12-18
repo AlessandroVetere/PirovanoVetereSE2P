@@ -1,3 +1,13 @@
 \section{Other Problems}
 %TODO <List here all the parts of code that you think create or may create a bug and explain why>
 %TODO Spostare qui il problema dell'algoritmo di Nagle
+%TODO Perchè i ciphers sono separati da virgole anzichè da due punti?
+%TODO No generici
+%TODO Classe usata per fare due cose diverse senza subclassing
+%TODO Prende variabili globali durante la chiamata di metodi
+\subsection{Nagle's Algorithm Disabling}
+By default, Nagle's algorithm is disabled for \textbf{all and only} the plain sockets built: this is done by setting the "TCP No Delay" property of the java.net.Socket to true, using the given setter.
+For encrypted sockets, Nagle's algorithm is not disabled and this could lead to severe performance issue.
+This is because Nagle's algorithm is essentially delaying the delivery of TCP Packets in order to avoid the delivery of several small packets (which obviously increases the overhead to data ratio), preferring less but bigger packets.
+Thus, a server response that is generated very fast could be delivered later to the client because of this policy.
+\textbf{For us, the missed disabling of Nagle's algorithm in secure sockets is a major bug.}

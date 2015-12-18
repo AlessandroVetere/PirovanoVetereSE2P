@@ -1,37 +1,34 @@
 \section{Functional Role of Assigned Classes}
 %TODO <Elaborate on the functional role you have identified for the class cluster that was assigned to you, also, elaborate on how you managed to understand this role and provide the necessary evidence, e.g., javadoc, diagrams, etc.>
 
-The class we have been assigned is named IIOPSSLSocketFactory.
-It is included in the org.glassfish.enterprise.iiop.impl package.
-IIOPSSLSocketFactory implements the ORBSocketFactory interface, which is part of the CORBA (Common Object Request Broker Architecture) standard declined to Java Enterprise Edition.
-%included in the com.sun.corba.ee.spi.transport package.
-ORBSocketFactory is an interface that abstracts some parts of the ORB (Object Request Broker) Middleware related to sockets creation.
-The IIOP (Internet Inter-Orb Protocol, a concrete protocol) is an implementation of the GIOP (General Inter-ORB Protocol, an abstract protocol) that ORBs use to communicate over the Internet, and provides a mapping between GIOP messages and the TCP/IP layer.
+Starting from the considerations made in the previous section, the \textbf{IIOPSSLSocketFactory} functional role is further analysed .
 
-\subsection{ORB Middleware}
-An ORB Middleware provides that there are two main actors exchanging informations:
+\subsection{ORB Middleware Actors Overview}
+First of all, an overview of the \textbf{ORB} middleware is given, because it is the component that uses the \textbf{IIOP} protocol to communicate over the internet.
+The \textbf{O}bject \textbf{R}equest \textbf{B}roker allows method calls to be made from one computer to another via network, and it provides that for each remote method call there are two main actors exchanging informations:
 \begin{itemize}
 	\item \textbf{Client:}
-		It requests a method call to an object which interface is exposed by the Server and is known to the Client.
-		The Client has the capability of sending some parameters to the Server for executing the given method call and the capability of receiving back the return value of the called method, if any.
+		It requests a method call to an object which interface is exposed by the \textbf{Server} and is known to the \textbf{Client}.
+		The \textbf{Client} has the capability of sending some parameters to the Server for executing the given method call and the capability of receiving back the return value of the called method, if any.
 	\item \textbf{Server:}
-		It exposes the interfaces of the objects that can be called by the various Clients allowed to make remote method calls.
-		Through those interfaces, the Clients can make remote method calls, passing objects as parameters if necessary, and receiving a return value, if any.
+		It exposes the interfaces of the objects that can be called by the various \textbf{Clients} allowed to make remote method calls.
+		Through those interfaces, the \textbf{Clients} can make remote method calls, passing objects as parameters if necessary, and receiving a return value, if any.
 \end{itemize}
 
 \subsection{IIOPSSLSocketFactory functionalities}
-In order to give each actor the capability of performing the actions provided by the middleware using the IIOP protocol, the IIOPSSLSocketFactory main functionalities are:
+In order to give each actor the capability of performing the actions provided by the middleware using the \textbf{IIOP} protocol, the \textbf{IIOPSSLSocketFactory} main functionalities are the following ones.
 \begin{itemize}
 	\item \textbf{Socket Creation:}
-		This functionality allows the creation of a socket with some specific characteristics.
+		This functionality allows the creation of a \textbf{Socket} with some specific characteristics.
 		\begin{itemize}
 			\item \textbf{Plain Socket:}
-				Plain text socket (java.net.Socket) with the option of using a java.nio.channels.SocketChannel (if so is specified in the ORB object, whose reference is passed at runtime to a IIOPSSLSocketFactory object using a setter).
+				Plain Text Socket (\textbf{java.net.Socket}) with \textbf{Nagle's algorithm} disabled.
+				It is created using a \textbf{java.nio.channels.SocketChannel}, if so is specified in the \textbf{ORB} object, whose reference is passed at runtime to a \textbf{IIOPSSLSocketFactory} object using a setter).
 			\item \textbf{Secure Socket:}
-				Encrypted socket (javax.net.ssl.SSLSocket) that uses Secure Socket Layer or Transport Secure Layer.
-				Its characteristics are defined during the creation of a IIOPSSLSocketFactory object by obtaining data from global variables (which seems to be a bad behaviour) and storing those data into a specific private attribute of type IIOPSSLSocketFactory.SSLInfo.
-				This private attribute is never modified after IIOPSSLSocketFactory object creation and thus it can be considered as final, although it is not final nor immutable.
-				In particular, a secure socket built by IIOPSSLSocketFactory can use either one of the following cryptographic protocols for data encryption.
+				Encrypted Socket (\textbf{javax.net.ssl.SSLSocket}) that uses \textbf{Secure Socket Layer} or \textbf{Transport Secure Layer}.
+				Its characteristics are defined during the creation of a \textbf{IIOPSSLSocketFactory} object by obtaining data from global variables (which seems to be a bad behaviour) and storing those data into a specific private attribute of type \textbf{IIOPSSLSocketFactory.SSLInfo}.
+				This private attribute is never modified after \textbf{IIOPSSLSocketFactory} object creation and thus it can be considered as final, although it is not final nor immutable.
+				In particular, a secure socket built by \textbf{IIOPSSLSocketFactory} can use either one of the following cryptographic protocols for data encryption.
 				\begin{itemize}
 					\item \textbf{SSL1} 
 					\item \textbf{SSL2}
@@ -39,11 +36,6 @@ In order to give each actor the capability of performing the actions provided by
 					\item \textbf{TLS}
 				\end{itemize}
 		\end{itemize}
-		By default, Nagle's algorithm is disabled for \textbf{all and only} the plain sockets built: this is done by setting the "TCP No Delay" property of the java.net.Socket to true, using the given setter.
-		For encrypted sockets, Nagle's algorithm is not disabled and this could lead to severe performance issue.
-		This is because Nagle's algorithm is essentially delaying the delivery of TCP Packets in order to avoid the delivery of several small packets (which obviously increases the overhead to data ratio), preferring less but bigger packets.
-		Thus, a server response that is generated very fast could be delivered later to the client because of this policy.
-		\textbf{For us, the missed disabling of Nagle's algorithm in secure sockets is a major bug.}
 	\item \textbf{Server Socket Creation:}
 		This functionality allows the creation of a server socket.
 		\begin{itemize}
@@ -62,15 +54,11 @@ In order to give each actor the capability of performing the actions provided by
 
 %TODO Il client è in realtà l'application server. Quindi è il server che CHIAMA metodi sul server che contiene l'EJB a cui è associato lo IIOPListener.
 
-The entire class behaviour depends on the type of process in which context the IIOPSSLSocketFactory object is built.
+The entire class behaviour depends on the type of process in which context the IIOPSSLSocketFactory object is built ().
 %TODO Completare
 
-
-
-
-
-
-
+\subsection{References}
+%TODO Wikipedia, OMG, glassfish, java...
 
 
 
