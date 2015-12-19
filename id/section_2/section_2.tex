@@ -48,31 +48,37 @@ In order to give each actor the capability of performing the actions provided by
 				An \textbf{IIOP listener}, using \textbf{Server Sockets}, accepts incoming connections from the remote \textbf{Clients} of \textbf{Enterprise Beans} and from other \textbf{CORBA} (Common Object Request Broker Architecture) based \textbf{Clients}.
 		\end{itemize}
 \end{itemize}
-%TODO Spiegare quando vengono usate le diverse funzioni dal client e dal server
-
-%TODO I SERVER POSSONO PARLARE FRA DI LORO MA I SERVER NON POSSONO APRIRE CONNESSIONI VERSO I CLIENT!!!! LA MAPPA PORT TO SSLINFO E' SALVATA SOLO NEL SERVER, QUINDI UN CLIENT NON PUOI USARE IL METODO createSSLServerSocket (CHE SFRUTTA LE INFORMAZIONI CONTENUTE IN QUESTA MAPPA) E QUINDI NON PUO' ACCETTARE CONNESSIONI!!! LA CLASSE E' USATA NEL CONTESTO DI UN PROCESSO SERVER COME PUNTO DI COMUNICAZIONE BIDIREZIONALE , MENTRE IN UN PROCESSO CLIENT E' USATA SOLO PER APRIRE SOCKET VERSO UN SERVER!
-
-%TODO Il client è in realtà l'application server. Quindi è il server che CHIAMA metodi sul server che contiene l'EJB a cui è associato lo IIOPListener.
-
-The entire class behaviour depends on the type of process in which context the \textbf{IIOPSSLSocketFactory} object is built (A extremely bad behaviour).
-There can exists two different types of 
-So, using inference (the class documentation is not enough) on what has been discussed about so far, it can be concluded that the class functional role is 
-%TODO Completare
+The entire class behaviour depends on the type of process in which context the \textbf{IIOPSSLSocketFactory} object is built (A extremely bad modus operandi).
+There can exists two different types of processes in which this class could be used, inferring by the source code available:
+\begin{itemize}
+	\item \textbf{Server (EJB container):}
+		The \textbf{EJB container} is the interface between \textbf{enterprise beans}, which provide the business logic in a \textbf{Java EE application}, and the \textbf{Java EE server}. The \textbf{EJB container} runs on the \textbf{Java EE server} and manages the execution of an \textbf{application's enterprise beans}.
+	\item \textbf{Client (Application Client Container):}
+		The \textbf{application client container} is the interface between \textbf{Java EE application clients} (special Java SE applications that use Java EE server components) and the \textbf{Java EE server}. The \textbf{application client container} runs on the \textbf{client machine} and is the gateway between the \textbf{client application} and the \textbf{Java EE server components} that the client uses.
+\end{itemize}
+The reader who would get a more comprehensive overview on this topic is suggested to go through this \href{https://docs.oracle.com/javaee/7/firstcup/java-ee002.htm}{Oracle documentation}.
+So, again using inference (the class documentation is not enough detailed to get a complete knowledge about these facts) on what has been discovered so far, it can be concluded that the class functional role is fundamentally different in the case of running into a \textbf{EJB Container} than on an \textbf{Application Client Container}.
+To recap, the functional role is either one of the following two:
+\begin{itemize}
+	\item \textbf{Server-side Functional Role:}
+		The class \textbf{Server Socket Creation} functionality is used to give a \textbf{IIOP Listener} the capability of accepting incoming \textbf{Plain Text Socket} and \textbf{Secure Socket} connections, in order to receive \textbf{Remote Method Calls} through \textbf{IIOP}.
+		On the other side, the \textbf{Socket Creation} capability is exploited when the \textbf{EJB Container} needs to make \textbf{Remote Method Calls} using \textbf{IIOP} to another remote \textbf{EJB Container}.
+	\item \textbf{Client-side Functional Role:}
+		The \textbf{Socket Creation} functionality is used to connect to a remote \textbf{IIOP Listener} that is running into an \textbf{EJB Container} in order to deliver a \textbf{Remote Method Call}, and receive the \textbf{Return Value}, if any.
+\end{itemize}
 
 \subsection{References}
-%TODO Wikipedia, OMG, glassfish, java...
 To study the functional role of \textbf{IIOPSSLSocketFactory} and further topics, some references have been consulted:
 \begin{itemize}
-	\item Wikipedia, the free encyclopedia (https://www.wikipedia.org/)
-	\item Expectations, Outcomes, and Challenges Of Modern Code Review by Alberto Bacchelli and Christian Bird (http://research.microsoft.com/pubs/180283/ICSE\%202013-codereview.pdf)
-	\item Object Management Group (OMG) website (http://www.omg.org/)
-	\item Java Platform, Standard Edition 7 API Specification (http://docs.oracle.com/javase/7/docs/api/overview-summary.html)
-	\item Java RMI over IIOP (http://docs.oracle.com/javase/7/docs/technotes/guides/rmi-iiop/index.html)
-	\item GrepCode for navigating the source code (http://grepcode.com/file/repo1.maven.org/maven2/org.glassfish.main.orb/orb-iiop/4.0/org/glassfish/enterprise/iiop/impl/IIOPSSLSocketFactory.java)
-	\item Class JavaDoc
-	\item GlassFish Server Administration Guide: Administering the Object Request Broker (ORB) (http://docs.oracle.com/cd/E26576_01/doc.312/e24928/orb.htm#GSADG00018)
-	\item https://httpd.apache.org/docs/trunk/ssl/ssl_howto.html
-	\item SSL/TLS Strong Encryption: An Introduction (https://httpd.apache.org/docs/trunk/ssl/ssl_intro.html)
+	\item \href{https://www.wikipedia.org/}{Wikipedia, the free encyclopedia}
+	\item \href{http://research.microsoft.com/pubs/180283/ICSE\%202013-codereview.pdf}{Expectations, Outcomes, and Challenges Of Modern Code Review by Alberto Bacchelli and Christian Bird}
+	\item \href{http://www.omg.org/}{Object Management Group (OMG) website}
+	\item \href{http://docs.oracle.com/javase/7/docs/api/overview-summary.html}{Java Platform, Standard Edition 7 API Specification}
+	\item \href{http://docs.oracle.com/javase/7/docs/technotes/guides/rmi-iiop/index.html}{Java RMI over IIOP}
+	\item \href{http://grepcode.com/file/repo1.maven.org/maven2/org.glassfish.main.orb/orb-iiop/4.0/org/glassfish/enterprise/iiop/impl/IIOPSSLSocketFactory.java}{GrepCode for class and related classes source code and documentation}  
+	\item \href{http://docs.oracle.com/cd/E26576_01/doc.312/e24928/orb.htm\#GSADG00018}{GlassFish Server Administration Guide: Administering the Object Request Broker (ORB)}
+	\item \href{https://httpd.apache.org/docs/trunk/ssl/ssl_intro.html}{SSL/TLS Strong Encryption: An Introduction}
+	\item \href{https://docs.oracle.com/javaee/7/firstcup/java-ee002.htm}{Java EE Servers and Containers}
 \end{itemize}
 
 
