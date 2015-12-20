@@ -1,76 +1,469 @@
 \section{Issues Found}
 %TODO <Report the classes/code fragments that do not fullfill some points in the check list. Explain which point is not fullfilled and why>
+In this section are reported all the coding choices that do not meet the \textbf{Code Inspection Checklist} given.
 
 \subsection{Code Inspection Checklist}
 %TODO Inserire la checklist
-In this section are reported all the code choices that do not meet the \textbf{Code Inspection Checklist} given for this document.
+%\newcounter{checklist_item_number}
+%\setcounter{checklist_item_number}{1}
+%\stepcounter{checklist_item_number}
+\subsubsection{Naming Conventions}
+\begin{itemize}
+	\checklist{1}
+	\checklist{2}
+	\checklist{3}
+	\checklist{4}
+	\checklist{5}
+	\checklist{6}
+	\checklist{7}
+\end{itemize}
+
+\subsubsection{Indention}
+\begin{itemize}
+	\checklist{8}
+	\checklist{9}
+\end{itemize}
+
+\subsubsection{Braces}
+\begin{itemize}
+	\checklist{10}
+	\checklist{11}
+\end{itemize}
+
+\subsubsection{File Organization}
+\begin{itemize}
+	\checklist{12}
+	\checklist{13}
+	\checklist{14}
+\end{itemize}
+
+\subsubsection{Wrapping Lines}
+\begin{itemize}
+	\checklist{15}
+	\checklist{16}
+	\checklist{17}
+\end{itemize}
+
+\subsubsection{Comments}
+\begin{itemize}
+	\checklist{18}
+	\checklist{19}
+\end{itemize}
+
+\subsubsection{Java Source Files}
+\begin{itemize}
+	\checklist{20}
+	\checklist{21}
+	\checklist{22}
+	\checklist{23}
+\end{itemize}
+
+\subsubsection{Package and Import Statements}
+\begin{itemize}
+	\checklist{24}
+\end{itemize}
+
+\subsubsection{Class and Interface Declarations}
+\begin{itemize}
+	\checklist{25}
+	\checklist{26}
+	\checklist{27}
+\end{itemize}
+
+\subsubsection{Initialization and Declarations}
+\begin{itemize}
+	\checklist{28}
+	\checklist{29}
+	\checklist{30}
+	\checklist{31}
+	\checklist{32}
+	\checklist{33}
+\end{itemize}
+
+\subsubsection{Method Calls}
+\begin{itemize}
+	\checklist{34}
+	\checklist{35}
+	\checklist{36}
+\end{itemize}
+
+\subsubsection{Arrays}
+\begin{itemize}
+	\checklist{37}
+	\checklist{38}
+	\checklist{39}
+\end{itemize}
+
+\subsubsection{Object Comparison}
+\begin{itemize}
+	\checklist{40}
+\end{itemize}
+
+\subsubsection{Output Format}
+\begin{itemize}
+	\checklist{41}
+	\checklist{42}
+	\checklist{43}
+\end{itemize}
+
+\subsubsection{Computation, Comparisons and Assignments}
+\begin{itemize}
+	\checklist{44}
+	\checklist{45}
+	\checklist{46}
+	\checklist{47}
+	\checklist{48}
+	\checklist{49}
+	\checklist{50}
+	\checklist{51}
+\end{itemize}
+
+\subsubsection{Exceptions}
+\begin{itemize}
+	\checklist{52}
+	\checklist{53}
+\end{itemize}
+
+\subsubsection{Flow of Control}
+\begin{itemize}
+	\checklist{54}
+	\checklist{55}
+	\checklist{56}
+\end{itemize}
+
+\subsubsection{Files}
+\begin{itemize}
+	\checklist{57}
+	\checklist{58}
+	\checklist{59}
+	\checklist{60}
+\end{itemize}
+
 \subsection{Class Issues}
-In this subsection are listed the issues related to the whole class and not to a specific method:
+In this subsection are listed the issues related to the whole class and not only to a specific method.
+\subsubsection{Naming Conventions}
 \begin{itemize}
 	\checklist{1}
 		\begin{itemize}
 			\item
-				The method
-				\renderPartialCode{219}{222}
-				has a name which is not meaningful at all.
-				It's code could in fact be moved into the \textbf{SSLInfo constructor}.
+			The method
+			\renderPartialCode{219}{222}
+			has a name which is not meaningful at all.
+			It's code could in fact be moved into the \textbf{SSLInfo constructor}.
 			\item
-				The method
-				\renderPartialCode{209}{211}
-				has a name which is not really meaningful.
-				It could have been omitted and substituted by a \textbf{SSLInfo constant} inside either the \textbf{IIOPSSLSocketFactory} class or the \textbf{SSLInfo} inner class.
+			The method
+			\renderPartialCode{209}{211}
+			has a name which is not really meaningful.
+			It could have been omitted and substituted by a \textbf{SSLInfo constant} inside either the \textbf{IIOPSSLSocketFactory} class or the \textbf{SSLInfo} inner class.
 			\item
-				The method
-				\renderPartialCode{597}{602}
-				has a name that is not really meaningful, and its functionality is in fact disjointed by the one of \textbf{Socket and Server Socket Creation}.
+			The method
+			\renderPartialCode{597}{602}
+			has a name that is not really meaningful, and its functionality is in fact disjointed by the one of \textbf{Socket and Server Socket Creation}.
 			\item
-				The method 
-				\renderPartialCode{537}{538}
-				has a name that is not really meaningful, and its functionality is in fact disjointed by the one of \textbf{Socket and Server Socket Creation}.
+			The method 
+			\renderPartialCode{537}{538}
+			has a name that is not really meaningful, and its functionality is in fact disjointed by the one of \textbf{Socket and Server Socket Creation}.
 			\item
-				The method
-				\renderPartialCode{348}{360}
-				is simply terrible.
-				No meaningful name, useless parameters and fuzzy functionality.
-		\end{itemize}		
+			The method
+			\renderPartialCode{348}{360}
+			is simply terrible.
+			No meaningful name, useless parameters and fuzzy functionality.
+		\end{itemize}
+	\checklist{2}
+	\checklist{3}
+	\checklist{4}
+	\checklist{5}
+	\checklist{6}
+	\checklist{7}
+\end{itemize}
+
+\subsubsection{Indention}
+\begin{itemize}
+	\checklist{8}
+	\checklist{9}
+\end{itemize}
+
+\subsubsection{Braces}
+\begin{itemize}
+	\checklist{10}
+	\checklist{11}
+\end{itemize}
+
+\subsubsection{File Organization}
+\begin{itemize}
+	\checklist{12}
+	\checklist{13}
+	\checklist{14}
+\end{itemize}
+
+\subsubsection{Wrapping Lines}
+\begin{itemize}
+	\checklist{15}
+	\checklist{16}
+	\checklist{17}
+\end{itemize}
+
+\subsubsection{Comments}
+\begin{itemize}
+	\checklist{18}
+	\checklist{19}
+\end{itemize}
+
+\subsubsection{Java Source Files}
+\begin{itemize}
 	\checklist{20}
 		The main class contains an internal class named \textbf{SSLInfo}:
 		\lstinputlisting [firstline=615,lastline=636]{./common/IIOPSSLSocketFactory.java}
+	\checklist{21}
+	\checklist{22}
+	\checklist{23}
+\end{itemize}
+
+\subsubsection{Package and Import Statements}
+\begin{itemize}
+	\checklist{24}
+\end{itemize}
+
+\subsubsection{Class and Interface Declarations}
+\begin{itemize}
+	\checklist{25}
 	\checklist{26}
 		%TODO @Albi: I metodi che ritornano SSLInfo dovrebbero stare nella classe SSLInfo...
 		The implementation of the class named \textbf{SSLInfo} is put in the beginning of the file while is better to put it near the methods that have the role of returning an \textbf{SSLInfo} object.
-		This is an hint for raising up the readability of the code and for avoiding the continous scrolling of the class code
+		This is an hint for raising up the readability of the code and for avoiding the continuous scrolling of the class code
 		\renderPartialCode{209}{209}
 		\renderPartialCode{219}{222}
+	\checklist{27}
 \end{itemize}
 
-\subsection{Method Issues}
-We have checked the constraints analysing the assigned source code file method by method:
+\subsubsection{Initialization and Declarations}
 \begin{itemize}
-	\item
-		\textbf{public ServerSocket createServerSocket(String type, InetSocketAddress inetSocketAddress) throws IOException}
-		\renderPartialCode{266}{301}
-		In this method we have found the following problems:
-		\begin{itemize}
-			%1 ok
-			%3 cl
-			\checklist{8} 
-				\begin{itemize}
-					\itemBold{From line 277 to line 300}
-						The whole method is not indented ad all.
-					\itemBold{Lines 279, 284, 285, 297, 298}
-						Are indented with one space and one tab command.
-					\itemBold{Lines 280, 290, 292, 294}
-						Are indented with three tab commands.
-					\itemBold{Lines 287, 288, 293, 295}
-						Are indented with two tab commands.
-					\itemBold{Line 291}
-						Is indented with five tab commands.
-					\itemBold{Line 289}
-						Is indented with four tab commands.
-				\end{itemize}
-			\checklist{18}
-				The provided javadoc is too short and not too much self-explicable. It doesn't completely explain the class functionalities:
-				\renderPartialCode{266}{274}
-	\end{itemize}
+	\checklist{28}
+	\checklist{29}
+	\checklist{30}
+	\checklist{31}
+	\checklist{32}
+	\checklist{33}
 \end{itemize}
+
+\subsubsection{Method Calls}
+\begin{itemize}
+	\checklist{34}
+	\checklist{35}
+	\checklist{36}
+\end{itemize}
+
+\subsubsection{Arrays}
+\begin{itemize}
+	\checklist{37}
+	\checklist{38}
+	\checklist{39}
+\end{itemize}
+
+\subsubsection{Object Comparison}
+\begin{itemize}
+	\checklist{40}
+\end{itemize}
+
+\subsubsection{Output Format}
+\begin{itemize}
+	\checklist{41}
+	\checklist{42}
+	\checklist{43}
+\end{itemize}
+
+\subsubsection{Computation, Comparisons and Assignments}
+\begin{itemize}
+	\checklist{44}
+	\checklist{45}
+	\checklist{46}
+	\checklist{47}
+	\checklist{48}
+	\checklist{49}
+	\checklist{50}
+	\checklist{51}
+\end{itemize}
+
+\subsubsection{Exceptions}
+\begin{itemize}
+	\checklist{52}
+	\checklist{53}
+\end{itemize}
+
+\subsubsection{Flow of Control}
+\begin{itemize}
+	\checklist{54}
+	\checklist{55}
+	\checklist{56}
+\end{itemize}
+
+\subsubsection{Files}
+\begin{itemize}
+	\checklist{57}
+	\checklist{58}
+	\checklist{59}
+	\checklist{60}
+\end{itemize}
+
+
+\subsection{Method Issues}
+The checklist has also been checked analyzing the assigned source code file method by method.
+
+\subsubsection{createServerSocket}
+\renderPartialCode{266}{301}
+The following problems have been found in this method.
+
+\paragraph{Naming Conventions}
+\begin{itemize}
+	%\checklist{1} Class Related
+	\checklist{2}
+	\checklist{3}
+	\checklist{4}
+	\checklist{5}
+	\checklist{6}
+	\checklist{7}
+\end{itemize}
+
+\paragraph{Indention}
+\begin{itemize}
+	\checklist{8}
+	 	\begin{itemize}
+			\itemBold{From line 277 to line 300}
+				The whole method is not indented ad all.
+			\itemBold{Lines 279, 284, 285, 297, 298}
+				Are indented with one space and one tab command.
+			\itemBold{Lines 280, 290, 292, 294}
+				Are indented with three tab commands.
+			\itemBold{Lines 287, 288, 293, 295}
+				Are indented with two tab commands.
+			\itemBold{Line 291}
+				Is indented with five tab commands.
+			\itemBold{Line 289}
+				Is indented with four tab commands.
+		\end{itemize}
+	\checklist{9}
+\end{itemize}
+
+\paragraph{Braces}
+\begin{itemize}
+	\checklist{10}
+	\checklist{11}
+\end{itemize}
+
+\paragraph{File Organization}
+\begin{itemize}
+	\checklist{12}
+	\checklist{13}
+	\checklist{14}
+\end{itemize}
+
+\paragraph{Wrapping Lines}
+\begin{itemize}
+	\checklist{15}
+	\checklist{16}
+	\checklist{17}
+\end{itemize}
+
+\paragraph{Comments}
+\begin{itemize}
+	\checklist{18}
+		The provided JavaDoc is too short and not too much self-explicable.
+		It does not completely explain the class functionalities:
+		\renderPartialCode{266}{274}
+	\checklist{19}
+\end{itemize}
+
+\paragraph{Java Source Files}
+\begin{itemize}
+	\checklist{20}
+	\checklist{21}
+	\checklist{22}
+	\checklist{23}
+\end{itemize}
+
+\paragraph{Package and Import Statements}
+\begin{itemize}
+	\checklist{24}
+\end{itemize}
+
+\paragraph{Class and Interface Declarations}
+\begin{itemize}
+	\checklist{25}
+	\checklist{26}
+	\checklist{27}
+\end{itemize}
+
+\paragraph{Initialization and Declarations}
+\begin{itemize}
+	\checklist{28}
+	\checklist{29}
+	\checklist{30}
+	\checklist{31}
+	\checklist{32}
+	\checklist{33}
+\end{itemize}
+
+\paragraph{Method Calls}
+\begin{itemize}
+	\checklist{34}
+	\checklist{35}
+	\checklist{36}
+\end{itemize}
+
+\paragraph{Arrays}
+\begin{itemize}
+	\checklist{37}
+	\checklist{38}
+	\checklist{39}
+\end{itemize}
+
+\paragraph{Object Comparison}
+\begin{itemize}
+	\checklist{40}
+\end{itemize}
+
+\paragraph{Output Format}
+\begin{itemize}
+	\checklist{41}
+	\checklist{42}
+	\checklist{43}
+\end{itemize}
+
+\paragraph{Computation, Comparisons and Assignments}
+\begin{itemize}
+	\checklist{44}
+	\checklist{45}
+	\checklist{46}
+	\checklist{47}
+	\checklist{48}
+	\checklist{49}
+	\checklist{50}
+	\checklist{51}
+\end{itemize}
+
+\paragraph{Exceptions}
+\begin{itemize}
+	\checklist{52}
+	\checklist{53}
+\end{itemize}
+
+\paragraph{Flow of Control}
+\begin{itemize}
+	\checklist{54}
+	\checklist{55}
+	\checklist{56}
+\end{itemize}
+
+\paragraph{Files}
+\begin{itemize}
+	\checklist{57}
+	\checklist{58}
+	\checklist{59}
+	\checklist{60}
+\end{itemize}
+
+\subsubsection{createSocket}
+
+\subsubsection{createSSLServerSocket}
+
+\subsubsection{createSSLSocket}
