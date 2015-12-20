@@ -3,319 +3,379 @@
 In this section are reported all the coding choices that do not meet the \textbf{Code Inspection Checklist} given.
 
 \subsection{Code Inspection Checklist}
-%TODO Inserire la checklist
 %\newcounter{checklist_item_number}
 %\setcounter{checklist_item_number}{1}
 %\stepcounter{checklist_item_number}
 \subsubsection{Naming Conventions}
 \begin{itemize}
 	\checklist{1}
+		All class names, interface names, method names, class variables, method variables, and constants used should have meaningful names and do what the name suggests.
 	\checklist{2}
+		If one-character variables are used, they are used only for temporary “throwaway” variables, such as those used in for loops.
 	\checklist{3}
+		Class names are nouns, in mixed case, with the first letter of each word in capitalized. Examples: class Raster; class ImageSprite;
 	\checklist{4}
+		Interface names should be capitalized like classes.
 	\checklist{5}
+		Method names should be verbs, with the first letter of each addition word capitalized. Examples: getBackground(); computeTemperature().
 	\checklist{6}
+		Class variables, also called attributes, are mixed case, but might begin with an underscore (‘\_’) followed by a lowercase first letter. All the remaining words in the variable name have their first letter capitalized. Examples: \_windowHeight, timeSeriesData.
 	\checklist{7}
+		Constants are declared using all uppercase with words separated by an underscore. Examples: MIN\_WIDTH; MAX\_HEIGHT;
 \end{itemize}
 
 \subsubsection{Indention}
 \begin{itemize}
 	\checklist{8}
+		Three or four spaces are used for indentation and done so consistently
 	\checklist{9}
+		No tabs are used to indent
 \end{itemize}
 
 \subsubsection{Braces}
 \begin{itemize}
 	\checklist{10}
+		Consistent bracing style is used, either the preferred “Allman” style (first brace goes underneath the opening block) or the “Kernighan and Ritchie” style (first brace is on the same line of the instruction that opens the new block).
 	\checklist{11}
+		All if, while, do-while, try-catch, and for statements that have only one statement to execute are surrounded by curly braces. Example:
+		Avoid this:
+		\begin{lstlisting}
+			if (condition) 
+				doThis();
+		\end{lstlisting}
+		Instead do this:
+		\begin{lstlisting}
+			if (condition) 
+			{
+				doThis();
+			}
+		\end{lstlisting}
 \end{itemize}
 
 \subsubsection{File Organization}
 \begin{itemize}
 	\checklist{12}
+		Blank lines and optional comments are used to separate sections (beginning comments, package/import statements, class/interface declarations which include class variable/attributes declarations, constructors, and methods).
 	\checklist{13}
+		Where practical, line length does not exceed 80 characters.
 	\checklist{14}
+		When line length must exceed 80 characters, it does NOT exceed 120 characters.
 \end{itemize}
 
 \subsubsection{Wrapping Lines}
 \begin{itemize}
 	\checklist{15}
+		Line break occurs after a comma or an operator.
 	\checklist{16}
+		Higher-level breaks are used.
 	\checklist{17}
+		A new statement is aligned with the beginning of the expression at the same level as the previous line.
 \end{itemize}
 
 \subsubsection{Comments}
 \begin{itemize}
 	\checklist{18}
+		Comments are used to adequately explain what the class, interface, methods, and blocks of code are doing.
 	\checklist{19}
+		Commented out code contains a reason for being commented out and a date it can be removed from the source file if determined it is no longer needed.
 \end{itemize}
 
 \subsubsection{Java Source Files}
 \begin{itemize}
 	\checklist{20}
+		Each Java source file contains a single public class or interface.
 	\checklist{21}
+		The public class is the first class or interface in the file.
 	\checklist{22}
+		Check that the external program interfaces are implemented consistently with what is described in the javadoc.
 	\checklist{23}
+		Check that the javadoc is complete (i.e., it covers all classes and files part of the set of classes assigned to you).
 \end{itemize}
 
 \subsubsection{Package and Import Statements}
 \begin{itemize}
 	\checklist{24}
+		If any package statements are needed, they should be the first non-comment statements. Import statements follow.
 \end{itemize}
 
 \subsubsection{Class and Interface Declarations}
 \begin{itemize}
 	\checklist{25}
+		The class or interface declarations shall be in the following order:
+		\begin{enumerate}
+			\item
+				class/interface documentation comment
+			\item
+				class or interface statement
+			\item
+				class/interface implementation comment, if necessary
+			\item
+				class (static) variables
+				\begin{enumerate}
+					\item first public class variables
+					\item next protected class variables
+					\item next package level (no access modifier)
+					\item last private class variables
+				\end{enumerate}
+			\item
+				instance variables
+				\begin{enumerate}
+					\item first public instance variables
+					\item next protected instance variables
+					\item next package level (no access modifier)
+					\item last private instance variables
+				\end{enumerate}
+			\item
+				constructors
+			\item
+				methods
+		\end{enumerate}
 	\checklist{26}
+		Methods are grouped by functionality rather than by scope or accessibility.
 	\checklist{27}
+		Check that the code is free of duplicates, long methods, big classes, breaking encapsulation, as well as if coupling and cohesion are adequate.
 \end{itemize}
 
 \subsubsection{Initialization and Declarations}
 \begin{itemize}
 	\checklist{28}
+		Check that variables and class members are of the correct type. Check that they have the right visibility (public/private/protected)
 	\checklist{29}
+		Check that variables are declared in the proper scope
 	\checklist{30}
+		Check that constructors are called when a new object is desired
 	\checklist{31}
+		Check that all object references are initialized before use
 	\checklist{32}
+		Variables are initialized where they are declared, unless dependent upon a computation
 	\checklist{33}
+		Declarations appear at the beginning of blocks (A block is any code surrounded by curly braces “{“ and “}” ). The exception is a variable can be declared in a ‘for’ loop.
 \end{itemize}
 
 \subsubsection{Method Calls}
 \begin{itemize}
 	\checklist{34}
+		Check that parameters are presented in the correct order
 	\checklist{35}
+		Check that the correct method is being called, or should it be a different method with a similar name
 	\checklist{36}
+		Check that method returned values are used properly
 \end{itemize}
 
 \subsubsection{Arrays}
 \begin{itemize}
 	\checklist{37}
+		Check that there are no off-by-one errors in array indexing (that is, all required array elements are correctly accessed through the index)
 	\checklist{38}
+		Check that all array (or other collection) indexes have been prevented from going out-of-bounds
 	\checklist{39}
+		Check that constructors are called when a new array item is desired
 \end{itemize}
 
 \subsubsection{Object Comparison}
 \begin{itemize}
 	\checklist{40}
+		Check that all objects (including Strings) are compared with "equals" and not with "=="
 \end{itemize}
 
 \subsubsection{Output Format}
 \begin{itemize}
 	\checklist{41}
+		Check that displayed output is free of spelling and grammatical errors
 	\checklist{42}
+		Check that error messages are comprehensive and provide guidance as to how to correct the problem
 	\checklist{43}
+		Check that the output is formatted correctly in terms of line stepping and spacing
 \end{itemize}
 
 \subsubsection{Computation, Comparisons and Assignments}
 \begin{itemize}
 	\checklist{44}
+		Check that the implementation avoids “brutish programming: (see \href{http://users.csc.calpoly.edu/~jdalbey/SWE/CodeSmells/bonehead.html}{Brutish Programming})
 	\checklist{45}
+		Check order of computation/evaluation, operator precedence and parenthesizing
 	\checklist{46}
+		Check the liberal use of parenthesis is used to avoid operator precedence problems.
 	\checklist{47}
+		Check that all denominators of a division are prevented from being zero
 	\checklist{48}
+		Check that integer arithmetic, especially division, are used appropriately to avoid causing unexpected truncation/rounding
 	\checklist{49}
+		Check that the comparison and Boolean operators are correct
 	\checklist{50}
+		Check throw-catch expressions, and check that the error condition is actually legitimate
 	\checklist{51}
+		Check that the code is free of any implicit type conversions
 \end{itemize}
 
 \subsubsection{Exceptions}
 \begin{itemize}
 	\checklist{52}
+		Check that the relevant exceptions are caught
 	\checklist{53}
+		Check that the appropriate action are taken for each catch block
 \end{itemize}
 
 \subsubsection{Flow of Control}
 \begin{itemize}
 	\checklist{54}
+		In a switch statement, check that all cases are addressed by break or return
 	\checklist{55}
+		Check that all switch statements have a default branch
 	\checklist{56}
+		Check that all loops are correctly formed, with the appropriate initialization, increment and termination expressions
 \end{itemize}
 
 \subsubsection{Files}
 \begin{itemize}
 	\checklist{57}
+		Check that all files are properly declared and opened
 	\checklist{58}
+		Check that all files are closed properly, even in the case of an error
 	\checklist{59}
+		Check that EOF conditions are detected and handled correctly
 	\checklist{60}
+		Check that all file exceptions are caught and dealt with accordingly
 \end{itemize}
 
 \subsection{Class Issues}
 In this subsection are listed the issues related to the whole class and not only to a specific method.
 \subsubsection{Naming Conventions}
 \begin{itemize}
-	\checklist{1}
-		\begin{itemize}
-			\item
-			The method
-			\renderPartialCode{219}{222}
-			has a name which is not meaningful at all.
-			It's code could in fact be moved into the \textbf{SSLInfo constructor}.
-			\item
-			The method
-			\renderPartialCode{209}{211}
-			has a name which is not really meaningful.
-			It could have been omitted and substituted by a \textbf{SSLInfo constant} inside either the \textbf{IIOPSSLSocketFactory} class or the \textbf{SSLInfo} inner class.
-			\item
-			The method
-			\renderPartialCode{597}{602}
-			has a name that is not really meaningful, and its functionality is in fact disjointed by the one of \textbf{Socket and Server Socket Creation}.
-			\item
-			The method 
-			\renderPartialCode{537}{538}
-			has a name that is not really meaningful, and its functionality is in fact disjointed by the one of \textbf{Socket and Server Socket Creation}.
-			\item
-			The method
-			\renderPartialCode{348}{360}
-			is simply terrible.
-			No meaningful name, useless parameters and fuzzy functionality.
-		\end{itemize}
-	\checklist{2}
-	\checklist{3}
-	\checklist{4}
-	\checklist{5}
-	\checklist{6}
-	\checklist{7}
-\end{itemize}
-
-\subsubsection{Indention}
-\begin{itemize}
-	\checklist{8}
-	\checklist{9}
-\end{itemize}
-
-\subsubsection{Braces}
-\begin{itemize}
-	\checklist{10}
-	\checklist{11}
-\end{itemize}
-
-\subsubsection{File Organization}
-\begin{itemize}
-	\checklist{12}
-	\checklist{13}
-	\checklist{14}
-\end{itemize}
-
-\subsubsection{Wrapping Lines}
-\begin{itemize}
-	\checklist{15}
-	\checklist{16}
-	\checklist{17}
+	\checklist{1} Class Related
+%	All class names, interface names, method names, class variables, method variables, and constants used should have meaningful names and do what the name suggests.
+	\begin{itemize}
+		\item
+		The method
+		\renderPartialCode{219}{222}
+		has a name which is not meaningful at all.
+		It's code could in fact be moved into the \textbf{SSLInfo constructor}.
+		\item
+		The method
+		\renderPartialCode{209}{211}
+		has a name which is not really meaningful.
+		It could have been omitted and substituted by a \textbf{SSLInfo constant} inside either the \textbf{IIOPSSLSocketFactory} class or the \textbf{SSLInfo} inner class.
+		\item
+		The method
+		\renderPartialCode{597}{602}
+		has a name that is not really meaningful, and its functionality is in fact disjointed by the one of \textbf{Socket and Server Socket Creation}.
+		\item
+		The method 
+		\renderPartialCode{537}{538}
+		has a name that is not really meaningful, and its functionality is in fact disjointed by the one of \textbf{Socket and Server Socket Creation}.
+		\item
+		The method
+		\renderPartialCode{348}{360}
+		is simply terrible.
+		No meaningful name, useless parameters and fuzzy functionality.
+	\end{itemize}
+	\checklist{2}  %Class Related Ok
+%	If one-character variables are used, they are used only for temporary “throwaway” variables, such as those used in for loops.
+	\checklist{3} %Class Related Ok
+%	Class names are nouns, in mixed case, with the first letter of each word in capitalized. Examples: class Raster; class ImageSprite;
+	\checklist{4} %Class Related Ok
+%	Interface names should be capitalized like classes.
+	\checklist{5} %Also Class Related Ok
+%	Method names should be verbs, with the first letter of each addition word capitalized. Examples: getBackground(); computeTemperature().
+	\checklist{6} %Class Related Ok
+%	Class variables, also called attributes, are mixed case, but might begin with an underscore (‘\_’) followed by a lowercase first letter. All the remaining words in the variable name have their first letter capitalized. Examples: \_windowHeight, timeSeriesData.
+	\checklist{7} %Class Related
+%	Constants are declared using all uppercase with words separated by an underscore. Examples: MIN\_WIDTH; MAX\_HEIGHT;
+	The constant \textbf{\_logger} follows the naming convention of normal attributes.
+	\renderPartialCode{91}{92}
 \end{itemize}
 
 \subsubsection{Comments}
 \begin{itemize}
-	\checklist{18}
-	\checklist{19}
+	\checklist{18} %Also Class Related
+%	Comments are used to adequately explain what the class, interface, methods, and blocks of code are doing.
+		The only adequate comment in the whole class is at line 337.
+		\renderPartialCode{336}{337}
+		The class is not adequately commented at all.
+	\checklist{19} %Also Class Related
+%	Commented out code contains a reason for being commented out and a date it can be removed from the source file if determined it is no longer needed.
+		The commented out code at lines 103, 135 and 254 is left alone without any additional hint.
+		\renderPartialCode{102}{104}
+		\renderPartialCode{134}{136}
+		\renderPartialCode{253}{255}
 \end{itemize}
 
+%Class Related
 \subsubsection{Java Source Files}
 \begin{itemize}
 	\checklist{20}
+%	Each Java source file contains a single public class or interface.
 		The main class contains an internal class named \textbf{SSLInfo}:
 		\lstinputlisting [firstline=615,lastline=636]{./common/IIOPSSLSocketFactory.java}
-	\checklist{21}
+%	\checklist{21} Ok
+%	The public class is the first class or interface in the file.
 	\checklist{22}
+%	Check that the external program interfaces are implemented consistently with what is described in the javadoc.
 	\checklist{23}
+%	Check that the javadoc is complete (i.e., it covers all classes and files part of the set of classes assigned to you).
 \end{itemize}
 
-\subsubsection{Package and Import Statements}
-\begin{itemize}
-	\checklist{24}
-\end{itemize}
+%Class Related
+%\subsubsection{Package and Import Statements}
+%\begin{itemize}
+%	\checklist{24} Ok
+%	If any package statements are needed, they should be the first non-comment statements. Import statements follow.
+%\end{itemize}
 
+%Class Related
 \subsubsection{Class and Interface Declarations}
 \begin{itemize}
 	\checklist{25}
+%	The class or interface declarations shall be in the following order:
+%	\begin{enumerate}
+%		\item
+%		class/interface documentation comment
+%		\item
+%		class or interface statement
+%		\item
+%		class/interface implementation comment, if necessary
+%		\item
+%		class (static) variables
+%		\begin{enumerate}
+%			\item first public class variables
+%			\item next protected class variables
+%			\item next package level (no access modifier)
+%			\item last private class variables
+%		\end{enumerate}
+%		\item
+%		instance variables
+%		\begin{enumerate}
+%			\item first public instance variables
+%			\item next protected instance variables
+%			\item next package level (no access modifier)
+%			\item last private instance variables
+%		\end{enumerate}
+%		\item
+%		constructors
+%		\item
+%		methods
+%	\end{enumerate}
 	\checklist{26}
+%	Methods are grouped by functionality rather than by scope or accessibility.
 		%TODO @Albi: I metodi che ritornano SSLInfo dovrebbero stare nella classe SSLInfo...
 		The implementation of the class named \textbf{SSLInfo} is put in the beginning of the file while is better to put it near the methods that have the role of returning an \textbf{SSLInfo} object.
 		This is an hint for raising up the readability of the code and for avoiding the continuous scrolling of the class code
 		\renderPartialCode{209}{209}
 		\renderPartialCode{219}{222}
 	\checklist{27}
+%	Check that the code is free of duplicates, long methods, big classes, breaking encapsulation, as well as if coupling and cohesion are adequate.
 \end{itemize}
-
-\subsubsection{Initialization and Declarations}
-\begin{itemize}
-	\checklist{28}
-	\checklist{29}
-	\checklist{30}
-	\checklist{31}
-	\checklist{32}
-	\checklist{33}
-\end{itemize}
-
-\subsubsection{Method Calls}
-\begin{itemize}
-	\checklist{34}
-	\checklist{35}
-	\checklist{36}
-\end{itemize}
-
-\subsubsection{Arrays}
-\begin{itemize}
-	\checklist{37}
-	\checklist{38}
-	\checklist{39}
-\end{itemize}
-
-\subsubsection{Object Comparison}
-\begin{itemize}
-	\checklist{40}
-\end{itemize}
-
-\subsubsection{Output Format}
-\begin{itemize}
-	\checklist{41}
-	\checklist{42}
-	\checklist{43}
-\end{itemize}
-
-\subsubsection{Computation, Comparisons and Assignments}
-\begin{itemize}
-	\checklist{44}
-	\checklist{45}
-	\checklist{46}
-	\checklist{47}
-	\checklist{48}
-	\checklist{49}
-	\checklist{50}
-	\checklist{51}
-\end{itemize}
-
-\subsubsection{Exceptions}
-\begin{itemize}
-	\checklist{52}
-	\checklist{53}
-\end{itemize}
-
-\subsubsection{Flow of Control}
-\begin{itemize}
-	\checklist{54}
-	\checklist{55}
-	\checklist{56}
-\end{itemize}
-
-\subsubsection{Files}
-\begin{itemize}
-	\checklist{57}
-	\checklist{58}
-	\checklist{59}
-	\checklist{60}
-\end{itemize}
-
 
 \subsection{Method Issues}
-The checklist has also been checked analyzing the assigned source code file method by method.
+The checklist has also been checked analysing the assigned source code file method by method.
 
 \subsubsection{Issues in createServerSocket}
 \renderPartialCode{266}{301}
 The following problems have been found in this method.
 
-%\paragraph{Naming Conventions}
+%\paragraph{Naming Conventions} Ok
 %\begin{itemize}
-%	\checklist{1} Class Related
+%	\checklist{1} Ok
 %	\checklist{2} Ok
 %	\checklist{3} Class Related
 %	\checklist{4} Class Related
@@ -344,7 +404,7 @@ The following problems have been found in this method.
 	 	\end{itemize}
 \end{itemize}
 
-%\paragraph{Braces}
+%\paragraph{Braces} Ok
 %\begin{itemize}
 %	\checklist{10} Ok
 %	\checklist{11} Ok
@@ -388,103 +448,630 @@ The following problems have been found in this method.
 	%\checklist{19} Ok
 \end{itemize}
 
-%Class Related
-%\paragraph{Java Source Files} 
-%\begin{itemize}
-%	\checklist{20}
-%	\checklist{21}
-%	\checklist{22}
-%	\checklist{23}
-%\end{itemize}
-
-%Class Related
-%\paragraph{Package and Import Statements}
-%\begin{itemize}
-%	\checklist{24}
-%\end{itemize}
-
-%Class Related
-%\paragraph{Class and Interface Declarations}
-%\begin{itemize}
-%	\checklist{25}
-%	\checklist{26}
-%	\checklist{27}
-%\end{itemize}
-
 \paragraph{Initialization and Declarations}
 \begin{itemize}
 	\checklist{28}
-	\checklist{29}
-	\checklist{30}
-	\checklist{31}
+		For the parameter \textbf{type}, it would have been better to use an enumeration instead of a \textbf{String}.
+	%\checklist{29} Ok
+	%\checklist{30} Ok
+	%\checklist{31} Ok
 	\checklist{32}
-	\checklist{33}
+		At line 285, the \textbf{serverSocket} local variable is initialized to \textbf{null} without reason.
+	%\checklist{33} Ok
 \end{itemize}
 
-\paragraph{Method Calls}
-\begin{itemize}
-	\checklist{34}
-	\checklist{35}
-	\checklist{36}
-\end{itemize}
+%\paragraph{Method Calls} Ok
+%\begin{itemize}
+%	\checklist{34} Ok
+%	\checklist{35} Ok
+%	\checklist{36} Ok
+%\end{itemize}
 
-\paragraph{Arrays}
-\begin{itemize}
-	\checklist{37}
-	\checklist{38}
-	\checklist{39}
-\end{itemize}
+%\paragraph{Arrays} Ok
+%\begin{itemize}
+%	\checklist{37} Ok
+%	\checklist{38} Ok
+%	\checklist{39} Ok
+%\end{itemize}
 
-\paragraph{Object Comparison}
-\begin{itemize}
-	\checklist{40}
-\end{itemize}
+%\paragraph{Object Comparison} Ok
+%\begin{itemize}
+%	\checklist{40} Ok
+%\end{itemize}
 
 \paragraph{Output Format}
 \begin{itemize}
 	\checklist{41}
-	\checklist{42}
-	\checklist{43}
+		The third person form of the verb \textbf{create} is omitted at line 267.
+	%\checklist{42} Ok
+	%\checklist{43} Ok
 \end{itemize}
 
 \paragraph{Computation, Comparisons and Assignments}
 \begin{itemize}
 	\checklist{44}
+		\begin{itemize}
+			\itemBold{Lines 283 to 284}
+				The \textbf{if} condition is not explicit and requires inference to be fully understood.
+				In addition it is error prone.
+				The whole problem should have been faced using an \textbf{enumeration} instead of \textbf{String} constants.
+				\renderPartialCode{283}{284}
+			\itemBold{Line 287}
+				The initialization to \textbf{null} could have been omitted.
+				\renderPartialCode{287}{287}
+			\itemBold{Lines 288 to 293}
+				The local variable \textbf{serverSocketChannel} is useless.
+				\renderPartialCode{288}{293}
+		\end{itemize}
+%	\checklist{45} Ok
+%	\checklist{46} Ok
+%	\checklist{47} Ok
+%	\checklist{48} Ok
+%	\checklist{49} Ok
+%	\checklist{50} Ok
+%	\checklist{51} Ok
+\end{itemize}
+
+%\paragraph{Exceptions} Ok
+%\begin{itemize}
+%	\checklist{52} Ok
+%	\checklist{53} Ok
+%\end{itemize}
+
+%\paragraph{Flow of Control} Ok
+%\begin{itemize}
+%	\checklist{54} Ok
+%	\checklist{55} Ok
+%	\checklist{56} Ok
+%\end{itemize}
+
+%\paragraph{Files} Ok
+%\begin{itemize}
+%	\checklist{57} Ok
+%	\checklist{58} Ok
+%	\checklist{59} Ok
+%	\checklist{60} Ok
+%\end{itemize}
+
+\subsubsection{Issues in createSocket}
+%TODO Completare
+\renderPartialCode{303}{346}
+The following problems have been found in this method.
+
+\paragraph{Naming Conventions}
+\begin{itemize}
+	\checklist{1}
+	%		All class names, interface names, method names, class variables, method variables, and constants used should have meaningful names and do what the name suggests.
+	\checklist{2}
+	%		If one-character variables are used, they are used only for temporary “throwaway” variables, such as those used in for loops.
+	%	\checklist{3}
+	%		Class names are nouns, in mixed case, with the first letter of each word in capitalized. Examples: class Raster; class ImageSprite;
+	%	\checklist{4} Class Related
+	%		Interface names should be capitalized like classes.
+	\checklist{5}
+	Method names should be verbs, with the first letter of each addition word capitalized. Examples: getBackground(); computeTemperature().
+	%	\checklist{6} Class Related
+	%		Class variables, also called attributes, are mixed case, but might begin with an underscore (‘\_’) followed by a lowercase first letter. All the remaining words in the variable name have their first letter capitalized. Examples: \_windowHeight, timeSeriesData.
+	%	\checklist{7} Class Related
+	%		Constants are declared using all uppercase with words separated by an underscore. Examples: MIN\_WIDTH; MAX\_HEIGHT;
+\end{itemize}
+
+\paragraph{Indention}
+\begin{itemize}
+	\checklist{8}
+	Three or four spaces are used for indentation and done so consistently
+	\checklist{9}
+	No tabs are used to indent
+\end{itemize}
+
+\paragraph{Braces}
+\begin{itemize}
+	\checklist{10}
+	%		Consistent bracing style is used, either the preferred “Allman” style (first brace goes underneath the opening block) or the “Kernighan and Ritchie” style (first brace is on the same line of the instruction that opens the new block).
+	\checklist{11}
+	%		All if, while, do-while, try-catch, and for statements that have only one statement to execute are surrounded by curly braces. Example:
+	%		Avoid this:
+	%		\begin{lstlisting}
+	%			if (condition) 
+	%				doThis();
+	%		\end{lstlisting}
+	%		Instead do this:
+	%		\begin{lstlisting}
+	%			if (condition) 
+	%			{
+	%				doThis();
+	%			}
+	%		\end{lstlisting}
+\end{itemize}
+
+\paragraph{File Organization}
+\begin{itemize}
+	\checklist{12}
+	%		Blank lines and optional comments are used to separate sections (beginning comments, package/import statements, class/interface declarations which include class variable/attributes declarations, constructors, and methods).
+	\checklist{13}
+	%		Where practical, line length does not exceed 80 characters.
+	\checklist{14}
+	%		When line length must exceed 80 characters, it does NOT exceed 120 characters.
+\end{itemize}
+
+\paragraph{Wrapping Lines}
+\begin{itemize}
+	\checklist{15}
+	%		Line break occurs after a comma or an operator.
+	\checklist{16}
+	%		Higher-level breaks are used.
+	\checklist{17}
+	%		A new statement is aligned with the beginning of the expression at the same level as the previous line.
+\end{itemize}
+
+\paragraph{Comments}
+\begin{itemize}
+	\checklist{18}
+	%		Comments are used to adequately explain what the class, interface, methods, and blocks of code are doing.
+	\checklist{19}
+	%		Commented out code contains a reason for being commented out and a date it can be removed from the source file if determined it is no longer needed.
+\end{itemize}
+
+\paragraph{Initialization and Declarations}
+\begin{itemize}
+	\checklist{28}
+	%		Check that variables and class members are of the correct type. Check that they have the right visibility (public/private/protected)
+	\checklist{29}
+	%		Check that variables are declared in the proper scope
+	\checklist{30}
+	%		Check that constructors are called when a new object is desired
+	\checklist{31}
+	%		Check that all object references are initialized before use
+	\checklist{32}
+	%		Variables are initialized where they are declared, unless dependent upon a computation
+	\checklist{33}
+	%		Declarations appear at the beginning of blocks (A block is any code surrounded by curly braces “{“ and “}” ). The exception is a variable can be declared in a ‘for’ loop.
+\end{itemize}
+
+\paragraph{Method Calls}
+\begin{itemize}
+	\checklist{34}
+	%		Check that parameters are presented in the correct order
+	\checklist{35}
+	%		Check that the correct method is being called, or should it be a different method with a similar name
+	\checklist{36}
+	%		Check that method returned values are used properly
+\end{itemize}
+
+\paragraph{Arrays}
+\begin{itemize}
+	\checklist{37}
+	%		Check that there are no off-by-one errors in array indexing (that is, all required array elements are correctly accessed through the index)
+	\checklist{38}
+	%		Check that all array (or other collection) indexes have been prevented from going out-of-bounds
+	\checklist{39}
+	%		Check that constructors are called when a new array item is desired
+\end{itemize}
+
+\paragraph{Object Comparison}
+\begin{itemize}
+	\checklist{40}
+	%		Check that all objects (including Strings) are compared with "equals" and not with "=="
+\end{itemize}
+
+\paragraph{Output Format}
+\begin{itemize}
+	\checklist{41}
+	%		Check that displayed output is free of spelling and grammatical errors
+	\checklist{42}
+	%		Check that error messages are comprehensive and provide guidance as to how to correct the problem
+	\checklist{43}
+	%		Check that the output is formatted correctly in terms of line stepping and spacing
+\end{itemize}
+
+\paragraph{Computation, Comparisons and Assignments}
+\begin{itemize}
+	\checklist{44}
+	%		Check that the implementation avoids “brutish programming: (see \href{http://users.csc.calpoly.edu/~jdalbey/SWE/CodeSmells/bonehead.html}{Brutish Programming})
 	\checklist{45}
+	%		Check order of computation/evaluation, operator precedence and parenthesizing
 	\checklist{46}
+	%		Check the liberal use of parenthesis is used to avoid operator precedence problems.
 	\checklist{47}
+	%		Check that all denominators of a division are prevented from being zero
 	\checklist{48}
+	%		Check that integer arithmetic, especially division, are used appropriately to avoid causing unexpected truncation/rounding
 	\checklist{49}
+	%		Check that the comparison and Boolean operators are correct
 	\checklist{50}
+	%		Check throw-catch expressions, and check that the error condition is actually legitimate
 	\checklist{51}
+	%		Check that the code is free of any implicit type conversions
 \end{itemize}
 
 \paragraph{Exceptions}
 \begin{itemize}
 	\checklist{52}
+	%		Check that the relevant exceptions are caught
 	\checklist{53}
+	%		Check that the appropriate action are taken for each catch block
 \end{itemize}
 
 \paragraph{Flow of Control}
 \begin{itemize}
 	\checklist{54}
+	%		In a switch statement, check that all cases are addressed by break or return
 	\checklist{55}
+	%		Check that all switch statements have a default branch
 	\checklist{56}
+	%		Check that all loops are correctly formed, with the appropriate initialization, increment and termination expressions
 \end{itemize}
 
 \paragraph{Files}
 \begin{itemize}
 	\checklist{57}
+	%		Check that all files are properly declared and opened
 	\checklist{58}
+	%		Check that all files are closed properly, even in the case of an error
 	\checklist{59}
+	%		Check that EOF conditions are detected and handled correctly
 	\checklist{60}
+	%		Check that all file exceptions are caught and dealt with accordingly
 \end{itemize}
-
-\subsubsection{Issues in createSocket}
-%TODO Completare
 
 \subsubsection{Issues in createSSLServerSocket}
 %TODO Completare
+\renderPartialCode{364}{430}
+The following problems have been found in this method.
+
+\paragraph{Naming Conventions}
+\begin{itemize}
+	\checklist{1}
+	%		All class names, interface names, method names, class variables, method variables, and constants used should have meaningful names and do what the name suggests.
+	\checklist{2}
+	%		If one-character variables are used, they are used only for temporary “throwaway” variables, such as those used in for loops.
+	%	\checklist{3}
+	%		Class names are nouns, in mixed case, with the first letter of each word in capitalized. Examples: class Raster; class ImageSprite;
+	%	\checklist{4} Class Related
+	%		Interface names should be capitalized like classes.
+	\checklist{5}
+	Method names should be verbs, with the first letter of each addition word capitalized. Examples: getBackground(); computeTemperature().
+	%	\checklist{6} Class Related
+	%		Class variables, also called attributes, are mixed case, but might begin with an underscore (‘\_’) followed by a lowercase first letter. All the remaining words in the variable name have their first letter capitalized. Examples: \_windowHeight, timeSeriesData.
+	%	\checklist{7} Class Related
+	%		Constants are declared using all uppercase with words separated by an underscore. Examples: MIN\_WIDTH; MAX\_HEIGHT;
+\end{itemize}
+
+\paragraph{Indention}
+\begin{itemize}
+	\checklist{8}
+	Three or four spaces are used for indentation and done so consistently
+	\checklist{9}
+	No tabs are used to indent
+\end{itemize}
+
+\paragraph{Braces}
+\begin{itemize}
+	\checklist{10}
+	%		Consistent bracing style is used, either the preferred “Allman” style (first brace goes underneath the opening block) or the “Kernighan and Ritchie” style (first brace is on the same line of the instruction that opens the new block).
+	\checklist{11}
+	%		All if, while, do-while, try-catch, and for statements that have only one statement to execute are surrounded by curly braces. Example:
+	%		Avoid this:
+	%		\begin{lstlisting}
+	%			if (condition) 
+	%				doThis();
+	%		\end{lstlisting}
+	%		Instead do this:
+	%		\begin{lstlisting}
+	%			if (condition) 
+	%			{
+	%				doThis();
+	%			}
+	%		\end{lstlisting}
+\end{itemize}
+
+\paragraph{File Organization}
+\begin{itemize}
+	\checklist{12}
+	%		Blank lines and optional comments are used to separate sections (beginning comments, package/import statements, class/interface declarations which include class variable/attributes declarations, constructors, and methods).
+	\checklist{13}
+	%		Where practical, line length does not exceed 80 characters.
+	\checklist{14}
+	%		When line length must exceed 80 characters, it does NOT exceed 120 characters.
+\end{itemize}
+
+\paragraph{Wrapping Lines}
+\begin{itemize}
+	\checklist{15}
+	%		Line break occurs after a comma or an operator.
+	\checklist{16}
+	%		Higher-level breaks are used.
+	\checklist{17}
+	%		A new statement is aligned with the beginning of the expression at the same level as the previous line.
+\end{itemize}
+
+\paragraph{Comments}
+\begin{itemize}
+	\checklist{18}
+	%		Comments are used to adequately explain what the class, interface, methods, and blocks of code are doing.
+	\checklist{19}
+	%		Commented out code contains a reason for being commented out and a date it can be removed from the source file if determined it is no longer needed.
+\end{itemize}
+
+\paragraph{Initialization and Declarations}
+\begin{itemize}
+	\checklist{28}
+	%		Check that variables and class members are of the correct type. Check that they have the right visibility (public/private/protected)
+	\checklist{29}
+	%		Check that variables are declared in the proper scope
+	\checklist{30}
+	%		Check that constructors are called when a new object is desired
+	\checklist{31}
+	%		Check that all object references are initialized before use
+	\checklist{32}
+	%		Variables are initialized where they are declared, unless dependent upon a computation
+	\checklist{33}
+	%		Declarations appear at the beginning of blocks (A block is any code surrounded by curly braces “{“ and “}” ). The exception is a variable can be declared in a ‘for’ loop.
+\end{itemize}
+
+\paragraph{Method Calls}
+\begin{itemize}
+	\checklist{34}
+	%		Check that parameters are presented in the correct order
+	\checklist{35}
+	%		Check that the correct method is being called, or should it be a different method with a similar name
+	\checklist{36}
+	%		Check that method returned values are used properly
+\end{itemize}
+
+\paragraph{Arrays}
+\begin{itemize}
+	\checklist{37}
+	%		Check that there are no off-by-one errors in array indexing (that is, all required array elements are correctly accessed through the index)
+	\checklist{38}
+	%		Check that all array (or other collection) indexes have been prevented from going out-of-bounds
+	\checklist{39}
+	%		Check that constructors are called when a new array item is desired
+\end{itemize}
+
+\paragraph{Object Comparison}
+\begin{itemize}
+	\checklist{40}
+	%		Check that all objects (including Strings) are compared with "equals" and not with "=="
+\end{itemize}
+
+\paragraph{Output Format}
+\begin{itemize}
+	\checklist{41}
+	%		Check that displayed output is free of spelling and grammatical errors
+	\checklist{42}
+	%		Check that error messages are comprehensive and provide guidance as to how to correct the problem
+	\checklist{43}
+	%		Check that the output is formatted correctly in terms of line stepping and spacing
+\end{itemize}
+
+\paragraph{Computation, Comparisons and Assignments}
+\begin{itemize}
+	\checklist{44}
+	%		Check that the implementation avoids “brutish programming: (see \href{http://users.csc.calpoly.edu/~jdalbey/SWE/CodeSmells/bonehead.html}{Brutish Programming})
+	\checklist{45}
+	%		Check order of computation/evaluation, operator precedence and parenthesizing
+	\checklist{46}
+	%		Check the liberal use of parenthesis is used to avoid operator precedence problems.
+	\checklist{47}
+	%		Check that all denominators of a division are prevented from being zero
+	\checklist{48}
+	%		Check that integer arithmetic, especially division, are used appropriately to avoid causing unexpected truncation/rounding
+	\checklist{49}
+	%		Check that the comparison and Boolean operators are correct
+	\checklist{50}
+	%		Check throw-catch expressions, and check that the error condition is actually legitimate
+	\checklist{51}
+	%		Check that the code is free of any implicit type conversions
+\end{itemize}
+
+\paragraph{Exceptions}
+\begin{itemize}
+	\checklist{52}
+	%		Check that the relevant exceptions are caught
+	\checklist{53}
+	%		Check that the appropriate action are taken for each catch block
+\end{itemize}
+
+\paragraph{Flow of Control}
+\begin{itemize}
+	\checklist{54}
+	%		In a switch statement, check that all cases are addressed by break or return
+	\checklist{55}
+	%		Check that all switch statements have a default branch
+	\checklist{56}
+	%		Check that all loops are correctly formed, with the appropriate initialization, increment and termination expressions
+\end{itemize}
+
+\paragraph{Files}
+\begin{itemize}
+	\checklist{57}
+	%		Check that all files are properly declared and opened
+	\checklist{58}
+	%		Check that all files are closed properly, even in the case of an error
+	\checklist{59}
+	%		Check that EOF conditions are detected and handled correctly
+	\checklist{60}
+	%		Check that all file exceptions are caught and dealt with accordingly
+\end{itemize}
 
 \subsubsection{Issues in createSSLSocket}
 %TODO Completare
+\renderPartialCode{432}{474}
+The following problems have been found in this method.
+
+\paragraph{Naming Conventions}
+\begin{itemize}
+	\checklist{1}
+	%		All class names, interface names, method names, class variables, method variables, and constants used should have meaningful names and do what the name suggests.
+	\checklist{2}
+	%		If one-character variables are used, they are used only for temporary “throwaway” variables, such as those used in for loops.
+	%	\checklist{3}
+	%		Class names are nouns, in mixed case, with the first letter of each word in capitalized. Examples: class Raster; class ImageSprite;
+	%	\checklist{4} Class Related
+	%		Interface names should be capitalized like classes.
+	\checklist{5}
+	Method names should be verbs, with the first letter of each addition word capitalized. Examples: getBackground(); computeTemperature().
+	%	\checklist{6} Class Related
+	%		Class variables, also called attributes, are mixed case, but might begin with an underscore (‘\_’) followed by a lowercase first letter. All the remaining words in the variable name have their first letter capitalized. Examples: \_windowHeight, timeSeriesData.
+	%	\checklist{7} Class Related
+	%		Constants are declared using all uppercase with words separated by an underscore. Examples: MIN\_WIDTH; MAX\_HEIGHT;
+\end{itemize}
+
+\paragraph{Indention}
+\begin{itemize}
+	\checklist{8}
+	Three or four spaces are used for indentation and done so consistently
+	\checklist{9}
+	No tabs are used to indent
+\end{itemize}
+
+\paragraph{Braces}
+\begin{itemize}
+	\checklist{10}
+	%		Consistent bracing style is used, either the preferred “Allman” style (first brace goes underneath the opening block) or the “Kernighan and Ritchie” style (first brace is on the same line of the instruction that opens the new block).
+	\checklist{11}
+	%		All if, while, do-while, try-catch, and for statements that have only one statement to execute are surrounded by curly braces. Example:
+	%		Avoid this:
+	%		\begin{lstlisting}
+	%			if (condition) 
+	%				doThis();
+	%		\end{lstlisting}
+	%		Instead do this:
+	%		\begin{lstlisting}
+	%			if (condition) 
+	%			{
+	%				doThis();
+	%			}
+	%		\end{lstlisting}
+\end{itemize}
+
+\paragraph{File Organization}
+\begin{itemize}
+	\checklist{12}
+	%		Blank lines and optional comments are used to separate sections (beginning comments, package/import statements, class/interface declarations which include class variable/attributes declarations, constructors, and methods).
+	\checklist{13}
+	%		Where practical, line length does not exceed 80 characters.
+	\checklist{14}
+	%		When line length must exceed 80 characters, it does NOT exceed 120 characters.
+\end{itemize}
+
+\paragraph{Wrapping Lines}
+\begin{itemize}
+	\checklist{15}
+	%		Line break occurs after a comma or an operator.
+	\checklist{16}
+	%		Higher-level breaks are used.
+	\checklist{17}
+	%		A new statement is aligned with the beginning of the expression at the same level as the previous line.
+\end{itemize}
+
+\paragraph{Comments}
+\begin{itemize}
+	\checklist{18}
+	%		Comments are used to adequately explain what the class, interface, methods, and blocks of code are doing.
+	\checklist{19}
+	%		Commented out code contains a reason for being commented out and a date it can be removed from the source file if determined it is no longer needed.
+\end{itemize}
+
+\paragraph{Initialization and Declarations}
+\begin{itemize}
+	\checklist{28}
+	%		Check that variables and class members are of the correct type. Check that they have the right visibility (public/private/protected)
+	\checklist{29}
+	%		Check that variables are declared in the proper scope
+	\checklist{30}
+	%		Check that constructors are called when a new object is desired
+	\checklist{31}
+	%		Check that all object references are initialized before use
+	\checklist{32}
+	%		Variables are initialized where they are declared, unless dependent upon a computation
+	\checklist{33}
+	%		Declarations appear at the beginning of blocks (A block is any code surrounded by curly braces “{“ and “}” ). The exception is a variable can be declared in a ‘for’ loop.
+\end{itemize}
+
+\paragraph{Method Calls}
+\begin{itemize}
+	\checklist{34}
+	%		Check that parameters are presented in the correct order
+	\checklist{35}
+	%		Check that the correct method is being called, or should it be a different method with a similar name
+	\checklist{36}
+	%		Check that method returned values are used properly
+\end{itemize}
+
+\paragraph{Arrays}
+\begin{itemize}
+	\checklist{37}
+	%		Check that there are no off-by-one errors in array indexing (that is, all required array elements are correctly accessed through the index)
+	\checklist{38}
+	%		Check that all array (or other collection) indexes have been prevented from going out-of-bounds
+	\checklist{39}
+	%		Check that constructors are called when a new array item is desired
+\end{itemize}
+
+\paragraph{Object Comparison}
+\begin{itemize}
+	\checklist{40}
+	%		Check that all objects (including Strings) are compared with "equals" and not with "=="
+\end{itemize}
+
+\paragraph{Output Format}
+\begin{itemize}
+	\checklist{41}
+	%		Check that displayed output is free of spelling and grammatical errors
+	\checklist{42}
+	%		Check that error messages are comprehensive and provide guidance as to how to correct the problem
+	\checklist{43}
+	%		Check that the output is formatted correctly in terms of line stepping and spacing
+\end{itemize}
+
+\paragraph{Computation, Comparisons and Assignments}
+\begin{itemize}
+	\checklist{44}
+	%		Check that the implementation avoids “brutish programming: (see \href{http://users.csc.calpoly.edu/~jdalbey/SWE/CodeSmells/bonehead.html}{Brutish Programming})
+	\checklist{45}
+	%		Check order of computation/evaluation, operator precedence and parenthesizing
+	\checklist{46}
+	%		Check the liberal use of parenthesis is used to avoid operator precedence problems.
+	\checklist{47}
+	%		Check that all denominators of a division are prevented from being zero
+	\checklist{48}
+	%		Check that integer arithmetic, especially division, are used appropriately to avoid causing unexpected truncation/rounding
+	\checklist{49}
+	%		Check that the comparison and Boolean operators are correct
+	\checklist{50}
+	%		Check throw-catch expressions, and check that the error condition is actually legitimate
+	\checklist{51}
+	%		Check that the code is free of any implicit type conversions
+\end{itemize}
+
+\paragraph{Exceptions}
+\begin{itemize}
+	\checklist{52}
+	%		Check that the relevant exceptions are caught
+	\checklist{53}
+	%		Check that the appropriate action are taken for each catch block
+\end{itemize}
+
+\paragraph{Flow of Control}
+\begin{itemize}
+	\checklist{54}
+	%		In a switch statement, check that all cases are addressed by break or return
+	\checklist{55}
+	%		Check that all switch statements have a default branch
+	\checklist{56}
+	%		Check that all loops are correctly formed, with the appropriate initialization, increment and termination expressions
+\end{itemize}
+
+\paragraph{Files}
+\begin{itemize}
+	\checklist{57}
+	%		Check that all files are properly declared and opened
+	\checklist{58}
+	%		Check that all files are closed properly, even in the case of an error
+	\checklist{59}
+	%		Check that EOF conditions are detected and handled correctly
+	\checklist{60}
+	%		Check that all file exceptions are caught and dealt with accordingly
+\end{itemize}
