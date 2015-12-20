@@ -1,35 +1,76 @@
 \section{Issues Found}
 %TODO <Report the classes/code fragments that do not fullfill some points in the check list. Explain which point is not fullfilled and why>
-\configureJava{}
-In this section are reported all the code choices that doesn't comply with the \textit{java standard programmative style}.
+
+\subsection{Code Inspection Checklist}
+%TODO Inserire la checklist
+In this section are reported all the code choices that do not meet the \textbf{Code Inspection Checklist} given for this document.
 \subsection{Class Issues}
 In this subsection are listed the issues related to the whole class and not to a specific method:
 \begin{itemize}
-	\checklist{20} The main class contains an internal class named \textbf{SSLInfo}:
-	\lstinputlisting [firstline=615,lastline=636]{./common/IIOPSSLSocketFactory.java}
-	\checklist{26} The implementation of the class named \textbf{SSLInfo} is put in the beginning of the file while is better to put it near the methods that have the role of returning an \textbf{SSLInfo} object. This is an hint for raising up the readability of the code and for avoiding the continous scrolling of the class code
-	\renderPartialCode{209}{209}
-	\renderPartialCode{219}{220}
-	%\lstinputlisting [firstline=209,lastline=209]{./common/IIOPSSLSocketFactory.java}
-	%\lstinputlisting [firstline=219,lastline=219]{./common/IIOPSSLSocketFactory.java}
-\end{itemize}
-\subsection{Method Issues}
-We have checked the lexical constraint analyzing the assigned file method by method:
-\begin{itemize}
-	\itemBold{public ServerSocket createServerSocket(String type, InetSocketAddress inetSocketAddress) throws IOException}\\
-	In this method we have found the following problems:
-	\begin{itemize}
-		\checklist{8} 
+	\checklist{1}
 		\begin{itemize}
-			\itemBold{From line 277 to line 300} The whole method is not indented ad all.
-			\itemBold{Lines 279, 284, 285, 297, 298} Are indented with one space and one tab command.
-			\itemBold{Lines 280, 290, 292, 294} Are indented with three tab commands.
-			\itemBold{Lines 287, 288, 293, 295} Are indented with two tab commands.
-			\itemBold{Line 291} Is indented with five tab commands.
-			\itemBold{Line 289} Is indented with four tab commands.
-		\end{itemize}
-		\checklist{18} The provided javadoc is too short and not too much self-explicable. It doesn't completely explain the class functionalities:
-		\renderPartialCode{266}{274}
-		%\lstinputlisting[firstline=266,lastline=274]{./common/IIOPSSLSocketFactory.java}
+			\item
+				The method
+				\renderPartialCode{219}{222}
+				has a name which is not meaningful at all.
+				It's code could in fact be moved into the \textbf{SSLInfo constructor}.
+			\item
+				The method
+				\renderPartialCode{209}{211}
+				has a name which is not really meaningful.
+				It could have been omitted and substituted by a \textbf{SSLInfo constant} inside either the \textbf{IIOPSSLSocketFactory} class or the \textbf{SSLInfo} inner class.
+			\item
+				The method
+				\renderPartialCode{597}{602}
+				has a name that is not really meaningful, and its functionality is in fact disjointed by the one of \textbf{Socket and Server Socket Creation}.
+			\item
+				The method 
+				\renderPartialCode{537}{538}
+				has a name that is not really meaningful, and its functionality is in fact disjointed by the one of \textbf{Socket and Server Socket Creation}.
+			\item
+				The method
+				\renderPartialCode{348}{360}
+				is simply terrible.
+				No meaningful name, useless parameters and fuzzy functionality.
+		\end{itemize}		
+	\checklist{20}
+		The main class contains an internal class named \textbf{SSLInfo}:
+		\lstinputlisting [firstline=615,lastline=636]{./common/IIOPSSLSocketFactory.java}
+	\checklist{26}
+		%TODO @Albi: I metodi che ritornano SSLInfo dovrebbero stare nella classe SSLInfo...
+		The implementation of the class named \textbf{SSLInfo} is put in the beginning of the file while is better to put it near the methods that have the role of returning an \textbf{SSLInfo} object.
+		This is an hint for raising up the readability of the code and for avoiding the continous scrolling of the class code
+		\renderPartialCode{209}{209}
+		\renderPartialCode{219}{222}
+\end{itemize}
+
+\subsection{Method Issues}
+We have checked the constraints analysing the assigned source code file method by method:
+\begin{itemize}
+	\item
+		\textbf{public ServerSocket createServerSocket(String type, InetSocketAddress inetSocketAddress) throws IOException}
+		\renderPartialCode{266}{301}
+		In this method we have found the following problems:
+		\begin{itemize}
+			%1 ok
+			%3 cl
+			\checklist{8} 
+				\begin{itemize}
+					\itemBold{From line 277 to line 300}
+						The whole method is not indented ad all.
+					\itemBold{Lines 279, 284, 285, 297, 298}
+						Are indented with one space and one tab command.
+					\itemBold{Lines 280, 290, 292, 294}
+						Are indented with three tab commands.
+					\itemBold{Lines 287, 288, 293, 295}
+						Are indented with two tab commands.
+					\itemBold{Line 291}
+						Is indented with five tab commands.
+					\itemBold{Line 289}
+						Is indented with four tab commands.
+				\end{itemize}
+			\checklist{18}
+				The provided javadoc is too short and not too much self-explicable. It doesn't completely explain the class functionalities:
+				\renderPartialCode{266}{274}
 	\end{itemize}
 \end{itemize}
