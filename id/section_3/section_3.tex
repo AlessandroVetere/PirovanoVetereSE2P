@@ -313,85 +313,103 @@ The checklist has also been checked analyzing the assigned source code file meth
 \renderPartialCode{266}{301}
 The following problems have been found in this method.
 
-\paragraph{Naming Conventions}
-\begin{itemize}
-	%\checklist{1} Class Related
-	\checklist{2}
-	\checklist{3}
-	\checklist{4}
-	\checklist{5}
-	\checklist{6}
-	\checklist{7}
-\end{itemize}
+%\paragraph{Naming Conventions}
+%\begin{itemize}
+%	\checklist{1} Class Related
+%	\checklist{2} Ok
+%	\checklist{3} Class Related
+%	\checklist{4} Class Related
+%	\checklist{5} Ok
+%	\checklist{6} Class Related
+%	\checklist{7} Class Related
+%\end{itemize}
 
 \paragraph{Indention}
 \begin{itemize}
 	\checklist{8}
 	 	\begin{itemize}
-			\itemBold{From line 277 to line 300}
-				The whole method is not indented ad all.
-			\itemBold{Lines 279, 284, 285, 297, 298}
-				Are indented with one space and one tab command.
-			\itemBold{Lines 280, 290, 292, 294}
-				Are indented with three tab commands.
-			\itemBold{Lines 287, 288, 293, 295}
-				Are indented with two tab commands.
-			\itemBold{Line 291}
-				Is indented with five tab commands.
-			\itemBold{Line 289}
-				Is indented with four tab commands.
+			\itemBold{Lines 277 to 300}
+				The whole method lacks a level of indentation.
+			\itemBold{Lines 287 to 295}
+				Have an extra level of indentation.
 		\end{itemize}
 	\checklist{9}
+	 	\begin{itemize}
+	 		\itemBold{Lines 278, 281, 283, 286, 300}
+		 		Are indented using one tab.
+	 		\itemBold{Lines 279, 285, 297, 298}
+		 		Are indented using one tab and four spaces.
+	 		\itemBold{Line 284}
+		 		Is indented using two tabs.
+	 	\end{itemize}
 \end{itemize}
 
-\paragraph{Braces}
-\begin{itemize}
-	\checklist{10}
-	\checklist{11}
-\end{itemize}
+%\paragraph{Braces}
+%\begin{itemize}
+%	\checklist{10} Ok
+%	\checklist{11} Ok
+%\end{itemize}
 
 \paragraph{File Organization}
 \begin{itemize}
 	\checklist{12}
-	\checklist{13}
-	\checklist{14}
+		 Lines 277, 289, 296 and 299 are blank without a clear reason.
+	%\checklist{13} Ok
+	%\checklist{14} Ok
 \end{itemize}
 
 \paragraph{Wrapping Lines}
 \begin{itemize}
 	\checklist{15}
+		 \begin{itemize}
+		 	\itemBold{Line 279}
+		 		Is broken before an operator.
+		 	\itemBold{Line 288}
+		 		Is broken at an open parenthesis.
+		 \end{itemize}
 	\checklist{16}
+		\begin{itemize}
+			\itemBold{Line 288}
+				A lower-level break occurs.
+		\end{itemize}
 	\checklist{17}
+		\begin{itemize}
+			\itemBold{Lines 280}
+				Is aligned with an extra level of indentation.
+		\end{itemize}
 \end{itemize}
 
 \paragraph{Comments}
 \begin{itemize}
 	\checklist{18}
-		The provided JavaDoc is too short and not too much self-explicable.
-		It does not completely explain the class functionalities:
+		The provided JavaDoc is too short and not really explicative.
+		It does not completely explain the method functionalities.
 		\renderPartialCode{266}{274}
-	\checklist{19}
+	%\checklist{19} Ok
 \end{itemize}
 
-\paragraph{Java Source Files}
-\begin{itemize}
-	\checklist{20}
-	\checklist{21}
-	\checklist{22}
-	\checklist{23}
-\end{itemize}
+%Class Related
+%\paragraph{Java Source Files} 
+%\begin{itemize}
+%	\checklist{20}
+%	\checklist{21}
+%	\checklist{22}
+%	\checklist{23}
+%\end{itemize}
 
-\paragraph{Package and Import Statements}
-\begin{itemize}
-	\checklist{24}
-\end{itemize}
+%Class Related
+%\paragraph{Package and Import Statements}
+%\begin{itemize}
+%	\checklist{24}
+%\end{itemize}
 
-\paragraph{Class and Interface Declarations}
-\begin{itemize}
-	\checklist{25}
-	\checklist{26}
-	\checklist{27}
-\end{itemize}
+%Class Related
+%\paragraph{Class and Interface Declarations}
+%\begin{itemize}
+%	\checklist{25}
+%	\checklist{26}
+%	\checklist{27}
+%\end{itemize}
 
 \paragraph{Initialization and Declarations}
 \begin{itemize}
@@ -463,7 +481,10 @@ The following problems have been found in this method.
 \end{itemize}
 
 \subsubsection{createSocket}
+%TODO Completare
 
 \subsubsection{createSSLServerSocket}
+%TODO Completare
 
 \subsubsection{createSSLSocket}
+%TODO Completare
