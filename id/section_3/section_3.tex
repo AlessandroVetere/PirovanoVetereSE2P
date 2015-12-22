@@ -443,7 +443,7 @@ The following problems have been found in this method.
 \paragraph{Comments}
 \begin{itemize}
 	\checklist{18}
-		The provided JavaDoc is too short and not really explicative.
+		The provided \textit{JavaDoc} is too short and not really explicative.
 		It does not completely explain the method functionalities.
 		\renderPartialCode{266}{274}
 	%\checklist{19} Ok
@@ -788,16 +788,26 @@ The following problems have been found in this method.
 \begin{itemize}
 	\checklist{1}
 	%		All class names, interface names, method names, class variables, method variables, and constants used should have meaningful names and do what the name suggests.
+	\begin{itemize}
+		\itemBold{Lines 376, 377} \renderPartialCode{376}{377} The difference between \textit{port} and \textit{iport} should be more highlighted through the naming choices.
+		\itemBold{Line 384} The variable name \textit{ssf} is not really meaningful.
+		\renderPartialCode{384}{384}
+		\itemBold{Line 393} The variable name \textit{cs} is not really meaningful.
+		\renderPartialCode{393}{393}
+		\itemBold{Line 401} The variable name \textit{ss} is not really meaningful.
+		\renderPartialCode{401}{401}
 		
-	\checklist{2}
+	\end{itemize}
+		
+	%\checklist{2} Ok
 	%		If one-character variables are used, they are used only for temporary “throwaway” variables, such as those used in for loops.
-	%	\checklist{3}
+	%\checklist{3} Class Related
 	%		Class names are nouns, in mixed case, with the first letter of each word in capitalized. Examples: class Raster; class ImageSprite;
-	%	\checklist{4} Class Related
+	%\checklist{4} Class Related
 	%		Interface names should be capitalized like classes.
-	\checklist{5}
+	%\checklist{5} Ok
 	%Method names should be verbs, with the first letter of each addition word capitalized. Examples: getBackground(); computeTemperature().
-	%	\checklist{6} Class Related
+	%\checklist{6} Class Related
 	%		Class variables, also called attributes, are mixed case, but might begin with an underscore (‘\_’) followed by a lowercase first letter. All the remaining words in the variable name have their first letter capitalized. Examples: \_windowHeight, timeSeriesData.
 	%	\checklist{7} Class Related
 	%		Constants are declared using all uppercase with words separated by an underscore. Examples: MIN\_WIDTH; MAX\_HEIGHT;
@@ -807,15 +817,24 @@ The following problems have been found in this method.
 \begin{itemize}
 	\checklist{8}
 	%Three or four spaces are used for indentation and done so consistently
+	\begin{itemize}
+		\itemBold{Lines 368 to 430}
+		The whole method is not indented correctly.
+		\itemBold{Lines 398, 419, 420}
+		Lack an extra level of indentation, over the one mentioned above.
+	\end{itemize}
 	\checklist{9}
 	%No tabs are used to indent
+	\begin{itemize}
+		\itemBold{Lines 396, 397, 399, 418, 421, 423, 424, 427} These lines are indented using one space and one tab. This approach is neither consistent with the (wrong) style adopted in the whole method.
+	\end{itemize}
 \end{itemize}
 
-\paragraph{Braces}
-\begin{itemize}
-	\checklist{10}
+%\paragraph{Braces}
+%\begin{itemize}
+	%\checklist{10} Ok "Allman"
 	%		Consistent bracing style is used, either the preferred “Allman” style (first brace goes underneath the opening block) or the “Kernighan and Ritchie” style (first brace is on the same line of the instruction that opens the new block).
-	\checklist{11}
+	%\checklist{11} Ok
 	%		All if, while, do-while, try-catch, and for statements that have only one statement to execute are surrounded by curly braces. Example:
 	%		Avoid this:
 	%		\begin{lstlisting}
@@ -829,15 +848,29 @@ The following problems have been found in this method.
 	%				doThis();
 	%			}
 	%		\end{lstlisting}
-\end{itemize}
+%\end{itemize}
 
 \paragraph{File Organization}
 \begin{itemize}
 	\checklist{12}
 	%		Blank lines and optional comments are used to separate sections (beginning comments, package/import statements, class/interface declarations which include class variable/attributes declarations, constructors, and methods).
+	\begin{itemize}
+		\itemBold{Lines 392, 394, 416}
+		Are blank without reason.
+	\end{itemize}
 	\checklist{13}
 	%		Where practical, line length does not exceed 80 characters.
-	\checklist{14}
+		\begin{itemize}
+			\itemBold{Line 368}
+			Is 113 characters long.
+			\itemBold{Line 372}
+			Is 92 characters long.
+			\itemBold{Line 380}
+			Is 93 characters long.
+			\itemBold{Line 411}
+			Is 101 characters long.
+		\end{itemize}
+	%\checklist{14}
 	%		When line length must exceed 80 characters, it does NOT exceed 120 characters.
 \end{itemize}
 
@@ -846,7 +879,7 @@ The following problems have been found in this method.
 	\checklist{15}
 	%		Line break occurs after a comma or an operator.
 	\checklist{16}
-	%		Higher-level breaks are used.
+	%		Higher-level breaks are used.co
 	\checklist{17}
 	%		A new statement is aligned with the beginning of the expression at the same level as the previous line.
 \end{itemize}
@@ -855,59 +888,89 @@ The following problems have been found in this method.
 \begin{itemize}
 	\checklist{18}
 	%		Comments are used to adequately explain what the class, interface, methods, and blocks of code are doing.
-	\checklist{19}
+	The provided \textit{JavaDoc} is too short and not really explicative.
+	It does not completely explain the method functionalities.
+	\renderPartialCode{364}{367}
+	%\checklist{19}
 	%		Commented out code contains a reason for being commented out and a date it can be removed from the source file if determined it is no longer needed.
 \end{itemize}
 
 \paragraph{Initialization and Declarations}
 \begin{itemize}
-	\checklist{28}
+	%\checklist{28} Ok
 	%		Check that variables and class members are of the correct type. Check that they have the right visibility (public/private/protected)
-	\checklist{29}
+	%\checklist{29} Ok
 	%		Check that variables are declared in the proper scope
-	\checklist{30}
+	%\checklist{30} Ok
 	%		Check that constructors are called when a new object is desired
 	\checklist{31}
 	%		Check that all object references are initialized before use
-	\checklist{32}
+	\begin{itemize}
+		\itemBold{Lines 393 and 393}
+		The variable \textit{cs} is initialized to \textit{null} even if is useless.
+		\renderPartialCode{393}{393}
+		\itemBold{Lines 401 and 401}
+		The variable \textit{ss} is initialized to \textit{null} even if is useless.
+		\renderPartialCode{401}{401}
+	\end{itemize}
+	%\checklist{32} Ok
 	%		Variables are initialized where they are declared, unless dependent upon a computation
-	\checklist{33}
+	\checklist{33} 
 	%		Declarations appear at the beginning of blocks (A block is any code surrounded by curly braces “{“ and “}” ). The exception is a variable can be declared in a ‘for’ loop.
+	\begin{itemize}
+		\itemBold{Lines 393 and 401} The \textit{cs} and \textit{ss} variables are declared at the middle of the method code. They have to be declared at the beginning of it.
+		\renderPartialCode{393}{393}
+		\renderPartialCode{401}{401}
+	\end{itemize}
 \end{itemize}
 
-\paragraph{Method Calls}
-\begin{itemize}
-	\checklist{34}
+%\paragraph{Method Calls} Ok
+%\begin{itemize}
+%	\checklist{34}
 	%		Check that parameters are presented in the correct order
-	\checklist{35}
+%	\checklist{35}
 	%		Check that the correct method is being called, or should it be a different method with a similar name
-	\checklist{36}
+%	\checklist{36}
 	%		Check that method returned values are used properly
-\end{itemize}
+%\end{itemize}
 
-\paragraph{Arrays}
-\begin{itemize}
-	\checklist{37}
+%\paragraph{Arrays} Ok
+%\begin{itemize}
+%	\checklist{37}
 	%		Check that there are no off-by-one errors in array indexing (that is, all required array elements are correctly accessed through the index)
-	\checklist{38}
+%	\checklist{38}
 	%		Check that all array (or other collection) indexes have been prevented from going out-of-bounds
-	\checklist{39}
+%	\checklist{39}
 	%		Check that constructors are called when a new array item is desired
-\end{itemize}
+%\end{itemize}
 
 \paragraph{Object Comparison}
 \begin{itemize}
 	\checklist{40}
 	%		Check that all objects (including Strings) are compared with "equals" and not with "=="
+	\begin{itemize}
+		\itemBold{Line 371, 379, 388, 407} The comparison between \textit{null} and other objects is done through the \textit{==} operator, insted of using \textit{equals()}. 
+		\renderPartialCode{371}{371}
+		\renderPartialCode{379}{379}
+		\renderPartialCode{388}{388}
+		\renderPartialCode{407}{407}
+	\end{itemize}
 \end{itemize}
 
 \paragraph{Output Format}
 \begin{itemize}
-	\checklist{41}
+	%\checklist{41}
 	%		Check that displayed output is free of spelling and grammatical errors
 	\checklist{42}
 	%		Check that error messages are comprehensive and provide guidance as to how to correct the problem
-	\checklist{43}
+	In the \textit{catch blocks} the catched exceptions are not explained to the user, they are only printed out.
+	\begin{itemize}
+		\itemBold{Line 411}
+		\renderPartialCode{411}{413}
+		\itemBold{Line 423}
+		\renderPartialCode{423}{423}
+	\end{itemize}
+	%\checklist{43}
 	%		Check that the output is formatted correctly in terms of line stepping and spacing
 \end{itemize}
 
@@ -935,31 +998,40 @@ The following problems have been found in this method.
 \begin{itemize}
 	\checklist{52}
 	%		Check that the relevant exceptions are caught
+	\begin{itemize}
+		\itemBold{Lines 422 to 425}
+		The \textbf{catch} block
+		\renderPartialCode{422}{425}
+		is actually catching a generic \textbf{Exception} instead of the generated ones.
+	\end{itemize}
 	\checklist{53}
 	%		Check that the appropriate action are taken for each catch block
+	\begin{itemize}
+		\item The problem in the above \textit{code-block} is that, for every generated exception, this block throws an \textbf{IOException}, even if the catched exception is not an \textbf{IO} one.
+	\end{itemize}
 \end{itemize}
 
-\paragraph{Flow of Control}
-\begin{itemize}
-	\checklist{54}
+%\paragraph{Flow of Control}
+%\begin{itemize}
+%	\checklist{54}
 	%		In a switch statement, check that all cases are addressed by break or return
-	\checklist{55}
+%	\checklist{55}
 	%		Check that all switch statements have a default branch
-	\checklist{56}
+%	\checklist{56}
 	%		Check that all loops are correctly formed, with the appropriate initialization, increment and termination expressions
-\end{itemize}
+%\end{itemize}
 
-\paragraph{Files}
-\begin{itemize}
-	\checklist{57}
+%\paragraph{Files}
+%\begin{itemize}
+%	\checklist{57}
 	%		Check that all files are properly declared and opened
-	\checklist{58}
+%	\checklist{58}
 	%		Check that all files are closed properly, even in the case of an error
-	\checklist{59}
+%	\checklist{59}
 	%		Check that EOF conditions are detected and handled correctly
-	\checklist{60}
+%	\checklist{60}
 	%		Check that all file exceptions are caught and dealt with accordingly
-\end{itemize}
+%\end{itemize}
 
 \subsubsection{Issues in createSSLSocket}
 %TODO Completare
