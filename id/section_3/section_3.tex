@@ -626,6 +626,7 @@ The following problems have been found in this method.
 	\checklist{16}
 	%		Higher-level breaks are used.
 		\begin{itemize}
+			
 			\itemBold{Lines 327, 328}
 				Low-level break is used.
 		\end{itemize}
@@ -870,7 +871,7 @@ The following problems have been found in this method.
 			\itemBold{Line 411}
 			Is 101 characters long.
 		\end{itemize}
-	%\checklist{14}
+	%\checklist{14} Ok
 	%		When line length must exceed 80 characters, it does NOT exceed 120 characters.
 \end{itemize}
 
@@ -878,9 +879,14 @@ The following problems have been found in this method.
 \begin{itemize}
 	\checklist{15}
 	%		Line break occurs after a comma or an operator.
-	\checklist{16}
+	\begin{itemize}
+		\itemBold{Lines 372 and 380} The line break occurs after an open rounded bracket.
+		\renderPartialCode{372}{374} 
+		\renderPartialCode{380}{382}
+	\end{itemize}
+	%\checklist{16} Ok
 	%		Higher-level breaks are used.co
-	\checklist{17}
+	%\checklist{17} Ok
 	%		A new statement is aligned with the beginning of the expression at the same level as the previous line.
 \end{itemize}
 
@@ -959,7 +965,7 @@ The following problems have been found in this method.
 
 \paragraph{Output Format}
 \begin{itemize}
-	%\checklist{41}
+	%\checklist{41} Ok
 	%		Check that displayed output is free of spelling and grammatical errors
 	\checklist{42}
 	%		Check that error messages are comprehensive and provide guidance as to how to correct the problem
@@ -970,29 +976,29 @@ The following problems have been found in this method.
 		\itemBold{Line 423}
 		\renderPartialCode{423}{423}
 	\end{itemize}
-	%\checklist{43}
+	%\checklist{43} Ok
 	%		Check that the output is formatted correctly in terms of line stepping and spacing
 \end{itemize}
 
-\paragraph{Computation, Comparisons and Assignments}
-\begin{itemize}
-	\checklist{44}
+%\paragraph{Computation, Comparisons and Assignments}
+%\begin{itemize}
+%	\checklist{44}
 	%		Check that the implementation avoids “brutish programming: (see \href{http://users.csc.calpoly.edu/~jdalbey/SWE/CodeSmells/bonehead.html}{Brutish Programming})
-	\checklist{45}
+	%\checklist{45} Ok
 	%		Check order of computation/evaluation, operator precedence and parenthesizing
-	\checklist{46}
+	%\checklist{46} Ok
 	%		Check the liberal use of parenthesis is used to avoid operator precedence problems.
-	\checklist{47}
+	%\checklist{47} Ok
 	%		Check that all denominators of a division are prevented from being zero
-	\checklist{48}
+	%\checklist{48} Ok
 	%		Check that integer arithmetic, especially division, are used appropriately to avoid causing unexpected truncation/rounding
-	\checklist{49}
+	%\checklist{49} Ok
 	%		Check that the comparison and Boolean operators are correct
-	\checklist{50}
+	%\checklist{50} Ok
 	%		Check throw-catch expressions, and check that the error condition is actually legitimate
-	\checklist{51}
+	%\checklist{51} Ok
 	%		Check that the code is free of any implicit type conversions
-\end{itemize}
+%\end{itemize}
 
 \paragraph{Exceptions}
 \begin{itemize}
@@ -1011,7 +1017,7 @@ The following problems have been found in this method.
 	\end{itemize}
 \end{itemize}
 
-%\paragraph{Flow of Control}
+%\paragraph{Flow of Control} Ok
 %\begin{itemize}
 %	\checklist{54}
 	%		In a switch statement, check that all cases are addressed by break or return
@@ -1021,7 +1027,7 @@ The following problems have been found in this method.
 	%		Check that all loops are correctly formed, with the appropriate initialization, increment and termination expressions
 %\end{itemize}
 
-%\paragraph{Files}
+%\paragraph{Files} Ok
 %\begin{itemize}
 %	\checklist{57}
 	%		Check that all files are properly declared and opened
