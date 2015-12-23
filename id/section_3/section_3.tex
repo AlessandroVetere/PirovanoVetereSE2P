@@ -270,19 +270,20 @@ In this subsection are listed the issues related to the whole class and not only
 		is simply terrible.
 		No meaningful name, useless parameters and fuzzy functionality.
 	\end{itemize}
-	\checklist{2}  %Class Related Ok
+	%\checklist{2}  %Class Related Ok
 %	If one-character variables are used, they are used only for temporary “throwaway” variables, such as those used in for loops.
-	\checklist{3} %Class Related Ok
+	%\checklist{3} %Class Related Ok
 %	Class names are nouns, in mixed case, with the first letter of each word in capitalized. Examples: class Raster; class ImageSprite;
-	\checklist{4} %Class Related Ok
+	%\checklist{4} %Class Related Ok
 %	Interface names should be capitalized like classes.
-	\checklist{5} %Also Class Related Ok
+%	\checklist{5} % Class Related Ok
 %	Method names should be verbs, with the first letter of each addition word capitalized. Examples: getBackground(); computeTemperature().
 	\checklist{6} %Class Related Ok
+	%TODO @Ale ma le variabili portToSSLInfo clientSslInfo e orb non dovrebbero avere l'"_" davanti essendo variabili della classe ?
 %	Class variables, also called attributes, are mixed case, but might begin with an underscore (‘\_’) followed by a lowercase first letter. All the remaining words in the variable name have their first letter capitalized. Examples: \_windowHeight, timeSeriesData.
 	\checklist{7} %Class Related
 %	Constants are declared using all uppercase with words separated by an underscore. Examples: MIN\_WIDTH; MAX\_HEIGHT;
-	The constant \textbf{\_logger} follows the naming convention of normal attributes.
+	The constant \textbf{\_logger} follows the naming convention of normal attributes, even if it is a constant.
 	\renderPartialCode{91}{92}
 \end{itemize}
 
@@ -310,10 +311,11 @@ In this subsection are listed the issues related to the whole class and not only
 		\renderPartialCode{615}{636}
 %	\checklist{21} Ok
 %	The public class is the first class or interface in the file.
-	\checklist{22}
+%	\checklist{22}
 %	Check that the external program interfaces are implemented consistently with what is described in the javadoc.
 	\checklist{23}
 %	Check that the javadoc is complete (i.e., it covers all classes and files part of the set of classes assigned to you).
+	The provided \textit{Javadoc} is not complete and is not an help in understanding the class behaviour.
 \end{itemize}
 
 %Class Related
@@ -326,7 +328,7 @@ In this subsection are listed the issues related to the whole class and not only
 %Class Related
 \subsubsection{Class and Interface Declarations}
 \begin{itemize}
-	\checklist{25}
+%	\checklist{25} Ok
 %	The class or interface declarations shall be in the following order:
 %	\begin{enumerate}
 %		\item
@@ -359,12 +361,28 @@ In this subsection are listed the issues related to the whole class and not only
 	\checklist{26}
 %	Methods are grouped by functionality rather than by scope or accessibility.
 		%TODO @Albi: I metodi che ritornano SSLInfo dovrebbero stare nella classe SSLInfo...
-		The implementation of the class named \textbf{SSLInfo} is put in the beginning of the file while is better to put it near the methods that have the role of returning an \textbf{SSLInfo} object.
+		The methods returning a \textit{SSLInfo Object}, for example \textit{getDefaultSslInfo()} and \textit{init()}, should be declared in the \textit{SSLInfo} class but here they are implemented in the main class. 
 		This is an hint for raising up the readability of the code and for avoiding the continuous scrolling of the class code
 		\renderPartialCode{209}{209}
 		\renderPartialCode{219}{222}
 	\checklist{27}
+		The constructor \textit{IIOPSSLSocketFactory()} is 75 lines of code long and it is not easily comprehensible. Furthermore it is full of \textit{if - else} structures with no meaningful conditions. A such long method worsens the readability and the instant comprehension of the method's role in the code.
+		In addition it would be better to refactor and separate the atomic part of code in additional methods.
 %	Check that the code is free of duplicates, long methods, big classes, breaking encapsulation, as well as if coupling and cohesion are adequate.
+\end{itemize}
+
+\subsubsection{Initialization and Declarations}
+\begin{itemize}
+	\checklist{28}
+	\begin{itemize}
+		\itemBold{Lines 94 to 97} The private variables \textit{TLS, SSLv3, SSLv2, SSL} are used as simple string instead of creating an enumeration for better show the logic bond between each one and the other ones.
+		\renderPartialCode{94}{97}
+	\end{itemize}
+	\checklist{32}
+	\begin{itemize}
+		\itemBold{Line 118} The \textit{clientSslInfo Object} is initialized with \textit{null} value even if it is useless.
+		\renderPartialCode{118}{118}
+	\end{itemize}
 \end{itemize}
 
 \subsection{Method Issues}
