@@ -21,8 +21,9 @@ Again, the usage of \textbf{public static methods} to obtain \textbf{global data
 
 \subsection{Class Context Dependency}
 The entire class behaviour depends on the type of process in which context the \textbf{IIOPSSLSocketFactory} object is built.
-In fact, the \textbf{Secure Socket Creation} is both used in the \textbf{Application Server (as Client of a EJB Container)} and the \textbf{EJB Container (as Client of another EJB Container)}, but the \textbf{Secure Server Socket Creation} is used and can only be used (if contrary a \textbf{RuntimeException} is thrown) by the \textbf{EJB Container (as Server of Application Servers and EJB Containers)}.
+In fact, the \textbf{Secure Socket Creation} is both used in the \textbf{Application Client Container (as Client of a EJB Container)} and the \textbf{EJB Container (as Client of another EJB Container)}, but the \textbf{Secure Server Socket Creation} is used and can only be used (if contrary a \textbf{RuntimeException} is thrown) by the \textbf{EJB Container (as Server of Application Client Containers and EJB Containers)}.
 This is a \textbf{major mess in the software architecture}, the solution should have been designed in a completely different way, following the \textbf{OOP principles}.
 
 \subsection{No Generics Used}
-There's no usage of generics in a \textbf{java.util.Map}.
+There's no usage of generics in the \textbf{java.util.Map} attribute \textbf{portToSSLInfo}.
+\renderPartialCode{113}{113}
