@@ -239,37 +239,36 @@ In this section are reported all the coding choices that do not meet the \textbf
 \end{itemize}
 
 \subsection{Class Issues}
-%TODO Completare, magari dopo aver finito i singoli metodi!
 In this subsection are listed the issues related to the whole class and not only to a specific method.
 \subsubsection{Naming Conventions}
 \begin{itemize}
 	\checklist{1} Class Related
 %	All class names, interface names, method names, class variables, method variables, and constants used should have meaningful names and do what the name suggests.
-	\begin{itemize}
-		\item
-		The method
-		\renderPartialCode{219}{222}
-		has a name which is not meaningful at all.
-		It's code could in fact be moved into the \textbf{SSLInfo constructor}.
-		\item
-		The method
-		\renderPartialCode{209}{211}
-		has a name which is not really meaningful.
-		It could have been omitted and substituted by a \textbf{SSLInfo constant} inside either the \textbf{IIOPSSLSocketFactory} class or the \textbf{SSLInfo} inner class.
-		\item
-		The method
-		\renderPartialCode{597}{602}
-		has a name that is not really meaningful, and its functionality is in fact disjointed by the one of \textbf{Socket and Server Socket Creation}.
-		\item
-		The method 
-		\renderPartialCode{537}{538}
-		has a name that is not really meaningful, and its functionality is in fact disjointed by the one of \textbf{Socket and Server Socket Creation}.
-		\item
-		The method
-		\renderPartialCode{348}{360}
-		is simply terrible.
-		No meaningful name, useless parameters and fuzzy functionality.
-	\end{itemize}
+		\begin{itemize}
+			\item
+				The method
+				\renderPartialCode{219}{222}
+				has a name which is not meaningful at all.
+				It's code could in fact be moved into the \textbf{SSLInfo constructor}.
+			\item
+				The method
+				\renderPartialCode{209}{211}
+				has a name which is not really meaningful.
+				It could have been omitted and substituted by a \textbf{SSLInfo constant} inside either the \textbf{IIOPSSLSocketFactory} class or the \textbf{SSLInfo} inner class.
+			\item
+				The method
+				\renderPartialCode{597}{602}
+				has a name that is not really meaningful, and its functionality is in fact disjointed by the one of \textbf{Socket and Server Socket Creation}.
+			\item
+				The method 
+				\renderPartialCode{537}{538}
+				has a name that is not really meaningful, and its functionality is in fact disjointed by the one of \textbf{Socket and Server Socket Creation}.
+			\item
+				The method
+				\renderPartialCode{348}{360}
+				is simply terrible.
+				No meaningful name, useless parameters and fuzzy functionality.
+		\end{itemize}
 	%\checklist{2}  %Class Related Ok
 %	If one-character variables are used, they are used only for temporary “throwaway” variables, such as those used in for loops.
 	%\checklist{3} %Class Related Ok
@@ -279,12 +278,11 @@ In this subsection are listed the issues related to the whole class and not only
 %	\checklist{5} % Class Related Ok
 %	Method names should be verbs, with the first letter of each addition word capitalized. Examples: getBackground(); computeTemperature().
 	\checklist{6} %Class Related Ok
-	%TODO @Ale ma le variabili portToSSLInfo clientSslInfo e orb non dovrebbero avere l'"_" davanti essendo variabili della classe ?
 %	Class variables, also called attributes, are mixed case, but might begin with an underscore (‘\_’) followed by a lowercase first letter. All the remaining words in the variable name have their first letter capitalized. Examples: \_windowHeight, timeSeriesData.
 	\checklist{7} %Class Related
 %	Constants are declared using all uppercase with words separated by an underscore. Examples: MIN\_WIDTH; MAX\_HEIGHT;
-	The constant \textbf{\_logger} follows the naming convention of normal attributes, even if it is a constant.
-	\renderPartialCode{91}{92}
+		The constant \textbf{\_logger} follows the naming convention of normal attributes, even if it is a constant.
+		\renderPartialCode{91}{92}
 \end{itemize}
 
 \subsubsection{Comments}
@@ -297,7 +295,7 @@ In this subsection are listed the issues related to the whole class and not only
 	\checklist{19} %Also Class Related
 %	Commented out code contains a reason for being commented out and a date it can be removed from the source file if determined it is no longer needed.
 		The commented out code at lines 103, 135 and 254 is left alone without any additional hint.
-		\renderPartialCode{102}{104}
+		\renderPartialCode{103}{103}
 		\renderPartialCode{134}{136}
 		\renderPartialCode{253}{255}
 \end{itemize}
@@ -360,15 +358,16 @@ In this subsection are listed the issues related to the whole class and not only
 %	\end{enumerate}
 	\checklist{26}
 %	Methods are grouped by functionality rather than by scope or accessibility.
-		%TODO @Albi: I metodi che ritornano SSLInfo dovrebbero stare nella classe SSLInfo...
-		The methods returning a \textit{SSLInfo Object}, for example \textit{getDefaultSslInfo()} and \textit{init()}, should be declared in the \textit{SSLInfo} class but here they are implemented in the main class. 
-		This is an hint for raising up the readability of the code and for avoiding the continuous scrolling of the class code
+		The methods returning a \textit{SSLInfo Object}, for example \textit{getDefaultSslInfo()} and \textit{init()}, should be declared in the \textit{SSLInfo} inner class but here they are implemented in the main class. 
+		This is an hint for improving the readability of the code and for avoiding the continuous scrolling of the class code
 		\renderPartialCode{209}{209}
 		\renderPartialCode{219}{222}
 	\checklist{27}
-		The constructor \textit{IIOPSSLSocketFactory()} is 75 lines of code long and it is not easily comprehensible. Furthermore it is full of \textit{if - else} structures with no meaningful conditions. A such long method worsens the readability and the instant comprehension of the method's role in the code.
-		In addition it would be better to refactor and separate the atomic part of code in additional methods.
 %	Check that the code is free of duplicates, long methods, big classes, breaking encapsulation, as well as if coupling and cohesion are adequate.
+		The constructor \textit{IIOPSSLSocketFactory()} is 75 lines of code long and it is not easily comprehensible.
+		Furthermore it is full of \textit{if - else} structures with no meaningful conditions.
+		A such long method worsens the readability and the instant comprehension of the method's role in the code.
+		In addition it would be better to refactor and separate the atomic parts of code in additional methods.
 \end{itemize}
 
 \subsubsection{Initialization and Declarations}
@@ -667,8 +666,9 @@ The following problems have been found in this method.
 
 \paragraph{Initialization and Declarations}
 \begin{itemize}
-	%\checklist{28} Ok
+	\checklist{28}
 	%		Check that variables and class members are of the correct type. Check that they have the right visibility (public/private/protected)
+		At line 401 the variable \textbf{ss} should have been declared of type \textbf{SSLServerSocket} instead of plain \textbf{ServerSocket}.
 	\checklist{29}
 	%		Check that variables are declared in the proper scope
 		At lines 332, 332 the local variables \textbf{host} and \textbf{port} could have been used instead for better code readability.
@@ -799,7 +799,6 @@ The following problems have been found in this method.
 %\end{itemize}
 
 \subsubsection{Issues in createSSLServerSocket}
-%TODO Completare
 \renderPartialCode{364}{430}
 The following problems have been found in this method.
 
@@ -807,17 +806,20 @@ The following problems have been found in this method.
 \begin{itemize}
 	\checklist{1}
 	%		All class names, interface names, method names, class variables, method variables, and constants used should have meaningful names and do what the name suggests.
-	\begin{itemize}
-		\itemBold{Lines 376, 377} \renderPartialCode{376}{377} The difference between \textit{port} and \textit{iport} should be more highlighted through the naming choices.
-		\itemBold{Line 384} The variable name \textit{ssf} is not really meaningful.
-		\renderPartialCode{384}{384}
-		\itemBold{Line 393} The variable name \textit{cs} is not really meaningful.
-		\renderPartialCode{393}{393}
-		\itemBold{Line 401} The variable name \textit{ss} is not really meaningful.
-		\renderPartialCode{401}{401}
-		
-	\end{itemize}
-		
+		\begin{itemize}
+			\itemBold{Lines 376, 377}
+				The difference between \textit{port} and \textit{iport} should be more highlighted through the naming choices.
+				\renderPartialCode{376}{377}
+			\itemBold{Line 384}
+				The variable name \textit{ssf} is not really meaningful.
+				\renderPartialCode{384}{384}
+			\itemBold{Line 393}
+				The variable name \textit{cs} is not really meaningful.
+				\renderPartialCode{393}{393}
+			\itemBold{Line 401}
+				The variable name \textit{ss} is not really meaningful.
+				\renderPartialCode{401}{401}
+		\end{itemize}
 	%\checklist{2} Ok
 	%		If one-character variables are used, they are used only for temporary “throwaway” variables, such as those used in for loops.
 	%\checklist{3} Class Related
@@ -836,17 +838,19 @@ The following problems have been found in this method.
 \begin{itemize}
 	\checklist{8}
 	%Three or four spaces are used for indentation and done so consistently
-	\begin{itemize}
-		\itemBold{Lines 368 to 430}
-		The whole method is not indented correctly.
-		\itemBold{Lines 398, 419, 420}
-		Lack an extra level of indentation, over the one mentioned above.
-	\end{itemize}
+		\begin{itemize}
+			\itemBold{Lines 368 to 430}
+				The whole method is not indented correctly.
+			\itemBold{Lines 398, 419, 420}
+				Lack an extra level of indentation, over the one mentioned above.
+		\end{itemize}
 	\checklist{9}
 	%No tabs are used to indent
-	\begin{itemize}
-		\itemBold{Lines 396, 397, 399, 418, 421, 423, 424, 427} These lines are indented using one space and one tab. This approach is neither consistent with the (wrong) style adopted in the whole method.
-	\end{itemize}
+		\begin{itemize}
+			\itemBold{Lines 396, 397, 399, 418, 421, 423, 424, 427}
+				These lines are indented using four spaces and one tab.
+				This approach is neither consistent with the (wrong) style adopted in the whole method.
+		\end{itemize}
 \end{itemize}
 
 %\paragraph{Braces}
@@ -873,21 +877,21 @@ The following problems have been found in this method.
 \begin{itemize}
 	\checklist{12}
 	%		Blank lines and optional comments are used to separate sections (beginning comments, package/import statements, class/interface declarations which include class variable/attributes declarations, constructors, and methods).
-	\begin{itemize}
-		\itemBold{Lines 392, 394, 416}
-		Are blank without reason.
-	\end{itemize}
+		\begin{itemize}
+			\itemBold{Lines 392, 394, 416}
+				Are blank without reason.
+		\end{itemize}
 	\checklist{13}
 	%		Where practical, line length does not exceed 80 characters.
 		\begin{itemize}
 			\itemBold{Line 368}
-			Is 113 characters long.
+				Is 113 characters long.
 			\itemBold{Line 372}
-			Is 92 characters long.
+				Is 92 characters long.
 			\itemBold{Line 380}
-			Is 93 characters long.
+				Is 93 characters long.
 			\itemBold{Line 411}
-			Is 101 characters long.
+				Is 101 characters long.
 		\end{itemize}
 	%\checklist{14} Ok
 	%		When line length must exceed 80 characters, it does NOT exceed 120 characters.
@@ -897,11 +901,12 @@ The following problems have been found in this method.
 \begin{itemize}
 	\checklist{15}
 	%		Line break occurs after a comma or an operator.
-	\begin{itemize}
-		\itemBold{Lines 372 and 380} The line break occurs after an open rounded bracket.
-		\renderPartialCode{372}{374} 
-		\renderPartialCode{380}{382}
-	\end{itemize}
+		\begin{itemize}
+			\itemBold{Lines 372 and 380}
+				The line break occurs after an open rounded bracket.
+				\renderPartialCode{372}{374} 
+				\renderPartialCode{380}{382}
+		\end{itemize}
 	%\checklist{16} Ok
 	%		Higher-level breaks are used.co
 	%\checklist{17} Ok
@@ -912,9 +917,9 @@ The following problems have been found in this method.
 \begin{itemize}
 	\checklist{18}
 	%		Comments are used to adequately explain what the class, interface, methods, and blocks of code are doing.
-	The provided \textit{JavaDoc} is too short and not really explicative.
-	It does not completely explain the method functionalities.
-	\renderPartialCode{364}{367}
+		The provided \textit{JavaDoc} is too short and not really explicative.
+		It does not completely explain the method functionalities.
+		\renderPartialCode{364}{367}
 	%\checklist{19}
 	%		Commented out code contains a reason for being commented out and a date it can be removed from the source file if determined it is no longer needed.
 \end{itemize}
@@ -929,23 +934,25 @@ The following problems have been found in this method.
 	%		Check that constructors are called when a new object is desired
 	\checklist{31}
 	%		Check that all object references are initialized before use
-	\begin{itemize}
-		\itemBold{Lines 393 and 393}
-		The variable \textit{cs} is initialized to \textit{null} even if is useless.
-		\renderPartialCode{393}{393}
-		\itemBold{Lines 401 and 401}
-		The variable \textit{ss} is initialized to \textit{null} even if is useless.
-		\renderPartialCode{401}{401}
-	\end{itemize}
+		\begin{itemize}
+			\itemBold{Lines 393 and 393}
+				The variable \textit{cs} is initialized to \textit{null} even if is useless.
+				\renderPartialCode{393}{393}
+			\itemBold{Lines 401 and 401}
+				The variable \textit{ss} is initialized to \textit{null} even if is useless.
+				\renderPartialCode{401}{401}
+		\end{itemize}
 	%\checklist{32} Ok
 	%		Variables are initialized where they are declared, unless dependent upon a computation
 	\checklist{33} 
 	%		Declarations appear at the beginning of blocks (A block is any code surrounded by curly braces “{“ and “}” ). The exception is a variable can be declared in a ‘for’ loop.
-	\begin{itemize}
-		\itemBold{Lines 393 and 401} The \textit{cs} and \textit{ss} variables are declared at the middle of the method code. They have to be declared at the beginning of it.
-		\renderPartialCode{393}{393}
-		\renderPartialCode{401}{401}
-	\end{itemize}
+		\begin{itemize}
+			\itemBold{Lines 393 and 401}
+				The \textit{cs} and \textit{ss} variables are declared at the middle of the method code.
+				They have to be declared at the beginning of it.
+				\renderPartialCode{393}{393}
+				\renderPartialCode{401}{401}
+		\end{itemize}
 \end{itemize}
 
 %\paragraph{Method Calls} Ok
@@ -972,13 +979,15 @@ The following problems have been found in this method.
 \begin{itemize}
 	\checklist{40}
 	%		Check that all objects (including Strings) are compared with "equals" and not with "=="
-	\begin{itemize}
-		\itemBold{Line 371, 379, 388, 407} The comparison between \textit{null} and other objects is done through the \textit{==} operator, insted of using \textit{equals()}. 
-		\renderPartialCode{371}{371}
-		\renderPartialCode{379}{379}
-		\renderPartialCode{388}{388}
-		\renderPartialCode{407}{407}
-	\end{itemize}
+	%TODO Re@Albi: Per checkare se un oggetto è null è giusto usare ==, perché mettiamo che hai String pippo = null; se poi fai pippo.equals(null) ottieni una NullPointerException perché pippo è null!	
+		%\begin{itemize}
+		%	\itemBold{Line 371, 379, 388, 407}
+		%		The comparison between \textit{null} and other objects is done through the \textit{==} operator, insted of using \textit{equals()}. 
+		%		\renderPartialCode{371}{371}
+		%		\renderPartialCode{379}{379}
+		%		\renderPartialCode{388}{388}
+		%		\renderPartialCode{407}{407}
+		%\end{itemize}
 \end{itemize}
 
 \paragraph{Output Format}
@@ -987,13 +996,13 @@ The following problems have been found in this method.
 	%		Check that displayed output is free of spelling and grammatical errors
 	\checklist{42}
 	%		Check that error messages are comprehensive and provide guidance as to how to correct the problem
-	In the \textit{catch blocks} the catched exceptions are not explained to the user, they are only printed out.
-	\begin{itemize}
-		\itemBold{Line 411}
-		\renderPartialCode{411}{413}
-		\itemBold{Line 423}
-		\renderPartialCode{423}{423}
-	\end{itemize}
+		In the \textit{catch blocks} the caught exceptions are not explained to the user, they are only printed out.
+		\begin{itemize}
+			\itemBold{Line 411}
+				\renderPartialCode{411}{413}
+			\itemBold{Line 423}
+				\renderPartialCode{423}{423}
+		\end{itemize}
 	%\checklist{43} Ok
 	%		Check that the output is formatted correctly in terms of line stepping and spacing
 \end{itemize}
@@ -1022,17 +1031,18 @@ The following problems have been found in this method.
 \begin{itemize}
 	\checklist{52}
 	%		Check that the relevant exceptions are caught
-	\begin{itemize}
-		\itemBold{Lines 422 to 425}
-		The \textbf{catch} block
-		\renderPartialCode{422}{425}
-		is actually catching a generic \textbf{Exception} instead of the generated ones.
-	\end{itemize}
+		\begin{itemize}
+			\itemBold{Lines 422 to 425}
+				The \textbf{catch} block
+				\renderPartialCode{422}{425}
+				is actually catching a generic \textbf{Exception} instead of the generated ones.
+		\end{itemize}
 	\checklist{53}
 	%		Check that the appropriate action are taken for each catch block
-	\begin{itemize}
-		\item The problem in the above \textit{code-block} is that, for every generated exception, this block throws an \textbf{IOException}, even if the catched exception is not an \textbf{IO} one.
-	\end{itemize}
+		\begin{itemize}
+			\item
+				The problem in the above \textit{code-block} is that, for every generated exception, this block throws an \textbf{IOException}, even if the caught exception is not an \textbf{IO} one.
+		\end{itemize}
 \end{itemize}
 
 %\paragraph{Flow of Control} Ok
@@ -1058,21 +1068,25 @@ The following problems have been found in this method.
 %\end{itemize}
 
 \subsubsection{Issues in createSSLSocket}
-%TODO Completare
 \renderPartialCode{432}{474}
 The following problems have been found in this method.
 
 \paragraph{Naming Conventions}
 \begin{itemize}
-	\checklist{1}
+	\checklist{1} 
+		\begin{itemize}
+			\item
+				The following piece of code contains a variable named \textbf{e2} whose name is not meaningful.
+				\renderPartialCode{468}{469}
+		\end{itemize}
 	%		All class names, interface names, method names, class variables, method variables, and constants used should have meaningful names and do what the name suggests.
-	\checklist{2}
+	%\checklist{2} Ok
 	%		If one-character variables are used, they are used only for temporary “throwaway” variables, such as those used in for loops.
-	%	\checklist{3}
+	%	\checklist{3} Ok
 	%		Class names are nouns, in mixed case, with the first letter of each word in capitalized. Examples: class Raster; class ImageSprite;
 	%	\checklist{4} Class Related
 	%		Interface names should be capitalized like classes.
-	\checklist{5}
+	%\checklist{5} Ok
 	%Method names should be verbs, with the first letter of each addition word capitalized. Examples: getBackground(); computeTemperature().
 	%	\checklist{6} Class Related
 	%		Class variables, also called attributes, are mixed case, but might begin with an underscore (‘\_’) followed by a lowercase first letter. All the remaining words in the variable name have their first letter capitalized. Examples: \_windowHeight, timeSeriesData.
@@ -1084,15 +1098,23 @@ The following problems have been found in this method.
 \begin{itemize}
 	\checklist{8}
 	%Three or four spaces are used for indentation and done so consistently
+		\begin{itemize}
+			\itemBold{Line 441, 469}
+				Lack a level of indentation.
+		\end{itemize}
 	\checklist{9}
+		\begin{itemize}
+			\itemBold{Line 441}
+				Is indented using a tab instead of four spaces.
+		\end{itemize}		
 	%No tabs are used to indent
 \end{itemize}
 
-\paragraph{Braces}
-\begin{itemize}
-	\checklist{10}
+%\paragraph{Braces} Ok
+%\begin{itemize}
+	%\checklist{10} Ok
 	%		Consistent bracing style is used, either the preferred “Allman” style (first brace goes underneath the opening block) or the “Kernighan and Ritchie” style (first brace is on the same line of the instruction that opens the new block).
-	\checklist{11}
+	%\checklist{11} Ok
 	%		All if, while, do-while, try-catch, and for statements that have only one statement to execute are surrounded by curly braces. Example:
 	%		Avoid this:
 	%		\begin{lstlisting}
@@ -1106,15 +1128,25 @@ The following problems have been found in this method.
 	%				doThis();
 	%			}
 	%		\end{lstlisting}
-\end{itemize}
+%\end{itemize}
 
 \paragraph{File Organization}
 \begin{itemize}
 	\checklist{12}
 	%		Blank lines and optional comments are used to separate sections (beginning comments, package/import statements, class/interface declarations which include class variable/attributes declarations, constructors, and methods).
+		\begin{itemize}
+			\itemBold{Lines 446, 457}
+				Are blank without reason.
+		\end{itemize}
 	\checklist{13}
 	%		Where practical, line length does not exceed 80 characters.
-	\checklist{14}
+		\begin{itemize}
+			\itemBold{Line 448}
+				Is 99 characters long.
+			\itemBold{Line 455}
+				Is 90 characters long.
+		\end{itemize}		
+	%\checklist{14} Ok
 	%		When line length must exceed 80 characters, it does NOT exceed 120 characters.
 \end{itemize}
 
@@ -1122,118 +1154,137 @@ The following problems have been found in this method.
 \begin{itemize}
 	\checklist{15}
 	%		Line break occurs after a comma or an operator.
-	\checklist{16}
+		\begin{itemize}
+			\itemBold{Line 468}
+				Is broken at an open parenthesis.
+		\end{itemize}
+	%\checklist{16} Ok
 	%		Higher-level breaks are used.
 	\checklist{17}
 	%		A new statement is aligned with the beginning of the expression at the same level as the previous line.
+		\begin{itemize}
+			\itemBold{Lines 465, 469}
+				Lack an extra level of indentation.
+		\end{itemize}
 \end{itemize}
 
 \paragraph{Comments}
 \begin{itemize}
 	\checklist{18}
 	%		Comments are used to adequately explain what the class, interface, methods, and blocks of code are doing.
-	\checklist{19}
+		Comments and JavaDoc provided in this method are completely useless.
+	%\checklist{19}
 	%		Commented out code contains a reason for being commented out and a date it can be removed from the source file if determined it is no longer needed.
 \end{itemize}
 
 \paragraph{Initialization and Declarations}
 \begin{itemize}
-	\checklist{28}
+	%\checklist{28} Ok
 	%		Check that variables and class members are of the correct type. Check that they have the right visibility (public/private/protected)
-	\checklist{29}
+	%\checklist{29} Ok
 	%		Check that variables are declared in the proper scope
-	\checklist{30}
+	%\checklist{30} Ok
 	%		Check that constructors are called when a new object is desired
-	\checklist{31}
+	%\checklist{31} Ok
 	%		Check that all object references are initialized before use
-	\checklist{32}
+	%\checklist{32} Ok
 	%		Variables are initialized where they are declared, unless dependent upon a computation
 	\checklist{33}
 	%		Declarations appear at the beginning of blocks (A block is any code surrounded by curly braces “{“ and “}” ). The exception is a variable can be declared in a ‘for’ loop.
+		\begin{itemize}
+			\itemBold{Lines 450, 451, 452, 468}
+				The local variables are not initialized at the beginning of their relevant blocks.
+		\end{itemize}
 \end{itemize}
 
-\paragraph{Method Calls}
-\begin{itemize}
-	\checklist{34}
+%\paragraph{Method Calls} Ok
+%\begin{itemize}
+	%\checklist{34} Ok
 	%		Check that parameters are presented in the correct order
-	\checklist{35}
+	%\checklist{35} Ok
 	%		Check that the correct method is being called, or should it be a different method with a similar name
-	\checklist{36}
+	%\checklist{36} Ok
 	%		Check that method returned values are used properly
-\end{itemize}
+%\end{itemize}
 
-\paragraph{Arrays}
-\begin{itemize}
-	\checklist{37}
+%\paragraph{Arrays} Ok
+%\begin{itemize}
+	%\checklist{37} Ok
 	%		Check that there are no off-by-one errors in array indexing (that is, all required array elements are correctly accessed through the index)
-	\checklist{38}
+	%\checklist{38} Ok
 	%		Check that all array (or other collection) indexes have been prevented from going out-of-bounds
-	\checklist{39}
+	%\checklist{39} Ok
 	%		Check that constructors are called when a new array item is desired
-\end{itemize}
+%\end{itemize}
 
-\paragraph{Object Comparison}
-\begin{itemize}
-	\checklist{40}
+%\paragraph{Object Comparison} Ok
+%\begin{itemize}
+	%\checklist{40} Ok
 	%		Check that all objects (including Strings) are compared with "equals" and not with "=="
-\end{itemize}
+%\end{itemize}
 
 \paragraph{Output Format}
 \begin{itemize}
-	\checklist{41}
+	%\checklist{41} Ok
 	%		Check that displayed output is free of spelling and grammatical errors
 	\checklist{42}
 	%		Check that error messages are comprehensive and provide guidance as to how to correct the problem
-	\checklist{43}
+		At lines from 462 to 472 the error message generated are a bit too general and not specific.
+		They may not really help debugging the problem.
+		\renderPartialCode{462}{472}
+	%\checklist{43}
 	%		Check that the output is formatted correctly in terms of line stepping and spacing
 \end{itemize}
 
-\paragraph{Computation, Comparisons and Assignments}
-\begin{itemize}
-	\checklist{44}
+%\paragraph{Computation, Comparisons and Assignments} Ok
+%\begin{itemize}
+	%\checklist{44} Ok
 	%		Check that the implementation avoids “brutish programming: (see \href{http://users.csc.calpoly.edu/~jdalbey/SWE/CodeSmells/bonehead.html}{Brutish Programming})
-	\checklist{45}
+	%\checklist{45} Ok
 	%		Check order of computation/evaluation, operator precedence and parenthesizing
-	\checklist{46}
+	%\checklist{46} Ok
 	%		Check the liberal use of parenthesis is used to avoid operator precedence problems.
-	\checklist{47}
+	%\checklist{47} Ok
 	%		Check that all denominators of a division are prevented from being zero
-	\checklist{48}
+	%\checklist{48} Ok
 	%		Check that integer arithmetic, especially division, are used appropriately to avoid causing unexpected truncation/rounding
-	\checklist{49}
+	%\checklist{49} Ok
 	%		Check that the comparison and Boolean operators are correct
-	\checklist{50}
+	%\checklist{50} Ok
 	%		Check throw-catch expressions, and check that the error condition is actually legitimate
-	\checklist{51}
+	%\checklist{51} Ok
 	%		Check that the code is free of any implicit type conversions
-\end{itemize}
+%\end{itemize}
 
 \paragraph{Exceptions}
 \begin{itemize}
 	\checklist{52}
 	%		Check that the relevant exceptions are caught
+		At lines 462 to 472 is caught a generic \textbf{Exception} instead of the generated ones.
 	\checklist{53}
 	%		Check that the appropriate action are taken for each catch block
+		At lines 462 to 472 a \textbf{IOException} is created in the place of the generic \textbf{Exception} caught, and it is configured and re-thrown.
+		This modus operandi destroys information about the error occurred in the first place, given that the logging is poor.
 \end{itemize}
 
-\paragraph{Flow of Control}
-\begin{itemize}
-	\checklist{54}
+%\paragraph{Flow of Control} oK
+%\begin{itemize}
+	%\checklist{54} Ok
 	%		In a switch statement, check that all cases are addressed by break or return
-	\checklist{55}
+	%\checklist{55} Ok
 	%		Check that all switch statements have a default branch
-	\checklist{56}
+	%\checklist{56} Ok
 	%		Check that all loops are correctly formed, with the appropriate initialization, increment and termination expressions
-\end{itemize}
+%\end{itemize}
 
-\paragraph{Files}
-\begin{itemize}
-	\checklist{57}
+%\paragraph{Files} Ok
+%\begin{itemize}
+	%\checklist{57} Ok
 	%		Check that all files are properly declared and opened
-	\checklist{58}
+	%\checklist{58} Ok
 	%		Check that all files are closed properly, even in the case of an error
-	\checklist{59}
+	%\checklist{59} Ok
 	%		Check that EOF conditions are detected and handled correctly
-	\checklist{60}
+	%\checklist{60} Ok
 	%		Check that all file exceptions are caught and dealt with accordingly
-\end{itemize}
+%\end{itemize}
