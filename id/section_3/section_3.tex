@@ -242,7 +242,7 @@ In this section are reported all the coding choices that do not meet the \textbf
 In this subsection are listed the issues related to the whole class and not only to a specific method.
 \subsubsection{Naming Conventions}
 \begin{itemize}
-	\checklist{1} Class Related
+	\checklist{1} %Class Related
 %	All class names, interface names, method names, class variables, method variables, and constants used should have meaningful names and do what the name suggests.
 		\begin{itemize}
 			\item
@@ -277,7 +277,7 @@ In this subsection are listed the issues related to the whole class and not only
 %	Interface names should be capitalized like classes.
 %	\checklist{5} % Class Related Ok
 %	Method names should be verbs, with the first letter of each addition word capitalized. Examples: getBackground(); computeTemperature().
-	\checklist{6} %Class Related Ok
+%	\checklist{6} %Class Related Ok
 %	Class variables, also called attributes, are mixed case, but might begin with an underscore (‘\_’) followed by a lowercase first letter. All the remaining words in the variable name have their first letter capitalized. Examples: \_windowHeight, timeSeriesData.
 	\checklist{7} %Class Related
 %	Constants are declared using all uppercase with words separated by an underscore. Examples: MIN\_WIDTH; MAX\_HEIGHT;
@@ -581,7 +581,6 @@ The following problems have been found in this method.
 			The whole method is not indented correctly.
 		\itemBold{Lines 317, 320, 342}
 			Lack an extra level of indentation, over the one mentioned above.
-		\itemBold{Line }	
 	\end{itemize}
 	\checklist{9}
 		%No tabs are used to indent
@@ -975,9 +974,9 @@ The following problems have been found in this method.
 	%		Check that constructors are called when a new array item is desired
 %\end{itemize}
 
-\paragraph{Object Comparison}
-\begin{itemize}
-	\checklist{40}
+%\paragraph{Object Comparison} Ok
+%\begin{itemize}
+	%\checklist{40} Ok
 	%		Check that all objects (including Strings) are compared with "equals" and not with "=="
 	%TODO Re@Albi: Per checkare se un oggetto è null è giusto usare ==, perché mettiamo che hai String pippo = null; se poi fai pippo.equals(null) ottieni una NullPointerException perché pippo è null!	
 		%\begin{itemize}
@@ -988,7 +987,7 @@ The following problems have been found in this method.
 		%		\renderPartialCode{388}{388}
 		%		\renderPartialCode{407}{407}
 		%\end{itemize}
-\end{itemize}
+%\end{itemize}
 
 \paragraph{Output Format}
 \begin{itemize}
