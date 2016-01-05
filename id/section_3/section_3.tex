@@ -246,7 +246,8 @@ In this subsection are listed the issues related to the whole class and not only
 %	All class names, interface names, method names, class variables, method variables, and constants used should have meaningful names and do what the name suggests.
 		\begin{itemize}
 			\item
-				The class has the capability of creating also \textbf{Plain Text Socket} and \textbf{Plain Text Server Socket}, even if the name \textbf{IIOPSSLSocketFactory} clearly underlines that the class is a \textbf{Factory} of \textbf{Secure Sockets} and \textbf{Server Sockets}.
+				The class has the capability of creating also \textbf{Plain Text Socket} and \textbf{Plain Text Server Socket}, even if the name \textbf{IIOPSSLSocketFactory} clearly underlines that the class has to be a \textbf{Factory} of \textbf{Secure Sockets} and \textbf{Server Sockets}.
+				In order to give the architecture the ability of creating \textbf{Plain Text Socket} and \textbf{Plain Text Server Socket}, a separate class  has to be thought.
 			\item
 				The method
 				\renderPartialCode{219}{222}
