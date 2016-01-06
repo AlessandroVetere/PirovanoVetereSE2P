@@ -150,16 +150,36 @@
 		\end{itemize}
 	\end{frame}
 	
-	\begin{frame}{.createServerSocket() Issues -}
+	\begin{frame}{.createServerSocket() Main Issues}
+		Below we show the method's aspects we want to underline:
+		\begin{itemize}
+			\itemBold{Indention CL[8]} The whole method 	lacks a level of indentation and in general is provided of a bad layout (blank useless lines...).
+			\itemBold{File Organization CL[12]} Lines 277, 289, 296 and 299 are blank without a clear reason.
+			\itemBold{Comments CL[18]} The provided JavaDoc is too short and not really explicative. It does not completely explain the method functionalities.
+			\itemBold{Computation, Comparisons and Assignments CL[44]} Lines 283 to 284: The if condition is not explicit and requires inference to be fully understood. In addition it is error prone. The whole problem should have been faced using an enumeration instead of String constants.
+			\itemBold{Initialization and Declarations} In the method's code we can find some useless variable's initialization to \textit{"null"} value.
+		\end{itemize}
 	\end{frame}
 	
-	\begin{frame}{.createSSLServerSocket() Issues-}
+	\begin{frame}{.createSSLServerSocket() Main Issues}
+		Below we show the method's aspects we want to underline:
+		\begin{itemize}
+			\itemBold{}
+		\end{itemize}
 	\end{frame}
 	
-	\begin{frame}{.createSocket() Issues-}
+	\begin{frame}{.createSocket() Main Issues}
+		Below we show the method's aspects we want to underline:
+		\begin{itemize}
+			\itemBold{}
+		\end{itemize}
 	\end{frame}
 	
-	\begin{frame}{.createSSLSocket() Issues-}
+	\begin{frame}{.createSSLSocket() Main Issues}
+		Below we show the method's aspects we want to underline:
+		\begin{itemize}
+			\itemBold{}
+		\end{itemize}
 	\end{frame}
 	
 \end{document}
