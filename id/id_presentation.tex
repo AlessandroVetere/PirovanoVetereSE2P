@@ -29,14 +29,22 @@
 		
 		\section{Functional Role of Assigned Class}
 		
-		\begin{frame}{ORB Middleware Actors Overview}
+		\subsection{ORB Middleware}
+		
+		\begin{frame}{ORB Middleware - Overview}
 			%First of all, an overview of the \textbf{ORB} middleware is given, because it is the component that uses the \textbf{IIOP} protocol to communicate over the Internet.
 			The \textbf{O}bject \textbf{R}equest \textbf{B}roker
 			(component that uses the \textbf{IIOP} protocol) 
-allows method calls to be made from one computer to another via network, and it provides that for each remote method call there are two main actors exchanging informations:
+			allows method calls to be made from one computer to another via network. \par This middleware allows objects to interact in a \textbf{heterogeneous}, \textbf{distributed} environment, \textbf{independent} of the \textbf{computer platforms} on which the various objects reside and the \textbf{languages} used to implement them. \par \textbf{For example}, a C++ object running on one machine can communicate with an object on another machine which is implemented in Java. 
+			
+		\end{frame}
+			
+		\begin{frame}{ORB Middleware - Actors}
+			
+			\textbf{Two} main actors are involved in this new \textbf{Client - Server} approach, called \textbf{CORBA Client - Server architecture}:
 			\begin{itemize}
 				\item \textbf{Client:}
-				It requests a method call to an object which interface is exposed by the \textbf{Server} and is known to the \textbf{Client}.
+				It requests a method call to an object which interface (stub) is exposed by the \textbf{Server} and is known to the \textbf{Client}.(In Java RMI this is done by the client by looking up on a registry, where the server puts the remote objects).
 				The \textbf{Client} has the capability of sending some parameters to the Server for executing the given method call and the capability of receiving back the return value of the called method, if any.
 				\item \textbf{Server:}
 				It exposes the interfaces of the objects that can be called by the various \textbf{Clients} allowed to make remote method calls.
@@ -44,61 +52,58 @@ allows method calls to be made from one computer to another via network, and it 
 			\end{itemize}
 		\end{frame}
 		
-		\begin{frame}{CORBA Architecture}
+		\begin{frame}{CORBA Client - Server Architecture}
 			\showPercentImage{./section_2/iiop.jpg}{Overview of CORBA Architecture}{0.9}
 		\end{frame}
 		
-		\begin{frame}{IIOPSSLSocketFactory functionalities - Socket Creation}
-			This functionality allows the creation of a \textbf{Socket} with some specific characteristics.
+		\subsection{Functional Role}
+		
+		\begin{frame}{Class functionalities - Socket Creation}
+			The class has a lot of roles including the creation of \textbf{Sockets}.\par Through two methods, of whom one calls the other one, the class can create \textbf{two type of socket}:
 			\begin{itemize}
 				\item \textbf{Plain Socket:}
 				Plain Text Socket (\textbf{java.net.Socket}) with \textit{Nagle's algorithm disabled}.
-				%It is created using \textbf{java.nio.channels.SocketChannel}, if so is specified in the \textbf{ORB} object, whose reference is passed at runtime to a \textbf{IIOPSSLSocketFactory} object using a setter.
 				\item \textbf{Secure Socket:}
 				Encrypted Socket (\textbf{javax.net.ssl.SSLSocket}) that uses \textbf{Secure Socket Layer} or \textbf{Transport Secure Layer}.
 				Its characteristics are defined during the creation of a \textbf{IIOPSSLSocketFactory} object by \textit{obtaining data from global variables} (which seems to be a bad behaviour) and storing those data into a specific private attribute of type \textbf{IIOPSSLSocketFactory.SSLInfo}.
 				%This private attribute is never modified after \textbf{IIOPSSLSocketFactory} object creation and thus it can be considered as final, although it is not declared final nor immutable.
-				In particular, a secure socket built by \textbf{IIOPSSLSocketFactory} can use either one of the following cryptographic protocols for data encryption:
-				\begin{itemize}
-					\item \textbf{SSL1} 
-					\item \textbf{SSL2}
-					\item \textbf{SSL3}
-					\item \textbf{TLS}
-				\end{itemize}
+				In particular, a secure socket built by \textbf{IIOPSSLSocketFactory} can use either one of the following cryptographic protocols for data encryption: \textbf{SSL1}, \textbf{SSL2}, \textbf{SSL3}, \textbf{TLS}.
 			\end{itemize}
 		\end{frame}
 		
-		\begin{frame}{IIOPSSLSocketFactory f. - Server Socket Creation}
+		\begin{frame}{Class functionalities - Server Socket Creation}
 			This functionality allows the creation of a \textbf{Server Socket}.
 			\begin{itemize}
 				\item \textbf{Plain Server Socket:}
 				A Server Socket (\textbf{java.net.ServerSocket}) that accepts incoming \textbf{Plain Socket} connections from \textbf{Clients}.
-				%If the \textbf{ORB} object set into the given \textbf{IIOPSSLSocketFactory} object is configured accordingly, the \textbf{Server Socket} is created using \textbf{java.nio.ServerSocketChannel}.
 				\item \textbf{Secure Server Socket:}
 				A Secure Server Socket (\textbf{javax.net.ssl.SSLSocket}) that accepts incoming \textbf{Secure Socket} connections.
 				%on a certain \textbf{Port} of a given \textbf{IP} address.
-				The \textbf{SSLInfo} object necessary to have the informations about how to build the \textbf{Secure Server Socket} are contained into an \textbf{IIOPSSLSocketFactory} attribute of type \textbf{java.util.Map} that associates a given \textbf{TCP Port} to the relevant \textbf{SSLInfo} object.
-				This \textbf{java.util.Map} is \textit{initialized from global variables}
-				%(which seems a bad habit again)
-				at \textbf{IIOPSSLSocketFactory} object creation time and stores the association of every \textbf{IIOP Listener Port} to the relevant \textbf{IIOP Listener configuration}.
-				An \textbf{IIOP listener}, using \textbf{Server Sockets}, accepts incoming connections from the remote \textbf{Clients} of \textbf{Enterprise Beans} and from other \textbf{CORBA}
+				Given that the class can open a \textbf{Server Socket} for each \textbf{IIOP Listener}, in the boot procedure it stores in a \textbf{java.util.Map} an association between the a given \textbf{TCP Port} and an object, called \textbf{SSLInfo} object, that summarized the informations about an opened \textbf{IIOP Listener}.
+				
+				From this map could be derived the association between every \textbf{IIOP Listener Port} to the relevant \textbf{IIOP Listener configuration}.
+				
+				Once required, the server socket related to an \textbf{IIOP Listener} can be opened, and the server can accepts incoming connections from the remote \textbf{Clients} of \textbf{Enterprise Beans} and from other \textbf{CORBA}
 				%(Common Object Request Broker Architecture)
 				based \textbf{Clients}.
 			\end{itemize}
 		\end{frame}
 		
-		\begin{frame}
-			The entire class behaviour depends on the type of process in which context the \textbf{IIOPSSLSocketFactory} object is built (A extremely bad modus operandi).
-			There can exists two different types of processes in which this class could be used, inferring by the source code available:
+		\begin{frame}{Class Context}
+			The entire class behaviour depends on the type of process wherein the \textbf{IIOPSSLSocketFactory} object is built (A extremely bad modus operandi).
+			Inferring the source code available there can exists two different types of processes in which this class could be used:
 			\begin{itemize}
-				\item \textbf{EJB container:}
-				The \textbf{EJB container} is the interface between \textbf{enterprise beans}, which provide the business logic in a \textbf{Java EE application}, and the \textbf{Java EE server}. The \textbf{EJB container} runs on the \textbf{Java EE server} and manages the execution of an \textbf{application's enterprise beans}.
+				\item \textbf{EJB container:} In this case the object is instantiated in a \textbf{Server Process}
+				%The \textbf{EJB container} is the interface between \textbf{enterprise beans}, which provide the business logic in a \textbf{Java EE application}, and the \textbf{Java EE server}. (Server Process)
 				\item \textbf{Application Client Container:}
-				The \textbf{Application Client Container} is the interface between \textbf{Java EE application clients} (special Java SE applications that use Java EE server components) and the \textbf{Java EE server}. The \textbf{application client container} runs on the \textbf{client machine} and is the gateway between the \textbf{client application} and the \textbf{Java EE server components} that the client uses.
+				In this case the object is instantiated in a \textbf{Client Process}.
+				%The \textbf{Application Client Container} is the interface between \textbf{Java EE application clients} (special Java SE applications that use Java EE server components) and the \textbf{Java EE server}. The \textbf{application client container} runs on the \textbf{client machine} and is the gateway between the \textbf{client application} and the \textbf{Java EE server components} that the client uses. (Client Process)
 			\end{itemize}
+			Through the use of an \textbf{If - Else Structure} in the \textbf{class's Constructor}, the created object derived by the \textbf{if branch} is completely different from the \textbf{else one}.
 			
-			The reader who would get a more comprehensive overview on this topic is suggested to go through this \href{https://docs.oracle.com/javaee/7/firstcup/java-ee002.htm}{Oracle documentation}.
-			So, again using inference (the class documentation is not enough detailed to get a complete knowledge about these facts) on what has been discovered so far, it can be concluded that the class functional role is fundamentally different in the case of running into a \textbf{EJB Container} than on an \textbf{Application Client Container}.
+			\end{frame}
+			
+			\begin{frame}{Class Usage}
 			To recap, the functional role is either one of the following two:
 			\begin{itemize}
 				\item \textbf{EJB Container Functional Role:}
@@ -119,6 +124,42 @@ allows method calls to be made from one computer to another via network, and it 
 	\begin{frame}{Class Issues - Checklist[1] Naming Conventions}
 		The class has the capability of creating also \textbf{Plain Text Socket} and \textbf{Plain Text Server Socket}, even if the name \textbf{IIOPSSLSocketFactory} clearly underlines that the class has to be a Factory of \textbf{Secure Sockets and Server Sockets}. In order to give the architecture the ability of creating \textbf{Plain Text Socket} and \textbf{Plain Text Server Socket}, a separate class has to be thought.
 	\end{frame}
+	\begin{frame}{Class Issues - Checklist[18] Comments}
+		The class is not adequately commented at all.
+	\end{frame}
+	\begin{frame}{Class Issues - Checklist[20] Java Source File}
+		The main class contains an internal class named \textbf{SSLInfo}.
+	\end{frame}
+	\begin{frame}{Class Issues - Checklist[27] Class and Interface Declarations}
+		The constructor \textbf{IIOPSSLSocketFactory()} is \textbf{75 lines of code long} and it is not easily comprehensible. Furthermore it is full of if - else structures with no meaningful conditions. A such long method worsens the readability and the instant comprehension of the method’s role in the code. In addition it would be better to \textbf{refactor} and separate the atomic parts of code in additional methods.
+	\end{frame}
+	\begin{frame}{Class Issues - Checklist[28] Initialization and Declarations}
+		\textbf{Lines 94 to 97:} The private variables \textbf{TLS, SSLv3, SSLv2, SSL} are used as simple string instead of creating an enumeration for better show the logic bond between each one and the other ones.
+		%\renderPartialCode{94}{97}
+	\end{frame}
 	\subsection{Method Issues}
+	
+	\begin{frame}{Method Issues - Overview}
+		The \textbf{checklist} has also been checked analysing the assigned source code file method by method.
+		We were assigned of \textbf{four methods} of this class:
+		\begin{itemize}
+			\itemBold{.createServerSocket()}
+			\itemBold{.createSSLServerSocket()}
+			\itemBold{.createSocket()}
+			\itemBold{.createSSLSocket()}
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{.createServerSocket() Issues -}
+	\end{frame}
+	
+	\begin{frame}{.createSSLServerSocket() Issues-}
+	\end{frame}
+	
+	\begin{frame}{.createSocket() Issues-}
+	\end{frame}
+	
+	\begin{frame}{.createSSLSocket() Issues-}
+	\end{frame}
 	
 \end{document}
