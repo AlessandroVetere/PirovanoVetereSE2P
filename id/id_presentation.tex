@@ -161,14 +161,20 @@
 		\end{itemize}
 	\end{frame}
 	
-	\begin{frame}{.createSSLServerSocket() Main Issues}
+	\begin{frame}{.createSocket() Main Issues}
 		Below we show the method's aspects we want to underline:
 		\begin{itemize}
-			\itemBold{}
+			\itemBold{Indention CL[8]} The whole method 	lacks a level of indentation and in general is provided of a bad layout (blank useless lines...).
+			\itemBold{File Organization CL[13]} Lines 304, 310, 317, 329 are too long.
+			\itemBold{Comments CL[18]} The provided JavaDoc is too short and not really explicative. It does not completely explain the method functionalities.
+			\itemBold{Initialization and Declaration CL[28]} At line 401 the variable \textit{ss} should have been declared of type \textbf{SSLServerSocket} instead of plain \textbf{ServerSocket}.
+			\itemBold{Initialization and Declaration CL[29]} At lines 332, 332 the local variables host and port could have been used instead for better code readability.
+			\itemBold{Exception CL[52]} Lines 340 to 345: The catch block is actually catching a generic Exception instead of the generated ones.
+
 		\end{itemize}
 	\end{frame}
 	
-	\begin{frame}{.createSocket() Main Issues}
+	\begin{frame}{.createSSLServerSocket() Main Issues}
 		Below we show the method's aspects we want to underline:
 		\begin{itemize}
 			\itemBold{}
