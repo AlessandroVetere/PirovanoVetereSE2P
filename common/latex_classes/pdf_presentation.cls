@@ -162,3 +162,4 @@
 }
 
 \newcommand{\showImage}[2]{\showPercentImage{#1}{#2}{1}}
+\newcommand{\itemBold}[1]{\item\textbf{#1:}}
