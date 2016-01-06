@@ -170,22 +170,45 @@
 			\itemBold{Initialization and Declaration CL[28]} At line 401 the variable \textit{ss} should have been declared of type \textbf{SSLServerSocket} instead of plain \textbf{ServerSocket}.
 			\itemBold{Initialization and Declaration CL[29]} At lines 332, 332 the local variables host and port could have been used instead for better code readability.
 			\itemBold{Exception CL[52]} Lines 340 to 345: The catch block is actually catching a generic Exception instead of the generated ones.
-
 		\end{itemize}
 	\end{frame}
 	
 	\begin{frame}{.createSSLServerSocket() Main Issues}
 		Below we show the method's aspects we want to underline:
 		\begin{itemize}
-			\itemBold{}
+			\itemBold{Naming Conventions CL[1]} The difference between \textbf{port} and \textbf{iport} should be more highlighted through the naming choices (\textbf{iport} is used to search inside the \textbf{HashMap}).%367.377
+			\itemBold{Indention CL[8]} The whole method 	lacks a level of indentation and in general is provided of a bad layout (blank useless lines...).
+			\itemBold{File Organization CL[13]} Lines 368, 372, 380, 411 are too long.
+			\itemBold{Comments CL[18]} The provided JavaDoc is too short and not really explicative. It does not completely explain the method functionalities.
+			\itemBold{Initialization and Declaration CL[33]} Lines 393 and 401: The \textit{cs} and \textit{ss} variables are declared at the middle of the method code. They have to be declared at the beginning of it.
+			\itemBold{Exception CL[52]} Lines 422 to 425: The catch block is actually catching a generic Exception instead of the generated ones.
+			\itemBold{Output Format CL[42]} In the catch blocks the caught exceptions are not explained to the user, they are only printed out.
 		\end{itemize}
 	\end{frame}
 	
 	\begin{frame}{.createSSLSocket() Main Issues}
 		Below we show the method's aspects we want to underline:
 		\begin{itemize}
-			\itemBold{}
+			\itemBold{Naming Conventions CL[1]} The following piece of code contains a variable named e2 whose name is not meaningful.%468.469
+			\itemBold{Indention CL[8]} The whole method 	lacks a level of indentation and in general is provided of a bad layout (blank useless lines...).
+			\itemBold{File Organization CL[13]} Lines 90, 99 are too long.
+			\itemBold{Comments CL[18]}Comments and JavaDoc provided in this method are completely useless.
+			\itemBold{Exception CL[52]} Lines 462 to 475: The catch block is actually catching a generic Exception instead of the generated ones.
+			\itemBold{Initialization and Declarations CL[33]} Lines 450, 451, 452, 468: The local variables are not initialized at the beginning of their relevant blocks.
 		\end{itemize}
 	\end{frame}
 	
+	\section{Other Problems}
+	
+	\begin{frame}{Other Problems - Nagle’s Algorithm Disabling}
+		By default, \textbf{Nagle’s algorithm} is disabled for all and only the plain sockets built. For encrypted sockets, Nagle’s algorithm is not disabled and this could lead to severe performance issue. \par This is because \textbf{Nagle’s algorithm is essentially delaying the delivery of TCP Packets in order to avoid the delivery of several small packets (which obviously increases the overhead to data ratio), preferring less but bigger packets}. Thus, a server response that is generated very fast could be delivered later to the client because of this policy. \par \textbf{For us, the missed disabling of Nagle’s algorithm in secure sockets is a major bug.}
+	\end{frame}
+	
+	\begin{frame}{Other Problems - Class Context Dependency}
+		The entire \textbf{class behaviour} depends on the \textbf{type of process} in which context the IIOPSSLSocketFactory \textbf{object is built}. \par In fact, the Secure Socket Creation is both used in the \textbf{Application Client Container} (as Client of a EJB Container) and the \textbf{EJB Container} (as Client of another EJB Container), but the Secure Server Socket Creation is used and can only be used (if contrary a \textit{RuntimeException} is thrown) by the \textbf{EJB Container} (as Server of Application Client Containers and EJB Containers). \par \textbf{This is a major mess in the software architecture, the solution should have been designed in a completely different way, following the OOP principles.}
+	\end{frame}
+	
+	\begin{frame}{Other Problems - No Generics Used}
+		There’s no usage of generics in the \textbf{java.util.Map} attribute \textbf{portToSSLInfo}.%113
+	\end{frame}
 \end{document}
