@@ -9,25 +9,107 @@
 % Let's get started
 \begin{document}
 	\titleToc{}
-	\section{Class Name and Pattern Explanation}
+		\section{Class Name and Pattern Explanation}
+		
+		\begin{frame}{IIOPSSLSocketFactory - Overview}
+			The class we have been assigned is named \textbf{IIOPSSLSocketFactory}.
+			It is included in the \textbf{org.glassfish.enterprise.iiop.impl} package.
+			\textbf{IIOPSSLSocketFactory} implements the \textbf{ORBSocketFactory} interface, which is part of the \textbf{CORBA} (Common Object Request Broker Architecture) standard declined to \textbf{Java Enterprise Edition}.
+		\end{frame}
+		
+		\begin{frame}{IIOPSSLSocketFactory - ORB}
+			The \textbf{ORBSocketFactory} interface is included in the \textbf{com.sun.corba.ee.spi.transport} package, and is an interface that abstracts some parts of the \textbf{ORB} (Object Request Broker) middleware related to sockets creation.
+			As the name suggests, the \textbf{ORBSocketFactory} interface is a \textbf{Factory} of \textbf{Sockets} for the \textbf{ORB} middleware.
+		\end{frame}
+		
+		\begin{frame}{IIOPSSLSocketFactory - IIOP}
+			The \textbf{IIOP} (Internet Inter-ORB Protocol, a concrete protocol) is an implementation of the \textbf{GIOP} (General Inter-ORB Protocol, an abstract protocol) that \textbf{ORB}s use to communicate over the Internet, and provides a mapping between \textbf{GIOP} messages and the \textbf{TCP/IP} layer.
+			Our class is therefore a \textbf{Factory} of \textbf{SSLSockets} for \textbf{IIOP}, and is an \textbf{Implementation} of the relevant part of the \textbf{IIOP} included in the \textbf{Enterprise} facilities of the \textbf{GlassFish} server.
+		\end{frame}
+		
+		\section{Functional Role of Assigned Class}
+		
+		\begin{frame}{ORB Middleware Actors Overview}
+			%First of all, an overview of the \textbf{ORB} middleware is given, because it is the component that uses the \textbf{IIOP} protocol to communicate over the Internet.
+			The \textbf{O}bject \textbf{R}equest \textbf{B}roker
+			(component that uses the \textbf{IIOP} protocol) %Added
+			allows method calls to be made from one computer to another via network, and it provides that for each remote method call there are two main actors exchanging informations:
+			\begin{itemize}
+				\item \textbf{Client:}
+				It requests a method call to an object which interface is exposed by the \textbf{Server} and is known to the \textbf{Client}.
+				The \textbf{Client} has the capability of sending some parameters to the Server for executing the given method call and the capability of receiving back the return value of the called method, if any.
+				\item \textbf{Server:}
+				It exposes the interfaces of the objects that can be called by the various \textbf{Clients} allowed to make remote method calls.
+				Through those interfaces, the \textbf{Clients} can make remote method calls, passing objects as parameters if necessary, and receiving a return value, if any.
+			\end{itemize}
+		\end{frame}
+		
+		\begin{frame}{CORBA Architecture}
+			\showPercentImage{./section_2/iiop.jpg}{Overview of CORBA Architecture}{0.9}
+		\end{frame}
+		
+		\begin{frame}{IIOPSSLSocketFactory functionalities - Socket Creation}
+			This functionality allows the creation of a \textbf{Socket} with some specific characteristics.
+			\begin{itemize}
+				\item \textbf{Plain Socket:}
+				Plain Text Socket (\textbf{java.net.Socket}) with \textit{Nagle's algorithm disabled}.
+				%It is created using \textbf{java.nio.channels.SocketChannel}, if so is specified in the \textbf{ORB} object, whose reference is passed at runtime to a \textbf{IIOPSSLSocketFactory} object using a setter.
+				\item \textbf{Secure Socket:}
+				Encrypted Socket (\textbf{javax.net.ssl.SSLSocket}) that uses \textbf{Secure Socket Layer} or \textbf{Transport Secure Layer}.
+				Its characteristics are defined during the creation of a \textbf{IIOPSSLSocketFactory} object by \textit{obtaining data from global variables} (which seems to be a bad behaviour) and storing those data into a specific private attribute of type \textbf{IIOPSSLSocketFactory.SSLInfo}.
+				%This private attribute is never modified after \textbf{IIOPSSLSocketFactory} object creation and thus it can be considered as final, although it is not declared final nor immutable.
+				In particular, a secure socket built by \textbf{IIOPSSLSocketFactory} can use either one of the following cryptographic protocols for data encryption:
+				\begin{itemize}
+					\item \textbf{SSL1} 
+					\item \textbf{SSL2}
+					\item \textbf{SSL3}
+					\item \textbf{TLS}
+				\end{itemize}
+			\end{itemize}
+		\end{frame}
+		
+		\begin{frame}{IIOPSSLSocketFactory f. - Server Socket Creation}
+			This functionality allows the creation of a \textbf{Server Socket}.
+			\begin{itemize}
+				\item \textbf{Plain Server Socket:}
+				A Server Socket (\textbf{java.net.ServerSocket}) that accepts incoming \textbf{Plain Socket} connections from \textbf{Clients}.
+				%If the \textbf{ORB} object set into the given \textbf{IIOPSSLSocketFactory} object is configured accordingly, the \textbf{Server Socket} is created using \textbf{java.nio.ServerSocketChannel}.
+				\item \textbf{Secure Server Socket:}
+				A Secure Server Socket (\textbf{javax.net.ssl.SSLSocket}) that accepts incoming \textbf{Secure Socket} connections.
+				%on a certain \textbf{Port} of a given \textbf{IP} address.
+				The \textbf{SSLInfo} object necessary to have the informations about how to build the \textbf{Secure Server Socket} are contained into an \textbf{IIOPSSLSocketFactory} attribute of type \textbf{java.util.Map} that associates a given \textbf{TCP Port} to the relevant \textbf{SSLInfo} object.
+				This \textbf{java.util.Map} is \textit{initialized from global variables}
+				%(which seems a bad habit again)
+				at \textbf{IIOPSSLSocketFactory} object creation time and stores the association of every \textbf{IIOP Listener Port} to the relevant \textbf{IIOP Listener configuration}.
+				An \textbf{IIOP listener}, using \textbf{Server Sockets}, accepts incoming connections from the remote \textbf{Clients} of \textbf{Enterprise Beans} and from other \textbf{CORBA}
+				%(Common Object Request Broker Architecture)
+				based \textbf{Clients}.
+			\end{itemize}
+		\end{frame}
+		
+		\begin{frame}
+			The entire class behaviour depends on the type of process in which context the \textbf{IIOPSSLSocketFactory} object is built (A extremely bad modus operandi).
+			There can exists two different types of processes in which this class could be used, inferring by the source code available:
+			\begin{itemize}
+				\item \textbf{EJB container:}
+				The \textbf{EJB container} is the interface between \textbf{enterprise beans}, which provide the business logic in a \textbf{Java EE application}, and the \textbf{Java EE server}. The \textbf{EJB container} runs on the \textbf{Java EE server} and manages the execution of an \textbf{application's enterprise beans}.
+				\item \textbf{Application Client Container:}
+				The \textbf{Application Client Container} is the interface between \textbf{Java EE application clients} (special Java SE applications that use Java EE server components) and the \textbf{Java EE server}. The \textbf{application client container} runs on the \textbf{client machine} and is the gateway between the \textbf{client application} and the \textbf{Java EE server components} that the client uses.
+			\end{itemize}
+			
+			The reader who would get a more comprehensive overview on this topic is suggested to go through this \href{https://docs.oracle.com/javaee/7/firstcup/java-ee002.htm}{Oracle documentation}.
+			So, again using inference (the class documentation is not enough detailed to get a complete knowledge about these facts) on what has been discovered so far, it can be concluded that the class functional role is fundamentally different in the case of running into a \textbf{EJB Container} than on an \textbf{Application Client Container}.
+			To recap, the functional role is either one of the following two:
+			\begin{itemize}
+				\item \textbf{EJB Container Functional Role:}
+				The \textbf{Server Socket Creation} functionality is used to give a \textbf{IIOP Listener} the capability of accepting incoming \textbf{Plain Text Socket} and \textbf{Secure Socket} connections, in order to receive \textbf{Remote Method Calls} through \textbf{IIOP}.
+				On the other side, the \textbf{Socket Creation} capability is exploited when the \textbf{EJB Container} needs to make \textbf{Remote Method Calls} using \textbf{IIOP} to another remote \textbf{EJB Container}.
+				\item \textbf{Application Client Container Functional Role:}
+				The \textbf{Socket Creation} functionality is used to connect to a remote \textbf{IIOP Listener} that is running into an \textbf{EJB Container} in order to deliver a \textbf{Remote Method Call}, and receive the \textbf{Return Value}, if any.
+			\end{itemize}
+		\end{frame}
 	
-	\begin{frame}{IIOPSSLSocketFactory - Overview}
-		The class we have been assigned is named \textbf{IIOPSSLSocketFactory}.
-		It is included in the \textbf{org.glassfish.enterprise.iiop.impl} package.
-		\textbf{IIOPSSLSocketFactory} implements the \textbf{ORBSocketFactory} interface, which is part of the \textbf{CORBA} (Common Object Request Broker Architecture) standard declined to \textbf{Java Enterprise Edition}.
-	\end{frame}
-	
-	\begin{frame}{IIOPSSLSocketFactory - ORB}
-		The \textbf{ORBSocketFactory} interface is included in the \textbf{com.sun.corba.ee.spi.transport} package, and is an interface that abstracts some parts of the \textbf{ORB} (Object Request Broker) middleware related to sockets creation.
-		As the name suggests, the \textbf{ORBSocketFactory} interface is a \textbf{Factory} of \textbf{Sockets} for the \textbf{ORB} middleware.
-	\end{frame}
-	
-	\begin{frame}{IIOPSSLSocketFactory - IIOP}
-		The \textbf{IIOP} (Internet Inter-ORB Protocol, a concrete protocol) is an implementation of the \textbf{GIOP} (General Inter-ORB Protocol, an abstract protocol) that \textbf{ORB}s use to communicate over the Internet, and provides a mapping between \textbf{GIOP} messages and the \textbf{TCP/IP} layer.
-		Our class is therefore a \textbf{Factory} of \textbf{SSLSockets} for \textbf{IIOP}, and is an \textbf{Implementation} of the relevant part of the \textbf{IIOP} included in the \textbf{Enterprise} facilities of the \textbf{GlassFish} server.
-	\end{frame}
-	
-	\section{Functional Role of Assigned Class}
+	\section{Issues Found}
 	
 	\subsection{Class Issues}
 	
@@ -40,3 +122,4 @@
 	
 	\subsection{Method Issues}
 	
+\end{document}
