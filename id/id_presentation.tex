@@ -33,11 +33,11 @@
 		
 		\begin{frame}{ORB Middleware - Overview}
 			The \textbf{O}bject \textbf{R}equest \textbf{B}roker, using the \textbf{IIOP} protocol, allows method calls to be made from one computer to another via Internet. \\
-			This \textbf{Middleware} allows objects to interact in a \textbf{heterogeneous}, \textbf{distributed}, \textbf{language} and \textbf{platform independent} environment.	
+			This \textbf{middleware} allows objects to interact in a \textbf{heterogeneous}, \textbf{distributed}, \textbf{language} and \textbf{platform independent} environment.	
 		\end{frame}
 			
 		\begin{frame}{ORB Middleware - Actors}
-			\textbf{Two} main actors are involved every remote method call, following the so called \textbf{CORBA Client - Server architecture}.
+			\textbf{Two} main actors are involved in every remote method call, following the so called \textbf{CORBA Client - Server architecture}.
 			\begin{itemize}
 				\item \textbf{Client:}
 					It requests a method call to an object which interface is exposed by the \textbf{Server} and is known to the \textbf{Client}.\\
@@ -52,7 +52,7 @@
 			\showPercentImage{./section_2/iiop.jpg}{CORBA Client - Server Architecture Overview}{0.9}
 		\end{frame}
 		
-		\subsection{IIOSSLSocketFactory Role}
+		\subsection{IIOPSSLSocketFactory Role}
 		
 		\begin{frame}{Class functionalities - Socket Creation}
 			The first main class functionality is the creation of two types of \textbf{Sockets}.
@@ -79,8 +79,8 @@
 		\end{frame}
 		
 		\begin{frame}{Class Context}
-			The entire class behaviour depends on the type of process wherein the \textbf{IIOPSSLSocketFactory} object is built.\\
-			This \textbf{extremely bad behaviour} is obtained through the usage of a \textbf{Conditional} structure in the class \textbf{Constructor}.\\
+			The entire class behavior depends on the type of process wherein the \textbf{IIOPSSLSocketFactory} object is built.\\
+			This \textbf{extremely bad behavior} is obtained through the usage of a \textbf{conditional} structure in the class \textbf{constructor}.\\
 			Doing inference on the source code available we discovered that there exists two different types of processes in which this class could be instantiated.
 			\begin{itemize}
 				\item \textbf{EJB container:}
@@ -106,50 +106,55 @@
 	\subsection{Class Issues}
 	
 	\begin{frame}{Class Issues - Overview}
-		In this subsection are listed the issues related to the whole class and not only to a specific method. \par Below we propose only few \textbf{selected}, \textbf{particular} and \textbf{meaningful} issues that we have thought could have been interesting to be spoken about.
+		In this subsection are listed the issues related to the whole class and not only to a specific method. \par
+		In the next slides we propose only few \textbf{selected}, \textbf{particular} and \textbf{meaningful} issues that we found interesting to mention.
 	\end{frame}
 	\begin{frame}{Class Issues - Checklist[1] Naming Conventions}
-		The class has the capability of creating also \textbf{Plain Text Socket} and \textbf{Plain Text Server Socket}, even if the name \textbf{IIOPSSLSocketFactory} clearly underlines that the class has to be a Factory of \textbf{Secure Sockets and Server Sockets}. In order to give the architecture the ability of creating \textbf{Plain Text Socket} and \textbf{Plain Text Server Socket}, a separate class has to be thought.
+		The class has the capability of creating also \textbf{Plain Text Socket} and \textbf{Plain Text Server Socket}, even if the name \textbf{IIOPSSLSocketFactory} clearly underlines that the class has to be a Factory of \textbf{Secure Sockets and Server Sockets}. \\
+		In order to give the architecture the ability of creating \textbf{Plain Text Socket} and \textbf{Plain Text Server Socket}, a separate class should be designed.
 	\end{frame}
 	\begin{frame}{Class Issues - Checklist[18] Comments}
 		The class is not adequately commented at all.
 	\end{frame}
 	\begin{frame}{Class Issues - Checklist[20] Java Source File}
-		The main class contains an internal class named \textbf{SSLInfo}.
+		The main class contains a non private inner class named \textbf{SSLInfo}.
 	\end{frame}
 	\begin{frame}{Class Issues - Checklist[27] Class and Interface Declarations}
-		The constructor \textbf{IIOPSSLSocketFactory()} is \textbf{75 lines of code long} and it is not easily comprehensible. Furthermore it is full of if - else structures with no meaningful conditions. A such long method worsens the readability and the instant comprehension of the method’s role in the code. In addition it would be better to \textbf{refactor} and separate the atomic parts of code in additional methods.
+		The constructor \textbf{IIOPSSLSocketFactory()} is \textbf{75 lines of code long} and it is not easily comprehensible.\\
+		Furthermore it is full of if-else structures with no meaningful conditions.\\
+		A such long method worsens the readability and the fast comprehension of the method role in the code.\\
+		In addition it would be better to \textbf{refactor} the code by moving repeated atomic parts of the constructor logic in additional methods.
 	\end{frame}
 	\begin{frame}{Class Issues - Checklist[28] Initialization and Declarations}
-		\textbf{Lines 94 to 97:} The private variables \textbf{TLS, SSLv3, SSLv2, SSL} are used as simple string instead of creating an enumeration for better show the logic bond between each one and the other ones.
+		\textbf{Lines 94 to 97:} The private variables \textbf{TLS, SSL3, SSL2, SSL} are declared simple strings, instead of being members of a dedicated \textbf{enumeration} that could better encapsulate their logical boundary.
 		%\renderPartialCode{94}{97}
 	\end{frame}
 	\subsection{Method Issues}
 	
 	\begin{frame}{Method Issues - Overview}
-		The \textbf{checklist} has also been checked analysing the assigned source code file method by method.
-		We were assigned of \textbf{four methods} of this class:
+		The \textbf{checklist} has also been checked analyzing the assigned source code file method by method.
+		We were assigned \textbf{four methods} of this class:
 		\begin{itemize}
-			\itemBold{createServerSocket()}
-			\itemBold{createSSLServerSocket()}
-			\itemBold{createSocket()}
-			\itemBold{createSSLSocket()}
+			\item \textbf{createServerSocket()}
+			\item \textbf{createSSLServerSocket()}
+			\item \textbf{createSocket()}
+			\item \textbf{createSSLSocket()}
 		\end{itemize}
 	\end{frame}
 	
-	\begin{frame}{createServerSocket() Main Issues}
-		Below we show the method's aspects we want to underline:
+	\begin{frame}{createServerSocket() - Main Issues}
+		Below we show the method issues we want to underline:
 		\begin{itemize}
 			\itemBold{Indention CL[8]} The whole method 	lacks a level of indentation and in general is provided of a bad layout (blank useless lines...).
 			\itemBold{File Organization CL[12]} Lines 277, 289, 296 and 299 are blank without a clear reason.
 			\itemBold{Comments CL[18]} The provided JavaDoc is too short and not really explicative. It does not completely explain the method functionalities.
 			\itemBold{Computation, Comparisons and Assignments CL[44]} Lines 283 to 284: The if condition is not explicit and requires inference to be fully understood. In addition it is error prone. The whole problem should have been faced using an enumeration instead of String constants.
-			\itemBold{Initialization and Declarations} In the method's code we can find some useless variable's initialization to \textit{"null"} value.
+			\itemBold{Initialization and Declarations} In the method code we can find some useless variable initialization to \textit{"null"} value.
 		\end{itemize}
 	\end{frame}
 	
-	\begin{frame}{createSocket() Main Issues}
-		Below we show the method's aspects we want to underline:
+	\begin{frame}{createSocket() - Main Issues}
+		Below we show the method issues we want to underline:
 		\begin{itemize}
 			\itemBold{Indention CL[8]} The whole method 	lacks a level of indentation and in general is provided of a bad layout (blank useless lines...).
 			\itemBold{File Organization CL[13]} Lines 304, 310, 317, 329 are too long.
@@ -160,11 +165,11 @@
 		\end{itemize}
 	\end{frame}
 	
-	\begin{frame}{createSSLServerSocket() Main Issues}
-		Below we show the method's aspects we want to underline:
+	\begin{frame}{createSSLServerSocket() - Main Issues}
+		Below we show the method issues we want to underline:
 		\begin{itemize}
 			\itemBold{Naming Conventions CL[1]} The difference between \textbf{port} and \textbf{iport} should be more highlighted through the naming choices (\textbf{iport} is used to search inside the \textbf{HashMap}).%367.377
-			\itemBold{Indention CL[8]} The whole method 	lacks a level of indentation and in general is provided of a bad layout (blank useless lines...).
+			\itemBold{Indention CL[8]} The whole method lacks a level of indentation and in general is provided of a bad layout (blank useless lines...).
 			\itemBold{File Organization CL[13]} Lines 368, 372, 380, 411 are too long.
 			\itemBold{Comments CL[18]} The provided JavaDoc is too short and not really explicative. It does not completely explain the method functionalities.
 			\itemBold{Initialization and Declaration CL[33]} Lines 393 and 401: The \textit{cs} and \textit{ss} variables are declared at the middle of the method code. They have to be declared at the beginning of it.
@@ -173,13 +178,13 @@
 		\end{itemize}
 	\end{frame}
 	
-	\begin{frame}{createSSLSocket() Main Issues}
-		Below we show the method's aspects we want to underline:
+	\begin{frame}{createSSLSocket() - Main Issues}
+		Below we show the method issues we want to underline:
 		\begin{itemize}
 			\itemBold{Naming Conventions CL[1]} The following piece of code contains a variable named e2 whose name is not meaningful.%468.469
 			\itemBold{Indention CL[8]} The whole method 	lacks a level of indentation and in general is provided of a bad layout (blank useless lines...).
 			\itemBold{File Organization CL[13]} Lines 90, 99 are too long.
-			\itemBold{Comments CL[18]}Comments and JavaDoc provided in this method are completely useless.
+			\itemBold{Comments CL[18]} Comments and JavaDoc provided in this method are completely useless.
 			\itemBold{Exception CL[52]} Lines 462 to 475: The catch block is actually catching a generic Exception instead of the generated ones.
 			\itemBold{Initialization and Declarations CL[33]} Lines 450, 451, 452, 468: The local variables are not initialized at the beginning of their relevant blocks.
 		\end{itemize}
@@ -187,19 +192,20 @@
 	
 	\section{Other Problems}
 	
-	\begin{frame}{Other Problems - Nagle’s Algorithm Disabling}
-		By default, \textbf{Nagle’s algorithm} is disabled for all and only the plain sockets built. For encrypted sockets, Nagle’s algorithm is not disabled and this could lead to severe performance issue. \par This is because \textbf{Nagle’s algorithm is essentially delaying the delivery of TCP Packets in order to avoid the delivery of several small packets (which obviously increases the overhead to data ratio), preferring less but bigger packets}. Thus, a server response that is generated very fast could be delivered later to the client because of this policy. \par \textbf{For us, the missed disabling of Nagle’s algorithm in secure sockets is a major bug.}
+	\begin{frame}{Other Problems - Nagle's Algorithm Disabling}
+		By default, \textbf{Nagle's algorithm} is disabled for all and only the plain sockets built. For encrypted sockets, Nagle's algorithm is not disabled and this could lead to severe performance issue. \par This is because \textbf{Nagle's algorithm is essentially delaying the delivery of TCP Packets in order to avoid the delivery of several small packets (which obviously increases the overhead to data ratio), preferring less but bigger packets}. Thus, a server response that is generated very fast could be delivered later to the client because of this policy. \par \textbf{For us, the missed disabling of Nagle's algorithm in secure sockets is a major bug.}
 	\end{frame}
 
-	\begin{frame}{Other Problems - Obtain Data from Global Values}
-		%TODO Summarize
+	\begin{frame}{Other Problems - Obtain Data from Global Variables}
+		The characteristics of \textbf{Secure Sockets} and \textbf{Secure Server Sockets} creation are fetched from \textbf{global variables} using \textbf{public static methods} and stored into two relevant attributes by \textbf{IIOPSSLSocketFactory} constructor at object creation time.\\
+		Obtaining \textbf{global data} from \textbf{static methods} instead of using a proper \textbf{object oriented factory}, makes the class functionality mostly dependent on the surrounding context, less predictable and bug prone.
 	\end{frame}
 	
 	\begin{frame}{Other Problems - Class Context Dependency}
-		The entire \textbf{class behaviour} depends on the \textbf{type of process} in which context the IIOPSSLSocketFactory \textbf{object is built}. \par In fact, the Secure Socket Creation is both used in the \textbf{Application Client Container} (as Client of a EJB Container) and the \textbf{EJB Container} (as Client of another EJB Container), but the Secure Server Socket Creation is used and can only be used (if contrary a \textit{RuntimeException} is thrown) by the \textbf{EJB Container} (as Server of Application Client Containers and EJB Containers). \par \textbf{This is a major mess in the software architecture, the solution should have been designed in a completely different way, following the OOP principles.}
+		The entire \textbf{class behavior} depends on the \textbf{type of process} in which context the IIOPSSLSocketFactory \textbf{object is built}. \par In fact, the Secure Socket Creation is both used in the \textbf{Application Client Container} (as Client of a EJB Container) and the \textbf{EJB Container} (as Client of another EJB Container), but the Secure Server Socket Creation is used and can only be used (if contrary a \textit{RuntimeException} is thrown) by the \textbf{EJB Container} (as Server of Application Client Containers and EJB Containers). \par \textbf{This is a major mess in the software architecture, the solution should have been designed in a completely different way, following the OOP principles.}
 	\end{frame}
 	
 	\begin{frame}{Other Problems - No Generics Used}
-		There’s no usage of generics in the \textbf{java.util.Map} attribute \textbf{portToSSLInfo}.%113
+		There is no usage of generics in the \textbf{java.util.Map} attribute \textbf{portToSSLInfo}.%113
 	\end{frame}
 \end{document}
