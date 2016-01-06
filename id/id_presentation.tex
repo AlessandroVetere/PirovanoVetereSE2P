@@ -9,12 +9,22 @@
 % Let's get started
 \begin{document}
 	\titleToc{}
-	\section{Section 1}
+	\section{Class Name and Pattern Explanation}
 	
-	\subsection{Subsection 1}
+	\begin{frame}{IIOPSSLSocketFactory - Overview}
+		The class we have been assigned is named \textbf{IIOPSSLSocketFactory}.
+		It is included in the \textbf{org.glassfish.enterprise.iiop.impl} package.
+		\textbf{IIOPSSLSocketFactory} implements the \textbf{ORBSocketFactory} interface, which is part of the \textbf{CORBA} (Common Object Request Broker Architecture) standard declined to \textbf{Java Enterprise Edition}.
+	\end{frame}
 	
-	\begin{frame}{Slide 1}
-		
+	\begin{frame}{IIOPSSLSocketFactory - ORB}
+		The \textbf{ORBSocketFactory} interface is included in the \textbf{com.sun.corba.ee.spi.transport} package, and is an interface that abstracts some parts of the \textbf{ORB} (Object Request Broker) middleware related to sockets creation.
+		As the name suggests, the \textbf{ORBSocketFactory} interface is a \textbf{Factory} of \textbf{Sockets} for the \textbf{ORB} middleware.
+	\end{frame}
+	
+	\begin{frame}{IIOPSSLSocketFactory - IIOP}
+		The \textbf{IIOP} (Internet Inter-ORB Protocol, a concrete protocol) is an implementation of the \textbf{GIOP} (General Inter-ORB Protocol, an abstract protocol) that \textbf{ORB}s use to communicate over the Internet, and provides a mapping between \textbf{GIOP} messages and the \textbf{TCP/IP} layer.
+		Our class is therefore a \textbf{Factory} of \textbf{SSLSockets} for \textbf{IIOP}, and is an \textbf{Implementation} of the relevant part of the \textbf{IIOP} included in the \textbf{Enterprise} facilities of the \textbf{GlassFish} server.
 	\end{frame}
 	
 \end{document}
