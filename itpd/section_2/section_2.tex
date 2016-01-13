@@ -57,6 +57,11 @@ Moreover we suppose that Google Maps API are already tested and that the exposed
 
 \subsubsection{Software Integration Sequence}
 %TODO For each subsystem: Identify the sequence in which the software components will be integrated within the subsystem. Relate this sequence to any product features/functions that are being built up.
-
+We adopted a \textbf{bottom-up} testing strategy; this strategy starts from the testing of the \textbf{Model}'s features.\par
+We considered \textbf{Model}, \textbf{Controller} and \textbf{Views} as \textbf{Components Subsystems}.
+Firstly the \textit{tester} has to singularly test the component' \textit{sub-features} contained in the \textbf{Model Subsystem}, then, in order to simulate the behaviour of the \textbf{Interacting Software Parts}, he has to represent the \textbf{Controller Component} with a dedicated \textbf{Driver} in order to globally test the \textbf{Model}' features that have to be tested.\par In this way, the model will be completely tested and its behaviour is shown by simulating all the \textbf{Controller}'s possible actions.\par
+Then the testing procedure passes through the \textbf{Controller Component} and the test sequence adopts the same strategy used to test the \textbf{Model}. The only difference, watching the procedure from a high point of view, is that in this case the \textbf{Controller} is tested using the already tested \textbf{Model} and using a \textbf{Driver} in order to simulate the \textbf{Views} actions.
+The last part of the procedure is the one dedicated to the \textbf{View}. These Components(\textbf{TD View, PS View, Administrator View}) are tested using the already tested components (\textbf{Controller and the Model}) and no one component' behaviour is simulated using \textbf{Subs} or \textbf{Drivers}.
 \subsubsection{Subsystem Integration Sequence}
 %TODO Identify the order in which subsystems will be integrated. If you have a single subsystem, 2.4.1 and 2.4.2 are to be merged in a single section. You can refer to Section 2.2 of the test plan example [1] as an example of what we expect.
+%prima model con controller poi integriamo le due view
