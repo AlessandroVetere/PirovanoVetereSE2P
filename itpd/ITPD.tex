@@ -1,39 +1,5 @@
 \documentclass{../common/latex_classes/pdf_document}
 
-\usepackage{tikz}
-
-\usetikzlibrary{calc,trees,positioning,arrows,chains,shapes.geometric,%
-	decorations.pathreplacing,decorations.pathmorphing,shapes,%
-	matrix,shapes.symbols}
-
-\tikzset{
-	>=stealth',
-	punktchain/.style={
-		rectangle, 
-		rounded corners, 
-		% fill=black!10,
-		draw=black, very thick,
-		text width=10em, 
-		minimum height=3em, 
-		text centered, 
-		on chain},
-	line/.style={draw, thick, <-},
-	element/.style={
-		tape,
-		top color=white,
-		bottom color=blue!50!black!60!,
-		minimum width=8em,
-		draw=blue!40!black!90, very thick,
-		text width=10em, 
-		minimum height=3.5em, 
-		text centered, 
-		on chain},
-	every join/.style={->, thick,shorten >=1pt},
-	decoration={brace},
-	tuborg/.style={decorate},
-	tubnode/.style={midway, right=2pt},
-}
-
 \titleSubtitle{Integration Test Plan Document}{Version 1.0}
 
 %TODO The Test Plan Document (ITPD) aims at describing how you plan to accomplish the integration test. This document is supposed to be written before the integration test really happens. Often it is written in parallel to the Design Document and takes the architectural description of the software system as a starting point. This document needs to explain to the development team what to test, in which sequence, which tools are needed for testing (if any), which stubs/ drivers/oracles need to be developed.
