@@ -42,6 +42,7 @@
 }
 \newcommand{\enableCodeLineNumbers}{\lstset{numbers=left}}
 \newcommand{\disableCodeLineNumbers}{\lstset{numbers=none}}
+
 \newcommand{\myTaxiService}[0]{\mbox{\emph{myTaxiService}}}
 \newcommand{\setDepth}[1]{\setcounter{tocdepth}{#1}\setcounter{secnumdepth}{#1}}
 \newcommand{\sectionBaseDir}[1]{./section_#1}
@@ -71,6 +72,7 @@
 	colorlinks=true, %set true if you want colored links
 	linktoc=all,     %set to all if you want both sections and subsections linked
 	linkcolor=black,
+	urlcolor=blue
 }
 \author{Alberto Mario Pirovano \and Alessandro Vetere}      % Declares authors' names.
 \date{\today}	% This command produces today's date.

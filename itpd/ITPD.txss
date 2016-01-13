@@ -2,7 +2,7 @@
 FileVersion=1
 File0\FileName=ITPD.tex
 File0\Line=0
-File0\Col=6
+File0\Col=432
 File0\FirstLine=0
 File0\FoldedLines=
 File1\FileName=section_1/section_1.tex
@@ -33,6 +33,11 @@ File5\FoldedLines=
 MasterFile=ITPD.tex
 CurrentFile=ITPD.tex
 Bookmarks=@Invalid()
+File6\FileName=../common/latex_classes/pdf_document.cls
+File6\Line=0
+File6\Col=0
+File6\FirstLine=0
+File6\FoldedLines=
 
 [InternalPDFViewer]
 File=
