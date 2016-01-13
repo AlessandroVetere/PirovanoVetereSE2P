@@ -10,7 +10,20 @@ Almost every software component in the Component View section of the Design Docu
 The interested components are reported below for readers' convenience:
 \begin{itemize}
 	\item Passenger View
+	\begin{itemize}
+		\item PS Application View
+		\item PS Web View
+		\item PS Request Creator
+		\item PS Receiver
+	\end{itemize}
 	\item Taxi Driver View
+	\begin{itemize}
+		\item TD Application View
+		\item TD Request Creator
+		\item TD Receiver
+		\item TD Locator
+		\item GPS Data Source
+	\end{itemize}
 	\item Administrator View
 	\item Controller
 	\begin{itemize}
@@ -35,7 +48,7 @@ The interested components are reported below for readers' convenience:
 		\item Database Driver Adapter
 	\end{itemize}
 \end{itemize}
-
+Moreover we suppose that Google Maps API are already tested and that the exposed API will be tested in a separate environment using \textbf{JUnit}.
 \subsection{Integration Testing Strategy}
 %TODO Describe the integration testing approach (top-down, bottom-up, functional groupings, etc.) and the rationale for the choosing that approach
 
