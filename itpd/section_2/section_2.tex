@@ -2,9 +2,12 @@
 
 \subsection{Entry Criteria}
 %TODO Specify the criteria that must be met before integration testing of specific elements may begin (e.g., functions must have been unit tested).
+Before starting the integration testing of any software element that has been designed for \myTaxiService{} system, the relevant functions of the considered element must be unit tested using JUnit framework.
 
 \subsection{Elements to be Integrated}
 %TODO Identify the components to be integrated, refer to your design document to identify such components in a way that is consistent with your design
+Almost every software component in the Component View section of the Design Document has to be integrated.
+The interested components are reported below for readers' convenience:
 \begin{itemize}
 	\item Passenger View
 	\item Taxi Driver View
@@ -23,6 +26,14 @@
 		\item Query Manager
 	\end{itemize}
 	\item Model
+	\begin{itemize}
+		\item Model Query Service
+		\item Passenger DB Adapter
+		\item Taxi Ride DB Adapter
+		\item Zone DB Adapter
+		\item Queue DB Adapter
+		\item Database Driver Adapter
+	\end{itemize}
 \end{itemize}
 
 \subsection{Integration Testing Strategy}
