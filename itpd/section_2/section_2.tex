@@ -90,6 +90,8 @@ Therefore, a more stable and faster application will be distributed, instead of 
 		% Place nodes
 		\node [block] (query_manager) {Query Manager};
 		
+		\node [block, above of=query_manager, fill=green!20] (model_query_service) {Model Query Service};
+		
 		\node [block, below of=query_manager] (taxi_sharing_manager) {Taxi Sharing Manager};
 		\node [block, left of=taxi_sharing_manager, node distance=3.5cm] (profile_manager) {Profile Manager};
 		\node [block, left of=profile_manager, node distance=3.5cm] (session_manager) {Session Manager};
@@ -105,6 +107,7 @@ Therefore, a more stable and faster application will be distributed, instead of 
 		\node [block, below of=queue_manager] (taxi_driver_manager) {Taxi Driver Manager};
 	%	\node [block, below of=taxi_driver_manager] (restful_service) {RESTful Service};
 		% Draw edges
+		\path [line] (model_query_service) -- (query_manager);
 		\path [line] (query_manager) -- (taxi_sharing_manager);
 		\path [line] (query_manager) -- (profile_manager);
 		\path [line] (query_manager) -- (session_manager);
@@ -122,11 +125,11 @@ Therefore, a more stable and faster application will be distributed, instead of 
 Once completed the above testing then:
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
-	% Place nodes	
-	\node [block] (session_manager) {Session Manager};
-	\node [block, above of=session_manager] (profile_manager) {Profile Manager};
-	\node [block, below of=session_manager] (taxi_ride_manager) {Taxi Ride Manager};
-	\node [block, below of=taxi_ride_manager] (taxi_driver_manager) {Taxi Driver Manager};
+	% Place nodes
+	\node [block, fill=green!20] (session_manager) {Session Manager};
+	\node [block, above of=session_manager, fill=green!20] (profile_manager) {Profile Manager};
+	\node [block, below of=session_manager, fill=green!20] (taxi_ride_manager) {Taxi Ride Manager};
+	\node [block, below of=taxi_ride_manager, fill=green!20] (taxi_driver_manager) {Taxi Driver Manager};
 	\node [block, right of=session_manager, node distance=4cm] (restful_service) {RESTful Service};
 	% Draw edges
 	\path [line] (taxi_driver_manager) -| (restful_service);
@@ -139,16 +142,20 @@ Once completed the above testing then:
 The the two views before the Dispatcher.
 \begin{center}
 	\begin{tikzpicture}[node distance=2.5cm, auto]
-	% Place nodes	
+	% Place nodes
 	\node [block] (psreq) {PS Request Creator};
+	\node [block, fill=green!20, left of=psreq, node distance=4cm] (restful_service) {RESTful Service};
 	\node [block, right of=psreq, above of=psreq] (psw) {PS Web View};
 	\node [block, right of=psreq, below of=psreq] (papp) {PS Application View};
 	\node [block, below of=psw, right of=psw] (psr) {PS Receiver};
+	\node [block, right of=psr, fill=green!20] (dp) {Dispatcher};
 	% Draw edges
+	\path [line] (restful_service) -- (psreq);
 	\path [line] (psreq) |- (psw);
 	\path [line] (psreq) |- (papp);
 	\path [line] (psw) -| (psr);
 	\path [line] (papp) -| (psr);
+	\path [line] (psr) -- (dp);
 	\end{tikzpicture}
 	\captionof{figure}{Software Integration Sequence Diagram - PS View}
 \end{center}
@@ -157,27 +164,16 @@ The the two views before the Dispatcher.
 	\begin{tikzpicture}[node distance=4.5cm, auto]
 	% Place nodes	
 	\node [block] (treq) {TD Request Creator};
+	\node [block, above of=treq, fill=green!20, node distance=2cm] (rs) {RESTful Service};
 	\node [block, right of=treq] (tapp) {TD Application View};
 	\node [block, right of=tapp] (tr) {TD Receiver};
 	\node [block, below of=treq, node distance=2cm] (tl) {TD Locator};
 	% Draw edges
+	\path [line] (rs) -- (treq);
 	\path [line] (treq) -- (tapp);
 	\path [line] (tapp) -- (tr);
 	\end{tikzpicture}
 	\captionof{figure}{Software Integration Sequence Diagram - TD View}
-\end{center}
-
-\begin{center}
-	\begin{tikzpicture}[node distance=3cm, auto]
-	% Place nodes	
-	\node [block] (pr) {PS Receiver};
-	\node [block, below of=pr] (tr) {TD Receiver};
-	\node [block, right of=pr] (dp) {Dispatcher};
-	% Draw edges
-	\path [line] (pr) -- (dp);
-	\path [line] (tr) -- (dp);
-	\end{tikzpicture}
-	\captionof{figure}{Software Integration Sequence Diagram - Dispatcher}
 \end{center}
 
 \subsubsection{Software Integration Sequence}
