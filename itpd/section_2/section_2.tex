@@ -1,12 +1,13 @@
 \section{Integration Strategy}
+This section explains the integration strategy selected to integrate all the software elements of \myTaxiService{}.
 
 \subsection{Entry Criteria}
 %TODO Specify the criteria that must be met before integration testing of specific elements may begin (e.g., functions must have been unit tested).
-Before starting the integration testing of any software element that has been designed for \myTaxiService{} system, the relevant functions of the considered element must be unit tested using JUnit framework.
+Before starting the integration testing of any software component that has been designed for \myTaxiService{} system, the internal functions of the considered component (i.e. public or protected methods that are exposed within the package of the component but are not part of any external public interface) must be unit tested using \textbf{JUnit} framework.
 
 \subsection{Elements to be Integrated}
 %TODO Identify the components to be integrated, refer to your design document to identify such components in a way that is consistent with your design
-Almost every software component in the Component View section of the Design Document has to be integrated.
+Every software component in the Component View section of the Design Document has to be integrated.
 The interested components are reported below for readers' convenience:
 \begin{itemize}
 	\item Passenger View
@@ -48,22 +49,71 @@ The interested components are reported below for readers' convenience:
 		\item Database Driver Adapter
 	\end{itemize}
 \end{itemize}
-Moreover we suppose that Google Maps API are already tested and that the exposed API will be tested in a separate environment using \textbf{JUnit}.
+Moreover we suppose that Google Maps API are well tested by Google and that \myTaxiService{} Taxi Sharing API is will be tested in a separate environment using \textbf{JUnit}, after the whole procedure indicated in this document has been completed.
 
 \subsection{Integration Testing Strategy}
 %TODO Describe the integration testing approach (top-down, bottom-up, functional groupings, etc.) and the rationale for the choosing that approach
+The bottom-up integration testing approach has been chosen, because for a medium sized project like \myTaxiService{}, it is best to proceed step by step in a careful yet coherent integration strategy.
+The usage of the selected approach will smelt a robust application with efforts concentrated in testing the \textbf{Server} parts before all.
+Therefore, a more stable and faster application will be distributed, instead of a maybe nicer one.
 
 \subsection{Sequence of Component/Function Integration}
 %TODO Note: The structure of this section may vary depending on the integration strategy you select in Section 2.3. Use the structure proposed below as a non mandatory guide.
 
+\begin{center}
+	\begin{tikzpicture}[node distance=3cm, auto]
+	% Place nodes
+	\node [block] (datbase_driver_adapter) {Database Driver Adapter};
+	\node [block, right of=datbase_driver_adapter, node distance=5cm] (taxi_driver_db_adapter) {Taxi Driver DB Adapter};
+	\node [block, above of=taxi_driver_db_adapter] (taxi_ride_db_adapter) {Taxi Ride DB Adapter};
+	\node [block, above of=taxi_ride_db_adapter] (passenger_db_adapter) {Passenger DB Adapter};
+	\node [block, below of=taxi_driver_db_adapter] (zone_db_adapter) {Zone DB Adapter};
+	\node [block, below of=zone_db_adapter] (queue_db_adapter) {Queue DB Adapter};
+	\node [block, right of=taxi_driver_db_adapter, node distance=5cm] (model_query_service) {Model Query Service};
+	% Draw edges
+	\path [line] (datbase_driver_adapter) -- (taxi_driver_db_adapter);
+	\path [line] (datbase_driver_adapter) |- (taxi_ride_db_adapter);
+	\path [line] (datbase_driver_adapter) |- (passenger_db_adapter);
+	\path [line] (datbase_driver_adapter) |- (zone_db_adapter);
+	\path [line] (datbase_driver_adapter) |- (queue_db_adapter);
+	\path [line] (taxi_driver_db_adapter) -- (model_query_service);
+	\path [line] (taxi_ride_db_adapter) -| (model_query_service);
+	\path [line] (passenger_db_adapter) -| (model_query_service);
+	\path [line] (zone_db_adapter) -| (model_query_service);
+	\path [line] (queue_db_adapter) -| (model_query_service);
+	\end{tikzpicture}
+	\captionof{figure}{Software Integration Sequence Diagram}
+\end{center}
+
 \subsubsection{Software Integration Sequence}
-%TODO For each subsystem: Identify the sequence in which the software components will be integrated within the subsystem. Relate this sequence to any product features/functions that are being built up.
+%TODO For each subsystem: Identify the sequence in which the software components will be integrated within the subsystem. Relate this sequence to any product features/functions that are being built up
 We adopted a \textbf{bottom-up} testing strategy; this strategy starts from the testing of the \textbf{Model}'s features.\par
+
+\begin{center}
+	\begin{tikzpicture}[node distance=3cm, auto]
+		% Place nodes
+		\node [block] (model) {Model};
+		\node [block, right of=model] (controller) {Controller};
+		\node [block, right of=controller] (passenger_view) {Passenger View};
+		\node [block, right of=controller, above of=controller] (taxi_driver_view) {Taxi Driver View};
+		\node [block, right of=controller, below of=controller] (administrator_view) {Administrator View};
+		% Draw edges
+		\path [line] (model) -- (controller);
+		\path [line] (controller) -- (passenger_view);
+		\path [line] (controller) -- (taxi_driver_view);
+		\path [line] (controller) -- (administrator_view);
+	\end{tikzpicture}
+	\captionof{figure}{Software Integration Sequence Diagram}
+\end{center}
+
 We considered \textbf{Model}, \textbf{Controller} and \textbf{Views} as \textbf{Components Subsystems}.
 Firstly the \textit{tester} has to singularly test the component' \textit{sub-features} contained in the \textbf{Model Subsystem}, then, in order to simulate the behaviour of the \textbf{Interacting Software Parts}, he has to represent the \textbf{Controller Component} with a dedicated \textbf{Driver} in order to globally test the \textbf{Model}' features that have to be tested.\par In this way, the model will be completely tested and its behaviour is shown by simulating all the \textbf{Controller}'s possible actions.\par
 Then the testing procedure passes through the \textbf{Controller Component} and the test sequence adopts the same strategy used to test the \textbf{Model}. The only difference, watching the procedure from a high point of view, is that in this case the \textbf{Controller} is tested using the already tested \textbf{Model} and using a \textbf{Driver} in order to simulate the \textbf{Views} actions.
 The last part of the procedure is the one dedicated to the \textbf{View}. These Components(\textbf{TD View, PS View, Administrator View}) are tested using the already tested components (\textbf{Controller and the Model}) and no one component' behaviour is simulated using \textbf{Subs} or \textbf{Drivers}.
+
 \subsubsection{Subsystem Integration Sequence}
 %TODO Identify the order in which subsystems will be integrated. If you have a single subsystem, 2.4.1 and 2.4.2 are to be merged in a single section. You can refer to Section 2.2 of the test plan example [1] as an example of what we expect.
-\showPercentImage{./section_2/system_integration_flowchart.png}{Subsystem Integration Flowchart}{0.7}
 %prima model con controller poi integriamo le due view
+
+
+
