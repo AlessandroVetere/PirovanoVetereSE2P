@@ -49,7 +49,7 @@ The interested components are reported below for readers' convenience:
 		\item Database Driver Adapter
 	\end{itemize}
 \end{itemize}
-Moreover we suppose that Google Maps API are well tested by Google and that \myTaxiService{} Taxi Sharing API is will be tested in a separate environment using \textbf{JUnit}, after the whole procedure indicated in this document has been completed.
+Moreover we suppose that Google Maps API are well tested by Google, the GPS Data Source module is already tested, and that \myTaxiService{} Taxi Sharing API will be tested in a separate environment using \textbf{JUnit} after the whole procedure indicated in this document has been completed.
 
 \subsection{Integration Testing Strategy}
 %TODO Describe the integration testing approach (top-down, bottom-up, functional groupings, etc.) and the rationale for the choosing that approach
@@ -62,27 +62,122 @@ Therefore, a more stable and faster application will be distributed, instead of 
 
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
-	% Place nodes
-	\node [block] (datbase_driver_adapter) {Database Driver Adapter};
-	\node [block, right of=datbase_driver_adapter, node distance=5cm] (taxi_driver_db_adapter) {Taxi Driver DB Adapter};
-	\node [block, above of=taxi_driver_db_adapter] (taxi_ride_db_adapter) {Taxi Ride DB Adapter};
-	\node [block, above of=taxi_ride_db_adapter] (passenger_db_adapter) {Passenger DB Adapter};
-	\node [block, below of=taxi_driver_db_adapter] (zone_db_adapter) {Zone DB Adapter};
-	\node [block, below of=zone_db_adapter] (queue_db_adapter) {Queue DB Adapter};
-	\node [block, right of=taxi_driver_db_adapter, node distance=5cm] (model_query_service) {Model Query Service};
-	% Draw edges
-	\path [line] (datbase_driver_adapter) -- (taxi_driver_db_adapter);
-	\path [line] (datbase_driver_adapter) |- (taxi_ride_db_adapter);
-	\path [line] (datbase_driver_adapter) |- (passenger_db_adapter);
-	\path [line] (datbase_driver_adapter) |- (zone_db_adapter);
-	\path [line] (datbase_driver_adapter) |- (queue_db_adapter);
-	\path [line] (taxi_driver_db_adapter) -- (model_query_service);
-	\path [line] (taxi_ride_db_adapter) -| (model_query_service);
-	\path [line] (passenger_db_adapter) -| (model_query_service);
-	\path [line] (zone_db_adapter) -| (model_query_service);
-	\path [line] (queue_db_adapter) -| (model_query_service);
+		% Place nodes
+		\node [block] (datbase_driver_adapter) {Database Driver Adapter};
+		\node [block, right of=datbase_driver_adapter, node distance=5cm] (taxi_driver_db_adapter) {Taxi Driver DB Adapter};
+		\node [block, above of=taxi_driver_db_adapter] (taxi_ride_db_adapter) {Taxi Ride DB Adapter};
+		\node [block, above of=taxi_ride_db_adapter] (passenger_db_adapter) {Passenger DB Adapter};
+		\node [block, below of=taxi_driver_db_adapter] (zone_db_adapter) {Zone DB Adapter};
+		\node [block, below of=zone_db_adapter] (queue_db_adapter) {Queue DB Adapter};
+		\node [block, right of=taxi_driver_db_adapter, node distance=5cm] (model_query_service) {Model Query Service};
+		% Draw edges
+		\path [line] (datbase_driver_adapter) -- (taxi_driver_db_adapter);
+		\path [line] (datbase_driver_adapter) |- (taxi_ride_db_adapter);
+		\path [line] (datbase_driver_adapter) |- (passenger_db_adapter);
+		\path [line] (datbase_driver_adapter) |- (zone_db_adapter);
+		\path [line] (datbase_driver_adapter) |- (queue_db_adapter);
+		\path [line] (taxi_driver_db_adapter) -- (model_query_service);
+		\path [line] (taxi_ride_db_adapter) -| (model_query_service);
+		\path [line] (passenger_db_adapter) -| (model_query_service);
+		\path [line] (zone_db_adapter) -| (model_query_service);
+		\path [line] (queue_db_adapter) -| (model_query_service);
 	\end{tikzpicture}
-	\captionof{figure}{Software Integration Sequence Diagram}
+	\captionof{figure}{Software Integration Sequence Diagram - Model}
+\end{center}
+
+\begin{center}
+	\begin{tikzpicture}[node distance=2cm, auto]
+		% Place nodes
+		\node [block] (query_manager) {Query Manager};
+		
+		\node [block, below of=query_manager] (taxi_sharing_manager) {Taxi Sharing Manager};
+		\node [block, left of=taxi_sharing_manager, node distance=3.5cm] (profile_manager) {Profile Manager};
+		\node [block, left of=profile_manager, node distance=3.5cm] (session_manager) {Session Manager};
+		\node [block, right of=taxi_sharing_manager, node distance=3.5cm] (location_manager) {Location Manager};
+		
+		\node [block, above of=location_manager, fill=red!20] (taxi_driver_view_stub) {TD View Stub};
+		
+		\node [block, below of=location_manager] (taxi_ride_manager) {Taxi Ride Manager};
+		\node [block, below of=taxi_sharing_manager] (queue_manager) {Queue Manager};
+		
+		\node [block, left of=queue_manager, fill=red!20, node distance=3.5cm] (dispatcher_stub) {Dispatcher Stub};
+		
+		\node [block, below of=queue_manager] (taxi_driver_manager) {Taxi Driver Manager};
+	%	\node [block, below of=taxi_driver_manager] (restful_service) {RESTful Service};
+		% Draw edges
+		\path [line] (query_manager) -- (taxi_sharing_manager);
+		\path [line] (query_manager) -- (profile_manager);
+		\path [line] (query_manager) -- (session_manager);
+		\path [line] (query_manager) -- (location_manager);
+		\path [line] (taxi_driver_view_stub) -- (location_manager);
+		\path [line] (location_manager) -- (queue_manager);
+		\path [line] (dispatcher_stub) -- (queue_manager);
+		\path [line] (dispatcher_stub) -- (taxi_driver_manager);
+		\path [line] (location_manager) -- (taxi_ride_manager);
+		\path [line] (queue_manager) -- (taxi_driver_manager);
+		%\path [line] (taxi_driver_manager) -- (restful_service);
+	\end{tikzpicture}
+	\captionof{figure}{Software Integration Sequence Diagram - Controller Business Components}
+\end{center}
+Once completed the above testing then:
+\begin{center}
+	\begin{tikzpicture}[node distance=2cm, auto]
+	% Place nodes	
+	\node [block] (session_manager) {Session Manager};
+	\node [block, above of=session_manager] (profile_manager) {Profile Manager};
+	\node [block, below of=session_manager] (taxi_ride_manager) {Taxi Ride Manager};
+	\node [block, below of=taxi_ride_manager] (taxi_driver_manager) {Taxi Driver Manager};
+	\node [block, right of=session_manager, node distance=4cm] (restful_service) {RESTful Service};
+	% Draw edges
+	\path [line] (taxi_driver_manager) -| (restful_service);
+	\path [line] (taxi_ride_manager) -| (restful_service);
+	\path [line] (session_manager) -- (restful_service);
+	\path [line] (profile_manager) -| (restful_service);
+	\end{tikzpicture}
+	\captionof{figure}{Software Integration Sequence Diagram - RESTful Service}
+\end{center}
+The the two views before the Dispatcher.
+\begin{center}
+	\begin{tikzpicture}[node distance=2.5cm, auto]
+	% Place nodes	
+	\node [block] (psreq) {PS Request Creator};
+	\node [block, right of=psreq, above of=psreq] (psw) {PS Web View};
+	\node [block, right of=psreq, below of=psreq] (papp) {PS Application View};
+	\node [block, below of=psw, right of=psw] (psr) {PS Receiver};
+	% Draw edges
+	\path [line] (psreq) |- (psw);
+	\path [line] (psreq) |- (papp);
+	\path [line] (psw) -| (psr);
+	\path [line] (papp) -| (psr);
+	\end{tikzpicture}
+	\captionof{figure}{Software Integration Sequence Diagram - PS View}
+\end{center}
+
+\begin{center}
+	\begin{tikzpicture}[node distance=4.5cm, auto]
+	% Place nodes	
+	\node [block] (treq) {TD Request Creator};
+	\node [block, right of=treq] (tapp) {TD Application View};
+	\node [block, right of=tapp] (tr) {TD Receiver};
+	\node [block, below of=treq, node distance=2cm] (tl) {TD Locator};
+	% Draw edges
+	\path [line] (treq) -- (tapp);
+	\path [line] (tapp) -- (tr);
+	\end{tikzpicture}
+	\captionof{figure}{Software Integration Sequence Diagram - TD View}
+\end{center}
+
+\begin{center}
+	\begin{tikzpicture}[node distance=3cm, auto]
+	% Place nodes	
+	\node [block] (pr) {PS Receiver};
+	\node [block, below of=pr] (tr) {TD Receiver};
+	\node [block, right of=pr] (dp) {Dispatcher};
+	% Draw edges
+	\path [line] (pr) -- (dp);
+	\path [line] (tr) -- (dp);
+	\end{tikzpicture}
+	\captionof{figure}{Software Integration Sequence Diagram - Dispatcher}
 \end{center}
 
 \subsubsection{Software Integration Sequence}
