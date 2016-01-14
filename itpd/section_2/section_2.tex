@@ -61,7 +61,7 @@ Therefore, a more stable and faster application will be distributed, instead of 
 %TODO Note: The structure of this section may vary depending on the integration strategy you select in Section 2.3. Use the structure proposed below as a non mandatory guide.
 
 \begin{center}
-	\begin{tikzpicture}[node distance=3cm, auto]
+	\begin{tikzpicture}[node distance=2cm, auto]
 	% Place nodes
 	\node [block] (datbase_driver_adapter) {Database Driver Adapter};
 	\node [block, right of=datbase_driver_adapter, node distance=5cm] (taxi_driver_db_adapter) {Taxi Driver DB Adapter};
@@ -100,8 +100,8 @@ We adopted a \textbf{bottom-up} testing strategy; this strategy starts from the 
 		% Draw edges
 		\path [line] (model) -- (controller);
 		\path [line] (controller) -- (passenger_view);
-		\path [line] (controller) -- (taxi_driver_view);
-		\path [line] (controller) -- (administrator_view);
+		\path [line] (controller) |- (taxi_driver_view);
+		\path [line] (controller) |- (administrator_view);
 	\end{tikzpicture}
 	\captionof{figure}{Software Integration Sequence Diagram}
 \end{center}
