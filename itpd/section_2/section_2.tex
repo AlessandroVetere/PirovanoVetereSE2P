@@ -50,7 +50,6 @@ The interested components are reported below for readers' convenience:
 	\end{itemize}
 \end{itemize}
 Moreover we suppose that Google Maps API are well tested by Google, the GPS Data Source module is already tested, and that \myTaxiService{} Taxi Sharing API will be tested in a separate environment using \textbf{JUnit} after the whole procedure indicated in this document has been completed.
-
 \subsection{Integration Testing Strategy}
 %TODO Describe the integration testing approach (top-down, bottom-up, functional groupings, etc.) and the rationale for the choosing that approach
 The bottom-up integration testing approach has been chosen, because for a medium sized project like \myTaxiService{}, it is best to proceed step by step in a careful yet coherent integration strategy.
@@ -63,7 +62,7 @@ Therefore, a more stable and faster application will be distributed, instead of 
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
 		% Place nodes
-		\node [block] (datbase_driver_adapter) {Database Driver Adapter};
+		\node [block, fill=yellow!50] (datbase_driver_adapter) {Database Driver Adapter};
 		\node [block, right of=datbase_driver_adapter, node distance=5cm] (taxi_driver_db_adapter) {Taxi Driver DB Adapter};
 		\node [block, above of=taxi_driver_db_adapter] (taxi_ride_db_adapter) {Taxi Ride DB Adapter};
 		\node [block, above of=taxi_ride_db_adapter] (passenger_db_adapter) {Passenger DB Adapter};
@@ -89,23 +88,16 @@ Therefore, a more stable and faster application will be distributed, instead of 
 	\begin{tikzpicture}[node distance=2cm, auto]
 		% Place nodes
 		\node [block] (query_manager) {Query Manager};
-		
 		\node [block, above of=query_manager, fill=green!20] (model_query_service) {Model Query Service};
-		
 		\node [block, below of=query_manager] (taxi_sharing_manager) {Taxi Sharing Manager};
 		\node [block, left of=taxi_sharing_manager, node distance=3.5cm] (profile_manager) {Profile Manager};
 		\node [block, left of=profile_manager, node distance=3.5cm] (session_manager) {Session Manager};
 		\node [block, right of=taxi_sharing_manager, node distance=3.5cm] (location_manager) {Location Manager};
-		
 		\node [block, above of=location_manager, fill=red!20] (taxi_driver_view_stub) {TD View Stub};
-		
 		\node [block, below of=location_manager] (taxi_ride_manager) {Taxi Ride Manager};
 		\node [block, below of=taxi_sharing_manager] (queue_manager) {Queue Manager};
-		
 		\node [block, left of=queue_manager, fill=red!20, node distance=3.5cm] (dispatcher_stub) {Dispatcher Stub};
-		
 		\node [block, below of=queue_manager] (taxi_driver_manager) {Taxi Driver Manager};
-	%	\node [block, below of=taxi_driver_manager] (restful_service) {RESTful Service};
 		% Draw edges
 		\path [line] (model_query_service) -- (query_manager);
 		\path [line] (query_manager) -- (taxi_sharing_manager);
@@ -118,60 +110,69 @@ Therefore, a more stable and faster application will be distributed, instead of 
 		\path [line] (dispatcher_stub) -- (taxi_driver_manager);
 		\path [line] (location_manager) -- (taxi_ride_manager);
 		\path [line] (queue_manager) -- (taxi_driver_manager);
-		%\path [line] (taxi_driver_manager) -- (restful_service);
 	\end{tikzpicture}
 	\captionof{figure}{Software Integration Sequence Diagram - Controller Business Components}
 \end{center}
 Once completed the above testing then:
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
-	% Place nodes
-	\node [block, fill=green!20] (session_manager) {Session Manager};
-	\node [block, above of=session_manager, fill=green!20] (profile_manager) {Profile Manager};
-	\node [block, below of=session_manager, fill=green!20] (taxi_ride_manager) {Taxi Ride Manager};
-	\node [block, below of=taxi_ride_manager, fill=green!20] (taxi_driver_manager) {Taxi Driver Manager};
-	\node [block, right of=session_manager, node distance=4cm] (restful_service) {RESTful Service};
-	% Draw edges
-	\path [line] (taxi_driver_manager) -| (restful_service);
-	\path [line] (taxi_ride_manager) -| (restful_service);
-	\path [line] (session_manager) -- (restful_service);
-	\path [line] (profile_manager) -| (restful_service);
+		% Place nodes
+		\node [block, fill=green!20] (session_manager) {Session Manager};
+		\node [block, above of=session_manager, fill=green!20] (profile_manager) {Profile Manager};
+		\node [block, below of=session_manager, fill=green!20] (taxi_ride_manager) {Taxi Ride Manager};
+		\node [block, below of=taxi_ride_manager, fill=green!20] (taxi_driver_manager) {Taxi Driver Manager};
+		\node [block, below of=taxi_driver_manager, fill=green!20] (queue_manager) {Queue Manager};
+		\node [block, right of=queue_manager, node distance=4cm] (dispatcher) {Dispatcher};
+		\node [block, right of=dispatcher, fill=red!20, node distance=4cm] (td_view_stub) {Taxi Driver View Stub};
+		\node [block, below of=td_view_stub, fill=red!20] (passenger_view_stub) {Passenger View Stub};
+		\node [block, right of=session_manager, node distance=4cm] (restful_service) {RESTful Service};
+		% Draw edges
+		\path [line] (taxi_driver_manager) -| (restful_service);
+		\path [line] (taxi_ride_manager) -| (restful_service);
+		\path [line] (session_manager) -- (restful_service);
+		\path [line] (profile_manager) -| (restful_service);
+		\path [line] (taxi_driver_manager) -| (dispatcher);
+		\path [line] (queue_manager) -- (dispatcher);
+		\path [line] (td_view_stub) -- (dispatcher);
+		\path [line] (passenger_view_stub) -| (dispatcher);
 	\end{tikzpicture}
 	\captionof{figure}{Software Integration Sequence Diagram - RESTful Service}
 \end{center}
 The the two views before the Dispatcher.
 \begin{center}
-	\begin{tikzpicture}[node distance=2.5cm, auto]
-	% Place nodes
-	\node [block] (psreq) {PS Request Creator};
-	\node [block, fill=green!20, left of=psreq, node distance=4cm] (restful_service) {RESTful Service};
-	\node [block, right of=psreq, above of=psreq] (psw) {PS Web View};
-	\node [block, right of=psreq, below of=psreq] (papp) {PS Application View};
-	\node [block, below of=psw, right of=psw] (psr) {PS Receiver};
-	\node [block, right of=psr, fill=green!20] (dp) {Dispatcher};
-	% Draw edges
-	\path [line] (restful_service) -- (psreq);
-	\path [line] (psreq) |- (psw);
-	\path [line] (psreq) |- (papp);
-	\path [line] (psw) -| (psr);
-	\path [line] (papp) -| (psr);
-	\path [line] (psr) -- (dp);
+	\begin{tikzpicture}[node distance=2cm, auto]
+		% Place nodes
+		\node [block] (psreq) {PS Request Creator};
+		\node [block, fill=green!20, left of=psreq, node distance=4cm] (restful_service) {RESTful Service};
+		\node [block, right of=psreq, above of=psreq] (psw) {PS Web View};
+		\node [block, right of=psreq, below of=psreq] (papp) {PS Application View};
+		\node [block, below of=psw, right of=psw] (psr) {PS Receiver};
+		\node [block, right of=psr, fill=green!20, node distance=2.5cm] (dp) {Dispatcher};
+		% Draw edges
+		\path [line] (restful_service) -- (psreq);
+		\path [line] (psreq) |- (psw);
+		\path [line] (psreq) |- (papp);
+		\path [line] (psw) -| (psr);
+		\path [line] (papp) -| (psr);
+		\path [line] (psr) -- (dp);
 	\end{tikzpicture}
 	\captionof{figure}{Software Integration Sequence Diagram - PS View}
 \end{center}
 
 \begin{center}
 	\begin{tikzpicture}[node distance=4.5cm, auto]
-	% Place nodes	
-	\node [block] (treq) {TD Request Creator};
-	\node [block, above of=treq, fill=green!20, node distance=2cm] (rs) {RESTful Service};
-	\node [block, right of=treq] (tapp) {TD Application View};
-	\node [block, right of=tapp] (tr) {TD Receiver};
-	\node [block, below of=treq, node distance=2cm] (tl) {TD Locator};
-	% Draw edges
-	\path [line] (rs) -- (treq);
-	\path [line] (treq) -- (tapp);
-	\path [line] (tapp) -- (tr);
+		% Place nodes	
+		\node [block] (treq) {TD Request Creator};
+		\node [block, above of=treq, fill=green!20, node distance=2cm] (rs) {RESTful Service};
+		\node [block, right of=treq] (tapp) {TD Application View};
+		\node [block, right of=tapp] (tr) {TD Receiver};
+		\node [block, below of=treq, node distance=2cm,, fill=yellow!50] (gps) {GPS Data Source};
+		\node [block, right of=gps] (tl) {TD Locator};
+		% Draw edges
+		\path [line] (rs) -- (treq);
+		\path [line] (treq) -- (tapp);
+		\path [line] (tapp) -- (tr);
+		\path [line] (gps) -- (tl);
 	\end{tikzpicture}
 	\captionof{figure}{Software Integration Sequence Diagram - TD View}
 \end{center}
@@ -181,13 +182,13 @@ The the two views before the Dispatcher.
 We adopted a \textbf{bottom-up} testing strategy; this strategy starts from the testing of the \textbf{Model}'s features.\par
 
 \begin{center}
-	\begin{tikzpicture}[node distance=3cm, auto]
+	\begin{tikzpicture}[node distance=2cm, auto]
 		% Place nodes
 		\node [block] (model) {Model};
-		\node [block, right of=model] (controller) {Controller};
-		\node [block, right of=controller] (passenger_view) {Passenger View};
-		\node [block, right of=controller, above of=controller] (taxi_driver_view) {Taxi Driver View};
-		\node [block, right of=controller, below of=controller] (administrator_view) {Administrator View};
+		\node [block, right of=model, node distance=2.5cm] (controller) {Controller};
+		\node [block, right of=controller, node distance=3cm] (passenger_view) {Passenger View};
+		\node [block, above of=passenger_view] (taxi_driver_view) {Taxi Driver View};
+		\node [block, below of=passenger_view] (administrator_view) {Administrator View};
 		% Draw edges
 		\path [line] (model) -- (controller);
 		\path [line] (controller) -- (passenger_view);
