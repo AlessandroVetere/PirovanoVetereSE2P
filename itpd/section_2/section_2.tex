@@ -112,13 +112,13 @@ A precise convention has been adopted for the semantic of diagrams:
 		\node [block, above of=query_manager, fill=green!20] (model_query_service) {Model Query Service};
 		\node [block, below of=query_manager] (taxi_sharing_manager) {Taxi Sharing Manager};
 		\node [block, left of=taxi_sharing_manager, node distance=3.5cm] (profile_manager) {Profile Manager};
-		\node [block, left of=profile_manager, node distance=3.5cm] (session_manager) {Session Manager};
+		\node [block, left of=query_manager, node distance=3.5cm] (session_manager) {Session Manager};
 		\node [block, right of=taxi_sharing_manager, node distance=3.5cm] (location_manager) {Location Manager};
 		\node [block, above of=location_manager, fill=red!20] (taxi_driver_view_stub) {TD View Stub};
 		\node [block, below of=location_manager] (taxi_ride_manager) {Taxi Ride Manager};
-		\node [block, below of=taxi_sharing_manager] (queue_manager) {Queue Manager};
+		\node [block, below of=taxi_sharing_manager, fill=brown!20] (queue_manager) {Queue Manager};
 		\node [block, left of=queue_manager, fill=red!20, node distance=3.5cm] (dispatcher_stub) {Dispatcher Stub};
-		\node [block, below of=queue_manager] (taxi_driver_manager) {Taxi Driver Manager};
+		\node [block, below of=queue_manager, fill=brown!20] (taxi_driver_manager) {Taxi Driver Manager};
 		% Draw edges
 		\path [line] (model_query_service) -- (query_manager);
 		\path [line] (query_manager) -- (taxi_sharing_manager);
@@ -139,24 +139,24 @@ Once completed the above testing then:
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
 		% Place nodes
-		\node [block, fill=green!20] (session_manager) {Session Manager};
-		\node [block, above of=session_manager, fill=green!20] (profile_manager) {Profile Manager};
-		\node [block, below of=session_manager, fill=green!20] (taxi_ride_manager) {Taxi Ride Manager};
-		\node [block, below of=taxi_ride_manager, fill=brown!20] (taxi_driver_manager) {Taxi Driver Manager};
-		\node [block, below of=taxi_driver_manager] (queue_manager) {Queue Manager};
-		\node [block, right of=queue_manager, node distance=4cm] (dispatcher) {Dispatcher};
-		\node [block, right of=dispatcher, fill=red!20, node distance=4cm] (td_view_stub) {Taxi Driver View Stub};
-		\node [block, below of=td_view_stub, fill=red!20] (passenger_view_stub) {Passenger View Stub};
-		\node [block, right of=session_manager, node distance=4cm] (restful_service) {RESTful Service};
+		\node [block] (dispatcher) {Dispatcher};
+		\node [block, above of=dispatcher, fill=red!20] (td_view_stub) {Taxi Driver View Stub};
+		\node [block, below of=dispatcher, fill=red!20] (passenger_view_stub) {Passenger View Stub};
+		\node [block, right of=td_view_stub, node distance=4cm, fill=brown!20] (queue_manager) {Queue Manager};
+		\node [block, below of=queue_manager, fill=brown!20] (taxi_driver_manager) {Taxi Driver Manager};
+		\node [block, below of=taxi_driver_manager, fill=green!20] (session_manager) {Session Manager};
+		\node [block, right of=taxi_driver_manager, node distance=4cm] (restful_service) {RESTful Service};
+		\node [block, below of=restful_service, fill=green!20] (profile_manager) {Profile Manager};
+		\node [block, above of=restful_service, fill=green!20] (taxi_ride_manager) {Taxi Ride Manager};		
 		% Draw edges
-		\path [line] (taxi_driver_manager) -| (restful_service);
-		\path [line] (taxi_ride_manager) -| (restful_service);
+		\path [line] (taxi_driver_manager) -- (restful_service);
+		\path [line] (taxi_ride_manager) -- (restful_service);
 		\path [line] (session_manager) -- (restful_service);
-		\path [line] (profile_manager) -| (restful_service);
+		\path [line] (profile_manager) -- (restful_service);
 		\path [line] (dispatcher) -- (taxi_driver_manager);
 		\path [line] (dispatcher) -- (queue_manager);
 		\path [line] (td_view_stub) -- (dispatcher);
-		\path [line] (passenger_view_stub) -| (dispatcher);
+		\path [line] (passenger_view_stub) -- (dispatcher);
 	\end{tikzpicture}
 	\captionof{figure}{Software Integration Sequence Diagram - Controller Networking Components}
 \end{center}
@@ -165,7 +165,7 @@ The the two views before the Dispatcher.
 	\begin{tikzpicture}[node distance=2cm, auto]
 		% Place nodes
 		\node [block] (psreq) {PS Request Creator};
-		\node [block, fill=green!20, left of=psreq, node distance=4cm] (restful_service) {RESTful Service};
+		\node [block, fill=green!20, left of=psreq, node distance=3.5cm] (restful_service) {RESTful Service};
 		\node [block, right of=psreq, above of=psreq] (psw) {PS Web View};
 		\node [block, right of=psreq, below of=psreq] (papp) {PS Application View};
 		\node [block, below of=psw, right of=psw] (psr) {PS Receiver};
