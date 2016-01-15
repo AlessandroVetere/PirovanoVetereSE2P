@@ -111,10 +111,11 @@ We adopted a \textbf{bottom-up} testing strategy; this strategy starts from the 
 \end{center}
 
 We considered \textbf{Model}, \textbf{Controller} and \textbf{Views} as \textbf{Subsystems}.
-First the \textit{tester} has to test \textit{functionalities} of the components contained in the \textbf{Model Subsystem}, then, in order to simulate the behavior of the \textbf{Interacting Software Parts}, he has to represent the \textbf{Controller Subsystem} with a dedicated \textbf{Driver} in order to test the relevant \textbf{Model} features.
-In this way, the \textbf{Model} will be completely integration tested and its behavior is shown by simulating all the \textbf{Controller}'s possible actions.\par
-Then the testing procedure passes through the \textbf{Controller Component} and the test sequence adopts the same strategy used to test the \textbf{Model}. The only difference, watching the procedure from a high point of view, is that in this case the \textbf{Controller} is tested using the already tested \textbf{Model} and using a \textbf{Driver} in order to simulate the \textbf{Views} actions.
-The last part of the procedure is the one dedicated to the \textbf{View}. These Components(\textbf{TD View, PS View, Administrator View}) are tested using the already tested components (\textbf{Controller and the Model}) and no one component' behaviour is simulated using \textbf{Subs} or \textbf{Drivers}.
+First the \textit{tester} has to test \textit{functionalities} of the components contained in the \textbf{Model}, then, in order to simulate the behavior of the interacting software elements, he has to represent the \textbf{Controller} with a dedicated \textbf{Driver} in order to test the relevant \textbf{Model} features.
+In this way, the \textbf{Model} will be completely integration tested by simulating all the possible actions that the \textbf{Controller} can do on it.\par
+Then the testing procedure passes to the \textbf{Controller} and the test sequence adopts the same strategy used to test the \textbf{Model}. The only difference from a higher point of view, is that in this case the \textbf{Controller} is tested using the already tested \textbf{Model} and using a \textbf{Driver} in order to simulate the \textbf{Views} actions.\par
+The last part of the procedure is dedicated to the \textbf{Views}.
+The \textbf{Taxi Driver View, Passenger View and Administrator View} are tested using the already tested \textbf{Controller} and \textbf{Model} and no component behavior is simulated using \textbf{Stubs} or \textbf{Drivers}.
 
 \newpage
 \subsubsection{Software Integration Sequence}
