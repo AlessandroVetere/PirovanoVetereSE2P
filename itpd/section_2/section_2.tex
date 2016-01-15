@@ -61,22 +61,62 @@ Therefore, a more stable and faster application will be distributed, instead of 
 
 \subsection{Sequence of Component/Function Integration}
 %TODO Note: The structure of this section may vary depending on the integration strategy you select in Section 2.3. Use the structure proposed below as a non mandatory guide.
-Here is presented how the bottom-up integration testing approach is going to be concretely used in \myTaxiService{} system integration, first by analysing each subsystem in detail and then giving a higher level overview on the subsystems integration process.
+Here is presented how the bottom-up integration testing approach is going to be concretely used in \myTaxiService{} system integration, first by analyzing each subsystem in detail and then giving a higher level overview on the subsystems integration process.
 A precise convention has been adopted for the semantic of diagrams:
 \begin{itemize}
 	\item
-		\textbf{Block}
+		\textbf{Block:}
 		\begin{itemize}
-			\item \textbf{Yellow:} This block is not dependant on any lower level component in \myTaxiService{} and therefore it is integrated as a starting point.
-			\item \textbf{Blue:} This block is going to be integrated on the top of any block that can reach it using a path in the diagram, and depends directly on its parents.
-			\item \textbf{Green:} This block can only be il padre di un nodo blu, vuol dire che il blocco e' gia' stato integrato e puo' essere usato per integrarci sopra dei nodi non ancora integrati.
-			\item \textbf{marrone:} i blocchi marroni hanno alcune interfacce testate e quindi "verdi" mentre altre disgiunte sono nello stato "blu" e non ancora testate.
-			\item \textbf{rosso:} stub
+			\item \textbf{Yellow:} This block is not dependent on any lower level component in \myTaxiService{} and therefore it is integrated as a starting point in the current diagram.
+			\item \textbf{Blue:} This block is going to be fully integrated on the top of any ancestor block in the diagram, and depends directly on its parents.
+			\item \textbf{Green:} This block can only be the father of a blue or brown block because, in a previous diagram (i.e. integration step) it has been fully integrated within the system.
+			Therefore it can be used to integrate other components on the top of it, as children in the diagram.
+			\item \textbf{Brown:} This block is not going to be fully integrated within the current diagram (i.e. integration step), but only a subset of its functionalities are going to be tested.
+			\item \textbf{Red:} This block represents a stub component, that replaces the real component mocking its functionalities.
+			It's a trick made necessary by the fact that some components are going to be integrated before some other needed components have been integrated, and therefore they require a stub in order to work.
+			The component represented by a red block is going to be integrated afterwards.
 		\end{itemize}
 	\item
-		freccia == il parent espone un interfaccia usata dal child, quindi percorrere una freccia significa testare se quell'interfaccia specifica esposta dal parent e usata dal child funziona correttamente
+		\textbf{Arrow:} Starts from a block and ends into another block.
+		The block from which it is starting is called parent and the other one child.
+		To cross an arrow in the diagram means that you are integration testing the parent exposed interfaces used by the child.
+	\item
+		\textbf{Blocks Visiting Order:} Each block can be traversed only once.
+		The starting arrows from a block can be traversed in parallel, when the arrows from all the parent of the considered block have been traversed.
+		A block without incoming arrows can be used as a start for a new path as soon as possible.
+		A diagram is completed when all the possible path have been traversed.
 \end{itemize}
 
+\newpage
+\subsubsection{Subsystem Integration Sequence}
+%TODO Identify the order in which subsystems will be integrated. If you have a single subsystem, 2.4.1 and 2.4.2 are to be merged in a single section. You can refer to Section 2.2 of the test plan example [1] as an example of what we expect.
+
+We adopted a \textbf{bottom-up} testing strategy; this strategy starts from the testing of the \textbf{Model} features.
+
+\begin{center}
+	\begin{tikzpicture}[node distance=2cm, auto]
+		% Place nodes
+		\node [block, fill=yellow!20] (model) {Model};
+		\node [block, right of=model, node distance=2.5cm] (controller) {Controller};
+		\node [block, right of=controller, node distance=3cm] (passenger_view) {Passenger View};
+		\node [block, above of=passenger_view] (taxi_driver_view) {Taxi Driver View};
+		\node [block, below of=passenger_view] (administrator_view) {Administrator View};
+		% Draw edges
+		\path [line] (model) -- (controller);
+		\path [line] (controller) -- (passenger_view);
+		\path [line] (controller) |- (taxi_driver_view);
+		\path [line] (controller) |- (administrator_view);
+	\end{tikzpicture}
+	\captionof{figure}{Software Integration Sequence Diagram}
+\end{center}
+
+We considered \textbf{Model}, \textbf{Controller} and \textbf{Views} as \textbf{Subsystems}.
+First the \textit{tester} has to test \textit{functionalities} of the components contained in the \textbf{Model Subsystem}, then, in order to simulate the behavior of the \textbf{Interacting Software Parts}, he has to represent the \textbf{Controller Subsystem} with a dedicated \textbf{Driver} in order to test the relevant \textbf{Model} features.
+In this way, the \textbf{Model} will be completely integration tested and its behavior is shown by simulating all the \textbf{Controller}'s possible actions.\par
+Then the testing procedure passes through the \textbf{Controller Component} and the test sequence adopts the same strategy used to test the \textbf{Model}. The only difference, watching the procedure from a high point of view, is that in this case the \textbf{Controller} is tested using the already tested \textbf{Model} and using a \textbf{Driver} in order to simulate the \textbf{Views} actions.
+The last part of the procedure is the one dedicated to the \textbf{View}. These Components(\textbf{TD View, PS View, Administrator View}) are tested using the already tested components (\textbf{Controller and the Model}) and no one component' behaviour is simulated using \textbf{Subs} or \textbf{Drivers}.
+
+\newpage
 \subsubsection{Software Integration Sequence}
 %TODO For each subsystem: Identify the sequence in which the software components will be integrated within the subsystem. Relate this sequence to any product features/functions that are being built up
 
@@ -114,7 +154,7 @@ A precise convention has been adopted for the semantic of diagrams:
 		\node [block, left of=taxi_sharing_manager, node distance=3.5cm] (profile_manager) {Profile Manager};
 		\node [block, left of=query_manager, node distance=3.5cm] (session_manager) {Session Manager};
 		\node [block, right of=taxi_sharing_manager, node distance=3.5cm] (location_manager) {Location Manager};
-		\node [block, above of=location_manager, fill=red!20] (taxi_driver_view_stub) {TD View Stub};
+		\node [block, above of=location_manager, fill=red!20] (taxi_driver_view_stub) {TD Locator Stub};
 		\node [block, below of=location_manager] (taxi_ride_manager) {Taxi Ride Manager};
 		\node [block, below of=taxi_sharing_manager, fill=brown!20] (queue_manager) {Queue Manager};
 		\node [block, left of=queue_manager, fill=red!20, node distance=3.5cm] (dispatcher_stub) {Dispatcher Stub};
@@ -134,14 +174,13 @@ A precise convention has been adopted for the semantic of diagrams:
 	\end{tikzpicture}
 	\captionof{figure}{Software Integration Sequence Diagram - Controller Business Components}
 \end{center}
-Once completed the above testing then:
-%TODO Questo grafico va spezzato
+
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
 		% Place nodes
 		\node [block] (dispatcher) {Dispatcher};
-		\node [block, above of=dispatcher, fill=red!20] (td_view_stub) {Taxi Driver View Stub};
-		\node [block, below of=dispatcher, fill=red!20] (passenger_view_stub) {Passenger View Stub};
+		\node [block, above of=dispatcher, fill=red!20] (td_view_stub) {TD Receiver Stub};
+		\node [block, below of=dispatcher, fill=red!20] (passenger_view_stub) {PS Receiver Stub};
 		\node [block, right of=td_view_stub, node distance=4cm, fill=brown!20] (queue_manager) {Queue Manager};
 		\node [block, below of=queue_manager, fill=brown!20] (taxi_driver_manager) {Taxi Driver Manager};
 		\node [block, below of=taxi_driver_manager, fill=green!20] (session_manager) {Session Manager};
@@ -160,7 +199,7 @@ Once completed the above testing then:
 	\end{tikzpicture}
 	\captionof{figure}{Software Integration Sequence Diagram - Controller Networking Components}
 \end{center}
-The the two views before the Dispatcher.
+
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
 		% Place nodes
@@ -202,31 +241,13 @@ The the two views before the Dispatcher.
 	\captionof{figure}{Software Integration Sequence Diagram - Taxi Driver View}
 \end{center}
 
-\subsubsection{Subsystem Integration Sequence}
-%TODO Identify the order in which subsystems will be integrated. If you have a single subsystem, 2.4.1 and 2.4.2 are to be merged in a single section. You can refer to Section 2.2 of the test plan example [1] as an example of what we expect.
-%prima model con controller poi integriamo le due view
-
-We adopted a \textbf{bottom-up} testing strategy; this strategy starts from the testing of the \textbf{Model}'s features.\par
-
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
-	% Place nodes
-	\node [block] (model) {Model};
-	\node [block, right of=model, node distance=2.5cm] (controller) {Controller};
-	\node [block, right of=controller, node distance=3cm] (passenger_view) {Passenger View};
-	\node [block, above of=passenger_view] (taxi_driver_view) {Taxi Driver View};
-	\node [block, below of=passenger_view] (administrator_view) {Administrator View};
-	% Draw edges
-	\path [line] (model) -- (controller);
-	\path [line] (controller) -- (passenger_view);
-	\path [line] (controller) |- (taxi_driver_view);
-	\path [line] (controller) |- (administrator_view);
+		% Place nodes	
+		\node [block, fill=green!20] (qm) {Query Manager};
+		\node [block, right of=qm, node distance=4cm] (admw) {Administrator View};
+		% Draw edges
+		\path [line] (qm) -- (admw);
 	\end{tikzpicture}
-	\captionof{figure}{Software Integration Sequence Diagram}
+	\captionof{figure}{Software Integration Sequence Diagram - Administrator View}
 \end{center}
-
-We considered \textbf{Model}, \textbf{Controller} and \textbf{Views} as \textbf{Components Subsystems}.
-Firstly the \textit{tester} has to singularly test the component' \textit{sub-features} contained in the \textbf{Model Subsystem}, then, in order to simulate the behaviour of the \textbf{Interacting Software Parts}, he has to represent the \textbf{Controller Component} with a dedicated \textbf{Driver} in order to globally test the \textbf{Model}' features that have to be tested.\par In this way, the model will be completely tested and its behaviour is shown by simulating all the \textbf{Controller}'s possible actions.\par
-Then the testing procedure passes through the \textbf{Controller Component} and the test sequence adopts the same strategy used to test the \textbf{Model}. The only difference, watching the procedure from a high point of view, is that in this case the \textbf{Controller} is tested using the already tested \textbf{Model} and using a \textbf{Driver} in order to simulate the \textbf{Views} actions.
-The last part of the procedure is the one dedicated to the \textbf{View}. These Components(\textbf{TD View, PS View, Administrator View}) are tested using the already tested components (\textbf{Controller and the Model}) and no one component' behaviour is simulated using \textbf{Subs} or \textbf{Drivers}.
-
