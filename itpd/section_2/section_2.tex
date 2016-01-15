@@ -49,15 +49,36 @@ The interested components are reported below for readers' convenience:
 		\item Database Driver Adapter
 	\end{itemize}
 \end{itemize}
-Moreover we suppose that Google Maps API are well tested by Google, the GPS Data Source module is already tested, and that \myTaxiService{} Taxi Sharing API will be tested in a separate environment using \textbf{JUnit} after the whole procedure indicated in this document has been completed.
+Moreover we suppose that Google Maps API are well tested by Google and thus we can use them without testing any further.
+For what concerns the other external software elements, we assume that the GPS Data Source module in the Taxi Driver View uses the GPS Drivers of the underlying operating system that are already tested, and the same is assumed for the Database Driver Adapter in the Model referring to Database Drivers.
+Last but not least, \myTaxiService{} Taxi Sharing API will be tested in a separate environment using \textbf{JUnit} after the whole procedure indicated in this document has been completed.
+
 \subsection{Integration Testing Strategy}
 %TODO Describe the integration testing approach (top-down, bottom-up, functional groupings, etc.) and the rationale for the choosing that approach
 The bottom-up integration testing approach has been chosen, because for a medium sized project like \myTaxiService{}, it is best to proceed step by step in a careful yet coherent integration strategy.
-The usage of the selected approach will smelt a robust application with efforts concentrated in testing the \textbf{Server} parts before all.
+The usage of the selected approach will forge a robust application with efforts concentrated in testing the \textbf{Server} parts before all.
 Therefore, a more stable and faster application will be distributed, instead of a maybe nicer one.
 
 \subsection{Sequence of Component/Function Integration}
 %TODO Note: The structure of this section may vary depending on the integration strategy you select in Section 2.3. Use the structure proposed below as a non mandatory guide.
+Here is presented how the bottom-up integration testing approach is going to be concretely used in \myTaxiService{} system integration, first by analysing each subsystem in detail and then giving a higher level overview on the subsystems integration process.
+A precise convention has been adopted for the semantic of diagrams:
+\begin{itemize}
+	\item
+		\textbf{Block}
+		\begin{itemize}
+			\item \textbf{Yellow:} This block is not dependant on any lower level component in \myTaxiService{} and therefore it is integrated as a starting point.
+			\item \textbf{Blue:} This block is going to be integrated on the top of any block that can reach it using a path in the diagram, and depends directly on its parents.
+			\item \textbf{Green:} This block can only be il padre di un nodo blu, vuol dire che il blocco e' gia' stato integrato e puo' essere usato per integrarci sopra dei nodi non ancora integrati.
+			\item \textbf{marrone:} i blocchi marroni hanno alcune interfacce testate e quindi "verdi" mentre altre disgiunte sono nello stato "blu" e non ancora testate.
+			\item \textbf{rosso:} stub
+		\end{itemize}
+	\item
+		freccia == il parent espone un interfaccia usata dal child, quindi percorrere una freccia significa testare se quell'interfaccia specifica esposta dal parent e usata dal child funziona correttamente
+\end{itemize}
+
+\subsubsection{Software Integration Sequence}
+%TODO For each subsystem: Identify the sequence in which the software components will be integrated within the subsystem. Relate this sequence to any product features/functions that are being built up
 
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
@@ -114,14 +135,15 @@ Therefore, a more stable and faster application will be distributed, instead of 
 	\captionof{figure}{Software Integration Sequence Diagram - Controller Business Components}
 \end{center}
 Once completed the above testing then:
+%TODO Questo grafico va spezzato
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
 		% Place nodes
 		\node [block, fill=green!20] (session_manager) {Session Manager};
 		\node [block, above of=session_manager, fill=green!20] (profile_manager) {Profile Manager};
 		\node [block, below of=session_manager, fill=green!20] (taxi_ride_manager) {Taxi Ride Manager};
-		\node [block, below of=taxi_ride_manager, fill=green!20] (taxi_driver_manager) {Taxi Driver Manager};
-		\node [block, below of=taxi_driver_manager, fill=green!20] (queue_manager) {Queue Manager};
+		\node [block, below of=taxi_ride_manager, fill=brown!20] (taxi_driver_manager) {Taxi Driver Manager};
+		\node [block, below of=taxi_driver_manager] (queue_manager) {Queue Manager};
 		\node [block, right of=queue_manager, node distance=4cm] (dispatcher) {Dispatcher};
 		\node [block, right of=dispatcher, fill=red!20, node distance=4cm] (td_view_stub) {Taxi Driver View Stub};
 		\node [block, below of=td_view_stub, fill=red!20] (passenger_view_stub) {Passenger View Stub};
@@ -131,12 +153,12 @@ Once completed the above testing then:
 		\path [line] (taxi_ride_manager) -| (restful_service);
 		\path [line] (session_manager) -- (restful_service);
 		\path [line] (profile_manager) -| (restful_service);
-		\path [line] (taxi_driver_manager) -| (dispatcher);
-		\path [line] (queue_manager) -- (dispatcher);
+		\path [line] (dispatcher) -- (taxi_driver_manager);
+		\path [line] (dispatcher) -- (queue_manager);
 		\path [line] (td_view_stub) -- (dispatcher);
 		\path [line] (passenger_view_stub) -| (dispatcher);
 	\end{tikzpicture}
-	\captionof{figure}{Software Integration Sequence Diagram - RESTful Service}
+	\captionof{figure}{Software Integration Sequence Diagram - Controller Networking Components}
 \end{center}
 The the two views before the Dispatcher.
 \begin{center}
@@ -156,7 +178,7 @@ The the two views before the Dispatcher.
 		\path [line] (papp) -| (psr);
 		\path [line] (psr) -- (dp);
 	\end{tikzpicture}
-	\captionof{figure}{Software Integration Sequence Diagram - PS View}
+	\captionof{figure}{Software Integration Sequence Diagram - Passenger View}
 \end{center}
 
 \begin{center}
@@ -168,32 +190,37 @@ The the two views before the Dispatcher.
 		\node [block, right of=tapp] (tr) {TD Receiver};
 		\node [block, below of=treq, node distance=2cm,, fill=yellow!50] (gps) {GPS Data Source};
 		\node [block, right of=gps] (tl) {TD Locator};
+		\node [block, below of=tr, fill=green!20, node distance=2cm] (dispatcher) {Dispatcher};
 		% Draw edges
 		\path [line] (rs) -- (treq);
 		\path [line] (treq) -- (tapp);
 		\path [line] (tapp) -- (tr);
 		\path [line] (gps) -- (tl);
+		\path [line] (tr) -- (dispatcher);
+		\path [line] (tl) -- (dispatcher);
 	\end{tikzpicture}
-	\captionof{figure}{Software Integration Sequence Diagram - TD View}
+	\captionof{figure}{Software Integration Sequence Diagram - Taxi Driver View}
 \end{center}
 
-\subsubsection{Software Integration Sequence}
-%TODO For each subsystem: Identify the sequence in which the software components will be integrated within the subsystem. Relate this sequence to any product features/functions that are being built up
+\subsubsection{Subsystem Integration Sequence}
+%TODO Identify the order in which subsystems will be integrated. If you have a single subsystem, 2.4.1 and 2.4.2 are to be merged in a single section. You can refer to Section 2.2 of the test plan example [1] as an example of what we expect.
+%prima model con controller poi integriamo le due view
+
 We adopted a \textbf{bottom-up} testing strategy; this strategy starts from the testing of the \textbf{Model}'s features.\par
 
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
-		% Place nodes
-		\node [block] (model) {Model};
-		\node [block, right of=model, node distance=2.5cm] (controller) {Controller};
-		\node [block, right of=controller, node distance=3cm] (passenger_view) {Passenger View};
-		\node [block, above of=passenger_view] (taxi_driver_view) {Taxi Driver View};
-		\node [block, below of=passenger_view] (administrator_view) {Administrator View};
-		% Draw edges
-		\path [line] (model) -- (controller);
-		\path [line] (controller) -- (passenger_view);
-		\path [line] (controller) |- (taxi_driver_view);
-		\path [line] (controller) |- (administrator_view);
+	% Place nodes
+	\node [block] (model) {Model};
+	\node [block, right of=model, node distance=2.5cm] (controller) {Controller};
+	\node [block, right of=controller, node distance=3cm] (passenger_view) {Passenger View};
+	\node [block, above of=passenger_view] (taxi_driver_view) {Taxi Driver View};
+	\node [block, below of=passenger_view] (administrator_view) {Administrator View};
+	% Draw edges
+	\path [line] (model) -- (controller);
+	\path [line] (controller) -- (passenger_view);
+	\path [line] (controller) |- (taxi_driver_view);
+	\path [line] (controller) |- (administrator_view);
 	\end{tikzpicture}
 	\captionof{figure}{Software Integration Sequence Diagram}
 \end{center}
@@ -202,10 +229,4 @@ We considered \textbf{Model}, \textbf{Controller} and \textbf{Views} as \textbf{
 Firstly the \textit{tester} has to singularly test the component' \textit{sub-features} contained in the \textbf{Model Subsystem}, then, in order to simulate the behaviour of the \textbf{Interacting Software Parts}, he has to represent the \textbf{Controller Component} with a dedicated \textbf{Driver} in order to globally test the \textbf{Model}' features that have to be tested.\par In this way, the model will be completely tested and its behaviour is shown by simulating all the \textbf{Controller}'s possible actions.\par
 Then the testing procedure passes through the \textbf{Controller Component} and the test sequence adopts the same strategy used to test the \textbf{Model}. The only difference, watching the procedure from a high point of view, is that in this case the \textbf{Controller} is tested using the already tested \textbf{Model} and using a \textbf{Driver} in order to simulate the \textbf{Views} actions.
 The last part of the procedure is the one dedicated to the \textbf{View}. These Components(\textbf{TD View, PS View, Administrator View}) are tested using the already tested components (\textbf{Controller and the Model}) and no one component' behaviour is simulated using \textbf{Subs} or \textbf{Drivers}.
-
-\subsubsection{Subsystem Integration Sequence}
-%TODO Identify the order in which subsystems will be integrated. If you have a single subsystem, 2.4.1 and 2.4.2 are to be merged in a single section. You can refer to Section 2.2 of the test plan example [1] as an example of what we expect.
-%prima model con controller poi integriamo le due view
-
-
 
