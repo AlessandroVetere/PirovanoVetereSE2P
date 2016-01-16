@@ -64,45 +64,46 @@
 	{1}
 	{Query Manager}
 	{Model Query Service}
-	{I1, I2, I3, I4, I5, I6}
+	{I2, I3, I4, I5, I6}
 \subsubsection{I8 - Query Manager}
 \testCaseSimpleSimple
 	{1}
 	{Session Manager}
 	{Query Manager}
-	{I1T5}
+	{I7}
 \testCaseSimpleSimple
 	{2}
 	{Profile Manager}
 	{Query Manager}
-	{I1T5}
+	{I7}
 \testCaseSimpleSimple
 	{3}
 	{Taxi Sharing Manager}
 	{Query Manager}
-	{I1T5}
+	{I7}
 \testCaseSimpleSimple
 	{4}
 	{Location Manager}
 	{Query Manager}
-	{TD Locator Stub}
+	{I7, TD Locator Stub}
 \subsubsection{I9 - Location Manager}
 \testCaseSimpleSimple
 	{1}
 	{Queue Manager}
 	{Location Manager}
-	{Dispatcher Stub}
+	{I8, TD Locator Stub}
 \testCaseSimpleSimple
 	{2}
 	{Taxi Ride Manager}
 	{Location Manager}
-	{Nothing}
+	{I8, TD Locator Stub}
 \subsubsection{I10 - Queue Manager}
 \testCaseSimpleSimple
 	{1}
 	{Taxi Driver Manager}
 	{Queue Manager}
-	{Dispatcher Stub}
+	{I9, Dispatcher Stub}
+	
 \subsection{Controller Networking Integration Test Cases}
 \subsubsection{I11 - Dispatcher}
 \testCaseSimpleSimple
@@ -114,7 +115,7 @@
 	{2}
 	{Taxi Driver Manager}
 	{Dispatcher}
-	{I10, TD Receiver Stub, PS Receiver Stub}
+	{TD Receiver Stub, PS Receiver Stub}
 \subsubsection{I12 - Taxi Driver Manager}
 \testCaseSimpleSimple
 	{1}
@@ -126,17 +127,17 @@
 	{1}
 	{RESTful Service}
 	{Taxi Ride Manager}
-	{I10}
+	{I9}
 \subsubsection{I14 - Session Manager}
 \testCaseSimpleSimple
 	{1}
 	{RESTful Service}
 	{Session Manager}
-	{I10}
+	{I8}
 \subsubsection{I15 - Profile Manager}
 \testCaseSimpleSimple
 	{1}
 	{RESTful Service}
 	{Profile Manager}
-	{I10}
+	{I8}
 \subsection{View Integration Test Cases}
