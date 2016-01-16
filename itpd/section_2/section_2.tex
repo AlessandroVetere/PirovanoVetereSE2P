@@ -68,12 +68,10 @@ A precise convention has been adopted for the semantic of diagrams:
 		\textbf{Block:}
 		\begin{itemize}
 			\item \textbf{Yellow:} This block is not dependent on any lower level component in \myTaxiService{} and therefore it is integrated as a starting point in the current diagram.
-			\item \textbf{Blue:} This block is going to be fully integrated on the top of any ancestor block in the diagram, and depends directly on its parents.
-			\item \textbf{Green:} This block can only be the father of a blue or brown block because, in a previous diagram (i.e. integration step) it has been fully integrated within the system.
-			Therefore it can be used to integrate other components on the top of it, as children in the diagram.
-			\item \textbf{Brown:} This block is not going to be fully integrated within the current diagram (i.e. integration step), but only a subset of its functionalities are going to be tested.
+			\item \textbf{Blue:} This block is going to be fully integrated on the top of its parents.
+			\item \textbf{Green:} This block is not going to be fully integrated within the current diagram but needs further integration testing in subsequent diagrams.
 			\item \textbf{Red:} This block represents a stub component, that replaces the real component mocking its functionalities.
-			It's a trick made necessary by the fact that some components are going to be integrated before some other needed components have been integrated, and therefore they require a stub in order to work.
+			That is a trick made necessary by the fact that some components are going to be integrated before some other needed components have been integrated, and therefore they require a stub in order to work.
 			The component represented by a red block is going to be integrated afterwards.
 		\end{itemize}
 	\item
