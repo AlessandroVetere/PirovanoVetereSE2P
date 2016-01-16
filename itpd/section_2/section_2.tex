@@ -121,11 +121,10 @@ The \textbf{Taxi Driver View, Passenger View and Administrator View} are tested 
 \subsubsection{Software Integration Sequence}
 %TODO For each subsystem: Identify the sequence in which the software components will be integrated within the subsystem. Relate this sequence to any product features/functions that are being built up
 
-\subsection{Model Integration Sequence}
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
 		% Place nodes
-		\node [block, fill=yellow!520] (datbase_driver_adapter) {Database Driver Adapter};
+		\node [block, fill=yellow!20] (datbase_driver_adapter) {Database Driver Adapter};
 		\node [block, right of=datbase_driver_adapter, node distance=5cm] (taxi_driver_db_adapter) {Taxi Driver DB Adapter};
 		\node [block, above of=taxi_driver_db_adapter] (taxi_ride_db_adapter) {Taxi Ride DB Adapter};
 		\node [block, above of=taxi_ride_db_adapter] (passenger_db_adapter) {Passenger DB Adapter};
@@ -147,7 +146,6 @@ The \textbf{Taxi Driver View, Passenger View and Administrator View} are tested 
 	\captionof{figure}{Software Integration Sequence Diagram - Model}
 \end{center}
 
-\subsection{Controller Business Components Integration Sequence}
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
 		% Place nodes
@@ -178,11 +176,10 @@ The \textbf{Taxi Driver View, Passenger View and Administrator View} are tested 
 	\captionof{figure}{Software Integration Sequence Diagram - Controller Business Components}
 \end{center}
 
-\subsection{Controller Networking Components Integration Sequence}
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
 		% Place nodes
-		\node [block, fill=brown!20] (dispatcher) {Dispatcher};
+		\node [block] (dispatcher) {Dispatcher};
 		\node [block, above of=dispatcher, fill=red!20] (td_view_stub) {TD Receiver Stub};
 		\node [block, below of=dispatcher, fill=red!20] (passenger_view_stub) {PS Receiver Stub};
 		\node [block, right of=td_view_stub, node distance=4cm, fill=brown!20] (queue_manager) {Queue Manager};
@@ -204,7 +201,6 @@ The \textbf{Taxi Driver View, Passenger View and Administrator View} are tested 
 	\captionof{figure}{Software Integration Sequence Diagram - Controller Networking Components}
 \end{center}
 
-\subsection{Passenger View Integration Sequence}
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
 		% Place nodes
@@ -213,7 +209,7 @@ The \textbf{Taxi Driver View, Passenger View and Administrator View} are tested 
 		\node [block, right of=psreq, above of=psreq] (psw) {PS Web View};
 		\node [block, right of=psreq, below of=psreq] (papp) {PS Application View};
 		\node [block, below of=psw, right of=psw] (psr) {PS Receiver};
-		\node [block, right of=psr, fill=green!20, node distance=2.5cm, fill=brown!20] (dp) {Dispatcher};
+		\node [block, right of=psr, fill=green!20, node distance=2.5cm] (dp) {Dispatcher};
 		% Draw edges
 		\path [line] (restful_service) -- (psreq);
 		\path [line] (psreq) |- (psw);
@@ -225,7 +221,6 @@ The \textbf{Taxi Driver View, Passenger View and Administrator View} are tested 
 	\captionof{figure}{Software Integration Sequence Diagram - Passenger View}
 \end{center}
 
-\subsection{Taxi Driver View Integration Sequence}
 \begin{center}
 	\begin{tikzpicture}[node distance=4.5cm, auto]
 		% Place nodes	
@@ -235,7 +230,7 @@ The \textbf{Taxi Driver View, Passenger View and Administrator View} are tested 
 		\node [block, right of=tapp] (tr) {TD Receiver};
 		\node [block, below of=treq, node distance=2cm,, fill=yellow!50] (gps) {GPS Data Source};
 		\node [block, right of=gps] (tl) {TD Locator};
-		\node [block, below of=tr, fill=green!20, node distance=2cm, fill=brown!20] (dispatcher) {Dispatcher};
+		\node [block, below of=tr, fill=green!20, node distance=2cm] (dispatcher) {Dispatcher};
 		% Draw edges
 		\path [line] (rs) -- (treq);
 		\path [line] (treq) -- (tapp);
@@ -247,7 +242,6 @@ The \textbf{Taxi Driver View, Passenger View and Administrator View} are tested 
 	\captionof{figure}{Software Integration Sequence Diagram - Taxi Driver View}
 \end{center}
 
-\subsection{Administrator View Integration Sequence}
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
 		% Place nodes	
