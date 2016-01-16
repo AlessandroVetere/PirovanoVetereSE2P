@@ -6,8 +6,10 @@
 
 \titleSubtitle{Integration Test Plan Document}{Version 1.0}
 
+\newcommand{\paragraphnewline}[1]{\paragraph{#1}\mbox{}\\}
+
 \newcommand{\testCase}[7]{
-	\paragraph{Test Case T#1}\mbox{}\\
+	\paragraphnewline{Test Case T#1}
 	\newline
 	\begin{tabulary}{\linewidth\tymin=70pt}{L|L}
 		\textbf{Test Item(s)} & #2 $\rightarrow$ #3 \\ \hline
@@ -17,6 +19,18 @@
 		\textbf{Purpose} & #7 \\
 	\end{tabulary}
 }
+
+\newcommand{\testCaseSimple}[5]{
+	\testCase
+		{#1}
+		{#2}
+		{#3}
+		{Create typical input for #2}
+		{Check if correct methods are called in #3}
+		{#4}
+		{#5}
+}
+
 
 %TODO The Test Plan Document (ITPD) aims at describing how you plan to accomplish the integration test. This document is supposed to be written before the integration test really happens. Often it is written in parallel to the Design Document and takes the architectural description of the software system as a starting point. This document needs to explain to the development team what to test, in which sequence, which tools are needed for testing (if any), which stubs/ drivers/oracles need to be developed.
 
