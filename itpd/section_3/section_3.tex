@@ -65,7 +65,7 @@
 	{Query Manager}
 	{Model Query Service}
 	{I2, I3, I4, I5, I6}
-\subsubsection{I8 - Query Manager}
+\subsubsection{I8 - Query Manager - 1}
 \testCaseSimpleSimple
 	{1}
 	{Session Manager}
@@ -103,7 +103,7 @@
 	{Taxi Driver Manager}
 	{Queue Manager}
 	{I9, Dispatcher Stub}
-	
+
 \subsection{Controller Networking Integration Test Cases}
 \subsubsection{I11 - Dispatcher}
 \testCaseSimpleSimple
@@ -140,4 +140,83 @@
 	{RESTful Service}
 	{Profile Manager}
 	{I8}
-\subsection{View Integration Test Cases}
+\subsection{Passenger View Integration Test Cases}
+\subsubsection{I16 - RESTful Service - 1}
+\testCaseSimpleSimple
+	{1}
+	{PS Request Creator}
+	{RESTful Service}
+	{Nothing}
+\subsubsection{I17 - PS Request Creator}
+\testCaseSimpleSimple
+	{1}
+	{PS Web View}
+	{PS Request Creator}
+	{I16}
+\testCaseSimpleSimple
+	{2}
+	{PS Application View}
+	{PS Request Creator}
+	{I16}
+\subsubsection{I18 - PS Web View}
+\testCaseSimpleSimple
+	{1}
+	{PS Receiver}
+	{PS Web View}
+	{I17}
+\subsubsection{I19 - PS Application View}
+\testCaseSimpleSimple
+	{1}
+	{PS Receiver}
+	{PS Application View}
+	{I17}
+\subsubsection{I19 - PS Receiver}
+\testCaseSimpleSimple
+	{1}
+	{Dispatcher}
+	{PS Receiver}
+	{I18, I19}
+\subsection{Taxi Driver View Integration Test Cases}
+\subsubsection{I20 - RESTful Service - 2}
+\testCaseSimpleSimple
+	{1}
+	{TD Request Creator}
+	{RESTful Service}
+	{I12, I13, I14, I15}
+\subsubsection{I21 - TD Request Creator}
+\testCaseSimpleSimple
+	{1}
+	{TD Application View}
+	{TD Request Creator}
+	{I20}
+\subsubsection{I22 - TD Application View}
+\testCaseSimpleSimple
+	{1}
+	{TD Receiver}
+	{TD Application View}
+	{I21}
+\subsubsection{I23 - TD Receiver}
+\testCaseSimpleSimple
+	{1}
+	{Dispatcher}
+	{TD Receiver}
+	{I22}
+\subsubsection{I24 - GPS Data Source}
+\testCaseSimpleSimple
+	{1}
+	{TD Locator}
+	{GPS Data Source}
+	{Nothing}
+\subsubsection{I24 - TD Locator}
+\testCaseSimpleSimple
+	{1}
+	{Dispatcher}
+	{TD Locator}
+	{I24}
+\subsection{Administrator View Integration Test Cases}
+\subsubsection{I25 - Query Manager - 2}
+\testCaseSimpleSimple
+	{1}
+	{Administrator View}
+	{Query Manager}
+	{I7}
