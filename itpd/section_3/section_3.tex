@@ -65,30 +65,61 @@
 	{Query Manager}
 	{Model Query Service}
 	{I1, I2, I3, I4, I5, I6}
-	{}
 \subsubsection{I8 - Query Manager}
 \testCaseSimpleSimple
 	{12}
 	{Model Query Service}
 	{Query Manager}
 	{I1T5}
-	{}
 \testCaseSimpleSimple
 	{13}
 	{Model Query Service}
 	{Query Manager}
 	{I1T5}
-	{}
 \testCaseSimpleSimple
 	{14}
 	{Model Query Service}
 	{Query Manager}
 	{I1T5}
-	{}
 \testCaseSimpleSimple
 	{15}
 	{Model Query Service}
 	{Query Manager}
 	{}
 \subsection{Controller Networking Integration Test Cases}
+\subsubsection{I11 - Dispatcher}
+\testCaseSimpleSimple
+	{1}
+	{Queue Manager}
+	{Dispatcher}
+	{I10, TD Receiver Stub, PS Receiver Stub}
+\testCaseSimpleSimple
+	{2}
+	{Taxi Driver Manager}
+	{Dispatcher}
+	{I10, TD Receiver Stub, PS Receiver Stub}
+\subsubsection{I12 - Taxi Driver Manager}
+\testCaseSimpleSimple
+	{1}
+	{RESTful Service}
+	{Taxi Driver Manager}
+	{I11}
+\subsubsection{I13 - Taxi Ride Manager}
+\testCaseSimpleSimple
+	{1}
+	{RESTful Service}
+	{Taxi Ride Manager}
+	{I10}
+\subsubsection{I14 - Session Manager}
+\testCaseSimpleSimple
+	{1}
+	{RESTful Service}
+	{Session Manager}
+	{I10}
+\subsubsection{I15 - Profile Manager}
+\testCaseSimpleSimple
+	{1}
+	{RESTful Service}
+	{Profile Manager}
+	{I10}
 \subsection{View Integration Test Cases}
