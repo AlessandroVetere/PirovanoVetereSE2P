@@ -16,7 +16,7 @@
 		\textbf{Input Specification} & #4 \\ \hline
 		\textbf{Output Specification} & #5 \\ \hline
 		\textbf{Environmental Needs} & #6 \\ \hline
-		\textbf{Purpose} & #7 \\
+		\textbf{Target} & #7 \\
 	\end{tabulary}
 }
 
@@ -29,6 +29,15 @@
 		{Check if correct methods are called in #3}
 		{#4}
 		{#5}
+}
+
+\newcommand{\testCaseSimpleSimple}[4]{
+	\testCaseSimple
+	{#1}
+	{#2}
+	{#3}
+	{#4}
+	{Verify that #2 works.}
 }
 
 
