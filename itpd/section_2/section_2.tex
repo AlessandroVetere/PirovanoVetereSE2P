@@ -131,7 +131,7 @@ The \textbf{Taxi Driver View, Passenger View and Administrator View} are tested 
 		\node [block, above of=taxi_ride_db_adapter] (passenger_db_adapter) {Passenger DB Adapter};
 		\node [block, below of=taxi_driver_db_adapter] (zone_db_adapter) {Zone DB Adapter};
 		\node [block, below of=zone_db_adapter] (queue_db_adapter) {Queue DB Adapter};
-		\node [block, right of=taxi_driver_db_adapter, node distance=5cm] (model_query_service) {Model Query Service};
+		\node [block, right of=taxi_driver_db_adapter, node distance=5cm, fill=green!20] (model_query_service) {Model Query Service};
 		% Draw edges
 		\path [line] (datbase_driver_adapter) -- (taxi_driver_db_adapter);
 		\path [line] (datbase_driver_adapter) |- (taxi_ride_db_adapter);
@@ -151,17 +151,17 @@ The \textbf{Taxi Driver View, Passenger View and Administrator View} are tested 
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
 		% Place nodes
-		\node [block] (query_manager) {Query Manager};
+		\node [block, fill=green!20] (query_manager) {Query Manager};
 		\node [block, above of=query_manager, fill=green!20] (model_query_service) {Model Query Service};
 		\node [block, below of=query_manager] (taxi_sharing_manager) {Taxi Sharing Manager};
-		\node [block, left of=taxi_sharing_manager, node distance=3.5cm] (profile_manager) {Profile Manager};
-		\node [block, left of=query_manager, node distance=3.5cm] (session_manager) {Session Manager};
+		\node [block, left of=taxi_sharing_manager, node distance=3.5cm, fill=green!20] (profile_manager) {Profile Manager};
+		\node [block, left of=query_manager, node distance=3.5cm, fill=green!20] (session_manager) {Session Manager};
 		\node [block, right of=taxi_sharing_manager, node distance=3.5cm] (location_manager) {Location Manager};
 		\node [block, above of=location_manager, fill=red!20] (taxi_driver_view_stub) {TD Locator Stub};
-		\node [block, below of=location_manager] (taxi_ride_manager) {Taxi Ride Manager};
-		\node [block, below of=taxi_sharing_manager, fill=brown!20] (queue_manager) {Queue Manager};
+		\node [block, below of=location_manager, fill=green!20] (taxi_ride_manager) {Taxi Ride Manager};
+		\node [block, below of=taxi_sharing_manager, fill=green!20] (queue_manager) {Queue Manager};
 		\node [block, left of=queue_manager, fill=red!20, node distance=3.5cm] (dispatcher_stub) {Dispatcher Stub};
-		\node [block, below of=queue_manager, fill=brown!20] (taxi_driver_manager) {Taxi Driver Manager};
+		\node [block, below of=queue_manager, fill=green!20] (taxi_driver_manager) {Taxi Driver Manager};
 		% Draw edges
 		\path [line] (model_query_service) -- (query_manager);
 		\path [line] (query_manager) -- (taxi_sharing_manager);
@@ -182,13 +182,13 @@ The \textbf{Taxi Driver View, Passenger View and Administrator View} are tested 
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
 		% Place nodes
-		\node [block] (dispatcher) {Dispatcher};
+		\node [block, fill=green!20] (dispatcher) {Dispatcher};
 		\node [block, above of=dispatcher, fill=red!20] (td_view_stub) {TD Receiver Stub};
 		\node [block, below of=dispatcher, fill=red!20] (passenger_view_stub) {PS Receiver Stub};
-		\node [block, right of=td_view_stub, node distance=4cm, fill=brown!20] (queue_manager) {Queue Manager};
-		\node [block, below of=queue_manager, fill=brown!20] (taxi_driver_manager) {Taxi Driver Manager};
+		\node [block, right of=td_view_stub, node distance=4cm, fill=green!20] (queue_manager) {Queue Manager};
+		\node [block, below of=queue_manager, fill=green!20] (taxi_driver_manager) {Taxi Driver Manager};
 		\node [block, below of=taxi_driver_manager, fill=green!20] (session_manager) {Session Manager};
-		\node [block, right of=taxi_driver_manager, node distance=4cm] (restful_service) {RESTful Service};
+		\node [block, right of=taxi_driver_manager, node distance=4cm, fill=green!20] (restful_service) {RESTful Service};
 		\node [block, below of=restful_service, fill=green!20] (profile_manager) {Profile Manager};
 		\node [block, above of=restful_service, fill=green!20] (taxi_ride_manager) {Taxi Ride Manager};		
 		% Draw edges
@@ -233,7 +233,7 @@ The \textbf{Taxi Driver View, Passenger View and Administrator View} are tested 
 		\node [block, above of=treq, fill=green!20, node distance=2cm] (rs) {RESTful Service};
 		\node [block, right of=treq] (tapp) {TD Application View};
 		\node [block, right of=tapp] (tr) {TD Receiver};
-		\node [block, below of=treq, node distance=2cm,, fill=yellow!50] (gps) {GPS Data Source};
+		\node [block, below of=treq, node distance=2cm,, fill=yellow!20] (gps) {GPS Data Source};
 		\node [block, right of=gps] (tl) {TD Locator};
 		\node [block, below of=tr, fill=green!20, node distance=2cm] (dispatcher) {Dispatcher};
 		% Draw edges
