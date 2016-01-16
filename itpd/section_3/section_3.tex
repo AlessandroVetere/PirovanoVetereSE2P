@@ -30,65 +30,78 @@
 	{Nothing}
 \subsubsection{I2 - Passenger DB Adapter}
 \testCaseSimpleSimple
-	{6}
+	{1}
 	{Model Query Service}
 	{Passenger DB Adapter}
 	{I1T1}
 \subsubsection{I3 - Taxi Ride DB Adapter}
 \testCaseSimpleSimple
-	{7}
+	{1}
 	{Model Query Service}
 	{Passenger DB Adapter}
 	{I1T2}
 \subsubsection{I4 - Taxi Driver DB Adapter}
 \testCaseSimpleSimple
-	{8}
+	{1}
 	{Model Query Service}
 	{Taxi Driver DB Adapter}
 	{I1T3}
 \subsubsection{I5 - Zone DB Adapter}
 \testCaseSimpleSimple
-	{9}
+	{1}
 	{Model Query Service}
 	{Zone DB Adapter}
 	{I1T4}
 \subsubsection{I6 - Queue DB Adapter}
 \testCaseSimpleSimple
-	{10}
+	{1}
 	{Model Query Service}
 	{Queue DB Adapter}
 	{I1T5}
 \subsection{Controller Business Integration Test Cases}
 \subsubsection{I7 - Model Query Service}
 \testCaseSimpleSimple
-	{11}
+	{1}
 	{Query Manager}
 	{Model Query Service}
 	{I1, I2, I3, I4, I5, I6}
-	{}
 \subsubsection{I8 - Query Manager}
 \testCaseSimpleSimple
-	{12}
-	{Model Query Service}
+	{1}
+	{Session Manager}
 	{Query Manager}
 	{I1T5}
-	{}
 \testCaseSimpleSimple
-	{13}
-	{Model Query Service}
+	{2}
+	{Profile Manager}
 	{Query Manager}
 	{I1T5}
-	{}
 \testCaseSimpleSimple
-	{14}
-	{Model Query Service}
+	{3}
+	{Taxi Sharing Manager}
 	{Query Manager}
 	{I1T5}
-	{}
 \testCaseSimpleSimple
-	{15}
-	{Model Query Service}
+	{4}
+	{Location Manager}
 	{Query Manager}
-	{}
+	{TD Locator Stub}
+\subsubsection{I9 - Location Manager}
+\testCaseSimpleSimple
+	{1}
+	{Queue Manager}
+	{Location Manager}
+	{Dispatcher Stub}
+\testCaseSimpleSimple
+	{2}
+	{Taxi Ride Manager}
+	{Location Manager}
+	{Nothing}
+\subsubsection{I10 - Queue Manager}
+\testCaseSimpleSimple
+	{1}
+	{Taxi Driver Manager}
+	{Queue Manager}
+	{Dispatcher Stub}
 \subsection{Controller Networking Integration Test Cases}
 \subsection{View Integration Test Cases}
