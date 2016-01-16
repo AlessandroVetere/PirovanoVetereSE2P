@@ -1,7 +1,28 @@
 \section{Tools and Test Equipment Required}
 %TODO Identify all tools and test equipment needed to accomplish the integration. Refer to the tools presented during the lectures. Explain why and how you are going to use them. Note that you may also use manual testing for some part. Consider manual testing as one of the possible tools you have available.
 
-Java EE 7 - programming language\\
-Arquillian http://arquillian.org/ - integration testing framework\\
-Espresso http://developer.android.com/training/testing/ui-testing/espresso-testing.html - Android UI testing automation\\
-SeleniumHQ http://www.seleniumhq.org/ - web ui testing\\
+The following part of the document contains a set of advices about the effective procedure of testing.\\ We provide a \textbf{collection} of interesting instruments:
+\begin{itemize}
+	\itemBold {Arquillian}  It is an integration testing framework
+	\begin{itemize}
+		\item \href{http://arquillian.org/}{http://arquillian.org/}
+	\end{itemize}
+	\itemBold {Espresso} Android UI testing automation
+	\begin{itemize}
+		\item \href{http://developer.android.com/training/testing/ui-testing/espresso-testing.html}{http://developer.android.com/training/testing/ui-testing/espresso-testing.html}
+	\end{itemize}
+	\itemBold {Karma JS} A simple tool that allows you to execute JavaScript code in multiple real browsers.
+	\begin{itemize}
+		\item \href{https://karma-runner.github.io/0.13/index.html}{https://karma-runner.github.io/0.13/index.html}
+	\end{itemize}
+	\itemBold {Mocha JS} A flexible, fun JavaScript test framework for node.js and the browser
+	\begin{itemize}
+		\item \href{https://mochajs.org/}{https://mochajs.org/}
+	\end{itemize}
+\end{itemize}
+
+Moreover, because of the high-level architecture proposed in the \textbf{DD} is thought with a \textbf{Java-based} style of thinking, the programming language that better adapts to this style is \textbf{Java}, but a lot of other emerging languages can be used in order to build a proper software. If the developers will decide to use this language, the proposed and well-known tools are:
+\begin{itemize}
+	\itemBold {Java EE 7} As programming language
+	\itemBold {JUnit} As software testing tool
+\end{itemize}
