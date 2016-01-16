@@ -77,14 +77,7 @@ A precise convention has been adopted for the semantic of diagrams:
 			The component represented by a red block is going to be integrated afterwards.
 		\end{itemize}
 	\item
-		\textbf{Arrow:} Starts from a block and ends into another block.
-		The block from which it is starting is called parent and the other one child.
-		To cross an arrow in the diagram means that you are integration testing the parent exposed interfaces used by the child.
-	\item
-		\textbf{Blocks Visiting Order:} Each block can be traversed only once.
-		The starting arrows from a block can be traversed in parallel, when the arrows from all the parent of the considered block have been traversed.
-		A block without incoming arrows can be used as a start for a new path as soon as possible.
-		A diagram is completed when all the possible path have been traversed.
+		\textbf{Arrow:} It is a \textbf{precedence} symbol: it helps the tester to follow the right order in the whole integration process. It starts from a block and ends into another block. The block from which it starts is called \textbf{parent} and the other one \textbf{child}. In particular it means that the child block can be integrated only if its father/fathers is/are already integrated. Moreover if a block is pointed by several arrows, its integration process can begin only when \textbf{all the father blocks are integrated}.
 \end{itemize}
 
 \newpage
