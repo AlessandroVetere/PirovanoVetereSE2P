@@ -14,16 +14,18 @@
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
-\newcommand{\versionHistoryTab}[1]{
+\newcommand{\versionHistoryTab}[1]{%
 	\begin{tabulary}{\linewidth\tymin=70pt}{C|C|L}
 		\textbf{\textit{Version Number}} & \textbf{\textit{Release Date}} & \textbf{\textit{Changelog}} \\
 		\hline
 		#1
-	\end{tabulary}
+	\end{tabulary}%
 }
 
-\newcommand{\configureJava}{
-	\lstset{frame=tb,
+\newcommand{\paragraphnewline}[1]{\paragraph{#1}\mbox{}\\}
+
+\newcommand{\configureJava}{%
+	\lstset{frame=tb,%
 		language=Java,
 		aboveskip=3mm,
 		belowskip=3mm,
@@ -37,8 +39,8 @@
 		stringstyle=\color{mauve},
 		breaklines=true,
 		breakatwhitespace=true,
-		tabsize=3
-	}
+		tabsize=3%
+	}%
 }
 \newcommand{\enableCodeLineNumbers}{\lstset{numbers=left}}
 \newcommand{\disableCodeLineNumbers}{\lstset{numbers=none}}
@@ -49,13 +51,13 @@
 \newcommand{\sectionTexPath}[1]{\sectionBaseDir{#1}/section_#1.tex}
 \newcommand{\inputSection}[1]{\newpage\input{\sectionTexPath{#1}}}
 \newcommand{\itemBold}[1]{\item\textbf{#1:}}
-\newcommand{\unbreakableBlock}[1]{
+\newcommand{\unbreakableBlock}[1]{%
 	\begin{minipage}{\linewidth}% Following stays together
 		#1
-	\end{minipage}
+	\end{minipage}%
 }
 \newcommand{\unbreakableItem}[1]{\unbreakableBlock{\item #1}}
-\newcommand{\showPercentImage}[3]{
+\newcommand{\showPercentImage}[3]{%
 	\begin{center}
 		\unbreakableBlock{
 			\begin{center}
@@ -63,16 +65,16 @@
 				\captionof{figure}{#2}
 			\end{center}
 		}
-	\end{center}
+	\end{center}%
 }
 
 \newcommand{\showImage}[2]{\showPercentImage{#1}{#2}{1}}
 \setDepth{4}
-\hypersetup{
+\hypersetup{%
 	colorlinks=true, %set true if you want colored links
 	linktoc=all,     %set to all if you want both sections and subsections linked
 	linkcolor=black,
-	urlcolor=blue
+	urlcolor=blue%
 }
 \author{Alberto Mario Pirovano \and Alessandro Vetere}      % Declares authors' names.
 \date{\today}	% This command produces today's date.
