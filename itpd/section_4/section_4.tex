@@ -1,9 +1,21 @@
 \section{Tools and Test Equipment Required}
 %TODO Identify all tools and test equipment needed to accomplish the integration. Refer to the tools presented during the lectures. Explain why and how you are going to use them. Note that you may also use manual testing for some part. Consider manual testing as one of the possible tools you have available.
 
-The following part of the document contains a set of advices about the effective procedure of testing.\\ We provide a \textbf{collection} of interesting instruments:
-\begin{itemize}
-	\itemBold {Arquillian}  It is an integration testing framework
+The following part of the document contains a set of recommended software that can be used to implement the concrete procedure of testing.
+Moreover, because the high-level architecture proposed in the \textbf{DD} is designed using a \textbf{Java-based} style, the programming language that better adapts to this style is \textbf{Java}, but a lot of other emerging languages can be used in order to build a proper software, like \textbf{JavaScript}.\par
+If it is decided to use \textbf{Java}, the proposed and well-known tools are:
+\begin{itemize}	
+	\itemBold {JUnit} Unit testing framework
+	\begin{itemize}
+		\item 
+		\href{http://junit.org/}{http://junit.org/}
+	\end{itemize}	
+	\itemBold{Mockito} Another unit testing framework
+	\begin{itemize}
+		\item 
+		\href{http://site.mockito.org/}{http://site.mockito.org/}
+	\end{itemize}	
+	\itemBold {Arquillian} Integration testing framework
 	\begin{itemize}
 		\item \href{http://arquillian.org/}{http://arquillian.org/}
 	\end{itemize}
@@ -11,6 +23,9 @@ The following part of the document contains a set of advices about the effective
 	\begin{itemize}
 		\item \href{http://developer.android.com/training/testing/ui-testing/espresso-testing.html}{http://developer.android.com/training/testing/ui-testing/espresso-testing.html}
 	\end{itemize}
+\end{itemize}
+Otherwise, if \textbf{JavaScript} is used, these tools can be useful:
+\begin{itemize}
 	\itemBold {Karma JS} A simple tool that allows you to execute JavaScript code in multiple real browsers.
 	\begin{itemize}
 		\item \href{https://karma-runner.github.io/0.13/index.html}{https://karma-runner.github.io/0.13/index.html}
@@ -19,10 +34,4 @@ The following part of the document contains a set of advices about the effective
 	\begin{itemize}
 		\item \href{https://mochajs.org/}{https://mochajs.org/}
 	\end{itemize}
-\end{itemize}
-
-Moreover, because of the high-level architecture proposed in the \textbf{DD} is thought with a \textbf{Java-based} style of thinking, the programming language that better adapts to this style is \textbf{Java}, but a lot of other emerging languages can be used in order to build a proper software. If the developers will decide to use this language, the proposed and well-known tools are:
-\begin{itemize}
-	\itemBold {Java EE 7} As programming language
-	\itemBold {JUnit} As software testing tool
 \end{itemize}

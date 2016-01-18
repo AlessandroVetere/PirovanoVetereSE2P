@@ -3,7 +3,7 @@ This section explains the integration strategy selected to integrate all the sof
 
 \subsection{Entry Criteria}
 %TODO Specify the criteria that must be met before integration testing of specific elements may begin (e.g., functions must have been unit tested).
-Before starting the integration testing of any software component that has been designed for \myTaxiService{} system, the internal functions of the considered component (i.e. public or protected methods that are exposed within the package of the component but are not part of any external public interface) must be unit tested using \textbf{JUnit} framework.
+Before starting the integration testing of any software component that has been designed for \myTaxiService{} system, the internal functions of the considered component (i.e. public or protected methods that are exposed within the package of the component but are not part of any external public interface) must be unit tested using an appropriate framework.
 
 \subsection{Elements to be Integrated}
 %TODO Identify the components to be integrated, refer to your design document to identify such components in a way that is consistent with your design
@@ -51,7 +51,6 @@ The interested components are reported below for readers' convenience:
 \end{itemize}
 Moreover we suppose that Google Maps API are well tested by Google and thus we can use them without testing any further.
 For what concerns the other external software elements, we assume that the GPS Data Source module in the Taxi Driver View uses the GPS Drivers of the underlying operating system that are already tested, and the same is assumed for the Database Driver Adapter in the Model referring to Database Drivers.
-Last but not least, \myTaxiService{} Taxi Sharing API will be tested in a separate environment using \textbf{JUnit} after the whole procedure indicated in this document has been completed.
 
 \subsection{Integration Testing Strategy}
 %TODO Describe the integration testing approach (top-down, bottom-up, functional groupings, etc.) and the rationale for the choosing that approach
@@ -75,7 +74,7 @@ A precise convention has been adopted for the semantic of diagrams:
 			The component represented by a red block is going to be integrated afterwards.
 		\end{itemize}
 	\item
-		\textbf{Arrow:} It is a \textbf{precedence} symbol: it helps the tester to follow the right order in the whole integration process. It starts from a block and ends into another block. The block from which it starts is called \textbf{parent} and the other one \textbf{child}. In particular it means that the child block can be integrated only if its parents are already integrated. Moreover if a block is pointed by several arrows, its integration process can begin only when \textbf{all the parent blocks are integrated}.
+		\textbf{Arrow:} It is a \textbf{precedence} symbol. It helps the tester to follow the right order in the whole integration process. It starts from a block and ends into another block. The block from which it starts is called \textbf{parent} and the other one \textbf{child}. In particular it means that the child block can be integrated only if its parents are already integrated. Moreover if a block is pointed by several arrows, its integration process can begin only when \textbf{all the parent blocks are integrated}.
 \end{itemize}
 
 \newpage
@@ -111,6 +110,9 @@ The \textbf{Taxi Driver View, Passenger View and Administrator View} are tested 
 \newpage
 \subsubsection{Software Integration Sequence}
 %TODO For each subsystem: Identify the sequence in which the software components will be integrated within the subsystem. Relate this sequence to any product features/functions that are being built up
+We provided six \textbf{Software Integration Sequence Diagram}, one for each main part of \myTaxiService{}.\par
+Referring to the diagram semantic explanation given in section 2.4, the reader can understand the meaning of each diagram.
+Further details about each testing step (represented as arrows), are then given in the following section.
 
 \paragraphnewline{Model Integration Sequence}
 \begin{center}
@@ -138,6 +140,7 @@ The \textbf{Taxi Driver View, Passenger View and Administrator View} are tested 
 	\captionof{figure}{Software Integration Sequence Diagram - Model}
 \end{center}
 
+\newpage
 \paragraphnewline{Controller Business Components Integration Sequence}
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]

@@ -1,62 +1,75 @@
 \section{Individual Steps and Test Description}
 %TODO For each step of the integration process identified above, describe the type of tests that will be used to verify that the elements integrated in this step perform as expected. Describe in general the expected results of the test set. You may refer to Chapter 3 and 4 of the test plan example [1] as an example of what we expect. (NOTE: This is not a detailed description of test protocols. Think of this as the test design phase. Specific protocols will be written to fulfill the goals of the tests identified in this section.)
 
+
+This section is divided into six parts, each one containing the relevant tests of a different part of \myTaxiService{}.
+For each part we defined many \textbf{Integration Test Suites}.
+The title we assigned to each \textbf{Integration Test Suite} contains the name of the software component on which top the integration of other components is done.
+Furthermore, for each \textbf{Integration Test Suite} we define one or more specific \textbf{Integration Test Cases}.
+Each \textbf{Integration Test Case} allows the integration of another software component on the top of the one mentioned in the \textbf{Integration Test Suite} title.\par
+Refer to section 5 to check which kind of sample data must be pre-inserted in \myTaxiService{} database in order to permit the whole testing procedure.
+
 \subsection{Model Integration Test Cases}
 \subsubsection{I1 - Database Driver Adapter}
 \testCaseSimpleSimple
 	{1}
 	{Passenger DB Adapter}
 	{Database Driver Adapter}
-	{Nothing}
+	{Sample data present in the DB}
 \testCaseSimpleSimple
 	{2}
 	{Taxi Ride DB Adapter}
 	{Database Driver Adapter}
-	{Nothing}
+	{Sample data present in the DB}
 \testCaseSimpleSimple
 	{3}
 	{Taxi Driver DB Adapter}
 	{Database Driver Adapter}
-	{Nothing}
+	{Sample data present in the DB}
 \testCaseSimpleSimple
 	{4}
 	{Zone DB Adapter}
 	{Database Driver Adapter}
-	{Nothing}
+	{Sample data present in the DB}
 \testCaseSimpleSimple
 	{5}
 	{Queue DB Adapter}
 	{Database Driver Adapter}
-	{Nothing}
+	{Sample data present in the DB}
 \subsubsection{I2 - Passenger DB Adapter}
-\testCaseSimpleSimple
+\testCaseSimple
 	{1}
 	{Model Query Service}
 	{Passenger DB Adapter}
+	{Create Passenger related input for Model Query Service}
 	{I1T1}
 \subsubsection{I3 - Taxi Ride DB Adapter}
-\testCaseSimpleSimple
+\testCaseSimple
 	{1}
 	{Model Query Service}
 	{Passenger DB Adapter}
+	{Create Taxi Ride related input for Model Query Service}
 	{I1T2}
 \subsubsection{I4 - Taxi Driver DB Adapter}
-\testCaseSimpleSimple
+\testCaseSimple
 	{1}
 	{Model Query Service}
 	{Taxi Driver DB Adapter}
+	{Create Taxi Driver related input for Model Query Service}
 	{I1T3}
 \subsubsection{I5 - Zone DB Adapter}
-\testCaseSimpleSimple
+\testCaseSimple
 	{1}
 	{Model Query Service}
 	{Zone DB Adapter}
+	{Create Zone related input for Model Query Service}
 	{I1T4}
 \subsubsection{I6 - Queue DB Adapter}
-\testCaseSimpleSimple
+\testCaseSimple
 	{1}
 	{Model Query Service}
 	{Queue DB Adapter}
+	{Create Queue related input for Model Query Service}
 	{I1T5}
 \subsection{Controller Business Integration Test Cases}
 \subsubsection{I7 - Model Query Service}
@@ -148,27 +161,31 @@
 	{RESTful Service}
 	{Nothing}
 \subsubsection{I17 - PS Request Creator}
-\testCaseSimpleSimple
+\testCaseSimple
 	{1}
 	{PS Web View}
 	{PS Request Creator}
+	{Create sample user interaction for PS Web View}
 	{I16}
-\testCaseSimpleSimple
+\testCaseSimple
 	{2}
 	{PS Application View}
 	{PS Request Creator}
+	{Create sample user interaction for PS Application View}	
 	{I16}
 \subsubsection{I18 - PS Web View}
-\testCaseSimpleSimple
+\testCaseSimplee
 	{1}
 	{PS Receiver}
 	{PS Web View}
+	{Check if correct methods are called in PS Web View and the UI is correctly updated}
 	{I17}
 \subsubsection{I19 - PS Application View}
-\testCaseSimpleSimple
+\testCaseSimplee
 	{1}
 	{PS Receiver}
 	{PS Application View}
+	{Check if correct methods are called in PS Application View and the UI is correctly updated}
 	{I17}
 \subsubsection{I19 - PS Receiver}
 \testCaseSimpleSimple
@@ -184,16 +201,18 @@
 	{RESTful Service}
 	{I12, I13, I14, I15}
 \subsubsection{I21 - TD Request Creator}
-\testCaseSimpleSimple
+\testCaseSimple
 	{1}
 	{TD Application View}
 	{TD Request Creator}
+	{Create user interaction for TD Application View}
 	{I20}
 \subsubsection{I22 - TD Application View}
-\testCaseSimpleSimple
+\testCaseSimplee
 	{1}
 	{TD Receiver}
 	{TD Application View}
+	{Check if correct methods are called in TD Application View and the UI is correctly updated}
 	{I21}
 \subsubsection{I23 - TD Receiver}
 \testCaseSimpleSimple
@@ -206,7 +225,7 @@
 	{1}
 	{TD Locator}
 	{GPS Data Source}
-	{Nothing}
+	{Sample GPS Data}
 \subsubsection{I24 - TD Locator}
 \testCaseSimpleSimple
 	{1}

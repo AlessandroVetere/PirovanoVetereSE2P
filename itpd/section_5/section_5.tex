@@ -1,2 +1,17 @@
 \section{Program Stubs and Test Data Required}
 %TODO Based on the testing strategy and test design, identify any program stubs or special test data required for each integration step.
+
+testing bottom up dopo developing -> non servono i drivers
+
+sample data nel DB
+
+sample GPS data 
+
+gli stub ci servono per far funzionare componenti che richiedono altri componenti non ancora integrati.
+lo stub è reso necessario dal fatto che sono presenti cicli nel diagramma delle dipendenze che abbiamo proposto nella sezione apposita.
+lo stub è presente per rispettare il bottom-up.
+
+per esempio
+per integrare il location manager nel controller, avremmo dovuto aver già integrato il TD locator, che fa parte della TD view.
+per rispettare la strategia bottom-up abbiamo quindi deciso di introdurre un TD Locator Stub che simuli il funzionamento del TD Locator fornendo dati fittizi.
+il vero TD Locator sarà integrato successivamente quando verrà il turno della TD View.
