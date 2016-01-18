@@ -1,63 +1,69 @@
 \documentclass{../common/latex_classes/pdf_document}
 
-\usepackage[latin1]{inputenc}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
 
-\titleSubtitle{Integration Test Plan Document}{Version 1.0}
+\newcommand{\currentVersion}{1.0}
 
-\newcommand{\paragraphnewline}[1]{\paragraph{#1}\mbox{}\\}
+\titleSubtitle{Integration Test Plan Document}{Version \currentVersion{}}
 
-\newcommand{\testCase}[7]{
-	\paragraphnewline{Test Case T#1}
-	\newline
-	\begin{tabulary}{\linewidth\tymin=90pt}{L|L}
-		\textbf{Test Item(s)} & #2 $\rightarrow$ #3 \\ \hline
-		\textbf{Input Specification} & #4 \\ \hline
-		\textbf{Output Specification} & #5 \\ \hline
-		\textbf{Environmental Needs} & #6 \\ \hline
-		\textbf{Target} & #7 \\
-	\end{tabulary}
+\newcommand{\blueHref}[2]{\hypersetup{linkcolor=blue}\hyperref[#1]{#2}\hypersetup{linkcolor=black}}
+
+\newcommand{\testCase}[7]{%
+	\unbreakableBlock{%
+		\paragraphnewline{Test Case T#1}
+		\newline
+		\begin{tabulary}{\linewidth\tymin=80pt}{L|L}
+			\textbf{Test Item(s)} & #2 $\rightarrow$ #3 \\ \hline
+			\textbf{Input Specification} & #4 \\ \hline
+			\textbf{Output Specification} & #5 \\ \hline
+			\textbf{Environmental Needs} & #6 \\ \hline
+			\textbf{Target} & #7 \\
+		\end{tabulary}%
+	}%
 }
 
-\newcommand{\testCaseSimple}[5]{
-	\testCase
+\newcommand{\testCaseStdOut}[5]{%
+	\testCase%
 	{#1}
 	{#2}
 	{#3}
 	{#4}
 	{Check if correct methods are called in #3}
 	{#5}
-	{Verify that #2 works}
+	{Verify that #2 works}%
 }
 
-\newcommand{\testCaseSimplee}[5]{
-	\testCase
+\newcommand{\testCaseStdIn}[5]{%
+	\testCase%
 	{#1}
 	{#2}
 	{#3}
 	{Create typical input for #2}
 	{#4}
 	{#5}
-	{Verify that #2 works}
+	{Verify that #2 works}%
 }
 
-\newcommand{\testCaseSimpleSimple}[4]{
-	\testCaseSimple
+\newcommand{\testCaseStdInOut}[4]{%
+	\testCaseStdOut%
 	{#1}
 	{#2}
 	{#3}
 	{Create typical input for #2}
-	{#4}
+	{#4}%
 }
 
+\newcommand{\configureTikz}{%
+	\pagestyle{empty}%
+	\tikzstyle{block} = [rectangle, draw, fill=blue!20, text centered, rounded corners, minimum height=3em, minimum width=4em]%
+	\tikzstyle{line} = [draw, -latex']%		
+}
 
 %TODO The Test Plan Document (ITPD) aims at describing how you plan to accomplish the integration test. This document is supposed to be written before the integration test really happens. Often it is written in parallel to the Design Document and takes the architectural description of the software system as a starting point. This document needs to explain to the development team what to test, in which sequence, which tools are needed for testing (if any), which stubs/ drivers/oracles need to be developed.
 
 \begin{document}
-	\pagestyle{empty}
-	\tikzstyle{block} = [rectangle, draw, fill=blue!20, text centered, rounded corners, minimum height=3em, minimum width=4em]
-	\tikzstyle{line} = [draw, -latex']
+	\configureTikz{}
 	\titleToc{}
 	\inputSection{1}
 	\inputSection{2}

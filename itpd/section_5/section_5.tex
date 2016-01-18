@@ -1,7 +1,7 @@
 \section{Program Stubs and Test Data Required}
 %TODO Based on the testing strategy and test design, identify any program stubs or special test data required for each integration step.
 We assume that the \textbf{Integration testing} comes after \textbf{Developing} and \textbf{Unit testing}. In this way we don't need any \textbf{Driver} because the software components are already developed.\par
-On the other hand we need few \textbf{Stubs} in order to make the not yet integrated components work, because we want to respect the \textbf{Bottom up} strategy.\par
+On the other hand we need few \textbf{Stubs} in order to make the not yet integrated components work, because we want to respect the \textbf{Bottom-Up} strategy.\par
 We decided to use \textbf{Stubs} in these \textbf{Integration Test Cases}:
 \begin{itemize}
 	\itemBold{I8T4} TD Locator Stub
@@ -9,9 +9,8 @@ We decided to use \textbf{Stubs} in these \textbf{Integration Test Cases}:
 	\itemBold{I10T1} Dispatcher Stub
 	\itemBold{I11T1, I11T2} TD Receiver Stub, PS Receiver Stub 
 \end{itemize}
-
-For better understanding the need of introducing a \textbf{Stub}, below is proposed an example of its usage.\par
+To better catch the need for introducing \textbf{Stubs}, an example of a specific \textbf{Stub} usage is proposed below.\par
 In order to integrate the \textbf{Location Manager} in \textbf{I8T4} we need a component that mocks \textbf{TD Locator} functionalities in a predefined way. 
-To respect the \textbf{Bottom up} strategy, given tha fact that the \textbf{TD Locator} is a component of the \textbf{TD View}, we have decided to introduce its stub.
+To respect the \textbf{Bottom-Up} strategy, given the fact that the \textbf{TD Locator} is a component of the \textbf{TD View}, we have decided to introduce its \textbf{Stub}.
 The real \textbf{TD Locator} will be integrated when the integration procedure arrives to \textbf{TD View}.\par
 In \textbf{I1} there is the need for some sample data to be in the \textbf{Database}, and in \textbf{I24} some sample GPS data are needed.

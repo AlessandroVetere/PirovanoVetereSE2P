@@ -1,10 +1,10 @@
 \section{Integration Strategy}
 This section explains the integration strategy selected to integrate all the software elements of \myTaxiService{}.
-
+%
 \subsection{Entry Criteria}
 %TODO Specify the criteria that must be met before integration testing of specific elements may begin (e.g., functions must have been unit tested).
 Before starting the integration testing of any software component that has been designed for \myTaxiService{} system, the internal functions of the considered component (i.e. public or protected methods that are exposed within the package of the component but are not part of any external public interface) must be unit tested using an appropriate framework.
-
+%
 \subsection{Elements to be Integrated}
 %TODO Identify the components to be integrated, refer to your design document to identify such components in a way that is consistent with your design
 Every software component in the Component View section of the Design Document has to be integrated.
@@ -51,14 +51,15 @@ The interested components are reported below for readers' convenience:
 \end{itemize}
 Moreover we suppose that Google Maps API are well tested by Google and thus we can use them without testing any further.
 For what concerns the other external software elements, we assume that the GPS Data Source module in the Taxi Driver View uses the GPS Drivers of the underlying operating system that are already tested, and the same is assumed for the Database Driver Adapter in the Model referring to Database Drivers.
-
+%
 \subsection{Integration Testing Strategy}
 %TODO Describe the integration testing approach (top-down, bottom-up, functional groupings, etc.) and the rationale for the choosing that approach
 The bottom-up integration testing approach has been chosen, because for a medium sized project like \myTaxiService{}, it is best to proceed step by step in a careful yet coherent integration strategy.
 The usage of the selected approach will forge a robust application with efforts concentrated in testing the \textbf{Server} parts before all.
 Therefore, a more stable and faster application will be distributed, instead of a maybe nicer one.
-
+%
 \subsection{Sequence of Component/Function Integration}
+\label{sec:section_2.4}
 %TODO Note: The structure of this section may vary depending on the integration strategy you select in Section 2.3. Use the structure proposed below as a non mandatory guide.
 Here is presented how the bottom-up integration testing approach is going to be concretely used in \myTaxiService{} system integration, first by analyzing each subsystem in detail and then giving a higher level overview on the subsystems integration process.
 A precise convention has been adopted for the semantic of diagrams:
@@ -76,13 +77,12 @@ A precise convention has been adopted for the semantic of diagrams:
 	\item
 		\textbf{Arrow:} It is a \textbf{precedence} symbol. It helps the tester to follow the right order in the whole integration process. It starts from a block and ends into another block. The block from which it starts is called \textbf{parent} and the other one \textbf{child}. In particular it means that the child block can be integrated only if its parents are already integrated. Moreover if a block is pointed by several arrows, its integration process can begin only when \textbf{all the parent blocks are integrated}.
 \end{itemize}
-
+%
 \newpage
 \subsubsection{Subsystem Integration Sequence}
 %TODO Identify the order in which subsystems will be integrated. If you have a single subsystem, 2.4.1 and 2.4.2 are to be merged in a single section. You can refer to Section 2.2 of the test plan example [1] as an example of what we expect.
-
 We adopted a \textbf{bottom-up} testing strategy; this strategy starts from the testing of the \textbf{Model} features.
-
+%
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
 		% Place nodes
@@ -99,22 +99,23 @@ We adopted a \textbf{bottom-up} testing strategy; this strategy starts from the 
 	\end{tikzpicture}
 	\captionof{figure}{Software Integration Sequence Diagram}
 \end{center}
-
+%
 We considered \textbf{Model}, \textbf{Controller} and \textbf{Views} as \textbf{Subsystems}.
 First the \textit{tester} has to test \textit{functionalities} of the components contained in the \textbf{Model}, then, in order to simulate the behavior of the interacting software elements, he has to represent the \textbf{Controller} with a dedicated \textbf{Driver} in order to test the relevant \textbf{Model} features.
 In this way, the \textbf{Model} will be completely integration tested by simulating all the possible actions that the \textbf{Controller} can do on it.\par
 Then the testing procedure passes to the \textbf{Controller} and the test sequence adopts the same strategy used to test the \textbf{Model}. The only difference from a higher point of view, is that in this case the \textbf{Controller} is tested using the already tested \textbf{Model} and using a \textbf{Driver} in order to simulate the \textbf{Views} actions.\par
 The last part of the procedure is dedicated to the \textbf{Views}.
 The \textbf{Taxi Driver View, Passenger View and Administrator View} are tested using the already tested \textbf{Controller} and \textbf{Model} and no component behavior is simulated using \textbf{Stubs} or \textbf{Drivers}.
-
 \newpage
 \subsubsection{Software Integration Sequence}
 %TODO For each subsystem: Identify the sequence in which the software components will be integrated within the subsystem. Relate this sequence to any product features/functions that are being built up
 We provided six \textbf{Software Integration Sequence Diagram}, one for each main part of \myTaxiService{}.\par
-Referring to the diagram semantic explanation given in section 2.4, the reader can understand the meaning of each diagram.
-Further details about each testing step (represented as arrows), are then given in the following section.
-
+%
+Referring to the diagram semantic explanation given in \blueHref{sec:section_2.4}{section 2.4}, the reader can understand the meaning of each diagram.
+Further details about each testing step (represented as arrows), are then given in the \blueHref{sec:section_3}{following section}.
+%
 \paragraphnewline{Model Integration Sequence}
+%
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
 		% Place nodes
@@ -139,7 +140,7 @@ Further details about each testing step (represented as arrows), are then given 
 	\end{tikzpicture}
 	\captionof{figure}{Software Integration Sequence Diagram - Model}
 \end{center}
-
+%
 \newpage
 \paragraphnewline{Controller Business Components Integration Sequence}
 \begin{center}
@@ -171,7 +172,7 @@ Further details about each testing step (represented as arrows), are then given 
 	\end{tikzpicture}
 	\captionof{figure}{Software Integration Sequence Diagram - Controller Business Components}
 \end{center}
-
+%
 \paragraphnewline{Controller Networking Components Integration Sequence}
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
@@ -197,7 +198,7 @@ Further details about each testing step (represented as arrows), are then given 
 	\end{tikzpicture}
 	\captionof{figure}{Software Integration Sequence Diagram - Controller Networking Components}
 \end{center}
-
+%
 \paragraphnewline{Passenger View Integration Sequence}
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
@@ -218,7 +219,7 @@ Further details about each testing step (represented as arrows), are then given 
 	\end{tikzpicture}
 	\captionof{figure}{Software Integration Sequence Diagram - Passenger View}
 \end{center}
-
+%
 \paragraphnewline{Taxi Driver View Integration Sequence}
 \begin{center}
 	\begin{tikzpicture}[node distance=4.5cm, auto]
@@ -240,7 +241,7 @@ Further details about each testing step (represented as arrows), are then given 
 	\end{tikzpicture}
 	\captionof{figure}{Software Integration Sequence Diagram - Taxi Driver View}
 \end{center}
-
+%
 \paragraphnewline{Administrator View Integration Sequence}
 \begin{center}
 	\begin{tikzpicture}[node distance=2cm, auto]
