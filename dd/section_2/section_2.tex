@@ -2,8 +2,8 @@
 This section exposes \myTaxiService{} Architectural Design in a complete e comprehensible way.
 %
 \subsection{Overview}
-A quick but meaningful overview on the system architectural design is presented with the help of the following diagram, which is self explanatory:
-\showGeneralDiagram{Overview Diagram}{1.0}
+A quick but meaningful overview on the system architectural design is presented with the help of the following diagram, which is self explanatory:\\
+\showGeneralDiagram{Overview Diagram}{1.0}\\
 In addition are given many \textbf{UML Diagrams} integrated with complete descriptions of the software components in the following subsections:
 \begin{itemize}
 	\itemBold{Component View} Describes the division of the system in \textbf{Layers} and how the work flow is organized through them.
@@ -66,7 +66,7 @@ Then it comes the division of the system in different \textbf{Tiers}:
 This architecture, with three different \textbf{Layers} and four different \textbf{Tiers}, makes possible to have a \textbf{Client-Server} style with a \textbf{Fat-Server} and a \textbf{Thin-Client}: this is due to the mapping of the \textbf{View} to the \textbf{Clients} and the mapping of the \textbf{Controller} and the \textbf{Model} to the \textbf{Server}.
 %
 \subsection{Component view}
-\showComponentDiagram{UML Component Diagram}{1.0}
+\showComponentDiagram{UML Component Diagram}{1.0}\\
 Below are described all the software component that interact inside every subsystem; for the most important ones is also provided a description of the internal interfaces that they use to communicate one with each other.
 The identified subsystems are:
 \begin{itemize}
@@ -269,16 +269,16 @@ The identified subsystems are:
 %
 \newpage
 \subsection{Deployment view}
-In this subsection is proposed a \textbf{UML Deployment Diagram} that shows how the software components are mapped into different \textbf{Tiers} that compose the system.
+In this subsection is proposed a \textbf{UML Deployment Diagram} that shows how the software components are mapped into different \textbf{Tiers} that compose the system.\\
 \showDeploymentDiagram{UML Deployment Diagram}{0.9}
 %
 \subsection{Runtime view}
-In this subsection is proposed a \textbf{UML Sequence Diagrams} that shows how the software components that compose the system interacts in order to deliver the requested functionality.
-\showSequenceDiagram{admin_td_reg}{UML Sequence Diagram - Taxi Driver Registration}{1.0}
-\showSequenceDiagram{ps_registration}{UML Sequence Diagram - Passenger Registration}{1.0}
-\showSequenceDiagram{ps_login}{UML Sequence Diagram - Passenger Login}{1.0}
-\showSequenceDiagram{queue}{UML Sequence Diagram - Queue Management}{1.0}
-\showSequenceDiagram{taxi_ride_arrived_handling}{UML Sequence Diagram - Taxi Ride Handling}{1.0}
+In this subsection is proposed a \textbf{UML Sequence Diagrams} that shows how the software components that compose the system interacts in order to deliver the requested functionality.\\
+\showSequenceDiagram{admin_td_reg}{UML Sequence Diagram - Taxi Driver Registration}{1.0}\\
+\showSequenceDiagram{ps_registration}{UML Sequence Diagram - Passenger Registration}{1.0}\\
+\showSequenceDiagram{ps_login}{UML Sequence Diagram - Passenger Login}{1.0}\\
+\showSequenceDiagram{queue}{UML Sequence Diagram - Queue Management}{1.0}\\
+\showSequenceDiagram{taxi_ride_arrived_handling}{UML Sequence Diagram - Taxi Ride Handling}{1.0}\\
 \showSequenceDiagram{tr_timer_expired}{UML Sequence Diagram - Taxi Reservation Timer Expired}{1.0}
 %
 \subsection{Component interfaces}
