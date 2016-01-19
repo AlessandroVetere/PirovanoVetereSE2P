@@ -1,23 +1,23 @@
 \documentclass{../common/latex_classes/pdf_document}
-
+%
 \newcommand{\showGeneralDiagram}[2]{\showPercentImage{\sectionBaseDir{2}/general_diagram_dd.png}{#1}{#2}}
 \newcommand{\showComponentDiagram}[2]{\showPercentImage{\sectionBaseDir{2}/component_diagram/component_diagram.png}{#1}{#2}}
 \newcommand{\showDeploymentDiagram}[2]{\showPercentImage{\sectionBaseDir{2}/deployment_diagram/deployment_diagram.png}{#1}{#2}}
 \newcommand{\showSequenceDiagram}[3]{\showPercentImage{\sectionBaseDir{2}/sequence_diagrams/#1_sequence_diagram.png}{#2}{#3}}
 \newcommand{\inputJava}[1]{\lstinputlisting{\sectionBaseDir{3}/java/src/mts/#1.java}}
 \newcommand{\showRPMockupImage}[2]{\showImage{../srs/section_3/mockups/png_passenger/#1.png}{#2}}
-\newcommand{\showTDMockupImage}[2]{\showPercentImage{../srs/section_3/mockups/png_driver/#1.png}{#2}{0.3}}
-\newcommand{\showAdminMockupImage}[2]{\showPercentImage{../dd/section_4/mockups/administrator_mockups/#1.png}{#2}{0.95}}
+\newcommand{\showTDMockupImage}[2]{\showPercentImage{../srs/section_3/mockups/png_driver/#1.png}{#2}{0.25}}
+\newcommand{\showAdminMockupImage}[2]{\showPercentImage{../dd/section_4/mockups/administrator_mockups/#1.png}{#2}{0.8}}
 \newcommand{\reqTracTab}[1]{
-	\begin{tabulary}{\linewidth\tymin=70pt}{C|L}
+	\begin{tabulary}{\linewidth}{Y{2.75cm}|X{9cm}}
 		\textbf{\textit{Functional Requirements}} & \textbf{\textit{Design Elements}} \\
 		\hline
 		#1
 	\end{tabulary}
 }
-
+%
 \titleSubtitle{Design Document for \myTaxiService{}}{Version 1.1}
-
+%
 \begin{document}
 	\titleToc{}
 	\inputSection{1}
