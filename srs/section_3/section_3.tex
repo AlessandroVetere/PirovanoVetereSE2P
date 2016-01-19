@@ -98,6 +98,9 @@ The use case considered are represented in this diagram:
 		In particular the system is built to store and periodically update a session object in order to restore the application when TD logs in once the problem is resolved.  
 		In this way the login procedure  brings the TD exactly in the same state in which he was after the problem.
 		\showUmlImage{TaxiDriverStateChartDiagram}{Taxi Driver State Chart Diagram}
+%
+	\newpage
+%
 	\itemBold{Passenger Mockup State Chart} The state chart diagram proposed below is a complete description of the navigation into \myTaxiService{} application.
 		In fact the mockups proposed in section [3.1.1] are not completely mapping this diagram.
 		\showUmlImage{PassengerMockupStateChart}{Passenger Mockup State Chart Diagram}
@@ -108,12 +111,13 @@ The use case considered are represented in this diagram:
 In this section is presented an Alloy Model and its execution results.
 \alloyfile{./section_3/alloy/model.als}
 %
+\newpage
 \paragraph{Alloy Model Execution Results}
 \begin{itemize}
-	\itemBold{Alloy Console} \showAlloyImage{alloy_console}{Alloy Console.}{0.9} \newpage
-	\itemBold{Alloy Meta Model} \showAlloyImage{metamodel}{Alloy Meta Model.}{1} \newpage
-	\itemBold{Alloy Simple World} \showAlloyImage{simple_world}{Alloy Simple World.}{0.8} \newpage
-	\itemBold{Alloy Real World} \showAlloyImage{real_world}{Alloy Real World.}{0.45} \newpage
+	\itemBold{Alloy Console} \showAlloyImage{alloy_console}{Alloy Console.}{0.9}\newpage
+	\itemBold{Alloy Meta Model} \showAlloyImage{metamodel}{Alloy Meta Model.}{1}\newpage
+	\itemBold{Alloy Simple World} \showAlloyImage{simple_world}{Alloy Simple World.}{0.8}\newpage
+	\itemBold{Alloy Real World} \showAlloyImage{real_world}{Alloy Real World.}{0.45}\newpage
 \end{itemize}
 %
 \subsection{Performance requirements}
