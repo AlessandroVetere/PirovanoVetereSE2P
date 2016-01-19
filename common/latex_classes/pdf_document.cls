@@ -10,6 +10,7 @@
 \usepackage{color}
 \usepackage{tabulary}
 \usepackage{array}
+\usepackage[ddmmyyyy]{datetime}
 %
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -43,8 +44,8 @@
 		stringstyle=\color{mauve},
 		breaklines=true,
 		breakatwhitespace=true,
-		tabsize=3%
-	}%
+		tabsize=3
+	}
 }
 \newcommand{\enableCodeLineNumbers}{\lstset{numbers=left}}
 \newcommand{\disableCodeLineNumbers}{\lstset{numbers=none}}
@@ -58,20 +59,28 @@
 \newcommand{\unbreakableBlock}[1]{%
 	\begin{minipage}{\linewidth}% Following stays together
 		#1
-		\vspace{0.5em}
 	\end{minipage}
+}
+\newcommand{\unbreakableCenteredBlock}[1]{%
+	\unbreakableBlock{%
+		\begin{center}
+			#1
+		\end{center}
+	}
+}
+\newcommand{\unbreakableCenteredBlockSpaced}[1]{%
+	\unbreakableCenteredBlock{%
+		\vspace{0.5em}
+		#1
+		\vspace{0.5em}
+	}
 }
 \newcommand{\unbreakableItem}[1]{\unbreakableBlock{\item #1}}
 \newcommand{\showPercentImage}[3]{%
-	\begin{center}
-		\unbreakableBlock{
-			\begin{center}
-				\vspace{0.5em}
-				\includegraphics[width=#3\textwidth,keepaspectratio=true]{#1}
-				\captionof{figure}{#2}
-			\end{center}
-		}
-	\end{center}%
+	\unbreakableCenteredBlockSpaced{%
+		\includegraphics[width=#3\textwidth,keepaspectratio=true]{#1}
+		\captionof{figure}{#2}
+	}
 }
 %
 \newcommand{\showImage}[2]{\showPercentImage{#1}{#2}{1}}
@@ -80,7 +89,7 @@
 	colorlinks=true, %set true if you want colored links
 	linktoc=all,     %set to all if you want both sections and subsections linked
 	linkcolor=black,
-	urlcolor=blue%
+	urlcolor=blue
 }
 \author{Alberto Mario Pirovano \and Alessandro Vetere}      % Declares authors' names.
 \date{\today}	% This command produces today's date.
