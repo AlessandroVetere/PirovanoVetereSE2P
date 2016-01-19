@@ -1,15 +1,15 @@
 \section{Introduction}	% Produces section heading.  Lower-level sections are begun with similar \subsection and \subsubsection commands.
 What follows is an introduction to \myTaxiService{} RASD document.
-
+%
 \subsection{Purpose}
 The purpose of this document is to serve as a guide to software designers, developers and testers who are responsible for the engineering of the \myTaxiService{} project.
 Through UML use cases and diagrams, it will show the interaction between the different agents involved in the application, to better explain the environment in which the software will work when installed in the real world: this should give the engineers all the necessary informations to design, develop and test the software.
 In addition, it is an important tool for stakeholders to check whether the product matches their initial demands, and to serve as a further contractual basis.
-
+%
 \subsection{Scope}
 This document provides an overall description of \myTaxiService{} software system, showing its functional and non-functional requirements, constraints and external interfaces.
 It consists of natural language descriptions, UML diagrams and Alloy models of the different features given.
-
+%
 \subsubsection{Actors}
 Below are listed the two main actors that will interact with the application once deployed:
 \begin{itemize}
@@ -17,7 +17,7 @@ Below are listed the two main actors that will interact with the application onc
 	\itemBold{Non registered passenger} A person that needs to move from a position to another one among the city and wants to use \myTaxiService{} in order to do so, but has not registered yet to the service.
 	\itemBold{Registered passenger} A formerly non registered passenger that has registered to \myTaxiService{}.
 \end{itemize}
-
+%
 \subsubsection{Goals}
 This new service pretends to achieve various goals, the main ones being:
 \begin{itemize}
@@ -45,10 +45,10 @@ This new service pretends to achieve various goals, the main ones being:
 	\itemBold{G22} Further services can be built on the top of the existing one through a set of given APIs.
 	\itemBold{G23} For a registered passenger that has requested a taxi ride, the system allocates a taxi driver to pick him up 10 minutes before the meeting time.
 \end{itemize}
-
+%
 \subsection{Definitions, acronyms, and abbreviations}
 Here are listed some of the necessary definitions, acronyms and abbreviations to make better understandable the content of the document:
-
+%
 \subsubsection{Acronyms}
 As commonly used, some acronyms are included in the document and here explained:
 \begin{itemize}
@@ -70,7 +70,7 @@ As commonly used, some acronyms are included in the document and here explained:
 	\itemBold{LAN} Local Area Network.
 	\itemBold{MAN} Metropolitan Area Network.
 \end{itemize}
-
+%
 \subsubsection{Definitions}
 What follows is a list of definitions of some terms used in the document:
 \begin{itemize}
@@ -91,7 +91,7 @@ What follows is a list of definitions of some terms used in the document:
 	\itemBold{Web Application} A client-server software application in which the client (or user interface) runs in a web browser.
 	\itemBold{Controller} A piece of software that resides on the server and act as an arbiter between incoming data from the Internet and the application data.
 \end{itemize}
-
+%
 \subsubsection{Abbreviations}
 For the sake of brevity, some abbreviations are adopted:
 \begin{itemize}
@@ -101,7 +101,7 @@ For the sake of brevity, some abbreviations are adopted:
 	\itemBold{TRQ} Taxi Request.
 	\itemBold{TRS} Taxi Reservation.
 \end{itemize}
-
+%
 \subsection{Overview}
 This document is structured in 3 main parts:
 \begin{itemize}
@@ -109,7 +109,7 @@ This document is structured in 3 main parts:
 	\itemBold{Section 2} Provides a high-level description of the software requirements, not describing specifically the main aspect of them, but only providing a background of those requirements. The main purpose of this section is make the requirements easy to understand.
 	\itemBold{Section 3} Shows all of software requirements to a level of detail sufficient to enable designers to design a system to satisfy those requirements, and testers to test the system requirements.
 \end{itemize}
-
+%
 \subsection{References}
 This section contains references to external sources that have been taken into account while writing this document.
 \begin{itemize}

@@ -1,7 +1,7 @@
 \section{Overall Description}
 The aim of \myTaxiService{} is to improve taxi service usage and management in a large city by simplifying the access of passengers to the service and optimizing the management of taxi queue.
 Overall, \myTaxiService{} will lead to several benefits for taxi drivers, passengers and the government of the city.
-
+%
 \subsection{Product Perspective}
 The software \myTaxiService{} is a completely new product, not based on previous ones.
 However, it relies on location data received via Internet from each taxi driver smartphone application: all the involved smartphones already have a GPS antenna installed inside, that communicates their position to the service.
@@ -17,7 +17,7 @@ The first three are allowed to use \myTaxiService{} through smartphone or person
 The Web Application Server, as well as providing the services requested by users and ensuring programmatic APIs to external developers, in turn uses the API provided by Google Maps to translate the GPS data sent from Taxi drivers' smartphone in real addresses, in such a way to associate every taxi driver to an area of ​​the city and add it to the relative queue.
 In addition, the Web Application Server has an administrator interface to manage failures and anomalies. To ensure the ACID properties, the database of \myTaxiService{} is provided of a database server with a relational DBMS, connected with an Ethernet LAN to the Application Server.
 As stated above, these indications are just to clarify among the solution space, which solutions are more feasible than others when it come to the deployment of \myTaxiService{}.
-
+%
 \subsection{Product Features}
 This project provides interesting features for both passengers and taxi drivers.
 Non registered passengers can only register to \myTaxiService{}, whereas registered passengers can request a taxi through the system, that answers informing the passenger about the code of the incoming taxi and the waiting time.
@@ -25,7 +25,7 @@ On the other hand, taxi drivers should inform the system about their availabilit
 The system then guarantees a fair management of taxi queues: when a request arrives from a certain zone, the system forwards it to the first taxi queuing in that zone.
 If the taxi confirms, then the system will send a confirmation to the passenger.
 If not, then the system will forward the request to the second in the queue and will, at the same time, move the first taxi in the last position in the queue.
-
+%
 \subsection{User Classes and Characteristics}
 As already mentioned, this software is dedicated both to passengers and taxi drivers, but the main focus of the software is about passengers' satisfaction, being them end users of the software, whereas taxi drivers are only intermediate users, trained to work with the application provided on their smartphones.
 Therefore the graphical interface provided to passengers, both on the web and mobile application, should be more attractive and well-finished, while the taxi drivers interface should more usable, and in general may be less attractive.
@@ -34,13 +34,13 @@ Taxi drivers use a mobile application to inform the system about their availabil
 Under a certain point of view, we could consider even an additional user class which is the one of the developers that will be using the project API to develop further services based on the provided ones.
 This class needs an extensive documentation about the programmatic interfaces they will integrate in their development, but no proper graphical or textual user interface is provided for them, so no it will be no mentioned further in the document.
 Even the system administrators could be considered as a further user class of the system, but that is a bit out of the scope of this document, which is more intended to the explain things around the core business of \myTaxiService{}.
-
+%
 \subsection{Operating Environment}
 This software will operate on different machines in different environments.
 Its distributed part should be installed on smartphones and be always connected to the Internet.
 Taxi drivers must have a GPS capable smartphone because their part of the software requires an always active and updated GPS signal to run properly.
 The server runs in a dedicated facility, within a controlled and protected environment, provided with a persistent Internet connection.
-
+%
 \subsection{Design and Implementation Constraints}
 Being the software deployed in a complex and non controllable environment, it could encounter some issues.
 The most common issue that could affect \myTaxiService{} is an Internet congestion: if the whole network slows down or become unavailable, the service could encounter major problems.
@@ -49,7 +49,7 @@ For instance, they could be connected to a mobile Wi-Fi hotspot, to a WiMAX hots
 A GPS connection is required only on taxi drivers smartphones, in order for them to communicate their current position, so the strength of the GPS signal on their smartphone is also a possible issue.
 No external application is required by \myTaxiService{}, nor any interface with external applications is provided.
 Object oriented, imperative and declarative programming languages will be used for \myTaxiService{} development, as well as markup and modeling languages.
-
+%
 \subsection{Assumptions and Dependencies}
 The software is going to interact with computer browsers and smartphones, smartphone GPS integrated antennas, external ISPs and external APIs and we assume that they all meet their specification.
 We are going to assume that Taxi Drivers are registered into \myTaxiService{} before deployment and then when hired, and this is done by a dedicated administrator.
