@@ -8,6 +8,7 @@
 \newcommand{\blueHref}[2]{\hypersetup{linkcolor=blue}\hyperref[#1]{#2}\hypersetup{linkcolor=black}}
 \newcommand{\testCase}[7]{%
 	\unbreakableBlock{%
+		\vspace{0.5em}
 		\paragraphnewline{Test Case T#1}
 		\newline
 		\begin{tabulary}{\linewidth}{Y{3cm}|X{8.25cm}}
@@ -16,7 +17,8 @@
 			\textbf{Output Specification} & #5 \\ \hline
 			\textbf{Environmental Needs} & #6 \\ \hline
 			\textbf{Target} & #7 \\
-		\end{tabulary}%		
+		\end{tabulary}
+		\vspace{0.5em}%	
 	}%
 }
 \newcommand{\testCaseStdOut}[5]{%
