@@ -66,6 +66,7 @@
 	\begin{center}
 		\unbreakableBlock{
 			\begin{center}
+				\vspace{0.5em}
 				\includegraphics[width=#3\textwidth,keepaspectratio=true]{#1}
 				\captionof{figure}{#2}
 			\end{center}
