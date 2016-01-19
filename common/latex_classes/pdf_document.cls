@@ -1,7 +1,7 @@
 \ProvidesClass{pdf_document}
-
+%
 \LoadClass[titlepage]{article}
-
+%
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{hyperref}
@@ -9,21 +9,25 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage{tabulary}
-
+\usepackage{array}
+%
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
-
+%
+\newcolumntype{X}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}	\newcolumntype{Y}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{Z}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+%
 \newcommand{\versionHistoryTab}[1]{%
-	\begin{tabulary}{\linewidth\tymin=70pt}{C|C|L}
+	\begin{tabulary}{\linewidth\tymin=70pt}{Y{3cm}|Y{3cm}|X{4.75cm}}
 		\textbf{\textit{Version Number}} & \textbf{\textit{Release Date}} & \textbf{\textit{Changelog}} \\
 		\hline
 		#1
 	\end{tabulary}%
 }
-
+%
 \newcommand{\paragraphnewline}[1]{\paragraph{#1}\mbox{}\\}
-
+%
 \newcommand{\configureJava}{%
 	\lstset{frame=tb,%
 		language=Java,
@@ -44,7 +48,7 @@
 }
 \newcommand{\enableCodeLineNumbers}{\lstset{numbers=left}}
 \newcommand{\disableCodeLineNumbers}{\lstset{numbers=none}}
-
+%
 \newcommand{\myTaxiService}[0]{\mbox{\emph{myTaxiService}}}
 \newcommand{\setDepth}[1]{\setcounter{tocdepth}{#1}\setcounter{secnumdepth}{#1}}
 \newcommand{\sectionBaseDir}[1]{./section_#1}
@@ -54,7 +58,8 @@
 \newcommand{\unbreakableBlock}[1]{%
 	\begin{minipage}{\linewidth}% Following stays together
 		#1
-	\end{minipage}%
+		\vspace{0.5em}
+	\end{minipage}
 }
 \newcommand{\unbreakableItem}[1]{\unbreakableBlock{\item #1}}
 \newcommand{\showPercentImage}[3]{%
@@ -67,7 +72,7 @@
 		}
 	\end{center}%
 }
-
+%
 \newcommand{\showImage}[2]{\showPercentImage{#1}{#2}{1}}
 \setDepth{4}
 \hypersetup{%
