@@ -1,0 +1,371 @@
+\documentclass{../common/latex_classes/pdf_presentation}
+%
+\newcommand{\showGeneralDiagram}[2]{\showPercentImage{./section_2/general_diagram_dd.png}{#1}{#2}}
+\newcommand{\showComponentDiagram}[2]{\showPercentImage{./section_2/component_diagram/component_diagram.png}{#1}{#2}}
+\newcommand{\showDeploymentDiagram}[2]{\showPercentImage{./section_2/deployment_diagram/deployment_diagram.png}{#1}{#2}}
+\newcommand{\showSequenceDiagram}[3]{\showPercentImage{./section_2/sequence_diagrams/#1_sequence_diagram.png}{#2}{#3}}
+\newcommand{\showRPMockupImage}[3]{\showPercentImage{../rasd/section_3/mockups/png_passenger/#1.png}{#2}{#3}}
+\newcommand{\showTDMockupImage}[3]{\showPercentImage{../rasd/section_3/mockups/png_driver/#1.png}{#2}{#3}}
+\newcommand{\showAdminMockupImage}[3]{\showPercentImage{./section_4/mockups/administrator_mockups/#1.png}{#2}{#3}}
+%
+\title{DD Presentation}
+%
+\subject{A brief presentation of myTaxiService DD}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+%
+% Let's get started
+\begin{document}
+	\titleToc{}
+	\section{Architectural Design}
+	
+	\subsection{Overview Diagram}
+	
+	\begin{frame}{Overview Diagram}
+		\showGeneralDiagram{Overview Diagram}{1.0}
+	\end{frame}
+	
+	
+	\subsection{High level components and their interaction}
+	
+	\begin{frame}{High level components and their interaction}
+		The system is composed of many \textbf{distributed} components: those will communicate with a \textbf{Client-Server} style and through \textbf{Point to Point} messaging system. 
+		\begin{itemize}
+			\item The \textbf{Client-Server} style is used to give the many Clients connected to the Server the opportunity of sending different requests (e.g. a \textbf{Taxi Ride Reservation} or \textbf{Taxi Ride Request}).
+			\item The \textbf{Point to Point} bidirectional communication channel is made necessary to enable the Server the delivery of various messages and requests to the Clients:
+			\begin{itemize}
+				\item Generic notifications
+				\item Service messages
+				\item The request of serving a Taxi Ride (to a Taxi Driver)
+				\item The request of an updating GPS Data (to a Taxi Driver)
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Layers}
+		The selected software architecture follows the principles of the \textbf{Model View Controller} architectural pattern, therefore three main software components have been identified and those are:
+		
+		\begin{itemize}
+			\item The \textbf{Model}
+			\item The \textbf{View}
+			\item The \textbf{Controller}
+		\end{itemize}
+		
+		\textbf{Model}, \textbf{View} and \textbf{Controller} are then mapped to three different relevant software layers.
+	\end{frame}
+	
+	\begin{frame}{Layers - View}
+		This layer processes \textbf{Clients} commands, and converts them into requests addressed to the \textbf{Controller} layer.
+		The \textbf{View} is connected to the \textbf{Controller} through a communication facility (e.g. The Internet).
+		We imagined four different types of \textbf{View}, each one designed specifically to access \myTaxiService{} system in a different way and by a specific kind of user:
+		\begin{itemize}
+			\item Passenger Web View
+			\item Passenger Application View
+			\item Taxi Driver Application View
+			\item Administrator View
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Layers - Controller}
+		This second Layer is split in two families of components with specialized functionalities:
+		\begin{itemize}
+			\item \textbf{Networking Components Family:}
+			\begin{itemize}
+				\item Groups the \textbf{Communication Components} that are involved in sending messages to the various Views, following the logic implements in the Business Components Family. 
+				\item Dispatches a particular request to the relative \textbf{View}.
+			\end{itemize}
+			\item \textbf{Business Components Family:} In this family are included all the software components that implement the system logic.
+			Their role is:
+			\begin{itemize}
+				\item Processing requests 
+				\item Generating either \textbf{synchronous responses} (e.g registration or login procedure) or \textbf{asynchronous events} (e.g adding a \textbf{Taxi Ride} and sending a \textbf{Taxi Driver}).
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Layers - Model}
+		The third and last Layer is the \textbf{Model}. It:
+		\begin{itemize}
+			\item Guarantees a high level interface to store and manage all the \myTaxiService{} relevant data.
+			\item Abstracts a \textbf{Relational Database} in a software component that is in direct connection with the \textbf{Controller}
+			%(Model Query Service in our UML Component Diagram proposed in a next section).
+		\end{itemize}
+		
+		It has the responsibility of \textbf{receiving} and \textbf{handling} all the model updating needs of the \textbf{Business Components}. 
+		%Moreover it has to guarantee \textbf{parallelism} and \textbf{high execution speed}.
+	\end{frame}
+	
+	\begin{frame}{Tiers}
+		The system is divided in \textbf{four} different tiers:
+		\begin{itemize}
+			\item \textbf{Clients:} The distributed clients of the application.
+			\item \textbf{Web Server:} An outer server that dynamically generates web pages, receives requests, dispatches messages and contacts other servers.
+			\item \textbf{Application Server:} The most important Tier of the system. Here are done all the logics and calculations that constitute the core part of \myTaxiService{}.
+			\item \textbf{Database Server:} In this Tier it is hosted the Database that allows data persistence.
+		\end{itemize}
+	\end{frame}
+	
+	\subsection{Component View}
+	
+	\begin{frame}{Component View}
+		Several components has been designed to provide all the functionalities needed for \myTaxiService{} to work.
+		\textbf{Five} mayor subsystems have been identified:
+		\begin{itemize}
+			\item Passenger View, Taxi Driver View, Administrator View
+			\item Controller
+			\item Model
+		\end{itemize}
+	\end{frame}
+	
+	
+	\begin{frame}{Component View - Diagram}
+		This diagram maps system \textbf{features into different software components}, and show \textbf{how these components interact} in order to \textbf{deliver the required functionalities}.
+		It helps showing \textbf{Layers organization} and the \textbf{MVC implementation}.
+		\showComponentDiagram{UML Component Diagram}{0.4}
+	\end{frame}
+	
+	\subsection{Deployment View}
+		
+	\begin{frame}{Deployment View}
+		The best way found to \textbf{deploy} the software components identified, is to consider \textbf{7 different nodes} (8 if considering the Google Server contacted to use Google Maps API):
+		\begin{itemize}
+			\item Passenger Web Browser, Passenger Smartphone, Taxi Driver Smartphone, Administrator Workstation
+			\item Web Server
+			\item Application Server
+			\item Database Server
+		\end{itemize}
+	\end{frame}		
+		
+	\begin{frame}{Deployment View - Diagram}
+		The following diagram shows how \textbf{software components} are mapped into the \textbf{physical system}.
+		\showDeploymentDiagram{UML Deployment Diagram}{0.3}
+	\end{frame}
+	
+	\subsection{Runtime View}
+		
+	\begin{frame}{Runtime View}
+		In this subsection are proposed some of the most meaningful \textbf{UML Sequence Diagrams} with respect to show how software components interacts in order to deliver a specific functionality.
+		The chosen functionalities are:
+		\begin{itemize}
+			\item Taxi Driver Registration (done by an Administrator)
+			\item Handling of a Taxi Reservation (done by the Taxi Ride Manager)
+		\end{itemize}
+		There are other functionalities whose \textbf{UML Sequence Diagram} is not reported here for space and time constraints:
+		\begin{itemize}
+			\item Passenger Login
+			\item Passenger Registration
+			\item Queue Management
+			\item Taxi Ride Request Handling
+			\item Taxi Driver Report Problem
+			\item Taxi Driver Position Update
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Taxi Driver Registration}
+		\showSequenceDiagram{admin_td_reg}{UML Sequence Diagram}{0.7}
+	\end{frame}
+	
+	\begin{frame}{Handling of a Taxi Reservation}
+		\showSequenceDiagram{tr_timer_expired}{UML Sequence Diagram}{0.9}
+	\end{frame}
+	
+	\subsection{Selected architectural styles and patterns}
+	\begin{frame}{Selected architectural styles and patterns - MVC}
+		Several architectural styles and patterns were chosen in order to build \myTaxiService{} as a modern software.
+		The main pattern that was recursively adopted is the \textbf{Model View Controller} architectural pattern:
+		\begin{itemize}
+			\item \textbf{System Level:} All the clients that use \myTaxiService{} (i.e. the Passengers, the Taxi Drivers, and the Administrator) are seen as Views, that following the Cocoa MVC pattern, are connected to a Controller, the Web Server, that through the Application Server is itself connected to the Model hosted on the Database Server.
+			\item \textbf{Client Level}
+			\item \textbf{Server Level}
+			\begin{itemize}
+				\item Web Server
+				\item Application Server
+				\item Database Server
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Selected architectural styles and patterns - Client-Server}
+		The \textbf{Client-Server} style is used for all the requests done by the various clients connected to the Web Server of \myTaxiService{}.
+		The \textbf{Taxi Driver Application} and the \textbf{Passenger Application} can use a standardized \textbf{Client-Server} protocol via \textbf{HTTPS} that follows the principle of a \textbf{RESTful Service}.
+		The \textbf{Administrator} application its connected via \textbf{RPC} to the \textbf{Web Server} and can perform more critical requests, like the registration of a new \textbf{Taxi Driver} into the system.
+		It is required that the \textbf{Administrator} application opens a \textbf{RPC} connection to the \textbf{Web Server} to start the communication.
+	\end{frame}
+	
+	\begin{frame}{Selected architectural styles and patterns - Point to Point}
+		A \textbf{Point to Point} bidirectional messaging system is established between the \textbf{Clients} and the \textbf{Web Server} at the \textit{boot} of the client application.
+		The client should explicitly request a connection to the server that is listening for clients' connections.
+		It is the connection over \textbf{Web Socket} protocol that allows the \textbf{Web Server} to send asynchronous messages and requests to which the client can respond using the same channel.
+		The main reasons why this protocol is used are sending a \textbf{Taxi Ride} proposal to a given \textbf{Taxi Driver}, that can either accept or deny the proposal, and allowing the server to ask the \textbf{Taxi Driver} an updated geolocation data.
+	\end{frame}
+	
+	\begin{frame}{Selected architectural styles and patterns - Conclusion}
+		The \textbf{Client-Server} style and \textbf{Point to Point} bidirectional messaging system are used to implement properly the \textbf{MVC} pattern in this three \textbf{Layers}, four \textbf{Tiers} system.
+	\end{frame}
+	
+	\subsection{Other design decisions}
+		
+	\begin{frame}{Other design decisions - HTTPS and Web Socket}
+		Several technologies have been chosen in order to best fit the needs of the system to be.
+		Not all the required functionalities of \myTaxiService{} are already mapped onto specific products because in those cases the choice done would matter less.
+		But for the cases in which a technology has already been proposed, it is because a clear design decision was mandatory.
+		As for the communication protocols between clients (excluded the Administrator client) and the server have been chosen:
+		\begin{itemize}
+			\itemBold{HTTPS} The secure version of \textbf{HTTP} was a mandatory choice as security and privacy concerns are of major importance nowadays.
+			\itemBold{Web Socket} This innovative socket technology has been chosen although is relatively new because it implements a full duplex socket communication channel using web technology and therefore using the port 80, which is in almost every case not blocked by any firewall.
+		\end{itemize}
+	\end{frame}
+	
+	
+	\begin{frame}{Other design decisions - Internet and Firewalls}
+		For what concerns the network reachability has been chosen to make discoverable only the Web Server assigning it a public IP.
+		All the other servers in \myTaxiService{} system are reachable only within the enterprise network.
+		Between the \textbf{Web Server} and the external network is installed a firewall that controls all the incoming connections.
+		In particular it must accept only incoming \textbf{HTTPS} connections, \textbf{Web Socket} connections and \textbf{RPC} connections.
+		A firewall is also used to protected the \textbf{Database Server} from the \textbf{Application Server} in the unlikely case that the \textbf{Application Server} is attacked through the \textbf{Web Server} or the \textbf{Application Server} for some reasons stops working correctly and start behaving in a way that will damage the application \textbf{Model}.
+	\end{frame}
+	
+	
+	\section{Algorithm Design}
+
+	\subsection{Queue Management}
+	\configureJava{}
+	\begin{frame}{Queue Management}
+		What will follow are slides containing algorithms (in form of Java methods, without loss of generality) that explain how the association of a Taxi Ride to an Available Taxi Driver is managed, and how that specific Taxi Driver is found.
+	\end{frame}
+	
+	\begin{frame}{Queue Management - Manage Taxi Ride}
+		
+		\lstinputlisting[firstline=67, lastline=99]{./section_3/java/src/mts/queue/QueueManager.java}
+	\end{frame}
+	
+	\begin{frame}{Queue Management - Get Taxi Driver}
+		\lstinputlisting[firstline=38, lastline=65]{./section_3/java/src/mts/queue/QueueManager.java}
+	\end{frame}
+	
+	\subsection{Geolocation}
+	
+	\begin{frame}{Geolocation - A First Approach}
+		Another interesting design choice that has been made concerns the way in which the \textbf{GPS coordinates} obtained from a given \textbf{Taxi Driver} are mapped into a specific \textbf{Zone}.
+		It could have been possible, to do such a thing:
+		\begin{enumerate}
+			\item Obtain \textbf{GPS Data} via \textbf{Web Socket} from the selected \textbf{Taxi Driver}.
+			\item Calculate the nearest \textbf{Address} of the given \textbf{GPS Data} using \textbf{Google Maps HTTPS API}.
+			\item Query the \textbf{Model} to obtain the \textbf{Zone} to which belongs the given \textbf{Address}.
+		\end{enumerate}
+		But this solution requires to have a precomputed data structure that associates every \textbf{Address} in the \textbf{City} to the corresponding \textbf{Zone} (that could have been a relational table with as many rows inside as \textbf{Addresses} in the \textbf{City}, each address associated with the corresponding \textbf{Zone}), that is heavy to manage and maintain, although if correctly installed and filled, it gives for certain good performances.
+	\end{frame}
+
+	\begin{frame}{Geolocation - The Chosen Approach}
+		A less heavy weight solution has been found: this solution expects every \textbf{Zone} of the \textbf{City} to be divided in several convex \textbf{Polygons}, for instance \textbf{Triangles}, that have interesting properties for our application.
+		In \myTaxiService{}, \textbf{Zones} of regular shape are intended to be designed, and therefore the number of \textbf{Triangles} in which a \textbf{Zone} should be decomposed is very limited.
+		So, such a flow is followed:
+		\begin{enumerate}
+			\item Obtain \textbf{GPS Data} via \textbf{Web Socket} from the selected \textbf{Taxi Driver}
+			\item For each \textbf{Zone}, check if the the \textbf{Point} that the \textbf{Longitude} and \textbf{Latitude} from \textbf{GPS Data} identify is contained inside any \textbf{Triangle} in which the \textbf{Zone} is divided. If it is so, then the \textbf{Zone} is found. If that's not the case, then another \textbf{Zone} could contain the given Point. If no \textbf{Zone} contains the Point, then we can assume that the \textbf{Point} refers to \textbf{GPS Data} that identify a geographical point outside of the \textbf{City}.
+		\end{enumerate}
+		The computation of the \textbf{Point in Triangle} test is simple and efficient (e.g. using barycentric coordinates).
+	\end{frame}
+	
+	\section{User Interface Design}
+	
+	\subsection{GUI Design}
+	
+	\begin{frame}{GUI Design}
+		In this section we provide the \textbf{most important and meaningful mockups} for every class of screens we have designed.
+		In particular we identified \textbf{three classes} of graphical user interfaces:
+		\begin{itemize}
+			\itemBold {Passenger Mockups} both Web based and Mobile Application based.
+			\itemBold {Taxi Driver Mockups} only Mobile Application based.
+			\itemBold {Administrator Mockups} only Desktop Application based.
+		\end{itemize}
+	\end{frame}
+
+	\subsection{Passenger Mockups}
+	\begin{frame}{Passenger Mockups}
+		In the following slides are shown \textbf{sequence of graphical states} that the application has to \textbf{render} in order to \textbf{create} and \textbf{handle} a Taxi Ride.
+		Once logged in, the \textbf{Registered Passenger} will be redirected in his/her personal \textbf{Home page}, where he/she will be able to request or reserve a \textbf{Taxi Ride} and manage his/her personal profile.
+	\end{frame}
+	
+	\begin{frame} {Passenger Mockups - Overview}
+		Here the \textbf{Registered Passenger} can perform different actions:
+		\begin{itemize}
+			\item Request a Ride
+			\item Reserve a Ride
+			\item Logout
+			\item Modify his profile
+			\item Throw away a selected Ride
+		\end{itemize}
+		By clicking the \textbf{"Request a ride"} and \textbf{"Reserve a ride"} buttons the user is allowed to perform the relative actions.\\
+		\textbf{Once requested a ride, the "Request a ride" button is disabled, in order to prevent multiple useless requests.}
+	\end{frame}
+	
+	\begin{frame} {Passenger Mockups - Personal Homepage}
+		This is an example of the \textbf{Registered Passenger}'s \textbf{Home page}. The screen is divided in two parts:
+		\begin{itemize}
+			\item The \textbf{left} one contains \textbf{Taxi Requests}
+			\item The \textbf{right} one contains \textbf{Taxi Reservations}
+		\end{itemize} 
+		\showRPMockupImage{RegisteredPassengerHomePage}{Empty RP home page.}{0.65}
+	\end{frame}
+	
+	\begin{frame} {Passenger Mockups - Request a Ride}
+		\showRPMockupImage{RequestTaxi}{Taxi request.}{0.9}
+	\end{frame}
+	
+	\begin{frame} {Passenger Mockups - Reserve a Ride}
+		\showRPMockupImage{ReserveTaxi}{Taxi reservation.}{0.9}
+	\end{frame}
+	
+	\begin{frame} {Passenger Mockups - Personal Homepage with \textbf{Taxi Rides}}
+		Below is shown a common \textbf{state} with one \textbf{Taxi Request} active and one \textbf{Taxi Reservation} booked. 
+		Through the trash icon the user is allowed to cancel a selected \textbf{Taxi Ride}.
+		\showRPMockupImage{RegisteredPassengerHomePage2}{Populated RP home page.}{0.75}
+	\end{frame}
+	
+	\subsection{Taxi Driver Mockups}
+	
+	\begin{frame}{Taxi Driver Mockups}
+		In the following slides are shown \textbf{the sequence of the graphical states} that the application has to \textbf{render} in order to make the \textbf{Taxi Driver} able to \textbf{handle} a \textbf{Taxi Ride}.
+	\end{frame}
+	
+	\begin{frame} {Taxi Driver Mockups - Overview}
+		The \textbf{Taxi Driver} personal screen is divided into \textbf{two} sections:
+		\begin{itemize}
+			\item Pending Rides Space
+			\item Serving Ride Space
+		\end{itemize}
+		When the system sends a \textbf{Taxi Ride} to a specific \textbf{Taxi Driver}, it is placed in the \textbf{Pending Requests} space.
+		Here the \textbf{Taxi Rider} can accept or deny it. 
+		If it is accepted the \textbf{Taxi Request} is moved from the previous to the second space.
+		Once the ride is finished, the \textbf{Taxi Driver} has to push the \textbf{Notify End Of Ride} button, in order to notify the system the ending of the given ride.
+		Through the \textbf{Report Problem} button, the \textbf{Taxi Driver} has the possibility, \textit{in every moment of his/her working time}, to signal an accident or a problem.
+		In order to better handle the problem, the \textbf{Taxi Driver} is asked to \textbf{signal} if the problem is solvable or not.
+		\begin{itemize}
+			\item If it is solvable, then the system \textbf{does not assign} a new \textbf{Taxi Driver}.
+			\item If it is not solvable, then the system \textbf{assigns} the incomplete ride to the next \textbf{Taxi Driver} in the \textbf{Zone Queue}.
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame} {Taxi Driver Mockups - No Requests}
+		\showTDMockupImage{TaxiDriverScreen3}{Taxi Driver Homepage without pending \textbf{Taxi Requests}.}{0.2}
+	\end{frame}
+	
+	\begin{frame} {Taxi Driver Mockups - A Pending Request}
+		\showTDMockupImage{TaxiDriverScreen1}{Taxi Driver Homepage with a \textbf{PENDING} \textbf{Taxi Request}.}{0.2}
+	\end{frame}
+	
+	\begin{frame} {Taxi Driver Mockups - A Active Request}
+		\showTDMockupImage{TaxiDriverScreen2}{Taxi Driver Homepage with an \textbf{ACTIVE} \textbf{Taxi Request}.}{0.2}
+	\end{frame}
+	
+	\subsection{Administrator Mockups}
+	
+	\begin{frame}{Administrator Mockups}
+		The system architecture does not admit the usage of a textual interface (e.g. a CLI). 
+		For this reason we decided to \textbf{provide a thin desktop interface to the Administrator}.
+		Thus, the Administrator can perform his actions using an intuitive, fast, and lightweight GUI.
+		\showAdminMockupImage{admin_mockup_1}{Example of an Administrator screen.}{0.5}
+	\end{frame}
+	
+\end{document}

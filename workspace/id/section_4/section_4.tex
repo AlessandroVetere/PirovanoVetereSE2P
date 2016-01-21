@@ -1,0 +1,29 @@
+\section{Other Problems}
+%TODO <List here all the parts of code that you think create or may create a bug and explain why>
+%
+\subsection{Nagle's Algorithm Disabling}
+By default, Nagle's algorithm is disabled for \textbf{all and only} the plain sockets built: this is done by setting the "TCP No Delay" property of the java.net.Socket to true, using the given setter.
+For encrypted sockets, Nagle's algorithm is not disabled and this could lead to severe performance issue.
+This is because Nagle's algorithm is essentially delaying the delivery of TCP Packets in order to avoid the delivery of several small packets (which obviously increases the overhead to data ratio), preferring less but bigger packets.
+Thus, a server response that is generated very fast could be delivered later to the client because of this policy.
+\textbf{For us, the missed disabling of Nagle's algorithm in secure sockets is a major bug.}
+%
+\subsection{Secure Socket Creation}
+%TODO Troppo simile (uguale) alla sezione 2?
+Encrypted Socket (\textbf{javax.net.ssl.SSLSocket}) characteristics are defined during the creation of a \textbf{IIOPSSLSocketFactory} object by \textit{obtaining data from global variables} (which seems to be a bad behaviour) and storing those data into a specific private attribute of type \textbf{IIOPSSLSocketFactory.SSLInfo}.
+This means that the \textbf{Secure Socket Creation} depends on the surrounding context and not only on the parameters passed to the class methods.
+%
+\subsection{Secure Server Socket Creation}
+%TODO Troppo simile (uguale) alla sezione 2?
+The \textbf{SSLInfo} object necessary to have the informations about how to build the secure server socket are contained into an \textbf{IIOPSSLSocketFactory} attribute of type \textbf{java.util.Map} that associates a given \textbf{TCP port} to the relevant \textbf{SSLInfo} object.
+This \textbf{java.util.Map} is initialized from global variables (which seems again a bad habit) at \textbf{IIOPSSLSocketFactory} object creation time and stores the association of every \textbf{IIOP Listener} port to the relevant \textbf{IIOP Listener} configuration.
+Again, the usage of \textbf{public static methods} to obtain \textbf{global data} makes the functionality dependant on the surrounding context and not only to the parameters passed to the class methods.
+%
+\subsection{Class Context Dependency}
+The entire class behaviour depends on the type of process in which context the \textbf{IIOPSSLSocketFactory} object is built.
+In fact, the \textbf{Secure Socket Creation} is both used in the \textbf{Application Client Container (as Client of a EJB Container)} and the \textbf{EJB Container (as Client of another EJB Container)}, but the \textbf{Secure Server Socket Creation} is used and can only be used (if contrary a \textbf{RuntimeException} is thrown) by the \textbf{EJB Container (as Server of Application Client Containers and EJB Containers)}.
+This is a \textbf{major mess in the software architecture}, the solution should have been designed in a completely different way, following the \textbf{OOP principles}.
+%
+\subsection{No Generics Used}
+There's no usage of generics in the \textbf{java.util.Map} attribute \textbf{portToSSLInfo}.
+\renderPartialCode{113}{113}

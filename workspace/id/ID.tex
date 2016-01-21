@@ -1,0 +1,23 @@
+\documentclass{../common/latex_classes/pdf_document}
+%
+\titleSubtitle{Inspection Document}{Version 1.0}
+%
+\newcommand{\renderPartialCode}[2]{\lstinputlisting[firstnumber=#1,firstline=#1,lastline=#2]{./common/IIOPSSLSocketFactory.java}}
+\newcommand{\checklist}[1]{\itemBold{Checklist[#1]}
+}
+%
+\configureJava{}
+\enableCodeLineNumbers{}
+%
+%TODO Sonarqube
+%TODO Video https://www.youtube.com/watch?v=1m3eRFeCInY
+%TODO http://research.microsoft.com/pubs/180283/ICSE%202013-codereview.pdf
+%
+\begin{document}
+	\titleToc{}
+	\inputSection{1}
+	\inputSection{2}
+	\inputSection{3}
+	\inputSection{4}
+	\inputSection{5}
+\end{document}               % End of document.
