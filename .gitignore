@@ -1,6 +1,6 @@
 *.aux
 *.out
-*.pdf
+workspace/*/*.pdf
 *.log
 *.synctex.gz
 *.toc
