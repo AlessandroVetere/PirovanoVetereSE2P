@@ -20,12 +20,19 @@
 \newcolumntype{X}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}	\newcolumntype{Y}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{Z}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 %
-\newcommand{\versionHistoryTab}[1]{%
-	\begin{tabulary}{\linewidth\tymin=70pt}{Y{3cm}|Y{3cm}|X{4.75cm}}
-		\textbf{\textit{Version Number}} & \textbf{\textit{Release Date}} & \textbf{\textit{Changelog}} \\
-		\hline
+\newcommand{\centeredBlock}[1]{
+	\begin{center}
 		#1
-	\end{tabulary}%
+	\end{center}
+}
+\newcommand{\versionHistoryTab}[1]{%
+	\centeredBlock{
+		\begin{tabulary}{\linewidth\tymin=70pt}{Y{3cm}|Y{3cm}|X{4.75cm}}
+			\textbf{\textit{Version Number}} & \textbf{\textit{Release Date}} & \textbf{\textit{Changelog}} \\
+			\hline
+			#1
+		\end{tabulary}%
+	}
 }
 %
 \newcommand{\paragraphnewline}[1]{\paragraph{#1}\mbox{}\\}
@@ -57,22 +64,16 @@
 \newcommand{\sectionTexPath}[1]{\sectionBaseDir{#1}/section_#1.tex}
 \newcommand{\inputSection}[1]{\newpage\input{\sectionTexPath{#1}}}
 \newcommand{\itemBold}[1]{\item\textbf{#1:}}
-\newcommand{\unbreakableBlock}[1]{%
+\newcommand{\unbreakableBlock}[1]{
 	\begin{minipage}{\linewidth}% Following stays together
 		#1
 	\end{minipage}
 }
-\newcommand{\unbreakableCenteredBlock}[1]{%
-	\unbreakableBlock{%
-		\begin{center}
-			#1
-		\end{center}
-	}
-}
+\newcommand{\unbreakableCenteredBlock}[1]{\unbreakableBlock{\centeredBlock{#1}}}
 \newcommand{\unbreakableCenteredBlockSpaced}[1]{%
 	\unbreakableCenteredBlock{%
 		\vspace{0.5em}
-		#1
+			#1
 		\vspace{0.5em}
 	}
 }
