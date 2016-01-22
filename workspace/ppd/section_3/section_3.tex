@@ -1,7 +1,27 @@
 \section{Project Tasks and Scheduling}
 %TODO Identify the tasks for your project and their schedule. Do so retrospectively, assuming that the project has started in October 2015 as it really happened.
-%TODO 1) tabella con le precedenze
-%TODO 2) diagramma di gantt costruito dalla tabella
-
 \subsection{Project Tasks}
 \subsection{Tasks Scheduling}
+\subsubsection{Tasks, Durations and Dependencies}
+%TODO 1) tabella con le precedenze
+\begin{center}
+	\begin{tabulary}{\linewidth\tymin=70pt}{Y{2cm}|Y{2.5cm}|Y{2cm}|Y{2cm}}
+		\textbf{Task} & \textbf{Effort\newline(person-days)} & \textbf{Duration\newline(days)} & \textbf{Dependencies} \\ \hline
+		T1 & 15 & 10 & \\ \hline
+		T2 & 153 & 123 & T1 \\
+	\end{tabulary}
+\end{center}
+\subsubsection{Gantt Diagram}
+%TODO 2) diagramma di gantt costruito dalla tabella
+\blindtext
+\begin{center}
+	\begin{ganttchart}[hgrid=true,vgrid={draw=none, dotted}, x unit=4mm]{1}{24}
+		\gantttitle{2016}{24} \\
+		\gantttitlelist{1,...,12}{2} \\
+		\ganttmilestone{M1 Start  -}{0} \\
+		\ganttbar{T1}{1}{2} \\
+		\ganttbar{T2}{1}{6} \\
+		\ganttmilestone{M2 End}{24}
+	\end{ganttchart}
+\end{center}
+%
