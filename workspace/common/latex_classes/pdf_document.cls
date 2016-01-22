@@ -11,6 +11,8 @@
 \usepackage{tabulary}
 \usepackage{array}
 \usepackage[ddmmyyyy]{datetime}
+\usepackage[english]{babel}
+\usepackage{blindtext}
 %
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -97,3 +99,4 @@
 \newcommand{\titleSubtitle}[2]{\title{#1 \\ \vspace{1cm} \large{#2}}}
 \newcommand{\titleToc}{\maketitle\newpage\tableofcontents}
 \newcommand{\blueHref}[2]{\hypersetup{linkcolor=blue}\hyperref[#1]{#2}\hypersetup{linkcolor=black}}
+%
