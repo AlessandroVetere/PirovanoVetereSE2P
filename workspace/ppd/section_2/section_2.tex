@@ -55,19 +55,18 @@ databases
 \end{itemize}
 \subsubsection{External Output}
 \begin{itemize}
-	\itemBold{Logout} Redirection
-	\itemBold{Registration} Acknowledgement
-	\itemBold{Login} Acknowledgement
-	\itemBold{Handle Personal Profile} Information about the result
-	\itemBold{Taxi Reservation} Notification
-	\itemBold{Taxi Request} Notification about the result
-	\itemBold{Notify Problem}
+	\fp{Logout}{A redirection message needs to be sent to the user that logs out.}{1}{SimpleWeight}
+	\fp{Registration}{The result of this operation must be sent to the user that registers}{1}{SimpleWeight}
+	\fp{Login}{The result of the login must be sent to the specific user.}{1}{SimpleWeight}
+	\fp{Handle Personal Profile}{Informations about the result of the modification must be sent to the related user}{1}{SimpleWeight}
+	\fp{Taxi Reservation}{Notification about the result of the reservation must be sent to the specific passenger.}{1}{SimpleWeight}
+	\fp{Taxi Request}{Notification about the result f the request must be sent to the specific passenger.}{1}{SimpleWeight}
 	\begin{itemize}
-		\item Automatic Taxi Request
-		\item Notification to the passenger
-		\item Notification to the problematic taxi driver
+		\fp{Automatic Taxi Request}{A new Taxi Request must be issued.}{1}{ComplexWeight}
+		\fp{Notification to the Passenger}{Notification about the new Taxi Request must be sent to the specific passenger.}{1}{SimpleWeight}
+		\fp{Notification to the Taxi Driver}{Notification about the result of the request must be sent to the specific Taxi Driver.}{1}{SimpleWeight}
 	\end{itemize}
-	\itemBold{End of Ride} Notification about the result
+	\fp{End of Ride}{Notification about the result of the operation must be sent to the relevant Taxi Driver.}{1}{SimpleWeight}
 \end{itemize}
 \subsubsection{External Inquiry}
 \begin{itemize}
