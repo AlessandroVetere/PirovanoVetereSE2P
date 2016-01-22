@@ -7,3 +7,10 @@ workspace/*/*.pdf
 *.nav
 *.lock
 *.snm
+dd/DD.pdf
+dd/DD_presentation.pdf
+id/id.pdf
+id/id_presentation.pdf
+itpd/ITPD.pdf
+srs/SRS.pdf
+srs/SRS_presentation.pdf
