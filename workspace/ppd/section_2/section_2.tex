@@ -10,9 +10,6 @@
 %TODO use free tools online (logo tipo tempio greco)
 %TODO 3) describe the number of hours spent for the various tasks (RASD, DD etc.)
 \subsection{Function Points}
-spieghiamo cosa sono in generale\\
-mettiamo la tabella dei pesi\\
-\lipsum[100]
 \begin{center}
 	\begin{tabulary}{\linewidth\tymin=70pt}{Y{2cm}|Y{1.75cm}|Y{1.75cm}|Y{1.75cm}}
 		\textbf{Function\newline{}Types} & \textbf{Simple\newline{}Weight} & \textbf{Medium\newline{}Weight} & \textbf{Complex\newline{}Weight} \\ \hline
@@ -24,53 +21,118 @@ mettiamo la tabella dei pesi\\
 	\end{tabulary}
 \end{center}
 \subsubsection{Internal Logic File}
-databases
+Summary of the calculated weights:
+\begin{equation*}
+	\begin{aligned}
+		&	FP_{ILF}
+		& & = 9 \cdot w_{Simple,ILF} + 1 \cdot w_{Medium,ILF}\\
+		&&& = 9 \cdot 7 + 1 \cdot 10\\
+		&&& = 73\\
+	\end{aligned}
+\end{equation*}
+In details:
 \begin{itemize}
-	\fp{Registered Passenger}{Personal Registered Passenger data. Infrequent modifications, but frequent insertions and readings.}{1}{SimpleWeight}
-	\fp{Taxi Driver}{Taxi Driver data. Very infrequent modifications, infrequent insertions, frequent readings.}{1}{SimpleWeight}
-	\fp{Administrator}{Administrator data. Very infrequent modifications, insertions and readings.}{1}{SimpleWeight}
-	\fp{Taxi Car}{Taxi Car data. Very infrequent modifications, insertions and readings.}{1}{SimpleWeight}
-	\fp{Taxi Request}{Taxi Request data. Frequent insertions and readings, infrequent modifications.}{1}{SimpleWeight}
-	\fp{Taxi Reservation}{Taxi Reservation data. Frequent insertions and readings, infrequent modifications.}{1}{SimpleWeight}
-	\fp{Problem}{Problem data. Infrequent insertions, readings and modifications.}{1}{SimpleWeight}
-	\fp{Zone}{Zone data. Very infrequent insertions, readings and modifications.}{1}{SimpleWeight}
-	\fp{GPS Data}{GPS Data, Database Server side. Very frequent insertions and readings, but very infrequent modifications.}{1}{MediumWeight}
-	\fp{Taxi Drivers Queue}{Taxi Drivers Queue data. Frequent insertions, readings and modifications.}{1}{SimpleWeight}
+	\fp{Registered Passenger}{Personal Registered Passenger data. Infrequent modifications, but frequent insertions and readings.}{1}{w_{Simple,ILF}}
+	\fp{Taxi Driver}{Taxi Driver data. Very infrequent modifications, infrequent insertions, frequent readings.}{1}{w_{Simple,ILF}}
+	\fp{Administrator}{Administrator data. Very infrequent modifications, insertions and readings.}{1}{w_{Simple,ILF}}
+	\fp{Taxi Car}{Taxi Car data. Very infrequent modifications, insertions and readings.}{1}{w_{Simple,ILF}}
+	\fp{Taxi Request}{Taxi Request data. Frequent insertions and readings, infrequent modifications.}{1}{w_{Simple,ILF}}
+	\fp{Taxi Reservation}{Taxi Reservation data. Frequent insertions and readings, infrequent modifications.}{1}{w_{Simple,ILF}}
+	\fp{Problem}{Problem data. Infrequent insertions, readings and modifications.}{1}{w_{Simple,ILF}}
+	\fp{Zone}{Zone data. Very infrequent insertions, readings and modifications.}{1}{w_{Simple,ILF}}
+	\fp{GPS Data}{GPS Data, Database Server side. Very frequent insertions and readings, but very infrequent modifications.}{1}{w_{Medium,ILF}}
+	\fp{Taxi Drivers Queue}{Taxi Drivers Queue data. Frequent insertions, readings and modifications.}{1}{w_{Simple,ILF}}
 \end{itemize}
 \subsubsection{External Interface File}
+Summary of the calculated weights:
+\begin{equation*}
+	\begin{aligned}
+		&	FP_{ELF}
+		& & = 2 \cdot w_{Simple,ELF} + 1 \cdot w_{Medium,ELF}\\
+		&&& = 2 \cdot 5 + 1 \cdot 7\\
+		&&& = 17\\
+	\end{aligned}
+\end{equation*}
+In details:
 \begin{itemize}
-	\fp{Google Maps API}{Google Maps API related data about Travel Time and Addresses. Very frequent readings.}{2}{SimpleWeight}
-	\fp{GPS Data}{GPS Data, Taxi Driver side. Very frequent insertions and readings, but very infrequent modifications.}{1}{MediumWeight}
+	\fp{Google Maps API}{Google Maps API related data about Travel Time and Addresses. Very frequent readings.}{2}{w_{Simple,ELF}}
+	\fp{GPS Data}{GPS Data, Taxi Driver side. Very frequent insertions and readings, but very infrequent modifications.}{1}{w_{Medium,ELF}}
 \end{itemize}
 \subsubsection{External Input}
+Summary of the calculated weights:
+\begin{equation*}
+	\begin{aligned}
+		&	FP_{EI}
+		& & = 4 \cdot w_{Simple,EI} + 3 \cdot w_{Medium,EI} + 1 \cdot w_{Complex,EI}\\
+		&&& = 4 \cdot 3 + 3 \cdot 4 + 1 \cdot 6\\
+		&&& = 30\\
+	\end{aligned}
+\end{equation*}
+In details:
 \begin{itemize}
-	\fp{Login}{This operation requires a simple effort. In fact it has to perform few steps in order to conclude the procedure.}{1}{SimpleWeight}
-	\fp{Logout}{This operation requires a simple effort. In fact it has to perform few steps in order to conclude the procedure.}{1}{SimpleWeight}
-	\fp{Registration}{This operation requires a simple effort. In fact it has to perform few steps in order to conclude the procedure.}{1}{SimpleWeight}
-	\fp{Handle Personal Profile}{This operation requires a simple effort. In fact it has to perform few steps in order to conclude the procedure.}{1}{SimpleWeight}
-	\fp{Taxi Reservation}{This operation requires a medium effort. In fact it is very frequent.}{1}{MediumWeight}
-	\fp{Taxi Request}{This operation requires a medium effort. In fact it is very frequent.}{1}{MediumWeight}
-	\fp{Notify Problem}{This operation requires a strong effort. In fact it has to perform many elementary steps in order to handle the problem.}{1}{HighWeight}
-	\fp{End of Ride}{This operation requires a medium effort. In fact it is very frequent.}{1}{MediumWeight}
+	\fp{Login}{This operation requires a simple effort. In fact it has to perform few steps in order to conclude the procedure.}{1}{w_{Simple,EI}}
+	\fp{Logout}{This operation requires a simple effort. In fact it has to perform few steps in order to conclude the procedure.}{1}{w_{Simple,EI}}
+	\fp{Registration}{This operation requires a simple effort. In fact it has to perform few steps in order to conclude the procedure.}{1}{w_{Simple,EI}}
+	\fp{Handle Personal Profile}{This operation requires a simple effort. In fact it has to perform few steps in order to conclude the procedure.}{1}{w_{Simple,EI}}
+	\fp{Taxi Reservation}{This operation requires a medium effort. In fact it is very frequent.}{1}{w_{Medium,EI}}
+	\fp{Taxi Request}{This operation requires a medium effort. In fact it is very frequent.}{1}{w_{Medium,EI}}
+	\fp{Notify Problem}{This operation requires a strong effort. In fact it has to perform many elementary steps in order to handle the problem.}{1}{w_{Complex,EI}}
+	\fp{End of Ride}{This operation requires a medium effort. In fact it is very frequent.}{1}{w_{Medium,EI}}
 \end{itemize}
 \subsubsection{External Output}
+Summary of the calculated weights:
+	\begin{equation*}
+		\begin{aligned}
+		&	FP_{EO}
+		& & = 9 \cdot w_{Simple,EO} + 1 \cdot w_{Complex,EO}\\
+		&&& = 9 \cdot 4 + 1 \cdot 7\\
+		&&& = 43\\
+	\end{aligned}
+\end{equation*}
+In details:
 \begin{itemize}
-	\fp{Logout}{A redirection message needs to be sent to the user that logs out.}{1}{SimpleWeight}
-	\fp{Registration}{The result of this operation must be sent to the user that registers}{1}{SimpleWeight}
-	\fp{Login}{The result of the login must be sent to the specific user.}{1}{SimpleWeight}
-	\fp{Handle Personal Profile}{Informations about the result of the modification must be sent to the related user}{1}{SimpleWeight}
-	\fp{Taxi Reservation}{Notification about the result of the reservation must be sent to the specific passenger.}{1}{SimpleWeight}
-	\fp{Taxi Request}{Notification about the result f the request must be sent to the specific passenger.}{1}{SimpleWeight}
+	\fp{Logout}{A redirection message needs to be sent to the user that logs out.}{1}{w_{Simple,EO}}
+	\fp{Registration}{The result of this operation must be sent to the user that registers}{1}{w_{Simple,EO}}
+	\fp{Login}{The result of the login must be sent to the specific user.}{1}{w_{Simple,EO}}
+	\fp{Handle Personal Profile}{Informations about the result of the modification must be sent to the related user}{1}{w_{Simple,EO}}
+	\fp{Taxi Reservation}{Notification about the result of the reservation must be sent to the specific passenger.}{1}{w_{Simple,EO}}
+	\fp{Taxi Request}{Notification about the result f the request must be sent to the specific passenger.}{1}{w_{Simple,EO}}
 	\begin{itemize}
-		\fp{Automatic Taxi Request}{A new Taxi Request must be issued.}{1}{ComplexWeight}
-		\fp{Notification to the Passenger}{Notification about the new Taxi Request must be sent to the specific passenger.}{1}{SimpleWeight}
-		\fp{Notification to the Taxi Driver}{Notification about the result of the request must be sent to the specific Taxi Driver.}{1}{SimpleWeight}
+		\fp{Automatic Taxi Request}{A new Taxi Request must be issued.}{1}{w_{Complex,EO}}
+		\fp{Notification to the Passenger}{Notification about the new Taxi Request must be sent to the specific passenger.}{1}{w_{Simple,EO}}
+		\fp{Notification to the Taxi Driver}{Notification about the result of the request must be sent to the specific Taxi Driver.}{1}{w_{Simple,EO}}
 	\end{itemize}
-	\fp{End of Ride}{Notification about the result of the operation must be sent to the relevant Taxi Driver.}{1}{SimpleWeight}
+	\fp{End of Ride}{Notification about the result of the operation must be sent to the relevant Taxi Driver.}{1}{w_{Simple,EO}}
 \end{itemize}
 \subsubsection{External Inquiry}
+Summary of the calculated weights:
+\begin{equation*}
+	\begin{aligned}
+		&	FP_{EIQ}
+		& & = 2 \cdot w_{Simple,EIQ}\\
+		&&& = 2 \cdot 3\\
+		&&& = 6\\
+	\end{aligned}
+\end{equation*}
+In details:
 \begin{itemize}
-	\fp{View Requests and Reservations}{In order to perform these operations the system has only to retrieve,send and render simple data.}{2}{SimpleWeight}
+	\fp{View Requests and Reservations}{In order to perform these operations the system has only to retrieve,send and render simple data.}{2}{w_{Simple,EIQ}}
 \end{itemize}
+\subsubsection{Summary}
+To recap:
+\begin{equation*}
+	\begin{aligned}
+		&	FP
+		& & = FP_{ILF} + FP_{ELF} + FP_{EI} + FP_{EO} + FP_{EIQ}\\
+		&&& = 73 + 17 + 30 + 43 + 6\\
+		&&& = 169\\	
+		\\
+		&   n_{SLOC}
+		& & = FP \cdot k_{Java, Avg}\\
+		&&& = 169 \cdot 53\\
+		&&& = 8957 \text{ SLOC}
+	\end{aligned}
+\end{equation*}
+
 \subsection{COCOMO}
 %
