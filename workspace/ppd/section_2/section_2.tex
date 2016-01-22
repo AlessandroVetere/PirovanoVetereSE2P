@@ -25,6 +25,18 @@ mettiamo la tabella dei pesi\\
 \end{center}
 \subsubsection{Internal Logic File}
 databases
+\begin{itemize}
+	\fp{Registered Passenger}{Personal Registered Passenger data. Infrequent modifications, but frequent insertions and readings.}{1}{SimpleWeight}
+	\fp{Taxi Driver}{Taxi Driver data. Very infrequent modifications, infrequent insertions, frequent readings.}{1}{SimpleWeight}
+	\fp{Administrator}{Administrator data. Very infrequent modifications, insertions and readings.}{1}{SimpleWeight}
+	\fp{Taxi Car}{Taxi Car data. Very infrequent modifications, insertions and readings.}{1}{SimpleWeight}
+	\fp{Taxi Request}{Taxi Request data. Frequent insertions and readings, infrequent modifications.}{1}{SimpleWeight}
+	\fp{Taxi Reservation}{Taxi Reservation data. Frequent insertions and readings, infrequent modifications.}{1}{SimpleWeight}
+	\fp{Problem}{Problem data. Infrequent insertions, readings and modifications.}{1}{SimpleWeight}
+	\fp{Zone}{Zone data. Very infrequent insertions, readings and modifications.}{1}{SimpleWeight}
+	\fp{GPS Data}{GPS Data. Very frequent insertions and readings, but very infrequent modifications.}{1}{MediumWeight}
+	\fp{Taxi Drivers Queue}{Taxi Drivers Queue data. Frequent insertions, readings and modifications.}{1}{SimpleWeight}
+\end{itemize}
 \subsubsection{External Interface File}
 gps data\\
 google maps
