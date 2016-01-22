@@ -34,12 +34,14 @@ databases
 	\fp{Taxi Reservation}{Taxi Reservation data. Frequent insertions and readings, infrequent modifications.}{1}{SimpleWeight}
 	\fp{Problem}{Problem data. Infrequent insertions, readings and modifications.}{1}{SimpleWeight}
 	\fp{Zone}{Zone data. Very infrequent insertions, readings and modifications.}{1}{SimpleWeight}
-	\fp{GPS Data}{GPS Data. Very frequent insertions and readings, but very infrequent modifications.}{1}{MediumWeight}
+	\fp{GPS Data}{GPS Data, Database Server side. Very frequent insertions and readings, but very infrequent modifications.}{1}{MediumWeight}
 	\fp{Taxi Drivers Queue}{Taxi Drivers Queue data. Frequent insertions, readings and modifications.}{1}{SimpleWeight}
 \end{itemize}
 \subsubsection{External Interface File}
-gps data\\
-google maps
+\begin{itemize}
+	\fp{Google Maps API}{Google Maps API related data about Travel Time and Addresses. Very frequent readings.}{2}{SimpleWeight}
+	\fp{GPS Data}{GPS Data, Taxi Driver side. Very frequent insertions and readings, but very infrequent modifications.}{1}{MediumWeight}
+\end{itemize}
 \subsubsection{External Input}
 \begin{itemize}
 	\itemBold{Login} Data input
