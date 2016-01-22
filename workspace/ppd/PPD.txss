@@ -1,6 +1,6 @@
 [Session]
 FileVersion=1
-File0\FileName=PP.tex
+File0\FileName=PPD.tex
 File0\Line=8
 File0\Col=12
 File0\FirstLine=0
@@ -35,10 +35,10 @@ File6\Line=0
 File6\Col=0
 File6\FirstLine=0
 File6\FoldedLines=
-MasterFile=PP.tex
-CurrentFile=PP.tex
+MasterFile=PPD.tex
+CurrentFile=PPD.tex
 Bookmarks=@Invalid()
 
 [InternalPDFViewer]
-File=PP.pdf
+File=PPD.pdf
 Embedded=true

@@ -10,4 +10,42 @@
 %TODO use free tools online (logo tipo tempio greco)
 %TODO 3) describe the number of hours spent for the various tasks (RASD, DD etc.)
 \subsection{Function Points}
+spieghiamo cosa sono in generale\\
+mettiamo la tabella dei pesi
+\subsubsection{Internal Logic File}
+databases
+\subsubsection{External Interface File}
+gps data\\
+google maps
+\subsubsection{External Input}
+\begin{itemize}
+	\itemBold{Login} Data input
+	\itemBold{Logout} Data input
+	\itemBold{Registration} Data input
+	\itemBold{Handle Personal Profile} Data input
+	\itemBold{Taxi Reservation} Data input
+	\itemBold{Taxi Request} Data input
+	\itemBold{Notify Problem} Data input
+	\itemBold{End of Ride} Data input
+\end{itemize}
+\subsubsection{External Output}
+\begin{itemize}
+	\itemBold{Logout} Redirection
+	\itemBold{Registration} Acknowledgement
+	\itemBold{Login} Acknowledgement
+	\itemBold{Handle Personal Profile} Information about the result
+	\itemBold{Taxi Reservation} Notification
+	\itemBold{Taxi Request} Notification about the result
+	\itemBold{Notify Problem}
+	\begin{itemize}
+		\item Automatic Taxi Request
+		\item Notification to the passenger
+		\item Notification to the problematic taxi driver
+	\end{itemize}
+	\itemBold{End of Ride} Notification about the result
+\end{itemize}
+\subsubsection{External Inquiry}
+\begin{itemize}
+	\itemBold{View Requests and Reservations}
+\end{itemize}
 \subsection{COCOMO}
