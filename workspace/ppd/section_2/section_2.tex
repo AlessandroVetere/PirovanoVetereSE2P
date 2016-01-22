@@ -135,7 +135,9 @@ To recap:
 \end{equation*}
 
 \subsection{COCOMO}
-Sizing Methods -> FP
+This estimation method takes into account a lot of parameters, such as final software, personnel and platform characteristics, combining them using a complex non-linear process.\\
+In order to generate the \textbf{Constructive Cost Model} we decided to use the online \textbf{COCOMO II} tool, reachable at \href{http://csse.usc.edu/tools/COCOMOII.php}{http://csse.usc.edu/tools/COCOMOII.php}, using the \textbf{FP Sizing Method}.\\
+We also used \href{http://csse.usc.edu/csse/research/COCOMOII/cocomo2000.0/CII_modelman2000.0.pdf}{COCOMO II - Model Definition Manual} to make better choices of the parameters we had to insert into the \textbf{model}.\\
 \begin{itemize}
 	\item Software Size
 	\begin{itemize}
@@ -144,21 +146,22 @@ Sizing Methods -> FP
 	\end{itemize}
 	\item Software Scale Drivers
 	\begin{itemize}
-		\item Precedentedness
-		\item Development Flexibility
-		\item Architecture/Risk Resolution
-		\item Team Cohesion
-		\item Process Maturity
+		\itemBold{Precedentedness} Since we had a previous experience using \textit{Java SE} for medium-size projects, but we had never used \textit{Java EE} for developing such a big application we decided to set this parameter to \textbf{Nominal}.
+		\itemBold{Development Flexibility} Given that we had not strict specifications we set this parameter to \textbf{High}.
+		\itemBold{Architecture/Risk Resolution} %TODO
+		\itemBold{Team Cohesion} After a few days dedicated to create a efficient and fast workspace, the cohesion reached an \textbf{Very High} level.
+		\itemBold{Process Maturity} We understand, support and follow the process so we choose a \textbf{High} level for this parameter.
 	\end{itemize}
 	\item Software Cost Drivers
 	\begin{itemize}
 		\item Product
 		\begin{itemize}
-			\item Required Software Reliability
-			\item Data Base Size
-			\item Product Complexity
-			\item Developed for Reusability
-			\item Documentation Match to Lifecycle Needs
+			\itemBold{Required Software Reliability}
+			Given that a failure in the software system could lead to moderate problem we chose \textbf{Nominal} level.
+			\itemBold{Data Base Size} Since we have a distributed application, the focus is on the lines of code instead of being on the size of the testing Database; so we chose a \textbf{Low} level parameter.
+			\itemBold{Product Complexity} We made an average of the various complexity areas and we chose a \textbf{High} level parameter.
+			\itemBold{Developed for Reusability} We decided to develop reusable system components, so we came up with an \textbf{High} level parameter.
+			\itemBold{Documentation Match to Lifecycle Needs} The standard level of documentation is required, so the chosen level is \textbf{Nominal}.
 		\end{itemize}
 		\item Personnel
 		\begin{itemize}
@@ -171,9 +174,9 @@ Sizing Methods -> FP
 		\end{itemize}
 		\item Platform
 		\begin{itemize}
-			\item Time Constraint
-			\item Storage Constraint
-			\item Platform Volatility
+			\itemBold{Time Constraint} We have no relevant time constraints, so we chose \textbf{Nominal} level for this parameter.
+			\itemBold{Storage Constraint} We have no relevant storage constraint, so we chose \textbf{Nominal} level for this parameter. 
+			\itemBold{Platform Volatility} Our hardware and software platforms do not change often, so we have no volatility and we chose a \textbf{Low} level for this constraint.
 		\end{itemize}
 		\item Project
 		\begin{itemize}
