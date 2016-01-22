@@ -11,8 +11,7 @@
 \usepackage{tabulary}
 \usepackage{array}
 \usepackage[ddmmyyyy]{datetime}
-\usepackage[english]{babel}
-\usepackage{blindtext}
+\usepackage{lipsum}
 %
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
