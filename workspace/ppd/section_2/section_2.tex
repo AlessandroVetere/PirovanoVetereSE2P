@@ -9,7 +9,10 @@
 %TODO 2) COCOMO
 %TODO use free tools online (logo tipo tempio greco)
 %TODO 3) describe the number of hours spent for the various tasks (RASD, DD etc.)
+%
 \subsection{Function Points}
+%TODO Spiegare
+\lipsum[100]
 \begin{center}
 	\begin{tabulary}{\linewidth\tymin=70pt}{Y{2cm}|Y{1.75cm}|Y{1.75cm}|Y{1.75cm}}
 		\textbf{Function\newline{}Types} & \textbf{Simple\newline{}Weight} & \textbf{Medium\newline{}Weight} & \textbf{Complex\newline{}Weight} \\ \hline
@@ -20,7 +23,10 @@
 		N. ELF & 5 & 7 & 10 \\
 	\end{tabulary}
 \end{center}
+%
 \subsubsection{Internal Logic File}
+%TODO Breve introduzione
+\lipsum[100]
 Summary of the calculated weights:
 \begin{equation*}
 	\begin{aligned}
@@ -43,7 +49,10 @@ In details:
 	\fp{GPS Data}{GPS Data, Database Server side. Very frequent insertions and readings, but very infrequent modifications.}{1}{w_{Medium,ILF}}
 	\fp{Taxi Drivers Queue}{Taxi Drivers Queue data. Frequent insertions, readings and modifications.}{1}{w_{Simple,ILF}}
 \end{itemize}
+%
 \subsubsection{External Interface File}
+%TODO Breve introduzione
+\lipsum[100]
 Summary of the calculated weights:
 \begin{equation*}
 	\begin{aligned}
@@ -58,7 +67,10 @@ In details:
 	\fp{Google Maps API}{Google Maps API related data about Travel Time and Addresses. Very frequent readings.}{2}{w_{Simple,ELF}}
 	\fp{GPS Data}{GPS Data, Taxi Driver side. Very frequent insertions and readings, but very infrequent modifications.}{1}{w_{Medium,ELF}}
 \end{itemize}
+%
 \subsubsection{External Input}
+%TODO Breve introduzione
+\lipsum[100]
 Summary of the calculated weights:
 \begin{equation*}
 	\begin{aligned}
@@ -79,7 +91,10 @@ In details:
 	\fp{Notify Problem}{This operation requires a strong effort. In fact it has to perform many elementary steps in order to handle the problem.}{1}{w_{Complex,EI}}
 	\fp{End of Ride}{This operation requires a medium effort. In fact it is very frequent.}{1}{w_{Medium,EI}}
 \end{itemize}
+%
 \subsubsection{External Output}
+%TODO Breve introduzione
+\lipsum[100]
 Summary of the calculated weights:
 	\begin{equation*}
 		\begin{aligned}
@@ -104,7 +119,10 @@ In details:
 	\end{itemize}
 	\fp{End of Ride}{Notification about the result of the operation must be sent to the relevant Taxi Driver.}{1}{w_{Simple,EO}}
 \end{itemize}
+%
 \subsubsection{External Inquiry}
+%TODO Breve introduzione
+\lipsum[100]
 Summary of the calculated weights:
 \begin{equation*}
 	\begin{aligned}
@@ -118,6 +136,7 @@ In details:
 \begin{itemize}
 	\fp{View Requests and Reservations}{In order to perform these operations the system has only to retrieve, send and render simple data.}{2}{w_{Simple,EIQ}}
 \end{itemize}
+%
 \subsubsection{Summary}
 To recap:
 \begin{equation*}
@@ -133,28 +152,28 @@ To recap:
 		&&& = 8957 \text{ SLOC}
 	\end{aligned}
 \end{equation*}
-
+%
 \subsection{COCOMO}
-This estimation method takes into account a lot of parameters, such as final software, personnel and platform characteristics, combining them using a complex non-linear process.\\
-In order to generate the \textbf{Constructive Cost Model} we decided to use the online \textbf{COCOMO II} tool, reachable at \href{http://csse.usc.edu/tools/COCOMOII.php}{http://csse.usc.edu/tools/COCOMOII.php}, using the \textbf{FP Sizing Method}.\\
-We also used \href{http://csse.usc.edu/csse/research/COCOMOII/cocomo2000.0/CII_modelman2000.0.pdf}{COCOMO II - Model Definition Manual} to make better choices of the parameters we had to insert into the \textbf{model}.\\
+This estimation method takes into account a lot of parameters, such as final software, personnel and platform characteristics, combining them using a complex non-linear process.\par
+In order to generate the \textbf{Constructive Cost Model} we decided to use an online \href{http://csse.usc.edu/tools/COCOMOII.php}{COCOMO II calculator}, using the \textbf{FP Sizing Method}.\par
+We also used \href{http://csse.usc.edu/csse/research/COCOMOII/cocomo2000.0/CII_modelman2000.0.pdf}{COCOMO II - Model Definition Manual} to make better choices of the parameters we had to insert into the model.
 \begin{itemize}
 	\item \textbf{Software Size}
 	\begin{itemize}
-		\item \textbf{Unadjusted Function Points:} The value $FP$ has been taken as parameter, so $169$ is the value chosen for this field.
-		\item \textbf{Language:} The language of choice is Java, and not only Java EE, because the software is possibly a combination of different flavours of Java (Java SE, Java EE and Java for Android).
+		\item \textbf{Unadjusted Function Points:} The value $FP$ has been taken as parameter, so \textbf{169} is the value chosen for this field.
+		\item \textbf{Language:} The language of choice is \textbf{Java}, and not only Java EE, because the software is possibly a combination of different flavors of Java (Java SE, Java EE and Java for Android).
 	\end{itemize}
-	\item Software Scale Drivers
+	\item \textbf{Software Scale Drivers}
 	\begin{itemize}
 		\itemBold{Precedentedness} Since we had a previous experience using \textit{Java SE} for medium-size projects, but we had never used \textit{Java EE} for developing such a big application we decided to set this parameter to \textbf{Nominal}.
 		\itemBold{Development Flexibility} Given that we had not strict specifications we set this parameter to \textbf{High}.
-		\itemBold{Architecture/Risk Resolution} %TODO
+		\itemBold{Architecture/Risk Resolution} %TODO Completare
 		\itemBold{Team Cohesion} After a few days dedicated to create a efficient and fast workspace, the cohesion reached an \textbf{Very High} level.
 		\itemBold{Process Maturity} We understand, support and follow the process so we choose a \textbf{High} level for this parameter.
 	\end{itemize}
-	\item Software Cost Drivers
+	\item \textbf{Software Cost Drivers}
 	\begin{itemize}
-		\item Product
+		\item \textbf{Product}
 		\begin{itemize}
 			\itemBold{Required Software Reliability}
 			Given that a failure in the software system could lead to moderate problem we chose \textbf{Nominal} level.
@@ -163,34 +182,32 @@ We also used \href{http://csse.usc.edu/csse/research/COCOMOII/cocomo2000.0/CII_m
 			\itemBold{Developed for Reusability} We decided to develop reusable system components, so we came up with an \textbf{High} level parameter.
 			\itemBold{Documentation Match to Lifecycle Needs} The standard level of documentation is required, so the chosen level is \textbf{Nominal}.
 		\end{itemize}
-		\item Personnel
+		\item \textbf{Personnel}
 		\begin{itemize}
-			\item Analyst Capability
-			\item Programmer Capability
-			\item Personnel Continuity
-			\item Application Experience
-			\item Platform Experience
-			\item Language and Toolset Experience
+			\itemBold{Analyst Capability}
+			\itemBold{Programmer Capability}
+			\itemBold{Personnel Continuity}
+			\itemBold{Application Experience}
+			\itemBold{Platform Experience}
+			\itemBold{Language and Toolset Experience}
 		\end{itemize}
-		\item Platform
+		\item \textbf{Platform}
 		\begin{itemize}
 			\itemBold{Time Constraint} We have no relevant time constraints, so we chose \textbf{Nominal} level for this parameter.
 			\itemBold{Storage Constraint} We have no relevant storage constraint, so we chose \textbf{Nominal} level for this parameter. 
 			\itemBold{Platform Volatility} Our hardware and software platforms do not change often, so we have no volatility and we chose a \textbf{Low} level for this constraint.
 		\end{itemize}
-		\item Project
+		\item \textbf{Project}
 		\begin{itemize}
-			\item Use of Software Tools
-			\item Multisite Development
-			\item Required Development Schedule
+			\itemBold{Use of Software Tools}
+			\itemBold{Multisite Development}
+			\itemBold{Required Development Schedule}
 		\end{itemize}
 	\end{itemize}
-	\item Maintenance
-	\item Software Labor Rates
+	\item \textbf{Maintenance}
+	\item \textbf{Software Labor Rates}
 	\begin{itemize}
-		\item Cost per Person-Month (Dollars)
+		\itemBold{Cost per Person-Month (Dollars)}
 	\end{itemize}	
 \end{itemize}
-
-
 %
