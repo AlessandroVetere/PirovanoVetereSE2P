@@ -8,25 +8,33 @@
 %TODO for each task asssign a level of complexity
 %TODO 2) COCOMO
 %TODO use free tools online (logo tipo tempio greco)
-%TODO 3) describe the number of hours spent for the various tasks (RASD, DD etc.)
 %
 \subsection{Function Points}
-%TODO Spiegare
-\lipsum[100]
+Under the assumption that the dimension of the software can be characterized by correlating the kind of functionalities offered with the source lines of code (SLOC) of the software itself the Function Points approach, defined in 1975 by Allan Albrecht, consist in a technique to assess the effort needed to design and develop custom software applications.
+This technique consists in combining the following program characteristics to obtain a final result:
+\begin{itemize}
+	\item External inputs and outputs,
+	\item User interactions,
+	\item External Interfaces,
+	\item Files used by the system.
+\end{itemize}
+A weight is associated to each of these characteristics and then final calculations are done in order to obtain an indicative size of the software project in terms of SLOC.\par
+The following table relates each types of functionality offered by the system with a weight that depends on the level of complexity of the functionality itself:
 \begin{center}
 	\begin{tabulary}{\linewidth\tymin=70pt}{Y{2cm}|Y{1.75cm}|Y{1.75cm}|Y{1.75cm}}
 		\textbf{Function\newline{}Types} & \textbf{Simple\newline{}Weight} & \textbf{Medium\newline{}Weight} & \textbf{Complex\newline{}Weight} \\ \hline
-		N. Inputs & 3 & 4 & 6 \\ \hline
-		N. Outputs & 4 & 5 & 7 \\ \hline
-		N. Inquiry & 3 & 4 & 6 \\ \hline
-		N. ILF & 7 & 10 & 15 \\ \hline
-		N. ELF & 5 & 7 & 10 \\
+		Internal Logic File & 7 & 10 & 15 \\ \hline
+		External Logic File & 5 & 7 & 10 \\ \hline
+		External Input & 3 & 4 & 6 \\ \hline
+		External Output & 4 & 5 & 7 \\ \hline
+		External Inquiry & 3 & 4 & 6 \\
 	\end{tabulary}
 \end{center}
+These weights are then referred to as $w_{i,j}$ in the following sections, where $i$ stands for the level of complexity, and $j$ for the function type.
+After this section comes the in-details description of each software function class, with the relevant partial sum indicated as $FP_{i}$, where $i$ is the abbreviation for the considered function class.
 %
 \subsubsection{Internal Logic File}
-%TODO Breve introduzione
-\lipsum[100]
+Internal Logic Files are homogeneous sets of data used and managed by the application.\\
 Summary of the calculated weights:
 \begin{equation*}
 	\begin{aligned}
@@ -51,8 +59,7 @@ In details:
 \end{itemize}
 %
 \subsubsection{External Interface File}
-%TODO Breve introduzione
-\lipsum[100]
+External Interface Files are homogeneous sets of data used by the application but generated and maintained by other applications.\\
 Summary of the calculated weights:
 \begin{equation*}
 	\begin{aligned}
@@ -69,8 +76,7 @@ In details:
 \end{itemize}
 %
 \subsubsection{External Input}
-%TODO Breve introduzione
-\lipsum[100]
+External Inputs are elementary operations to elaborate data coming from the external environment.\\
 Summary of the calculated weights:
 \begin{equation*}
 	\begin{aligned}
@@ -93,8 +99,7 @@ In details:
 \end{itemize}
 %
 \subsubsection{External Output}
-%TODO Breve introduzione
-\lipsum[100]
+External Outputs are elementary operations that generate data for the external environment, and they usually include the elaboration of data from logic files.\\
 Summary of the calculated weights:
 	\begin{equation*}
 		\begin{aligned}
@@ -121,8 +126,7 @@ In details:
 \end{itemize}
 %
 \subsubsection{External Inquiry}
-%TODO Breve introduzione
-\lipsum[100]
+External Inquiries are elementary operations that involve input and output, without significant elaboration of data from logic files.\\
 Summary of the calculated weights:
 \begin{equation*}
 	\begin{aligned}
@@ -138,14 +142,21 @@ In details:
 \end{itemize}
 %
 \subsubsection{Summary}
-To recap:
+All the calculated $FP_{i}$ sums up to $FP$, which is the total Function Points value:
 \begin{equation*}
 	\begin{aligned}
 		&	FP
 		& & = FP_{ILF} + FP_{ELF} + FP_{EI} + FP_{EO} + FP_{EIQ}\\
 		&&& = 73 + 17 + 30 + 43 + 6\\
 		&&& = 169\\	
-		\\
+	\end{aligned}
+\end{equation*}
+The total $FP$ value is then multiplied by a constant factor $k_{i,j}$ that depends on the programming language $i$ used to develop the software and the company gearing ratio $j$.\par
+The gearing ratio is the level of a company's debt related to its equity capital, usually expressed in percentage form.
+Gearing is a measure of a company's financial leverage and shows the extent to which its operations are funded by lenders versus shareholders.\par
+This final calculation gives us the number of SLOC predicted for \myTaxiService{}:
+\begin{equation*}
+	\begin{aligned}
 		&   n_{SLOC}
 		& & = FP \cdot k_{Java, Avg}\\
 		&&& = 169 \cdot 53\\
