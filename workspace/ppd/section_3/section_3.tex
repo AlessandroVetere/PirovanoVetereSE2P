@@ -28,8 +28,8 @@ The are summarized all together in the following table, which associates a label
 \end{center}
 %
 \subsection{Tasks Scheduling}
-%TODO Breve introduzione allo scheduling -> come deadline del progetto possiamo usare quella data da COCOMO II
-\lipsum[100]
+In this section is solved the scheduling problem for the identified tasks.
+We provide a table and a diagram in order to have the most effective visualization of the scheduling.
 %
 \subsubsection{Tasks, Durations and Dependencies}
 %TODO Spiegazione della tabella
@@ -46,13 +46,15 @@ The are summarized all together in the following table, which associates a label
 %TODO 2) diagramma di gantt costruito dalla tabella
 \lipsum[100]
 \begin{center}
-	\begin{ganttchart}[hgrid=true,vgrid={draw=none, dotted}, x unit=4mm]{1}{24}
-		\gantttitle{2016}{24} \\
-		\gantttitlelist{1,...,12}{2} \\
-		\ganttmilestone{M1 Start  -}{0} \\
+	\begin{ganttchart}[hgrid=true, vgrid={*3{none}, dotted}, x unit=1.7mm]{1}{60}
+		\gantttitle{2015}{12} \gantttitle{2016}{48} \\
+		\gantttitlelist{10,...,12}{4} \gantttitlelist{1,...,12}{4} \\
+		\ganttmilestone{M1 Start}{0} \\
 		\ganttbar{T1}{1}{2} \\
 		\ganttbar{T2}{1}{6} \\
-		\ganttmilestone{M2 End}{24}
+		\ganttmilestone{M2 End}{24} \\
+		\ganttlink{elem0}{elem1} \\
+		\ganttlink{elem2}{elem3}
 	\end{ganttchart}
 \end{center}
 %
