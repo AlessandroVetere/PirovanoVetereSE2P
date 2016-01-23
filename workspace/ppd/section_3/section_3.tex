@@ -10,13 +10,13 @@ The are summarized all together in the following table, which associates a label
 	\begin{tabulary}{\linewidth\tymin=70pt}{Y{2cm}|Y{6cm}|Y{2.25cm}}
 		\textbf{Task} & \textbf{Description} & \textbf{Completed?}\\ \hline
 		T1a & RASD - Writing & Yes \\ \hline
-		T1b & RASD - Review & Yes \\ \hline
+		T1b & RASD - Presentation & Yes \\ \hline
 		T2a & DD - Writing & Yes \\ \hline
-		T2b & DD - Review & Yes \\ \hline
+		T2b & DD - Presentation & Yes \\ \hline
 		T3a & ITPD - Writing & Yes \\ \hline
-		T3b & ITPD - Review & Yes \\ \hline
+		T3b & ITPD - Presentation & Yes \\ \hline
 		T4a & PPD - Writing & Yes \\ \hline
-		T4b & PPD - Review & No \\ \hline
+		T4b & PPD - Presentation & No \\ \hline
 		T5 & Implementation & No \\ \hline
 		T6 & Unit Testing & No \\ \hline
 		T7 & Integration Testing & No \\ \hline
@@ -35,11 +35,26 @@ The are summarized all together in the following table, which associates a label
 %TODO Spiegazione della tabella
 \lipsum[100]
 \begin{center}
-	\begin{tabulary}{\linewidth\tymin=70pt}{Y{2cm}|Y{2.5cm}|Y{2cm}|Y{2cm}}
-		\textbf{Task} & \textbf{Effort\newline(person-days)} & \textbf{Duration\newline(days)} & \textbf{Dependencies} \\ \hline
-		T1 & 15 & 10 & \\ \hline
-		T2 & 153 & 123 & T1 \\
+	\begin{tabulary}{\linewidth\tymin=70pt}{Y{2cm}|Y{3cm}|Y{2cm}|Y{2cm}}
+		\textbf{Task} & \textbf{Effort\newline(people-hours)} & \textbf{Duration\newline(hours)} & \textbf{Dependencies} \\ \hline
+		T1a &  86 & $22 \cdot 8 = 176h$  & \\ \hline
+		T1b & 7 & 7 & T1a \\ \hline
+		T2a & 74 & $22 \cdot 8 = 176h$ & T1b \\ \hline
+		T2b & 7 & 7 & T2a \\ \hline
+		T3a & 30 & 15 & T2b \\ \hline
+		T3b & 7 & 123 & T3a \\ \hline
+		T4a & 32 & 123 & T3b \\ \hline
+		T4b & 7 & 123 & T4a \\ \hline
+		T5 & 480 & 123 & T4b \\ \hline
+		T6 & 160 & 123 & T5 \\ \hline
+		T7 & 140 & 123 & T6 \\ \hline
+		T8 & 70 & 123 & T7 \\ \hline
+		T9 & 80 & 123 & T8 \\ \hline
+		T10 & 80 & 123 & T9 \\ \hline
+		T11 & 10 & 123 & T10 \\ \hline
 	\end{tabulary}
+	
+	2 febbraio 2016 ppd
 \end{center}
 %
 \subsubsection{Gantt Diagram}
