@@ -25,6 +25,7 @@ The following table relates each types of functionality offered by the system wi
 These weights are then referred to as $w_{i,j}$ in the following sections, where $i$ stands for the level of complexity, and $j$ for the function type.
 After this section comes the in-details description of each software function class, with the relevant partial sum indicated as $FP_{i}$, where $i$ is the abbreviation for the considered function class.
 %
+\newpage
 \subsubsection{Internal Logic File}
 Internal Logic Files are homogeneous sets of data used and managed by the application.\\
 Summary of the calculated weights:
@@ -44,6 +45,7 @@ In details:
 	\fp{Taxi Car}{Taxi Car data. Very infrequent modifications, insertions and readings.}{1}{w_{Simple,ILF}}
 	\fp{Taxi Request}{Taxi Request data. Frequent insertions and readings, infrequent modifications.}{1}{w_{Simple,ILF}}
 	\fp{Taxi Reservation}{Taxi Reservation data. Frequent insertions and readings, infrequent modifications.}{1}{w_{Simple,ILF}}
+	\newpage
 	\fp{Problem}{Problem data. Infrequent insertions, readings and modifications.}{1}{w_{Simple,ILF}}
 	\fp{Zone}{Zone data. Very infrequent insertions, readings and modifications.}{1}{w_{Simple,ILF}}
 	\fp{GPS Data}{GPS Data, Database Server side. Very frequent insertions and readings, but very infrequent modifications.}{1}{w_{Medium,ILF}}
@@ -193,6 +195,7 @@ We also used \href{http://csse.usc.edu/csse/research/COCOMOII/cocomo2000.0/CII_m
 			\itemBold{Platform Experience} The same as \textit{Application Experience}; we have chosen \textbf{Nominal} level for this parameter too.
 			\itemBold{Language and Toolset Experience} The team is quite familiar with the development, analysis and design representation, so we choose \textbf{High} level for this parameter.
 		\end{itemize}
+		\newpage
 		\item \textbf{Platform}
 		\begin{itemize}
 			\itemBold{Time Constraint} We have no relevant time constraints, so we choose \textbf{Nominal} level for this parameter.

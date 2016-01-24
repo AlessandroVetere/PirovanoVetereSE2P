@@ -7,32 +7,33 @@ As shown in the \blueHref{fig:1}{result of the COCOMO II - Calculator} in the co
 \subsection{Staff Allocation Chart}
 A chart is provided for the best visualization of the staff allocation.
 For graphical issues, some consecutive tasks are merged one into the other: T1a and T1b are merged into T1, T2a and T2b are merged into T2, T3a and T3b are merged into T3, T4a and T4b are merged into T4, T10 and T11 are merged into T12.
+\vspace{2em}
 \begin{center}
-	\begin{ganttchart}[hgrid=true, x unit=2.3mm]{1}{44}
-		%78 giorni e 315 giorni
-		\gantttitle{2015}{8} \gantttitle{2016}{36}\\
-		\ganttbar{Alberto}{1}{1}
-		\ganttbar[inline]{T1}{1}{2}
-		\ganttbar[inline]{T2}{3}{6}
-		\ganttbar[inline]{T3}{9}{10}
-		\ganttbar[inline]{T4}{11}{12}
-		\ganttbar[inline]{T5}{13}{24}
-		\ganttbar[inline]{T6}{25}{28}
-		\ganttbar[inline]{T7}{29}{32}
-		\ganttbar[inline]{T8}{33}{36}
-		\ganttbar[inline]{T9}{37}{40}
-		\ganttbar[inline]{T12}{41}{44}\\
-		\ganttbar{Alessandro}{1}{1}
-		\ganttbar[inline]{T1}{1}{2}
-		\ganttbar[inline]{T2}{3}{6}
-		\ganttbar[inline]{T3}{9}{10}
-		\ganttbar[inline]{T4}{11}{12}
-		\ganttbar[inline]{T5}{13}{24}
-		\ganttbar[inline]{T6}{25}{28}
-		\ganttbar[inline]{T7}{29}{32}
-		\ganttbar[inline]{T8}{33}{36}
-		\ganttbar[inline]{T9}{37}{40}
-		\ganttbar[inline]{T12}{41}{44}
+	\begin{ganttchart}[hgrid=true, x unit=1.8mm, vgrid={*3{draw=none}, dotted}, bar label font=\footnotesize]{1}{56}
+		\gantttitle{2015}{12} \gantttitle{2016}{44} \\
+		\gantttitlelist{10,...,12}{4}\gantttitlelist{1,...,11}{4}\\
+		\ganttbar{Alberto}{1}{0}
+		\ganttbar[inline]{T1}{3}{5} 
+		\ganttbar[inline]{T2}{8}{9} 
+		\ganttbar[inline]{T3}{14}{15}
+		\ganttbar[inline]{T4}{16}{18} 
+		\ganttbar[inline]{T5}{19}{32} 
+		\ganttbar[inline]{T6}{33}{36} 
+		\ganttbar[inline]{T7}{37}{40} 
+		\ganttbar[inline]{T8}{41}{44} 
+		\ganttbar[inline]{T9}{45}{48} 
+		\ganttbar[inline]{T10}{49}{52}\\
+		\ganttbar{Alessandro}{1}{0}
+		\ganttbar[inline]{T1}{3}{5} 
+		\ganttbar[inline]{T2}{8}{9} 
+		\ganttbar[inline]{T3}{14}{15}
+		\ganttbar[inline]{T4}{16}{18} 
+		\ganttbar[inline]{T5}{19}{32} 
+		\ganttbar[inline]{T6}{33}{36} 
+		\ganttbar[inline]{T7}{37}{40} 
+		\ganttbar[inline]{T8}{41}{44} 
+		\ganttbar[inline]{T9}{45}{48} 
+		\ganttbar[inline]{T10}{49}{52}
 \end{ganttchart}
 \end{center}
 %
