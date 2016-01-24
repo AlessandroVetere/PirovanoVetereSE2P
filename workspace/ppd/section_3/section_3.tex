@@ -29,11 +29,15 @@ The are summarized all together in the following table, which associates a label
 %
 \subsection{Tasks Scheduling}
 In this section is solved the scheduling problem for the identified tasks.
-We provide a table and a diagram in order to have the most effective visualization of the scheduling.
+We provide two tables and a diagram in order to have the most effective visualization of the scheduling.
 %
 \subsubsection{Tasks, Durations and Dependencies}
-%TODO Spiegazione della tabella
-\lipsum[100]
+The following table summarizes for each task identified:
+\begin{itemize}
+	\item The effort needed to perform such task (in terms of $[person \cdot hour]$),
+	\item The work force (in terms of $[hour]$) effectively available to do such task in the related period,
+	\item The dependencies of the specific tasks to other tasks.
+\end{itemize}
 \begin{center}
 	\begin{tabulary}{\linewidth\tymin=70pt}{Y{1cm}|Y{2.5cm}|Y{4cm}|Y{2.5cm}}
 		\textbf{Task} & \textbf{Effort [$person \cdot hour$]} & \textbf{Work Force [$hour$]} & \textbf{Dependencies} \\ \hline
@@ -54,7 +58,13 @@ We provide a table and a diagram in order to have the most effective visualizati
 		T11 & 8 & $1[day] \cdot 4[hour/day] = \textbf{4[hour]}$ & T10 \\
 	\end{tabulary}
 \end{center}
-Then we calculate the dates:
+\newpage
+Then, for each task, are identified:
+\begin{itemize}
+	\item The date in which the given task starts,
+	\item The date in which the given task ends,
+	\item The interval in $[day]$ that separates the starting date from the ending date.
+\end{itemize}
 \begin{center}
 	\begin{tabulary}{\linewidth\tymin=70pt}{Y{1cm}|Y{3cm}|Y{3cm}|Y{1.7cm}}
 		\textbf{Task} & \textbf{Start} & \textbf{End} & \textbf{Interval} \\ \hline
@@ -66,50 +76,40 @@ Then we calculate the dates:
 		T3b & 22/01/2016 & 22/01/2016 & 1\\ \hline
 		T4a & 22/01/2016 & 02/02/2016 & 10\\ \hline
 		T4b & 03/02/2016 & 03/02/2016 & 1\\ \hline
-		T5 & 04/02/2016 & 04/06/2016 & $\sim$90\\ \hline
-		T6 & 05/06/2016 & 05/07/2016 & $\sim$30\\ \hline
-		T7 & 06/07/2016 & 06/08/2016 & $\sim$30\\ \hline
-		T8 & 07/08/2016 & 07/09/2016 & $\sim$30\\ \hline
-		T9 & 08/09/2016 & 08/10/2016 & $\sim$30\\ \hline
-		T10 & 09/10/2016 & 09/11/2016 & $\sim$30\\ \hline
-		T11 & 10/11/2016 & 10/11/2016 & 1\\
+		T5 & 04/02/2016 & 30/05/2016 & 117\\ \hline
+		T6 & 31/05/2016 & 29/06/2016 & 29\\ \hline
+		T7 & 30/06/2016 & 28/07/2016 & 28\\ \hline
+		T8 & 29/07/2016 & 29/08/2016 & 31\\ \hline
+		T9 & 30/08/2016 & 27/09/2016 & 28\\ \hline
+		T10 & 28/09/2016 & 26/10/2016 & 28\\ \hline
+		T11 & 27/10/2016 & 27/10/2016 & 1\\
 	\end{tabulary}
 \end{center}
 %
+\newpage
 \subsubsection{Gantt Diagram}
 %TODO 2) diagramma di gantt costruito dalla tabella
-\lipsum[100]
+Here is built a Gantt Diagram showing the scheduling chosen for \myTaxiService{} project tasks.
 \begin{center}
 	%393 giorni
-	\begin{ganttchart}[hgrid=true, vgrid={*2{white}, dotted}, x unit=2.5mm]{1}{43}
+	\begin{ganttchart}[hgrid=true, x unit=2.75mm, link bulge=0.75]{1}{42}
 		%78 giorni e 315 giorni
-		\gantttitle{2015}{9} \gantttitle{2016}{34} \\
-		\ganttbar{T1a}{1}{2} \\
-		\ganttbar{T1b}{3}{2} \\
-		\ganttbar{T2a}{3}{4} \\
-		\ganttbar{T2b}{5}{4} \\
-		\ganttbar{T3a}{9}{10} \\
-		\ganttbar{T3b}{11}{10} \\
-		\ganttbar{T4a}{11}{12} \\
-		\ganttbar{T4b}{13}{12} \\
-		\ganttbar{T5}{13}{25} \\
-		\ganttbar{T6}{26}{29} \\
-		\ganttbar{T7}{30}{33} \\
-		\ganttbar{T8}{34}{37} \\
-		\ganttbar{T9}{38}{41} \\
-		\ganttbar{T10}{41}{44} \\
-		\ganttbar{T11}{45}{44}
-		\ganttlink{elem0}{elem1}
-		\ganttlink{elem1}{elem2}
-		\ganttlink{elem2}{elem3}
-		\ganttlink{elem3}{elem4}
-		\ganttlink{elem4}{elem5}
-		\ganttlink{elem5}{elem6}
-		\ganttlink{elem6}{elem7}
-		\ganttlink{elem7}{elem8}
-		\ganttlink{elem8}{elem9}
-		\ganttlink{elem9}{elem10}
-		\ganttlink{elem10}{elem11}
+		\gantttitle{2015}{8} \gantttitle{2016}{34} \\
+			  \ganttbar{T1a}{1}{2} \\
+		\ganttlinkedbar{T1b}{3}{2} \\
+		\ganttlinkedbar{T2a}{3}{5} \\
+		\ganttlinkedbar{T2b}{6}{5} \\
+		\ganttlinkedbar{T3a}{9}{9} \\
+		\ganttlinkedbar{T3b}{10}{9} \\
+		\ganttlinkedbar{T4a}{10}{11} \\
+		\ganttlinkedbar{T4b}{12}{11} \\
+		\ganttlinkedbar{T5}{12}{24} \\
+		\ganttlinkedbar{T6}{25}{28} \\
+		\ganttlinkedbar{T7}{29}{32} \\
+		\ganttlinkedbar{T8}{33}{36} \\
+		\ganttlinkedbar{T9}{36}{39} \\
+		\ganttlinkedbar{T10}{40}{42} \\
+		\ganttlinkedbar{T11}{43}{42}
 	\end{ganttchart}
 \end{center}
 %
