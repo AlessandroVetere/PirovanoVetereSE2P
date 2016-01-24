@@ -9,40 +9,58 @@ No recruitment problems.
 \begin{itemize}
 	%They threaten the project plan. If they become real, it is likely that the project schedule will slip and that costs will increase
 	\item Project Risks
+	\begin{enumerate}
+		\risk{Key staff are ill at critical times in the project.}{Moderate}{Serious}{}
+		\risk{The work force available is less than expected.}{Moderate}{Serious}{}
+	\end{enumerate}
+	
+	
 	% They threaten the quality and timeliness of the software to be produced. If they become real, implementation may become difficult or impossible
 	\item Technical Risks
+	\begin{enumerate}
+		\risk{The database used in the system cannot process as many transaction per second as expected.}{Moderate}{Serious}{}
+		\risk{Faults in reusable software components have to be repaired before these components are reused.}{Moderate}{Serious}{}
+		\
+	\end{enumerate}
+	
+	
 	%They threaten the viability of the software to be built. If they become real, they jeopardize the project or the product.
 	\item Business Risks
 	\begin{itemize}
 		%building an excellent product or system that no one really wants
 		\itemBold{Market Risk}
+		\begin{enumerate}
+			\risk{The project, once developed, demonstrates a complete misunderstanding of the requirements.}{Low}{Catastrophic}{}
+		\end{enumerate}
 		
 		
 		%building a product that no longer fits into the overall business strategy for the company
 		\itemBold{Strategic Risk}
+		\begin{enumerate}
+			\risk{The business strategy changes and \myTaxiService{} is no longer a priority for our company.}{Low}{Catastrophic}{}
+		\end{enumerate}
 		
 		
 		%building a product that the sales force doesn't understand how to sell
 		\itemBold{Sales Risk}
 		\begin{enumerate}
-			\risk{The project, once developed, comes out as too complex and not easily marketable.}{MEDIUM}{}{}
-			\risk{The user interfaces developed are not user-friendly.}{LOW}{}{}
-			\risk{The project, once developed, demonstrates a complete misunderstanding of the requirements.}{LOW}{}{}
+			\risk{The project, once developed, comes out as too complex and not easily marketable.}{Moderate}{}{}
+			\risk{The user interfaces developed are not user-friendly.}{Low}{}{}
 		\end{enumerate}
 		
 		
 		%Losing the support of senior management due to a change in focus or a change in people
 		\itemBold{Management Risk}
 		\begin{enumerate}
-			\risk{The company changes the management group and the new one decides to change the project focus or the project work force.}{LOW}{}{}
+			\risk{The company changes the management group and the new one decides to change the project focus or the project work force.}{High}{Serious}{}
 		\end{enumerate}
 		
 		
 		%losing budgetary or personnel commitment
 		\itemBold{Budget Risk}
 		\begin{enumerate}
-			\risk{The company decides to assign less money than promised for the development of \myTaxiService{}.}{LOW}{}{}
-			\risk{One or both the developers of \myTaxiService{} decide to stop the development for an overlapping with other personal commitments.}{LOW}{}{}
+			\risk{The company decides to reduce the budget for the development of \myTaxiService{}.}{Low}{Catastrophic}{}
+			\risk{One or both the developers of \myTaxiService{} decide to stop the development for an overlapping with other personal commitments.}{Low}{Serious}{}
 		\end{enumerate}
 	\end{itemize}
 \end{itemize}
