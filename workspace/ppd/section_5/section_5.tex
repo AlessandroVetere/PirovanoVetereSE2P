@@ -7,61 +7,49 @@ In order to adopt a global \textbf{Proactive Risk Management Strategy}, we ident
 %
 \subsection{Risk Types}
 All the risk types identified are here reported:
-%TODO risks types and examples
 \begin{itemize}
 	%They threaten the project plan. If they become real, it is likely that the project schedule will slip and that costs will increase
 	\item \textbf{Project Risks}
 	\begin{enumerate}
-		\risk{Key staff are ill at critical times in the project.}{Moderate}{Serious}{}
-		\risk{The work force available is less than expected.}{Moderate}{Serious}{}
+		\risk{Members of the team are ill at critical times in the project.}{Moderate}{Serious}{Organize the team so that there is more overlap of work and each team member for this reason understands each other's job.}
+		\risk{The work force available is less than expected.}{Moderate}{Serious}{In scheduling phase, take into account that possibility and assign a bit more effort than needed to each task.}
 	\end{enumerate}
-	
-	
 	% They threaten the quality and timeliness of the software to be produced. If they become real, implementation may become difficult or impossible
 	\item \textbf{Technical Risks}
 	\begin{enumerate}
-		\risk{The database used in the system cannot process as many transaction per second as expected.}{Moderate}{Serious}{}
-		\risk{Faults in reusable software components have to be repaired before these components are reused.}{Moderate}{Serious}{}
+		\risk{The database and other external software components used in the system cannot process as many operations per second as expected.}{Moderate}{Serious}{Overestimate the operations throughput in order to choose the appropriate support infrastructure.}
+		\risk{Faults in reusable software components have to be repaired before these components are reused.}{Moderate}{Serious}{Develop strong unit tests so that the error probability is reduced and in the worst case the reparation time is minimized.}
 	\end{enumerate}
-	
-	
 	%They threaten the viability of the software to be built. If they become real, they jeopardize the project or the product.
-	\item \textbf{ Business Risks}
+	\newpage
+	\item \textbf{Business Risks}
 	\begin{itemize}
 		%building an excellent product or system that no one really wants
 		\itemBold{Market Risk}
 		\begin{enumerate}
-			\risk{The project, once developed, demonstrates a complete misunderstanding of the requirements.}{Low}{Catastrophic}{}
+			\risk{The project, once developed, demonstrates a complete misunderstanding of the requirements.}{Low}{Catastrophic}{Design a complete RASD and submit it to peer reviewing.}
 		\end{enumerate}
-		
-		
 		%building a product that no longer fits into the overall business strategy for the company
 		\itemBold{Strategic Risk}
 		\begin{enumerate}
-			\risk{The business strategy changes and \myTaxiService{} is no longer a priority for our company.}{Low}{Catastrophic}{}
+			\risk{The business strategy changes and \myTaxiService{} is no longer a priority for the company.}{Low}{Catastrophic}{Prepare a briefing document for the business management showing how the project is going to provide concrete results, given the high market value of \myTaxiService{}.}
 		\end{enumerate}
-		
-		
 		%building a product that the sales force doesn't understand how to sell
 		\itemBold{Sales Risk}
 		\begin{enumerate}
-			\risk{The project, once developed, comes out as too complex and not easily marketable.}{Moderate}{}{}
-			\risk{The user interfaces developed are not user-friendly.}{Low}{}{}
+			\risk{The project, once developed, comes out as too complex and not easily marketable.}{Moderate}{Catastrophic}{Design a DD with a high level of detail, and double check it against the RASD.}
+			\risk{The user interfaces developed are not user-friendly.}{Low}{Moderate}{Follow the guidelines provided by the designers for developing modern, thin and usable UIs.}
 		\end{enumerate}
-		
-		
 		%Losing the support of senior management due to a change in focus or a change in people
 		\itemBold{Management Risk}
 		\begin{enumerate}
-			\risk{The company changes the management group and the new one decides to change the project focus or the project work force.}{High}{Serious}{}
+			\risk{The company changes the management group and the new one decides to change the project focus or the project work force.}{High}{Serious}{Prepare a briefing document for management group showing how \myTaxiService{} is making important contributions to the business goals.}
 		\end{enumerate}
-		
-		
 		%losing budgetary or personnel commitment
 		\itemBold{Budget Risk}
 		\begin{enumerate}
-			\risk{The company decides to reduce the budget for the development of \myTaxiService{}.}{Low}{Catastrophic}{}
-			\risk{One or both the developers of \myTaxiService{} decide to stop the development for an overlapping with other personal commitments.}{Low}{Serious}{}
+			\risk{The company decides to reduce the budget for the development of \myTaxiService{}.}{Low}{Catastrophic}{Prepare a briefing document for management showing how cutting the budget for the project would not be cost-effective.}
+			\risk{A developer of \myTaxiService{} decide to stop the development for an overlapping with other personal commitments.}{Low}{Serious}{Investigate the possibility of buying-in some software components, and the possibility of hiring new team members.}
 		\end{enumerate}
 	\end{itemize}
 \end{itemize}
