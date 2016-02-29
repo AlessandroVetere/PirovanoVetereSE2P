@@ -135,7 +135,7 @@
 		Here is an example of one among the \textbf{simplest world} we generated and double checked using both the \textbf{Alloy Analyzer 4.2} and \textbf{manual checking}.
 		\showPercentImageNoCaption{../rasd/section_3/alloy/simple_world_90.png}{0.9}
 	\end{frame}
-	\section{DD}
+	\section{Design}
 	\subsection{Architectural Design}
 	\begin{frame}{Overview Diagram}
 		\showGeneralDiagram{1.0}
@@ -349,7 +349,7 @@
 		In the following slides are shown \textbf{sequence of graphical states} that the application has to \textbf{render} in order to \textbf{create} and \textbf{handle} a Taxi Ride.
 		Once logged in, the \textbf{Registered Passenger} will be redirected in his/her personal \textbf{Home page}, where he/she will be able to request or reserve a \textbf{Taxi Ride} and manage his/her personal profile.
 	\end{frame}
-	\begin{frame} {Passenger Mockups - Overview}
+	\begin{frame}{Passenger Mockups - Overview}
 		Here the \textbf{Registered Passenger} can perform different actions:
 		\begin{itemize}
 			\item Request a Ride
@@ -361,7 +361,7 @@
 		By clicking the \textbf{"Request a ride"} and \textbf{"Reserve a ride"} buttons the user is allowed to perform the relative actions.\\
 		\textbf{Once requested a ride, the "Request a ride" button is disabled, in order to prevent multiple useless requests.}
 	\end{frame}
-	\begin{frame} {Passenger Mockups - Personal Homepage}
+	\begin{frame}{Passenger Mockups - Personal Homepage}
 		This is an example of the \textbf{Registered Passenger}'s \textbf{Home page}. The screen is divided in two parts:
 		\begin{itemize}
 			\item The \textbf{left} one contains \textbf{Taxi Requests}
@@ -369,13 +369,13 @@
 		\end{itemize} 
 		\showRPMockupImage{RegisteredPassengerHomePage}{Empty RP home page.}{0.775}
 	\end{frame}
-	\begin{frame} {Passenger Mockups - Request a Ride}
+	\begin{frame}{Passenger Mockups - Request a Ride}
 		\showRPMockupImage{RequestTaxi}{Taxi request.}{1}
 	\end{frame}
-	\begin{frame} {Passenger Mockups - Reserve a Ride}
+	\begin{frame}{Passenger Mockups - Reserve a Ride}
 		\showRPMockupImage{ReserveTaxi}{Taxi reservation.}{1}
 	\end{frame}
-	\begin{frame} {Passenger Mockups - Personal Homepage with \textbf{Taxi Rides}}
+	\begin{frame}{Passenger Mockups - Personal Homepage with \textbf{Taxi Rides}}
 		Below is shown a common \textbf{state} with one \textbf{Taxi Request} active and one \textbf{Taxi Reservation} booked. 
 		Through the trash icon the user is allowed to cancel a selected \textbf{Taxi Ride}.
 		\showRPMockupImage{RegisteredPassengerHomePage2}{Populated RP home page.}{0.85}
@@ -383,7 +383,7 @@
 	\begin{frame}{Taxi Driver Mockups}
 		In the following slides are shown \textbf{the sequence of the graphical states} that the application has to \textbf{render} in order to make the \textbf{Taxi Driver} able to \textbf{handle} a \textbf{Taxi Ride}.
 	\end{frame}
-	\begin{frame} {Taxi Driver Mockups - Overview}
+	\begin{frame}{Taxi Driver Mockups - Overview}
 		The \textbf{Taxi Driver} personal screen is divided into \textbf{two} sections:
 		\begin{itemize}
 			\item Pending Rides Space
@@ -400,13 +400,13 @@
 			\item If it is not solvable, then the system \textbf{assigns} the incomplete ride to the next \textbf{Taxi Driver} in the \textbf{Zone Queue}.
 		\end{itemize}
 	\end{frame}
-	\begin{frame} {Taxi Driver Mockups - No Requests}
+	\begin{frame}{Taxi Driver Mockups - No Requests}
 		\showTDMockupImage{TaxiDriverScreen3}{Taxi Driver Homepage without pending \textbf{Taxi Requests}.}{0.275}
 	\end{frame}
-	\begin{frame} {Taxi Driver Mockups - A Pending Request}
+	\begin{frame}{Taxi Driver Mockups - A Pending Request}
 		\showTDMockupImage{TaxiDriverScreen1}{Taxi Driver Homepage with a \textbf{PENDING} \textbf{Taxi Request}.}{0.275}
 	\end{frame}
-	\begin{frame} {Taxi Driver Mockups - A Active Request}
+	\begin{frame}{Taxi Driver Mockups - A Active Request}
 		\showTDMockupImage{TaxiDriverScreen2}{Taxi Driver Homepage with an \textbf{ACTIVE} \textbf{Taxi Request}.}{0.275}
 	\end{frame}
 	\begin{frame}{Administrator Mockups}
@@ -415,16 +415,17 @@
 		Thus, the Administrator can perform his actions using an intuitive, fast, and lightweight GUI.
 		\showAdminMockupImage{admin_mockup_1}{Example of an Administrator screen.}{0.575}
 	\end{frame}
-	\section{ITPD}
-	\begin{frame}{ITPD - Scope and Approach}
-		This document is mainly based on the \textbf{Design Document}. \\
+	\section{Integration Test Plan}
+	\subsection{Overview}
+	\begin{frame}{Scope and Approach}
+		This project phase is highly based on the \textbf{Design} one. \\
 		\medskip
-		In fact the purpose of the \textbf{Integration Test Plan Document} is to clearly state the order in which the software components identified in the \textbf{Component View} of the \textbf{DD} have to be integrated one with each other in order to guarantee a well tested final software.\\
+		We will clearly state the order in which the software components identified in the \textbf{Component View} of the \textbf{Design} part have to be integrated one with each other in order to guarantee a well tested final software.\\
 		\medskip
-		The \textbf{bottom-up integration testing approach} has been chosen, because for a medium sized project like \textbf{myTaxiService}, it is best to proceed step by step in a careful yet coherent integration strategy.\\
+		The \textbf{bottom-up integration testing approach} has been chosen, because for a medium sized project like \myTaxiService{}, it is best to proceed step by step in a careful yet coherent integration strategy.\\
 	\end{frame}
-	\begin{frame}{ITPD - Entry Criteria}
-		Before starting the integration testing of any software component that has been designed for \textbf{myTaxiService} system, few points have to be underlined:
+	\begin{frame}{Entry Criteria}
+		Before starting the integration testing of any software component that has been designed for \myTaxiService{} system, few points have to be underlined:
 		\begin{itemize}
 			 \item The \textbf{internal functions} of the considered component must be \textbf{unit tested} using an appropriate framework.
 			 \item We suppose that \textbf{Google Maps API} are well tested by \textbf{Google} and thus we can use them without testing any
@@ -432,25 +433,25 @@
 			 \item We assume that the \textbf{GPS Data Source} module in the \textbf{Taxi Driver View} uses the \textbf{GPS Drivers} of the underlying operating system that are already tested, and the same is assumed for the \textbf{Database Driver Adapter} in the \textbf{Model} referring to Database Drivers.
 		\end{itemize}
 	\end{frame}
-	\begin{frame}{ITPD - Integration Testing Strategy}
+	\begin{frame}{Integration Testing Strategy}
 		We considered \textbf{Model}, \textbf{Controller} and \textbf{Views} as \textbf{Subsystems}. \\
 		\medskip
 		\begin{itemize}
-			\itemBold{Model} In order to test its relevant functionalities, the tester has to simulate the behaviour of the \textbf{Controller} with a dedicated \textbf{Driver}. \\
+			\itemBold{Model} In order to test its relevant functionalities, the tester has to simulate the behavior of the \textbf{Controller} with a dedicated \textbf{Driver}. \\
 			In this way, the \textbf{Model} will be completely integration tested by simulating all the possible actions that the \textbf{Controller} can do on it.
 			\itemBold{Controller} The test sequence adopts the same strategy used to test the \textbf{Model}. The only difference from a higher point of view, is that in this case the \textbf{Controller} is tested using the already tested \textbf{Model} and using a \textbf{Driver} in order to simulate the \textbf{Views} actions.
 			\itemBold{Views} The \textbf{Taxi Driver View}, \textbf{Passenger View} and \textbf{Administrator View} are tested using the already tested \textbf{Controller} and \textbf{Model} and no component behavior is simulated using \textbf{Stubs} or \textbf{Drivers}.
 		\end{itemize}
 	\end{frame}
-	\begin{frame}{ITPD - Convention adopted - Blocks}
+	\begin{frame}{Convention adopted - Blocks}
 		\begin{itemize}
-			\itemBold{Yellow} This block is not dependent on any lower level component in \textbf{myTaxiService} and therefore it is integrated as a starting point in the current diagram.
+			\itemBold{Yellow} This block is not dependent on any lower level component in \myTaxiService{} and therefore it is integrated as a starting point in the current diagram.
 			\itemBold{Blue} This block is going to be fully integrated on the top of its parents.
 			\itemBold{Green} This block is not going to be fully integrated within the current diagram but needs further integration testing in subsequent diagrams.
 			\itemBold{Red} This block represents a stub component, that replaces the real component mocking its functionalities.
 		\end{itemize}
 	\end{frame}
-	\begin{frame}{ITPD - Convention adopted - Arrows}
+	\begin{frame}{Convention adopted - Arrows}
 		We use \textbf{arrows} to link different blocks in order to explain the \textbf{precedence} between software components integration. \\
 		\medskip
 		Every \textbf{arrow} has the following meaning:
@@ -461,6 +462,7 @@
 		\medskip
 		Moreover if a block is pointed by several arrows, its integration process can begin only when all the parent blocks are integrated.
 	\end{frame}
+	\subsection{Integration Sequence Diagrams}
 	\begin{frame}{Subsystems Integration Sequence}
 		\showPercentImageNoCaption{./itpd1.png}{0.75}
 	\end{frame}	
@@ -476,7 +478,6 @@
 		\end{itemize}
 		We are going to show only the first two diagrams for sake of brevity.
 	\end{frame}
-
 	\begin{frame}{Model Integration Sequence}
 		\showPercentImageNoCaption{./itpd2.png}{0.85}
 	\end{frame}
@@ -494,11 +495,13 @@
 		In conclusion there is the need for some sample data to be in the \textbf{Database} and some sample \textbf{GPS data} are needed.
 	\end{frame}
 	\section{Project Plan}
-	\begin{frame}{PPD}
-		The \textbf{Project Plan} consists in tables, \textbf{Gantt diagrams}, charts and natural language descriptions of the planning, scheduling and management of \textbf{myTaxiService} development. \\
+	\subsection{Plan Contents} 
+	\begin{frame}{Plan Contents}
+		The \textbf{Project Plan} consists in tables, \textbf{Gantt diagrams}, charts and natural language descriptions of the planning, scheduling and management of \myTaxiService{} development. \\
 		\medskip
 		In order to estimate the project effort, we followed the assumption that the \textbf{dimension of the software} can be characterized by correlating \textbf{the kind of functionalities offered} with \textbf{the source lines of code (SLOC) of the software itself}
 	\end{frame}
+	\subsection{Cost Models}
 	\begin{frame}{Function Points Approach}
 		The \textbf{Function Points approach}, defined in 1975 by Allan Albrecht:
 		\begin{itemize}
@@ -515,12 +518,35 @@
 			\item External Inquiry
 		\end{itemize}
 	\end{frame}
+	\begin{frame}{Function Points Summary}
+		All the calculated $FP_{i}$ sums up to $FP$, which is the total Function Points value:
+		\begin{equation*}
+			\begin{aligned}
+				&	FP
+				& & = FP_{ILF} + FP_{ELF} + FP_{EI} + FP_{EO} + FP_{EIQ}\\
+				&&& = 73 + 17 + 30 + 43 + 6\\
+				&&& = 169\\	
+			\end{aligned}
+		\end{equation*}
+		The total $FP$ value is then multiplied by a constant factor $k_{i,j}$ that depends on the programming language $i$ used to develop the software and the company gearing ratio $j$.\par
+		The gearing ratio is the level of a company's debt related to its equity capital, usually expressed in percentage form.\par
+		This final calculation gives us the number of SLOC $n_{SLOC}$ estimated for \myTaxiService{}:
+		\begin{equation*}
+			\begin{aligned}
+				&   n_{SLOC}
+				& & = FP \cdot k_{Java, Avg}\\
+				&&& = 169 \cdot 53\\
+				&&& = 8957 \text{ SLOC}
+			\end{aligned}
+		\end{equation*}
+	\end{frame}
 	\begin{frame}{COCOMO II - Parameters}
 		\showPercentImageNoCaption{../ppd/section_2/cocomo1.png}{0.9}
 	\end{frame}
 	\begin{frame}{COCOMO II - Results}
 		\showPercentImageNoCaption{../ppd/section_2/cocomo2.png}{0.75}
-	\end{frame}	
+	\end{frame}
+	\subsection{Tasks Scheduling}
 	\begin{frame}{Tasks}
 		\begin{tabulary}{\linewidth\tymin=70pt}{Y{2cm}|Y{6cm}|Y{2.25cm}}
 			\textbf{Task} & \textbf{Description} & \textbf{Completed?}\\ \hline
