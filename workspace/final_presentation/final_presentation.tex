@@ -1,12 +1,9 @@
 \documentclass{../common/latex_classes/pdf_presentation}
 %
-\usepackage{tikz}
-\usetikzlibrary{shapes,arrows}
-%
-\newcommand{\showGeneralDiagram}[2]{\showPercentImage{../dd/section_2/general_diagram_dd.png}{#1}{#2}}
-\newcommand{\showComponentDiagram}[2]{\showPercentImage{../dd/section_2/component_diagram/component_diagram.png}{#1}{#2}}
-\newcommand{\showDeploymentDiagram}[2]{\showPercentImage{../dd/section_2/deployment_diagram/deployment_diagram.png}{#1}{#2}}
-\newcommand{\showSequenceDiagram}[3]{\showPercentImage{../dd/section_2/sequence_diagrams/#1_sequence_diagram.png}{#2}{#3}}
+\newcommand{\showGeneralDiagram}[1]{\showPercentImageNoCaption{../dd/section_2/general_diagram_dd.png}{#1}}
+\newcommand{\showComponentDiagram}[1]{\showPercentImageNoCaption{../dd/section_2/component_diagram/component_diagram.png}{#1}}
+\newcommand{\showDeploymentDiagram}[1]{\showPercentImageNoCaption{../dd/section_2/deployment_diagram/deployment_diagram.png}{#1}}
+\newcommand{\showSequenceDiagram}[2]{\showPercentImageNoCaption{../dd/section_2/sequence_diagrams/#1_sequence_diagram.png}{#2}}
 \newcommand{\showRPMockupImage}[3]{\showPercentImage{../rasd/section_3/mockups/png_passenger/#1.png}{#2}{#3}}
 \newcommand{\showTDMockupImage}[3]{\showPercentImage{../rasd/section_3/mockups/png_driver/#1.png}{#2}{#3}}
 \newcommand{\showAdminMockupImage}[3]{\showPercentImage{../dd/section_4/mockups/administrator_mockups/#1.png}{#2}{#3}}
@@ -49,62 +46,69 @@
 \begin{document}
 	\titleToc{}
 	\section{Introduction}
-	\begin{frame}{Assignment}
-		The project is called \textbf{myTaxiService}, and is a complex software system to better manage and improve a preexisting taxi service in a town.\\
-		In order to rationalize, clarify, and put in a \textbf{well structured document} all the revelant contents of that high level description, along with several additional contents of ours, a \textbf{RASD} was chosen as the best form of such a document.\\
+	\begin{frame}{Introduction}
+		The project we have been assigned is called \myTaxiService{} and it is a complex software system that should improve in several ways a preexisting taxi service in a town.\par
+		In order to rationalize, clarify, and put in \textbf{structured and standardized documents} all the relevant concepts and informations, we designed and delivered several documents such as the \textbf{RASD}, the \textbf{DD}, the \textbf{ITPD} and the \textbf{PPD}.\par
+		These slides will only present an overview of the concepts thoroughly described in the above mentioned documents.
 	\end{frame}
-	\begin{frame}{Tools used}
-		We composed this document using some tools such as:
-		\begin{enumerate}
-			\item\textbf{TexStudio} for compiling \LaTeX{} document
-			\item\textbf{StarUML} for drawing diagrams
-			\item\textbf{Alloy Analizer 4.2} for checking model consistency
-			\item\textbf{Balsamiq mockups 3.0} for building mockups
-			\item\textbf{SourceTree} for allowing team collaboration
-			\item\textbf{Github} for storing the project 
-			\item\textbf{Asta Professional} for drwaing diagrams
-			\item\textbf{Skype} for team collaboration
-		\end{enumerate}		
-	\end{frame}
-	\section{RASD}
-	\subsection{What, why and how?}
-	\begin{frame}{What is a RASD?}
-		\textbf{RASD} stands for \textbf{R}equirement \textbf{A}nalysis and \textbf{S}pecification \textbf{D}ocument, and is often mentioned as \textbf{SRS} (\textbf{S}oftware \textbf{R}equirements \textbf{S}pecification) in the literature.\\
-		The standards that defines it, \textbf{IEEE Std 830-1998}, infact refers to that kind of document using the term \textbf{SRS}.\\
-		Essentially, it is a document in which are analyzed and specified all the \textbf{requirements} of a software system that is going to be developed.
-	\end{frame}
-	\subsection{What does our RASD contain?}
-	\begin{frame}{Contents overview}
-		Our \textbf{RASD} consists in:
-		\begin{enumerate}
-			\item Title
-			\item Table of Contents
-			\item \textbf{3 Main Sections}
-			s	\item 1 Appendix
-		\end{enumerate}
-		It was intended to be as much compilant with \textbf{IEEE Std 830-1998} as possible, but still there were deviations from the standard to better fit our project assignment (i.e. the inclusion of Alloy models...).
-	\end{frame}
-	\begin{frame}{Section 1 - Introduction}
-		It is a general overview of the \textbf{RASD} document.\\
-		Furthermore it specifically provides both a description of high-level software functionalities, and a set of information about the organization of the document.\\
-		In particular, this section specifies the \textbf{goals} and the \textbf{actors} involved in the application.\\ 
-		Moreover, it helps to better understand the used \textbf{acronyms}, \textbf{abbreviations}, and gives a lot of useful \textbf{definitions}.
-	\end{frame}
-	\begin{frame}{Section 2 - Overall Description}
-		The aim of this section is describing the \textbf{product} that is going to be developed at a sufficient level of details.\\
-		Moreover, it contains descriptions of all the \textbf{environmental} \textbf{elements} and \textbf{constraints} that are going to interact with the product during the development and once deployed.\\
-		It serves also as a \textbf{background} for the description of software requirements, and helps in making them easier to understand for the public of the document (i.e. engineers, stakeholders…).
-	\end{frame}
-	\begin{frame}{Section 3 - Specific requirements}
-		In this section are treated the \textbf{software requirements} at a level of detail sufficient for developers and engineers to create a software architecture that satisfies them, sufficient for testers to test those requirements and sufficient for stakeholders to have a general idea about how the finished product would work.\\
-		In order to better explain how to write a software that complies with all the \textbf{requirements} mentioned, this section is enriched with several \textbf{UML diagrams}, \textbf{mockups} and \textbf{Alloy Models}. 
-	\end{frame}
-	\begin{frame}{Section 3 - UML Diagrams}
-		In particular, this section is provided with a variety of diagrams: each type has a different purpose.\\
+	\begin{frame}{Tools}
+		We composed the documents we had to using some tools such as:
 		\begin{itemize}
-			\item\textbf{UML Use Case:} Show the \textbf{supported use cases} in relation with the \textbf{involved actors}.
-			\item\textbf{UML Sequence Diagram:} Indicating, for each \textbf{use case} required, the \textbf{interaction} between the \textbf{actors involved} and the \textbf{system}.
-			\item\textbf{UML State chart:} Explaining the \textbf{different states} in which:\\
+			\itemBold{TexStudio} to compile \LaTeX{} document.
+			\itemBold{StarUML, Astah Professional} to draw UML diagrams.
+			\itemBold{Alloy Analizer 4.2} to checking model consistency.
+			\itemBold{Balsamiq Mockups 3.0} to build mockups.
+			\itemBold{SourceTree} to allow team collaboration.
+			\itemBold{GitHub} for storing the project.
+			\itemBold{Skype} for team collaboration
+		\end{itemize}		
+	\end{frame}
+	\section{Requirement Analysis and Specification}
+	\subsection{Overview}
+	\begin{frame}{Overview}
+		The aim of \myTaxiService{} is to improve taxi service usage and management in a large city by simplifying the access of passengers to the service and optimizing the management of taxi queues.\par
+		Overall, \myTaxiService{} will lead to several benefits for taxi drivers, passengers and the government of the city.
+	\end{frame}
+	\begin{frame}{Goals}
+		This new service pretends to achieve various goals, such as:
+		\begin{itemize}
+			\itemBold{G5} A registered passenger can request a taxi ride when logged to the service.
+			\itemBold{G8} A registered passenger can cancel a taxi request if he is viewing it.
+			\itemBold{G15} A taxi driver can accept to give a ride to a registered user that requested one.
+			\itemBold{G17} A taxi driver can notify the end of a ride.
+			\itemBold{G19} A registered passenger can only take a ride from a taxi driver who is first in his current zone waiting queue.
+			\itemBold{G22} Further services can be built on the top of the existing one through	a set of given \textbf{API}s
+		\end{itemize}
+	\end{frame}
+	\begin{frame}{Actors - Taxi Drivers and Passengers}
+		Below are listed the three main actors that will interact with the application once deployed:
+		\begin{itemize}
+			\itemBold{Taxi Driver} Owner of a vehicle who is given the permission to provide the service.
+			\itemBold{Non Registered Passenger} A person that needs to move from a position	to another one among the city and wants to use \myTaxiService{} in order to do so, but has not registered yet to the service.
+			\itemBold{Registered Passenger} A formerly non registered passenger that has registered to \myTaxiService{}.
+		\end{itemize}
+	\end{frame}
+	\begin{frame}{Actors - Developers and Administrators}
+		Under a certain point of view, we could consider even an additional user class which is the one of the \textbf{Developers} that will be using the project \textbf{API}s to develop further services based on the provided ones.\par
+		Even the \textbf{Administrators} could be considered as a further user class of the system, but that is a bit out of the scope of this first part of the presentation, which is more intended to the explain things around the core business of \myTaxiService{}.
+	\end{frame}
+	\begin{frame}{Product Perspective}
+		Our \myTaxiService{} is a \textbf{completely new product}, not based on previous ones.\par 
+		It relies on \textbf{location data} received via \textbf{Internet} from each \textbf{taxi driver smartphone} application: all the involved smartphones already have a \textbf{GPS antenna} installed inside, that communicates their position to the service.\par
+		Being a partially \textbf{distributed application}, \myTaxiService{} requires a fully operative \textbf{Internet} connection in order to work properly, both on server and client side: \textbf{no service is intended to be provided offline}.
+	\end{frame}
+	\begin{frame}{More on Product Perspective}
+		This software provides three separate \textbf{End User Interfaces}, one of which is accessible via \textbf{Web}, and a dedicated \textbf{Administrator} interface that is only accessible through a \textbf{LAN}.\par
+		All the data generated by this software are stored in a database, accordingly to current normative and laws about privacy and personal data management.\par 
+		In addition, several \textbf{API}s are provided in order to allow further improvements and expansions of the software: in this way additional services like \textbf{Taxi Sharing} could be built on the top of the existing ones.
+	\end{frame}
+	\subsection{UML Diagrams}
+	\begin{frame}{UML Diagrams}
+		We provided a variety of UML diagrams, each type having a different purpose.
+		\begin{itemize}
+			\item\textbf{UML Use Case:} Shows the identified \textbf{use cases} in relation with the \textbf{involved actors}.
+			\item\textbf{UML Sequence Diagram:} Indicates, for each \textbf{use case} identified, the \textbf{interaction} between the \textbf{actors involved} and the \textbf{system}.
+			\item\textbf{UML State chart:} Explaining the \textbf{different states} in which:
 			\begin{itemize}
 				\item\textit{The Taxi driver (TD)} can be during the use of myTaxiService.
 				\item\textit{The application} can be during the Registered passenger (RP) navigation flow.
@@ -112,23 +116,27 @@
 			\item\textbf{UML Class diagram:} Pointing out the different \textbf{software entities} involved in the application and the \textbf{relationships} between them.
 		\end{itemize}
 	\end{frame}
-	\begin{frame}{Section 3 - Mockups}
-		In addition, are displayed the most important screens of the three available different GUI.
-		\begin{enumerate}
-			\item \textbf{myTaxiService} web site for \textbf{Registered} and \textbf{Non Registered Passengers}.
-			\item \textbf{myTaxiService} application for \textbf{Registered} and \textbf{Non Registered Passengers}.
-			\item \textbf{myTaxiService} application for \textbf{Taxi Drivers}.
-		\end{enumerate}
+	\begin{frame}{UML Use Case Diagram}
+		The \textbf{UML Use Case Diagram} is perhaps the most useful diagram that can be designed in the early phase of the development of a software project.
+		\showPercentImageNoCaption{../rasd/section_3/uml/UseCaseDiagram.png}{0.7}
 	\end{frame}
-	\begin{frame}{Section 3 - Alloy Models}
-		In order to meet the project assignment, we integrated our \textbf{RASD} with with some images of the models built with \textbf{Alloy Analyser 4.2} using the \textbf{Alloy} modeling language.\\
-		The tool didn't find a proof of the inconsistency of our \textbf{models}, and that along with the generation and verification of interesting worlds, made us aware of the \textbf{consistency} of those models within a reasonable level of confidence.\\
-		We integrated a screenshot for both of the generated worlds, one being simple and readable and the other being more “real”.
+	\begin{frame}{UML Class Diagram}
+		Furthermore we designed a \textbf{UML Class Diagram} for an early evaluation of the basic software components that consists in a sort of \textbf{Model} for \myTaxiService{}.
+		\showPercentImageNoCaption{../rasd/section_3/uml/ClassDiagram.png}{0.7}
+	\end{frame}
+	\subsection{Alloy}
+	\begin{frame}{Alloy}
+		Alongside the \textbf{UML Class Diagram} we built \textbf{Alloy Models} using the \textbf{Alloy} modeling language with the help of \textbf{Alloy Analyser 4.2}.\par
+		The tool didn't find a proof of the inconsistency of our \textbf{Alloy Models}, and that along with the \textbf{Automatic Generation} (and \textbf{Manual Verification}) of interesting worlds, made us aware of the \textbf{Consistency} of those models within a reasonable level of confidence.
+	\end{frame}
+	\begin{frame}{Alloy Simple World}
+		Here is an example of one among the \textbf{simplest world} we generated and double checked using both the \textbf{Alloy Analyzer 4.2} and \textbf{manual checking}.
+		\showPercentImageNoCaption{../rasd/section_3/alloy/simple_world_90.png}{0.9}
 	\end{frame}
 	\section{DD}
 	\subsection{Architectural Design}
 	\begin{frame}{Overview Diagram}
-		\showGeneralDiagram{Overview Diagram}{1.0}
+		\showGeneralDiagram{1.0}
 	\end{frame}
 	\begin{frame}{High level components and their interaction}
 		The system is composed of many \textbf{distributed} components: those will communicate with a \textbf{Client-Server} style and through \textbf{Point to Point} messaging system. 
@@ -207,10 +215,10 @@
 			\item Model
 		\end{itemize}
 	\end{frame}
-	\begin{frame}{Component View - Diagram}
+	\begin{frame}{Component View - UML Component Diagram}
 		This diagram maps system \textbf{features into different software components}, and show \textbf{how these components interact} in order to \textbf{deliver the required functionalities}.
 		It helps showing \textbf{Layers organization} and the \textbf{MVC implementation}.
-		\showComponentDiagram{UML Component Diagram}{0.4}
+		\showComponentDiagram{0.425}
 	\end{frame}
 	\begin{frame}{Deployment View}
 		The best way found to \textbf{deploy} the software components identified, is to consider \textbf{7 different nodes} (8 if considering the Google Server contacted to use Google Maps API):
@@ -221,9 +229,9 @@
 			\item Database Server
 		\end{itemize}
 	\end{frame}			
-	\begin{frame}{Deployment View - Diagram}
+	\begin{frame}{Deployment View - UML Deployment Diagram}
 		The following diagram shows how \textbf{software components} are mapped into the \textbf{physical system}.
-		\showDeploymentDiagram{UML Deployment Diagram}{0.3}
+		\showDeploymentDiagram{0.4125}
 	\end{frame}
 	\begin{frame}{Runtime View}
 		In this subsection are proposed some of the most meaningful \textbf{UML Sequence Diagrams} with respect to show how software components interacts in order to deliver a specific functionality.
@@ -243,10 +251,10 @@
 		\end{itemize}
 	\end{frame}
 	\begin{frame}{Taxi Driver Registration}
-		\showSequenceDiagram{admin_td_reg}{UML Sequence Diagram}{0.7}
+		\showSequenceDiagram{admin_td_reg}{0.75}
 	\end{frame}
 	\begin{frame}{Handling of a Taxi Reservation}
-		\showSequenceDiagram{tr_timer_expired}{UML Sequence Diagram}{0.9}
+		\showSequenceDiagram{tr_timer_expired}{0.9}
 	\end{frame}
 	\begin{frame}{Selected architectural styles and patterns - MVC}
 		Several architectural styles and patterns were chosen in order to build \myTaxiService{} as a modern software.
@@ -357,18 +365,18 @@
 			\item The \textbf{left} one contains \textbf{Taxi Requests}
 			\item The \textbf{right} one contains \textbf{Taxi Reservations}
 		\end{itemize} 
-		\showRPMockupImage{RegisteredPassengerHomePage}{Empty RP home page.}{0.65}
+		\showRPMockupImage{RegisteredPassengerHomePage}{Empty RP home page.}{0.775}
 	\end{frame}
 	\begin{frame} {Passenger Mockups - Request a Ride}
-		\showRPMockupImage{RequestTaxi}{Taxi request.}{0.9}
+		\showRPMockupImage{RequestTaxi}{Taxi request.}{1}
 	\end{frame}
 	\begin{frame} {Passenger Mockups - Reserve a Ride}
-		\showRPMockupImage{ReserveTaxi}{Taxi reservation.}{0.9}
+		\showRPMockupImage{ReserveTaxi}{Taxi reservation.}{1}
 	\end{frame}
 	\begin{frame} {Passenger Mockups - Personal Homepage with \textbf{Taxi Rides}}
 		Below is shown a common \textbf{state} with one \textbf{Taxi Request} active and one \textbf{Taxi Reservation} booked. 
 		Through the trash icon the user is allowed to cancel a selected \textbf{Taxi Ride}.
-		\showRPMockupImage{RegisteredPassengerHomePage2}{Populated RP home page.}{0.75}
+		\showRPMockupImage{RegisteredPassengerHomePage2}{Populated RP home page.}{0.85}
 	\end{frame}
 	\begin{frame}{Taxi Driver Mockups}
 		In the following slides are shown \textbf{the sequence of the graphical states} that the application has to \textbf{render} in order to make the \textbf{Taxi Driver} able to \textbf{handle} a \textbf{Taxi Ride}.
@@ -391,19 +399,19 @@
 		\end{itemize}
 	\end{frame}
 	\begin{frame} {Taxi Driver Mockups - No Requests}
-		\showTDMockupImage{TaxiDriverScreen3}{Taxi Driver Homepage without pending \textbf{Taxi Requests}.}{0.2}
+		\showTDMockupImage{TaxiDriverScreen3}{Taxi Driver Homepage without pending \textbf{Taxi Requests}.}{0.275}
 	\end{frame}
 	\begin{frame} {Taxi Driver Mockups - A Pending Request}
-		\showTDMockupImage{TaxiDriverScreen1}{Taxi Driver Homepage with a \textbf{PENDING} \textbf{Taxi Request}.}{0.2}
+		\showTDMockupImage{TaxiDriverScreen1}{Taxi Driver Homepage with a \textbf{PENDING} \textbf{Taxi Request}.}{0.275}
 	\end{frame}
 	\begin{frame} {Taxi Driver Mockups - A Active Request}
-		\showTDMockupImage{TaxiDriverScreen2}{Taxi Driver Homepage with an \textbf{ACTIVE} \textbf{Taxi Request}.}{0.2}
+		\showTDMockupImage{TaxiDriverScreen2}{Taxi Driver Homepage with an \textbf{ACTIVE} \textbf{Taxi Request}.}{0.275}
 	\end{frame}
 	\begin{frame}{Administrator Mockups}
 		The system architecture does not admit the usage of a textual interface (e.g. a CLI). 
 		For this reason we decided to \textbf{provide a thin desktop interface to the Administrator}.
 		Thus, the Administrator can perform his actions using an intuitive, fast, and lightweight GUI.
-		\showAdminMockupImage{admin_mockup_1}{Example of an Administrator screen.}{0.5}
+		\showAdminMockupImage{admin_mockup_1}{Example of an Administrator screen.}{0.575}
 	\end{frame}
 	\section{ITPD}
 	\begin{frame}{ITPD - Scope and Approach}
@@ -415,12 +423,12 @@
 	\end{frame}
 	\begin{frame}{ITPD - Entry Criteria}
 		Before starting the integration testing of any software component that has been designed for \textbf{myTaxiService} system, few points have to be underlined:
-		\begin{enumerate}
+		\begin{itemize}
 			 \item The \textbf{internal functions} of the considered component must be \textbf{unit tested} using an appropriate framework.
 			 \item We suppose that \textbf{Google Maps API} are well tested by \textbf{Google} and thus we can use them without testing any
 			 further.
 			 \item We assume that the \textbf{GPS Data Source} module in the \textbf{Taxi Driver View} uses the \textbf{GPS Drivers} of the underlying operating system that are already tested, and the same is assumed for the \textbf{Database Driver Adapter} in the \textbf{Model} referring to Database Drivers.
-		\end{enumerate}
+		\end{itemize}
 	\end{frame}
 	\begin{frame}{ITPD - Integration Testing Strategy}
 		We considered \textbf{Model}, \textbf{Controller} and \textbf{Views} as \textbf{Subsystems}. \\
@@ -444,23 +452,23 @@
 		We use \textbf{arrows} to link different blocks in order to explain the \textbf{precedence} between software components integration. \\
 		\medskip
 		Every \textbf{arrow} has the following meaning:
-		\begin{enumerate}
+		\begin{itemize}
 			\item It helps the tester to follow the right order in the whole integration process.
 			\item It starts from a block and ends into another block. The block from which it starts is called parent and the other one child. In particular \textbf{it means that the child block can be integrated only if its parents are already integrated}.
-		\end{enumerate}
+		\end{itemize}
 		\medskip
 		Moreover if a block is pointed by several arrows, its integration process can begin only when all the parent blocks are integrated.
 	\end{frame}
 	\begin{frame}{Software Integration Sequence}
 		We provided six \textbf{Software Integration Sequence Diagram}, one for each main part of \textbf{myTaxiService}.
-		\begin{enumerate}
+		\begin{itemize}
 			\item \textbf{Model Integration Sequence}
 			\item \textbf{Controller Business Components Integration Sequence}
 			\item \textbf{Controller Networking Components Integration Sequence}
 			\item \textbf{Passenger View Integration Sequence}
 			\item \textbf{Taxi Driver View Integration Sequence}
 			\item \textbf{Administrator View Integration Sequence}
-		\end{enumerate}
+		\end{itemize}
 	\end{frame}
 	\begin{frame}{Model Integration Sequence - Diagram}
 		[SCHEMA A BLOCCHI] anche uno solo ...
@@ -475,7 +483,6 @@
 		\medskip
 		In conclusion there is the need for some sample data to be in the \textbf{Database} and some sample \textbf{GPS data} are needed.
 	\end{frame}
-	
 	\section{PPD}
 	\begin{frame}{PPD}
 		The \textbf{Project Plan} consists in tables, \textbf{Gantt diagrams}, charts and natural language descriptions of the planning, scheduling and management of \textbf{myTaxiService} development. \\
