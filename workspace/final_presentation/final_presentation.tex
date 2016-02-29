@@ -423,12 +423,12 @@
 	\end{frame}
 	\begin{frame}{ITPD - Entry Criteria}
 		Before starting the integration testing of any software component that has been designed for \textbf{myTaxiService} system, few points have to be underlined:
-		\begin{enumerate}
+		\begin{itemize}
 			 \item The \textbf{internal functions} of the considered component must be \textbf{unit tested} using an appropriate framework.
 			 \item We suppose that \textbf{Google Maps API} are well tested by \textbf{Google} and thus we can use them without testing any
 			 further.
 			 \item We assume that the \textbf{GPS Data Source} module in the \textbf{Taxi Driver View} uses the \textbf{GPS Drivers} of the underlying operating system that are already tested, and the same is assumed for the \textbf{Database Driver Adapter} in the \textbf{Model} referring to Database Drivers.
-		\end{enumerate}
+		\end{itemize}
 	\end{frame}
 	\begin{frame}{ITPD - Integration Testing Strategy}
 		We considered \textbf{Model}, \textbf{Controller} and \textbf{Views} as \textbf{Subsystems}. \\
@@ -452,23 +452,23 @@
 		We use \textbf{arrows} to link different blocks in order to explain the \textbf{precedence} between software components integration. \\
 		\medskip
 		Every \textbf{arrow} has the following meaning:
-		\begin{enumerate}
+		\begin{itemize}
 			\item It helps the tester to follow the right order in the whole integration process.
 			\item It starts from a block and ends into another block. The block from which it starts is called parent and the other one child. In particular \textbf{it means that the child block can be integrated only if its parents are already integrated}.
-		\end{enumerate}
+		\end{itemize}
 		\medskip
 		Moreover if a block is pointed by several arrows, its integration process can begin only when all the parent blocks are integrated.
 	\end{frame}
 	\begin{frame}{Software Integration Sequence}
 		We provided six \textbf{Software Integration Sequence Diagram}, one for each main part of \textbf{myTaxiService}.
-		\begin{enumerate}
+		\begin{itemize}
 			\item \textbf{Model Integration Sequence}
 			\item \textbf{Controller Business Components Integration Sequence}
 			\item \textbf{Controller Networking Components Integration Sequence}
 			\item \textbf{Passenger View Integration Sequence}
 			\item \textbf{Taxi Driver View Integration Sequence}
 			\item \textbf{Administrator View Integration Sequence}
-		\end{enumerate}
+		\end{itemize}
 	\end{frame}
 	\begin{frame}{Model Integration Sequence - Diagram}
 		[SCHEMA A BLOCCHI] anche uno solo ...
