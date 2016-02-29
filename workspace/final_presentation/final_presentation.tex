@@ -9,23 +9,6 @@
 \newcommand{\showRPMockupImage}[3]{\showPercentImage{../rasd/section_3/mockups/png_passenger/#1.png}{#2}{#3}}
 \newcommand{\showTDMockupImage}[3]{\showPercentImage{../rasd/section_3/mockups/png_driver/#1.png}{#2}{#3}}
 \newcommand{\showAdminMockupImage}[3]{\showPercentImage{../dd/section_4/mockups/administrator_mockups/#1.png}{#2}{#3}}
-
-\newcommand{\testCase}[7]{%
-	\unbreakableBlock{%
-		\vspace{0.5em}
-		\paragraphnewline{Test Case T#1}
-		\newline
-		\begin{tabulary}{\linewidth}{Y{3cm}|X{8.25cm}}
-			\textbf{Test Item(s)} & #2 $\rightarrow$ #3 \\ \hline
-			\textbf{Input Specification} & #4 \\ \hline
-			\textbf{Output Specification} & #5 \\ \hline
-			\textbf{Environmental Needs} & #6 \\ \hline
-			\textbf{Target} & #7 \\
-		\end{tabulary}
-		\vspace{0.5em}%	
-	}%
-}
-
 %
 \title{Final Presentation}
 %
@@ -128,7 +111,7 @@
 	\end{frame}
 	\subsection{Alloy}
 	\begin{frame}{Alloy}
-		Alongside the \textbf{UML Class Diagram} we built \textbf{Alloy Models} using the \textbf{Alloy} modeling language with the help of \textbf{Alloy Analyser 4.2}.\par
+		Alongside the \textbf{UML Class Diagram} we built \textbf{Alloy Models} using the \textbf{Alloy} modeling language with the help of \textbf{Alloy Analyzer 4.2}.\par
 		The tool didn't find a proof of the inconsistency of our \textbf{Alloy Models}, and that along with the \textbf{Automatic Generation} (and \textbf{Manual Verification}) of interesting worlds, made us aware of the \textbf{Consistency} of those models within a reasonable level of confidence.
 	\end{frame}
 	\begin{frame}{Alloy Simple World}
