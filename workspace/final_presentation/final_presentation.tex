@@ -7,6 +7,23 @@
 \newcommand{\showRPMockupImage}[3]{\showPercentImage{../rasd/section_3/mockups/png_passenger/#1.png}{#2}{#3}}
 \newcommand{\showTDMockupImage}[3]{\showPercentImage{../rasd/section_3/mockups/png_driver/#1.png}{#2}{#3}}
 \newcommand{\showAdminMockupImage}[3]{\showPercentImage{../dd/section_4/mockups/administrator_mockups/#1.png}{#2}{#3}}
+
+\newcommand{\testCase}[7]{%
+	\unbreakableBlock{%
+		\vspace{0.5em}
+		\paragraphnewline{Test Case T#1}
+		\newline
+		\begin{tabulary}{\linewidth}{Y{3cm}|X{8.25cm}}
+			\textbf{Test Item(s)} & #2 $\rightarrow$ #3 \\ \hline
+			\textbf{Input Specification} & #4 \\ \hline
+			\textbf{Output Specification} & #5 \\ \hline
+			\textbf{Environmental Needs} & #6 \\ \hline
+			\textbf{Target} & #7 \\
+		\end{tabulary}
+		\vspace{0.5em}%	
+	}%
+}
+
 %
 \title{Final Presentation}
 %
@@ -397,20 +414,33 @@
 		\showAdminMockupImage{admin_mockup_1}{Example of an Administrator screen.}{0.575}
 	\end{frame}
 	\section{ITPD}
-	\begin{frame}{ITPD}
-		This document is mainly based on the \textbf{Design Document}.In fact the purpose of the \textbf{Integration Test Plan Document} is to clearly state the order in which the software components identified in the \textbf{Component View} of the \textbf{DD} have to be integrated one with each other in order to guarantee a well tested final software.
+	\begin{frame}{ITPD - Scope and Approach}
+		This document is mainly based on the \textbf{Design Document}. \\
+		\medskip
+		In fact the purpose of the \textbf{Integration Test Plan Document} is to clearly state the order in which the software components identified in the \textbf{Component View} of the \textbf{DD} have to be integrated one with each other in order to guarantee a well tested final software.\\
+		\medskip
+		The \textbf{bottom-up integration testing approach} has been chosen, because for a medium sized project like \textbf{myTaxiService}, it is best to proceed step by step in a careful yet coherent integration strategy.\\
 	\end{frame}
-	\begin{frame}{Entry Criteria}
-		Before starting the integration testing of any software component that has been designed for \textbf{myTaxiService} system, the internal functions of the considered component must be unit tested using an appropriate framework.\par
-		In particular every software component in the \textbf{Component View} section of the \textbf{Design Document} has to be integrated.\par
-		Moreover we suppose that \textbf{Google Maps API} are well tested by \textbf{Google} and thus we can use them without testing any further.\par
-		For what concerns the other external software elements, we assume that the \textbf{GPS Data Source} module in the \textbf{Taxi Driver View} uses the \textbf{GPS Drivers} of the underlying operating system that are already tested, and the same is assumed for the \textbf{Database Driver Adapter} in the \textbf{Model} referring to Database Drivers.
+	\begin{frame}{ITPD - Entry Criteria}
+		Before starting the integration testing of any software component that has been designed for \textbf{myTaxiService} system, few points have to be underlined:
+		\begin{enumerate}
+			 \item The \textbf{internal functions} of the considered component must be \textbf{unit tested} using an appropriate framework.
+			 \item We suppose that \textbf{Google Maps API} are well tested by \textbf{Google} and thus we can use them without testing any
+			 further.
+			 \item We assume that the \textbf{GPS Data Source} module in the \textbf{Taxi Driver View} uses the \textbf{GPS Drivers} of the underlying operating system that are already tested, and the same is assumed for the \textbf{Database Driver Adapter} in the \textbf{Model} referring to Database Drivers.
+		\end{enumerate}
 	\end{frame}
-	\begin{frame}{Integration Testing Strategy}
-		The \textbf{bottom-up integration testing approach} has been chosen, because for a medium sized project like \textbf{myTaxiService}, it is best to proceed step by step in a careful yet coherent integration strategy.\par
-		The usage of the selected approach will forge a robust application with efforts concentrated in testing the \textbf{Server} parts before all.
+	\begin{frame}{ITPD - Integration Testing Strategy}
+		We considered \textbf{Model}, \textbf{Controller} and \textbf{Views} as \textbf{Subsystems}. \\
+		\medskip
+		\begin{itemize}
+			\itemBold{Model} In order to test its relevant functionalities, the tester has to simulate the behaviour of the \textbf{Controller} with a dedicated \textbf{Driver}. \\
+			In this way, the \textbf{Model} will be completely integration tested by simulating all the possible actions that the \textbf{Controller} can do on it.
+			\itemBold{Controller} The test sequence adopts the same strategy used to test the \textbf{Model}. The only difference from a higher point of view, is that in this case the \textbf{Controller} is tested using the already tested \textbf{Model} and using a \textbf{Driver} in order to simulate the \textbf{Views} actions.
+			\itemBold{Views} The \textbf{Taxi Driver View}, \textbf{Passenger View} and \textbf{Administrator View} are tested using the already tested \textbf{Controller} and \textbf{Model} and no component behavior is simulated using \textbf{Stubs} or \textbf{Drivers}.
+		\end{itemize}
 	\end{frame}
-	\begin{frame}{Convention adopted - Blocks}
+	\begin{frame}{ITPD - Convention adopted - Blocks}
 		\begin{itemize}
 			\itemBold{Yellow} This block is not dependent on any lower level component in \textbf{myTaxiService} and therefore it is integrated as a starting point in the current diagram.
 			\itemBold{Blue} This block is going to be fully integrated on the top of its parents.
@@ -418,14 +448,43 @@
 			\itemBold{Red} This block represents a stub component, that replaces the real component mocking its functionalities.
 		\end{itemize}
 	\end{frame}
-	\begin{frame}{Convention adopted - Arrows}
-		It is a precedence symbol.\par
-		It helps the tester to follow the right order in the whole integration process.\par
-		It starts from a block and ends into another block. The block from which it starts is called parent and the other one child. In particular it means that the child block can be integrated only if its parents are already integrated.\par
+	\begin{frame}{ITPD - Convention adopted - Arrows}
+		We use \textbf{arrows} to link different blocks in order to explain the \textbf{precedence} between software components integration. \\
+		\medskip
+		Every \textbf{arrow} has the following meaning:
+		\begin{enumerate}
+			\item It helps the tester to follow the right order in the whole integration process.
+			\item It starts from a block and ends into another block. The block from which it starts is called parent and the other one child. In particular \textbf{it means that the child block can be integrated only if its parents are already integrated}.
+		\end{enumerate}
+		\medskip
 		Moreover if a block is pointed by several arrows, its integration process can begin only when all the parent blocks are integrated.
+	\end{frame}
+	\begin{frame}{Software Integration Sequence}
+		We provided six \textbf{Software Integration Sequence Diagram}, one for each main part of \textbf{myTaxiService}.
+		\begin{enumerate}
+			\item \textbf{Model Integration Sequence}
+			\item \textbf{Controller Business Components Integration Sequence}
+			\item \textbf{Controller Networking Components Integration Sequence}
+			\item \textbf{Passenger View Integration Sequence}
+			\item \textbf{Taxi Driver View Integration Sequence}
+			\item \textbf{Administrator View Integration Sequence}
+		\end{enumerate}
+	\end{frame}
+	\begin{frame}{Model Integration Sequence - Diagram}
+		[SCHEMA A BLOCCHI] anche uno solo ...
+	\end{frame}
+	\begin{frame}{Program Stubs And Data Required}
+		In order to perform the proposed testing strategy, we need few \textbf{Stubs} in order to make the not yet integrated components work, because we want to respect the \textbf{Bottom-Up strategy}.
+		\medskip
+		To better catch the need for introducing \textbf{Stubs}, an example of a specific Stub usage is proposed below.\\
+		In order to integrate the \textbf{Location Manager} in I8T4 we need a component that mocks \textbf{TD Locator} functionalities in a predefined way. \\
+		To respect the \textbf{Bottom-Up strategy}, given the fact that the \textbf{TD Locator} is a component of the \textbf{TD View}, we have decided to introduce its \textbf{Stub}. \\
+		The real \textbf{TD Locator} will be integrated when the integration procedure arrives to \textbf{TD View}.\\
+		\medskip
+		In conclusion there is the need for some sample data to be in the \textbf{Database} and some sample \textbf{GPS data} are needed.
 	\end{frame}
 	\section{PPD}
 	\begin{frame}{PPD}
-		PPD
+		The \textbf{Project Plan} consists in tables, \textbf{Gantt diagrams}, charts and natural language descriptions of the planning, scheduling and management of \textbf{myTaxiService} development.
 	\end{frame}
 \end{document}
