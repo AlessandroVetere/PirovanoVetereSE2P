@@ -57,9 +57,9 @@
 	\begin{frame}{Goals}
 		This new service pretends to achieve various goals, such as:
 		\begin{itemize}
-			\itemBold{G5} A registered passenger can request a taxi ride when logged to the service.
-			\itemBold{G8} A registered passenger can cancel a taxi request if he is viewing it.
-			\itemBold{G15} A taxi driver can accept to give a ride to a registered user that requested one.
+			\itemBold{G5} A registered passenger can request a taxi ride when logged into the service.
+			\itemBold{G8} A registered passenger can cancel a taxi request if he/she is viewing it.
+			\itemBold{G15} A taxi driver can accept to give a ride to a registered passenger that requested one.
 			\itemBold{G17} A taxi driver can notify the end of a ride.
 			\itemBold{G19} A registered passenger can only take a ride from a taxi driver who is first in his current zone waiting queue.
 			\itemBold{G22} Further services can be built on the top of the existing one through	a set of given \textbf{API}s
@@ -92,30 +92,30 @@
 		We provided a variety of UML diagrams, each type having a different purpose.
 		\begin{itemize}
 			\item\textbf{UML Use Case:} Shows the identified \textbf{use cases} in relation with the \textbf{involved actors}.
-			\item\textbf{UML Sequence Diagram:} Indicates, for each \textbf{use case} identified, the \textbf{interaction} between the \textbf{actors involved} and the \textbf{system}.
-			\item\textbf{UML State chart:} Explaining the \textbf{different states} in which:
+			\item\textbf{UML Sequence Diagram:} Indicates, for a given \textbf{use case}, the \textbf{interaction} between the \textbf{actors involved} and the \textbf{system}.
+			\item\textbf{UML State chart:} Explains the \textbf{different states} in which:
 			\begin{itemize}
 				\item\textit{The Taxi driver (TD)} can be during the use of myTaxiService.
-				\item\textit{The application} can be during the Registered passenger (RP) navigation flow.
+				\item\textit{The Passenger Application} can be during the Registered passenger (RP) navigation flow.
 			\end{itemize}
-			\item\textbf{UML Class diagram:} Pointing out the different \textbf{software entities} involved in the application and the \textbf{relationships} between them.
+			\item\textbf{UML Class diagram:} Points out the different \textbf{software entities} involved in the application and the \textbf{relationships} between them.
 		\end{itemize}
 	\end{frame}
 	\begin{frame}{UML Use Case Diagram}
-		The \textbf{UML Use Case Diagram} is perhaps the most useful diagram that can be designed in the early phase of the development of a software project.
+		This is perhaps the most useful diagram that can be designed in the early phase of the development of a software project.
 		\showPercentImageNoCaption{../rasd/section_3/uml/UseCaseDiagram.png}{0.7}
 	\end{frame}
 	\begin{frame}{UML Class Diagram}
-		Furthermore we designed a \textbf{UML Class Diagram} for an early evaluation of the basic software components that consists in a sort of \textbf{Model} for \myTaxiService{}.
+		Furthermore we designed a class diagram for an early evaluation of the basic software components that consists in a sort of \textbf{Model} for \myTaxiService{}.
 		\showPercentImageNoCaption{../rasd/section_3/uml/ClassDiagram.png}{0.7}
 	\end{frame}
 	\subsection{Alloy}
 	\begin{frame}{Alloy}
 		Alongside the \textbf{UML Class Diagram} we built \textbf{Alloy Models} using the \textbf{Alloy} modeling language with the help of \textbf{Alloy Analyzer 4.2}.\par
-		The tool didn't find a proof of the inconsistency of our \textbf{Alloy Models}, and that along with the \textbf{Automatic Generation} (and \textbf{Manual Verification}) of interesting worlds, made us aware of the \textbf{Consistency} of those models within a reasonable level of confidence.
+		The tool didn't find a proof of the inconsistency of our \textbf{Alloy Models}, and that along with the \textbf{Automatic Generation} (and \textbf{Manual Verification}) of interesting worlds, made us aware of the \textbf{Consistency} of those \textbf{Models} within a reasonable level of confidence.
 	\end{frame}
 	\begin{frame}{Alloy Simple World}
-		Here is an example of one among the \textbf{simplest world} we generated and double checked using both the \textbf{Alloy Analyzer 4.2} and \textbf{manual checking}.
+		Here is an example of one among the \textbf{simplest world} we generated and double checked using both \textbf{Alloy Analyzer 4.2} and \textbf{manual checking}.
 		\showPercentImageNoCaption{../rasd/section_3/alloy/simple_world_90.png}{0.9}
 	\end{frame}
 	\section{Design}
@@ -258,7 +258,7 @@
 	\begin{frame}{Selected architectural styles and patterns - Client-Server}
 		The \textbf{Client-Server} style is used for all the requests done by the various clients connected to the Web Server of \myTaxiService{}.
 		The \textbf{Taxi Driver Application} and the \textbf{Passenger Application} can use a standardized \textbf{Client-Server} protocol via \textbf{HTTPS} that follows the principle of a \textbf{RESTful Service}.
-		The \textbf{Administrator} application its connected via \textbf{RPC} to the \textbf{Web Server} and can perform more critical requests, like the registration of a new \textbf{Taxi Driver} into the system.
+		The \textbf{Administrator} application it's connected via \textbf{RPC} to the \textbf{Web Server} and can perform more critical requests, like the registration of a new \textbf{Taxi Driver} into the system.
 		It is required that the \textbf{Administrator} application opens a \textbf{RPC} connection to the \textbf{Web Server} to start the communication.
 	\end{frame}
 	\begin{frame}{Selected architectural styles and patterns - Point to Point}
@@ -420,12 +420,13 @@
 		We considered \textbf{Model}, \textbf{Controller} and \textbf{Views} as \textbf{Subsystems}. \\
 		\medskip
 		\begin{itemize}
-			\itemBold{Model} In order to test its relevant functionalities, the tester has to simulate the behavior of the \textbf{Controller} with a dedicated \textbf{Driver}. \\
-			In this way, the \textbf{Model} will be completely integration tested by simulating all the possible actions that the \textbf{Controller} can do on it.
-			\itemBold{Controller} The test sequence adopts the same strategy used to test the \textbf{Model}. The only difference from a higher point of view, is that in this case the \textbf{Controller} is tested using the already tested \textbf{Model} and using a \textbf{Driver} in order to simulate the \textbf{Views} actions.
-			\itemBold{Views} The \textbf{Taxi Driver View}, \textbf{Passenger View} and \textbf{Administrator View} are tested using the already tested \textbf{Controller} and \textbf{Model} and no component behavior is simulated using \textbf{Stubs} or \textbf{Drivers}.
+			\itemBold{Model} In order to test its relevant functionalities, the tester has to use the related part of the \textbf{Controller} to interact with the \textbf{Model}.\par
+			In this way, the \textbf{Model} will be completely integration tested by exploring all the possible actions that the \textbf{Controller} can do on it.
+			\itemBold{Controller} The test sequence adopts the same strategy used to test the \textbf{Model}. The only difference from a higher point of view, is that in this case the \textbf{Controller} is tested on the basis of the already tested \textbf{Model} using \textbf{Views} actions.
+			\itemBold{Views} The \textbf{Taxi Driver View}, \textbf{Passenger View} and \textbf{Administrator View} are tested above the already tested \textbf{Controller} and \textbf{Model} using \textbf{UI} testing automators or manual testing.
 		\end{itemize}
 	\end{frame}
+	\subsection{Integration Sequence Diagrams}
 	\begin{frame}{Convention adopted - Blocks}
 		\begin{itemize}
 			\itemBold{Yellow} This block is not dependent on any lower level component in \myTaxiService{} and therefore it is integrated as a starting point in the current diagram.
@@ -445,7 +446,6 @@
 		\medskip
 		Moreover if a block is pointed by several arrows, its integration process can begin only when all the parent blocks are integrated.
 	\end{frame}
-	\subsection{Integration Sequence Diagrams}
 	\begin{frame}{Subsystems Integration Sequence}
 		\showPercentImageNoCaption{./itpd1.png}{0.75}
 	\end{frame}	
@@ -468,11 +468,11 @@
 		\showPercentImageNoCaption{./itpd3.png}{0.6}
 	\end{frame}
 	\begin{frame}{Program Stubs And Data Required}
-		In order to perform the proposed testing strategy, we need few \textbf{Stubs} in order to make the not yet integrated components work, because we want to respect the \textbf{Bottom-Up strategy}.
+		In order to perform the proposed testing strategy, we need few \textbf{Stubs} in order to make the not yet integrated components work, because we want to respect the \textbf{bottom-up strategy}.\par
 		\medskip
 		To better catch the need for introducing \textbf{Stubs}, an example of a specific Stub usage is proposed below.\\
-		In order to integrate the \textbf{Location Manager} in I8T4 we need a component that mocks \textbf{TD Locator} functionalities in a predefined way. \\
-		To respect the \textbf{Bottom-Up strategy}, given the fact that the \textbf{TD Locator} is a component of the \textbf{TD View}, we have decided to introduce its \textbf{Stub}. \\
+		In order to integrate the \textbf{Location Manager} in I8T4 we need a component that mocks \textbf{TD Locator} functionalities in a predefined way.\\
+		Given the fact that the \textbf{TD Locator} is a component of the \textbf{TD View}, we have decided to introduce its \textbf{Stub}.\\
 		The real \textbf{TD Locator} will be integrated when the integration procedure arrives to \textbf{TD View}.\\
 		\medskip
 		In conclusion there is the need for some sample data to be in the \textbf{Database} and some sample \textbf{GPS data} are needed.
