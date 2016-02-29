@@ -461,8 +461,11 @@
 		\medskip
 		Moreover if a block is pointed by several arrows, its integration process can begin only when all the parent blocks are integrated.
 	\end{frame}
-	\begin{frame}{Software Integration Sequence}
-		We provided six \textbf{Software Integration Sequence Diagram}, one for each main part of \textbf{myTaxiService}.
+	\begin{frame}{Subsystems Integration Sequence}
+		\showPercentImageNoCaption{./itpd1.png}{0.75}
+	\end{frame}	
+	\begin{frame}{Software Components Integration Sequence}
+		We provided six \textbf{Software Components Integration Sequence Diagrams}:
 		\begin{itemize}
 			\item \textbf{Model Integration Sequence}
 			\item \textbf{Controller Business Components Integration Sequence}
@@ -471,12 +474,14 @@
 			\item \textbf{Taxi Driver View Integration Sequence}
 			\item \textbf{Administrator View Integration Sequence}
 		\end{itemize}
+		We are going to show only the first two diagrams for sake of brevity.
 	\end{frame}
-	\begin{frame}{Integration Sequence}
-		\showPercentImageNoCaption{./itpd1.png}{0.75}
-	\end{frame}
+
 	\begin{frame}{Model Integration Sequence}
 		\showPercentImageNoCaption{./itpd2.png}{0.85}
+	\end{frame}
+	\begin{frame}{Controller Business Logic Integration Sequence}
+		\showPercentImageNoCaption{./itpd3.png}{0.6}
 	\end{frame}
 	\begin{frame}{Program Stubs And Data Required}
 		In order to perform the proposed testing strategy, we need few \textbf{Stubs} in order to make the not yet integrated components work, because we want to respect the \textbf{Bottom-Up strategy}.
@@ -488,7 +493,7 @@
 		\medskip
 		In conclusion there is the need for some sample data to be in the \textbf{Database} and some sample \textbf{GPS data} are needed.
 	\end{frame}
-	\section{PPD}
+	\section{Project Plan}
 	\begin{frame}{PPD}
 		The \textbf{Project Plan} consists in tables, \textbf{Gantt diagrams}, charts and natural language descriptions of the planning, scheduling and management of \textbf{myTaxiService} development. \\
 		\medskip
