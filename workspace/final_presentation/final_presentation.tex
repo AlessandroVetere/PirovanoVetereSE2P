@@ -1,5 +1,7 @@
 \documentclass{../common/latex_classes/pdf_presentation}
 %
+\usepackage{pgfgantt}
+%
 \newcommand{\showGeneralDiagram}[1]{\showPercentImageNoCaption{../dd/section_2/general_diagram_dd.png}{#1}}
 \newcommand{\showComponentDiagram}[1]{\showPercentImageNoCaption{../dd/section_2/component_diagram/component_diagram.png}{#1}}
 \newcommand{\showDeploymentDiagram}[1]{\showPercentImageNoCaption{../dd/section_2/deployment_diagram/deployment_diagram.png}{#1}}
@@ -470,8 +472,11 @@
 			\item \textbf{Administrator View Integration Sequence}
 		\end{itemize}
 	\end{frame}
-	\begin{frame}{Model Integration Sequence - Diagram}
-		[SCHEMA A BLOCCHI] anche uno solo ...
+	\begin{frame}{Integration Sequence}
+		\showPercentImageNoCaption{./itpd1.png}{0.75}
+	\end{frame}
+	\begin{frame}{Model Integration Sequence}
+		\showPercentImageNoCaption{./itpd2.png}{0.85}
 	\end{frame}
 	\begin{frame}{Program Stubs And Data Required}
 		In order to perform the proposed testing strategy, we need few \textbf{Stubs} in order to make the not yet integrated components work, because we want to respect the \textbf{Bottom-Up strategy}.
@@ -486,5 +491,46 @@
 	\section{PPD}
 	\begin{frame}{PPD}
 		The \textbf{Project Plan} consists in tables, \textbf{Gantt diagrams}, charts and natural language descriptions of the planning, scheduling and management of \textbf{myTaxiService} development.
+	\end{frame}
+	\begin{frame}{Tasks}
+		\begin{tabulary}{\linewidth\tymin=70pt}{Y{2cm}|Y{6cm}|Y{2.25cm}}
+			\textbf{Task} & \textbf{Description} & \textbf{Completed?}\\ \hline
+			T1a & RASD - Writing & Yes \\ \hline
+			T1b & RASD - Presentation & Yes \\ \hline
+			T2a & DD - Writing & Yes \\ \hline
+			T2b & DD - Presentation & Yes \\ \hline
+			T3a & ITPD - Writing & Yes \\ \hline
+			T3b & ITPD - Presentation & Yes \\ \hline
+			T4a & PPD - Writing & Yes \\ \hline
+			T4b & Final Presentation & No \\ \hline
+			T5 & Implementation & No \\ \hline
+			T6 & Unit Testing & No \\ \hline
+			T7 & Integration Testing & No \\ \hline
+			T8 & System Testing & No \\ \hline
+			T9 & User Acceptance - Alpha Testing & No \\ \hline
+			T10 & User Acceptance - Beta Testing & No \\ \hline
+			T11 & Release To Market & No \\
+		\end{tabulary}
+	\end{frame}
+	\begin{frame}{Gantt}
+		\begin{ganttchart}[hgrid=true, x unit=1.8mm, vgrid={*3{draw=none}, dotted}, y unit chart=3.75mm, link bulge=1]{1}{56}
+			\gantttitle{2015}{12} \gantttitle{2016}{44} \\
+			\gantttitlelist{10,...,12}{4}\gantttitlelist{1,...,11}{4}\\
+			\ganttbar{T1a}{3}{5} \\
+			\ganttlinkedbar{T1b}{6}{5} \\
+			\ganttlinkedbar{T2a}{8}{9} \\
+			\ganttlinkedbar{T2b}{10}{9} \\
+			\ganttlinkedbar{T3a}{14}{15} \\
+			\ganttlinkedbar{T3b}{16}{15} \\
+			\ganttlinkedbar{T4a}{16}{17} \\
+			\ganttlinkedbar{T4b}{18}{17} \\
+			\ganttlinkedbar{T5}{18}{32} \\
+			\ganttlinkedbar{T6}{33}{36} \\
+			\ganttlinkedbar{T7}{37}{40} \\
+			\ganttlinkedbar{T8}{41}{44} \\
+			\ganttlinkedbar{T9}{45}{48} \\
+			\ganttlinkedbar{T10}{49}{52} \\
+			\ganttlinkedbar{T11}{53}{52}
+		\end{ganttchart}
 	\end{frame}
 \end{document}
