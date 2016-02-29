@@ -62,27 +62,51 @@
 		\end{enumerate}
 		It was intended to be as much compilant with \textbf{IEEE Std 830-1998} as possible, but still there were deviations from the standard to better fit our project assignment (i.e. the inclusion of Alloy models...).
 	\end{frame}
-	\begin{frame}{Section 1 - Introduction}
-		It is a general overview of the \textbf{RASD} document.\\
-		Furthermore it specifically provides both a description of high-level software functionalities, and a set of information about the organization of the document.\\
-		In particular, this section specifies the \textbf{goals} and the \textbf{actors} involved in the application.\\ 
-		Moreover, it helps to better understand the used \textbf{acronyms}, \textbf{abbreviations}, and gives a lot of useful \textbf{definitions}.
+	\subsection{Overview}
+	\begin{frame}{Overview}
+		The aim of \myTaxiService{} is to improve taxi service usage and management in a large city by simplifying the access of passengers to the service and optimizing the management of taxi queues.\par
+		Overall, \myTaxiService{} will lead to several benefits for taxi drivers, passengers and the government of the city.
 	\end{frame}
-	\begin{frame}{Section 2 - Overall Description}
-		The aim of this section is describing the \textbf{product} that is going to be developed at a sufficient level of details.\\
-		Moreover, it contains descriptions of all the \textbf{environmental} \textbf{elements} and \textbf{constraints} that are going to interact with the product during the development and once deployed.\\
-		It serves also as a \textbf{background} for the description of software requirements, and helps in making them easier to understand for the public of the document (i.e. engineers, stakeholders…).
-	\end{frame}
-	\begin{frame}{Section 3 - Specific requirements}
-		In this section are treated the \textbf{software requirements} at a level of detail sufficient for developers and engineers to create a software architecture that satisfies them, sufficient for testers to test those requirements and sufficient for stakeholders to have a general idea about how the finished product would work.\\
-		In order to better explain how to write a software that complies with all the \textbf{requirements} mentioned, this section is enriched with several \textbf{UML diagrams}, \textbf{mockups} and \textbf{Alloy Models}. 
-	\end{frame}
-	\begin{frame}{Section 3 - UML Diagrams}
-		In particular, this section is provided with a variety of diagrams: each type has a different purpose.\\
+	\begin{frame}{Goals}
+		This new service pretends to achieve various goals, such as:
 		\begin{itemize}
-			\item\textbf{UML Use Case:} Show the \textbf{supported use cases} in relation with the \textbf{involved actors}.
-			\item\textbf{UML Sequence Diagram:} Indicating, for each \textbf{use case} required, the \textbf{interaction} between the \textbf{actors involved} and the \textbf{system}.
-			\item\textbf{UML State chart:} Explaining the \textbf{different states} in which:\\
+			\itemBold{G5} A registered passenger can request a taxi ride when logged to the service.
+			\itemBold{G8} A registered passenger can cancel a taxi request if he is viewing it.
+			\itemBold{G15} A taxi driver can accept to give a ride to a registered user that requested one.
+			\itemBold{G17} A taxi driver can notify the end of a ride.
+			\itemBold{G19} A registered passenger can only take a ride from a taxi driver who is first in his current zone waiting queue.
+			\itemBold{G22} Further services can be built on the top of the existing one through	a set of given \textbf{API}s
+		\end{itemize}
+	\end{frame}
+	\begin{frame}{Actors - Taxi Drivers and Passengers}
+		Below are listed the three main actors that will interact with the application once deployed:
+		\begin{itemize}
+			\itemBold{Taxi Driver} Owner of a vehicle who is given the permission to provide the service.
+			\itemBold{Non Registered Passenger} A person that needs to move from a position	to another one among the city and wants to use \myTaxiService{} in order to do so, but has not registered yet to the service.
+			\itemBold{Registered Passenger} A formerly non registered passenger that has registered to \myTaxiService{}.
+		\end{itemize}
+	\end{frame}
+	\begin{frame}{Actors - Developers and Administrators}
+		Under a certain point of view, we could consider even an additional user class which is the one of the \textbf{Developers} that will be using the project \textbf{API}s to develop further services based on the provided ones.\par
+		Even the \textbf{Administrators} could be considered as a further user class of the system, but that is a bit out of the scope of this first part of the presentation, which is more intended to the explain things around the core business of \myTaxiService{}.
+	\end{frame}
+	\begin{frame}{Product Perspective}
+		Our \myTaxiService{} is a \textbf{completely new product}, not based on previous ones.\par 
+		It relies on \textbf{location data} received via \textbf{Internet} from each \textbf{taxi driver smartphone} application: all the involved smartphones already have a \textbf{GPS antenna} installed inside, that communicates their position to the service.\par
+		Being a partially \textbf{distributed application}, \myTaxiService{} requires a fully operative \textbf{Internet} connection in order to work properly, both on server and client side: \textbf{no service is intended to be provided offline}.
+	\end{frame}
+	\begin{frame}{More on Product Perspective}
+		This software provides three separate \textbf{End User Interfaces}, one of which is accessible via \textbf{Web}, and a dedicated \textbf{Administrator} interface that is only accessible through a \textbf{LAN}.\par
+		All the data generated by this software are stored in a database, accordingly to current normative and laws about privacy and personal data management.\par 
+		In addition, several \textbf{API}s are provided in order to allow further improvements and expansions of the software: in this way additional services like \textbf{Taxi Sharing} could be built on the top of the existing ones.
+	\end{frame}
+	\subsection{UML Diagrams}
+	\begin{frame}{UML Diagrams}
+		We provided a variety of UML diagrams, each type having a different purpose.
+		\begin{itemize}
+			\item\textbf{UML Use Case:} Shows the identified \textbf{use cases} in relation with the \textbf{involved actors}.
+			\item\textbf{UML Sequence Diagram:} Indicates, for each \textbf{use case} identified, the \textbf{interaction} between the \textbf{actors involved} and the \textbf{system}.
+			\item\textbf{UML State chart:} Explaining the \textbf{different states} in which:
 			\begin{itemize}
 				\item\textit{The Taxi driver (TD)} can be during the use of myTaxiService.
 				\item\textit{The application} can be during the Registered passenger (RP) navigation flow.
@@ -90,18 +114,22 @@
 			\item\textbf{UML Class diagram:} Pointing out the different \textbf{software entities} involved in the application and the \textbf{relationships} between them.
 		\end{itemize}
 	\end{frame}
-	\begin{frame}{Section 3 - Mockups}
-		In addition, are displayed the most important screens of the three available different GUI.
-		\begin{enumerate}
-			\item \textbf{myTaxiService} web site for \textbf{Registered} and \textbf{Non Registered Passengers}.
-			\item \textbf{myTaxiService} application for \textbf{Registered} and \textbf{Non Registered Passengers}.
-			\item \textbf{myTaxiService} application for \textbf{Taxi Drivers}.
-		\end{enumerate}
+	\begin{frame}{UML Use Case Diagram}
+		The \textbf{UML Use Case Diagram} is perhaps the most useful diagram that can be designed in the early phase of the development of a software project.
+		\showPercentImage{../rasd/section_3/uml/UseCaseDiagram.png}{UML Use Case Diagram}{0.65}
 	\end{frame}
-	\begin{frame}{Section 3 - Alloy Models}
-		In order to meet the project assignment, we integrated our \textbf{RASD} with with some images of the models built with \textbf{Alloy Analyser 4.2} using the \textbf{Alloy} modeling language.\\
-		The tool didn't find a proof of the inconsistency of our \textbf{models}, and that along with the generation and verification of interesting worlds, made us aware of the \textbf{consistency} of those models within a reasonable level of confidence.\\
-		We integrated a screenshot for both of the generated worlds, one being simple and readable and the other being more “real”.
+	\begin{frame}{UML Class Diagram}
+		Furthermore we designed a \textbf{UML Class Diagram} for an early evaluation of the basic software components that consists in a sort of \textbf{Model} for \myTaxiService{}.
+		\showPercentImage{../rasd/section_3/uml/ClassDiagram.png}{UML Class Diagram}{0.675}
+	\end{frame}
+	\subsection{Alloy}
+	\begin{frame}{Alloy}
+		Alongside the \textbf{UML Class Diagram} we built \textbf{Alloy Models} using the \textbf{Alloy} modeling language with the help of \textbf{Alloy Analyser 4.2}.\par
+		The tool didn't find a proof of the inconsistency of our \textbf{Alloy Models}, and that along with the \textbf{Automatic Generation} (and \textbf{Manual Verification}) of interesting worlds, made us aware of the \textbf{Consistency} of those models within a reasonable level of confidence.
+	\end{frame}
+	\begin{frame}{Alloy Simple World}
+		Here is an example of one among the \textbf{simplest world} we generated and double checked using both the \textbf{Alloy Analyzer 4.2} and \textbf{manual checking}.
+		\showPercentImage{../rasd/section_3/alloy/simple_world_90.png}{Alloy Simple World}{0.9}
 	\end{frame}
 	\section{DD}
 	\subsection{Architectural Design}
