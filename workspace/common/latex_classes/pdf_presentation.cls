@@ -157,6 +157,11 @@
 	}
 }
 \newcommand{\unbreakableItem}[1]{\unbreakableBlock{\item #1}}
+\newcommand{\showPercentImageNoCaption}[2]{%
+	\unbreakableCenteredBlockSpaced{%
+		\includegraphics[width=#2\textwidth,keepaspectratio=true]{#1}
+	}
+}
 \newcommand{\showPercentImage}[3]{%
 	\unbreakableCenteredBlockSpaced{%
 		\includegraphics[width=#3\textwidth,keepaspectratio=true]{#1}
