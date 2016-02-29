@@ -10,6 +10,23 @@
 \newcommand{\showRPMockupImage}[3]{\showPercentImage{../rasd/section_3/mockups/png_passenger/#1.png}{#2}{#3}}
 \newcommand{\showTDMockupImage}[3]{\showPercentImage{../rasd/section_3/mockups/png_driver/#1.png}{#2}{#3}}
 \newcommand{\showAdminMockupImage}[3]{\showPercentImage{../dd/section_4/mockups/administrator_mockups/#1.png}{#2}{#3}}
+
+\newcommand{\testCase}[7]{%
+	\unbreakableBlock{%
+		\vspace{0.5em}
+		\paragraphnewline{Test Case T#1}
+		\newline
+		\begin{tabulary}{\linewidth}{Y{3cm}|X{8.25cm}}
+			\textbf{Test Item(s)} & #2 $\rightarrow$ #3 \\ \hline
+			\textbf{Input Specification} & #4 \\ \hline
+			\textbf{Output Specification} & #5 \\ \hline
+			\textbf{Environmental Needs} & #6 \\ \hline
+			\textbf{Target} & #7 \\
+		\end{tabulary}
+		\vspace{0.5em}%	
+	}%
+}
+
 %
 \title{Final Presentation}
 %
@@ -389,20 +406,33 @@
 		\showAdminMockupImage{admin_mockup_1}{Example of an Administrator screen.}{0.5}
 	\end{frame}
 	\section{ITPD}
-	\begin{frame}{ITPD}
-		This document is mainly based on the \textbf{Design Document}.In fact the purpose of the \textbf{Integration Test Plan Document} is to clearly state the order in which the software components identified in the \textbf{Component View} of the \textbf{DD} have to be integrated one with each other in order to guarantee a well tested final software.
-	\end{frame}
-	\begin{frame}{Entry Criteria}
-		Before starting the integration testing of any software component that has been designed for \textbf{myTaxiService} system, the internal functions of the considered component must be unit tested using an appropriate framework.\\
-		In particular every software component in the \textbf{Component View} section of the \textbf{Design Document} has to be integrated.\\
-		Moreover we suppose that \textbf{Google Maps API} are well tested by \textbf{Google} and thus we can use them without testing any further.\\
-		For what concerns the other external software elements, we assume that the \textbf{GPS Data Source} module in the \textbf{Taxi Driver View} uses the \textbf{GPS Drivers} of the underlying operating system that are already tested, and the same is assumed for the \textbf{Database Driver Adapter} in the \textbf{Model} referring to Database Drivers.
-	\end{frame}
-	\begin{frame}{Integration Testing Strategy}
+	\begin{frame}{ITPD - Scope and Approach}
+		This document is mainly based on the \textbf{Design Document}. \\
+		\medskip
+		In fact the purpose of the \textbf{Integration Test Plan Document} is to clearly state the order in which the software components identified in the \textbf{Component View} of the \textbf{DD} have to be integrated one with each other in order to guarantee a well tested final software.\\
+		\medskip
 		The \textbf{bottom-up integration testing approach} has been chosen, because for a medium sized project like \textbf{myTaxiService}, it is best to proceed step by step in a careful yet coherent integration strategy.\\
-		The usage of the selected approach will forge a robust application with efforts concentrated in testing the \textbf{Server} parts before all.\\
 	\end{frame}
-	\begin{frame}{Convention adopted - Blocks}
+	\begin{frame}{ITPD - Entry Criteria}
+		Before starting the integration testing of any software component that has been designed for \textbf{myTaxiService} system, few points have to be underlined:
+		\begin{enumerate}
+			 \item The \textbf{internal functions} of the considered component must be \textbf{unit tested} using an appropriate framework.
+			 \item We suppose that \textbf{Google Maps API} are well tested by \textbf{Google} and thus we can use them without testing any
+			 further.
+			 \item We assume that the \textbf{GPS Data Source} module in the \textbf{Taxi Driver View} uses the \textbf{GPS Drivers} of the underlying operating system that are already tested, and the same is assumed for the \textbf{Database Driver Adapter} in the \textbf{Model} referring to Database Drivers.
+		\end{enumerate}
+	\end{frame}
+	\begin{frame}{ITPD - Integration Testing Strategy}
+		We considered \textbf{Model}, \textbf{Controller} and \textbf{Views} as \textbf{Subsystems}. \\
+		\medskip
+		\begin{itemize}
+			\itemBold{Model} In order to test its relevant functionalities, the tester has to simulate the behaviour of the \textbf{Controller} with a dedicated \textbf{Driver}. \\
+			In this way, the \textbf{Model} will be completely integration tested by simulating all the possible actions that the \textbf{Controller} can do on it.
+			\itemBold{Controller} The test sequence adopts the same strategy used to test the \textbf{Model}. The only difference from a higher point of view, is that in this case the \textbf{Controller} is tested using the already tested \textbf{Model} and using a \textbf{Driver} in order to simulate the \textbf{Views} actions.
+			\itemBold{Views} The \textbf{Taxi Driver View}, \textbf{Passenger View} and \textbf{Administrator View} are tested using the already tested \textbf{Controller} and \textbf{Model} and no component behavior is simulated using \textbf{Stubs} or \textbf{Drivers}.
+		\end{itemize}
+	\end{frame}
+	\begin{frame}{ITPD - Convention adopted - Blocks}
 		\begin{itemize}
 			\itemBold{Yellow} This block is not dependent on any lower level component in \textbf{myTaxiService} and therefore it is integrated as a starting point in the current diagram.
 			\itemBold{Blue} This block is going to be fully integrated on the top of its parents.
@@ -410,184 +440,44 @@
 			\itemBold{Red} This block represents a stub component, that replaces the real component mocking its functionalities.
 		\end{itemize}
 	\end{frame}
-	\begin{frame}{Convention adopted - Arrows}
-		It is a precedence symbol. \\
-		It helps the tester to follow the right order in the whole integration process.\\
-		It starts from a block and ends into another block. The block from which it starts is called parent and the other one child. In particular it means that the child block can be integrated only if its parents are already integrated. \\
+	\begin{frame}{ITPD - Convention adopted - Arrows}
+		We use \textbf{arrows} to link different blocks in order to explain the \textbf{precedence} between software components integration. \\
+		\medskip
+		Every \textbf{arrow} has the following meaning:
+		\begin{enumerate}
+			\item It helps the tester to follow the right order in the whole integration process.
+			\item It starts from a block and ends into another block. The block from which it starts is called parent and the other one child. In particular \textbf{it means that the child block can be integrated only if its parents are already integrated}.
+		\end{enumerate}
+		\medskip
 		Moreover if a block is pointed by several arrows, its integration process can begin only when all the parent blocks are integrated.
 	\end{frame}
-	\begin{frame}
-		%
-		\begin{center}
-			\begin{tikzpicture}[node distance=2cm, auto]
-			% Place nodes
-			\node [block, fill=yellow!20] (model) {Model};
-			\node [block, right of=model, node distance=2.5cm] (controller) {Controller};
-			\node [block, right of=controller, node distance=3cm] (passenger_view) {Passenger View};
-			\node [block, above of=passenger_view] (taxi_driver_view) {Taxi Driver View};
-			\node [block, below of=passenger_view] (administrator_view) {Administrator View};
-			% Draw edges
-			\path [line] (model) -- (controller);
-			\path [line] (controller) -- (passenger_view);
-			\path [line] (controller) |- (taxi_driver_view);
-			\path [line] (controller) |- (administrator_view);
-			\end{tikzpicture}
-			\captionof{figure}{Software Integration Sequence Diagram}
-		\end{center}
-		%
+	\begin{frame}{Software Integration Sequence}
+		We provided six \textbf{Software Integration Sequence Diagram}, one for each main part of \textbf{myTaxiService}.
+		\begin{enumerate}
+			\item \textbf{Model Integration Sequence}
+			\item \textbf{Controller Business Components Integration Sequence}
+			\item \textbf{Controller Networking Components Integration Sequence}
+			\item \textbf{Passenger View Integration Sequence}
+			\item \textbf{Taxi Driver View Integration Sequence}
+			\item \textbf{Administrator View Integration Sequence}
+		\end{enumerate}
 	\end{frame}
-	\begin{frame}
-		%
-		\begin{center}
-			\begin{tikzpicture}[node distance=2cm, auto]
-			% Place nodes
-			\node [block, fill=yellow!20] (datbase_driver_adapter) {Database Driver Adapter};
-			\node [block, right of=datbase_driver_adapter, node distance=5cm] (taxi_driver_db_adapter) {Taxi Driver DB Adapter};
-			\node [block, above of=taxi_driver_db_adapter] (taxi_ride_db_adapter) {Taxi Ride DB Adapter};
-			\node [block, above of=taxi_ride_db_adapter] (passenger_db_adapter) {Passenger DB Adapter};
-			\node [block, below of=taxi_driver_db_adapter] (zone_db_adapter) {Zone DB Adapter};
-			\node [block, below of=zone_db_adapter] (queue_db_adapter) {Queue DB Adapter};
-			\node [block, right of=taxi_driver_db_adapter, node distance=5cm, fill=green!20] (model_query_service) {Model Query Service};
-			% Draw edges
-			\path [line] (datbase_driver_adapter) -- (taxi_driver_db_adapter);
-			\path [line] (datbase_driver_adapter) |- (taxi_ride_db_adapter);
-			\path [line] (datbase_driver_adapter) |- (passenger_db_adapter);
-			\path [line] (datbase_driver_adapter) |- (zone_db_adapter);
-			\path [line] (datbase_driver_adapter) |- (queue_db_adapter);
-			\path [line] (taxi_driver_db_adapter) -- (model_query_service);
-			\path [line] (taxi_ride_db_adapter) -| (model_query_service);
-			\path [line] (passenger_db_adapter) -| (model_query_service);
-			\path [line] (zone_db_adapter) -| (model_query_service);
-			\path [line] (queue_db_adapter) -| (model_query_service);
-			\end{tikzpicture}
-			\captionof{figure}{Software Integration Sequence Diagram - Model}
-		\end{center}
-		%
+	\begin{frame}{Model Integration Sequence - Diagram}
+		[SCHEMA A BLOCCHI] anche uno solo ...
 	\end{frame}
-	\begin{frame}
-		%
-		\begin{center}
-			\begin{tikzpicture}[node distance=2cm, auto]
-			% Place nodes
-			\node [block, fill=green!20] (query_manager) {Query Manager};
-			\node [block, above of=query_manager, fill=green!20] (model_query_service) {Model Query Service};
-			\node [block, below of=query_manager] (taxi_sharing_manager) {Taxi Sharing Manager};
-			\node [block, left of=taxi_sharing_manager, node distance=3.5cm, fill=green!20] (profile_manager) {Profile Manager};
-			\node [block, left of=query_manager, node distance=3.5cm, fill=green!20] (session_manager) {Session Manager};
-			\node [block, right of=taxi_sharing_manager, node distance=3.5cm] (location_manager) {Location Manager};
-			\node [block, above of=location_manager, fill=red!20] (taxi_driver_view_stub) {TD Locator Stub};
-			\node [block, below of=location_manager, fill=green!20] (taxi_ride_manager) {Taxi Ride Manager};
-			\node [block, below of=taxi_sharing_manager, fill=green!20] (queue_manager) {Queue Manager};
-			\node [block, left of=queue_manager, fill=red!20, node distance=3.5cm] (dispatcher_stub) {Dispatcher Stub};
-			\node [block, below of=queue_manager, fill=green!20] (taxi_driver_manager) {Taxi Driver Manager};
-			% Draw edges
-			\path [line] (model_query_service) -- (query_manager);
-			\path [line] (query_manager) -- (taxi_sharing_manager);
-			\path [line] (query_manager) -- (profile_manager);
-			\path [line] (query_manager) -- (session_manager);
-			\path [line] (query_manager) -- (location_manager);
-			\path [line] (taxi_driver_view_stub) -- (location_manager);
-			\path [line] (location_manager) -- (queue_manager);
-			\path [line] (dispatcher_stub) -- (queue_manager);
-			\path [line] (dispatcher_stub) -- (taxi_driver_manager);
-			\path [line] (location_manager) -- (taxi_ride_manager);
-			\path [line] (queue_manager) -- (taxi_driver_manager);
-			\end{tikzpicture}
-			\captionof{figure}{Software Integration Sequence Diagram - Controller Business Components}
-		\end{center}
-		%
+	\begin{frame}{Program Stubs And Data Required}
+		In order to perform the proposed testing strategy, we need few \textbf{Stubs} in order to make the not yet integrated components work, because we want to respect the \textbf{Bottom-Up strategy}.
+		\medskip
+		To better catch the need for introducing \textbf{Stubs}, an example of a specific Stub usage is proposed below.\\
+		In order to integrate the \textbf{Location Manager} in I8T4 we need a component that mocks \textbf{TD Locator} functionalities in a predefined way. \\
+		To respect the \textbf{Bottom-Up strategy}, given the fact that the \textbf{TD Locator} is a component of the \textbf{TD View}, we have decided to introduce its \textbf{Stub}. \\
+		The real \textbf{TD Locator} will be integrated when the integration procedure arrives to \textbf{TD View}.\\
+		\medskip
+		In conclusion there is the need for some sample data to be in the \textbf{Database} and some sample \textbf{GPS data} are needed.
 	\end{frame}
-	\begin{frame}
-		%
-		\begin{center}
-			\begin{tikzpicture}[node distance=2cm, auto]
-			% Place nodes
-			\node [block, fill=green!20] (dispatcher) {Dispatcher};
-			\node [block, above of=dispatcher, fill=red!20] (td_view_stub) {TD Receiver Stub};
-			\node [block, below of=dispatcher, fill=red!20] (passenger_view_stub) {PS Receiver Stub};
-			\node [block, right of=td_view_stub, node distance=4cm, fill=green!20] (queue_manager) {Queue Manager};
-			\node [block, below of=queue_manager, fill=green!20] (taxi_driver_manager) {Taxi Driver Manager};
-			\node [block, below of=taxi_driver_manager, fill=green!20] (session_manager) {Session Manager};
-			\node [block, right of=taxi_driver_manager, node distance=4cm, fill=green!20] (restful_service) {RESTful Service};
-			\node [block, below of=restful_service, fill=green!20] (profile_manager) {Profile Manager};
-			\node [block, above of=restful_service, fill=green!20] (taxi_ride_manager) {Taxi Ride Manager};		
-			% Draw edges
-			\path [line] (taxi_driver_manager) -- (restful_service);
-			\path [line] (taxi_ride_manager) -- (restful_service);
-			\path [line] (session_manager) -- (restful_service);
-			\path [line] (profile_manager) -- (restful_service);
-			\path [line] (dispatcher) -- (taxi_driver_manager);
-			\path [line] (dispatcher) -- (queue_manager);
-			\path [line] (td_view_stub) -- (dispatcher);
-			\path [line] (passenger_view_stub) -- (dispatcher);
-			\end{tikzpicture}
-			\captionof{figure}{Software Integration Sequence Diagram - Controller Networking Components}
-		\end{center}
-		%
-	\end{frame}
-	\begin{frame}
-		%
-		\begin{center}
-			\begin{tikzpicture}[node distance=2cm, auto]
-			% Place nodes
-			\node [block] (psreq) {PS Request Creator};
-			\node [block, fill=green!20, left of=psreq, node distance=3.5cm] (restful_service) {RESTful Service};
-			\node [block, right of=psreq, above of=psreq] (psw) {PS Web View};
-			\node [block, right of=psreq, below of=psreq] (papp) {PS Application View};
-			\node [block, below of=psw, right of=psw] (psr) {PS Receiver};
-			\node [block, right of=psr, fill=green!20, node distance=2.5cm] (dp) {Dispatcher};
-			% Draw edges
-			\path [line] (restful_service) -- (psreq);
-			\path [line] (psreq) |- (psw);
-			\path [line] (psreq) |- (papp);
-			\path [line] (psw) -| (psr);
-			\path [line] (papp) -| (psr);
-			\path [line] (psr) -- (dp);
-			\end{tikzpicture}
-			\captionof{figure}{Software Integration Sequence Diagram - Passenger View}
-		\end{center}
-		%
-	\end{frame}
-	\begin{frame}
-		%
-		\begin{center}
-			\begin{tikzpicture}[node distance=4.5cm, auto]
-			% Place nodes	
-			\node [block] (treq) {TD Request Creator};
-			\node [block, above of=treq, fill=green!20, node distance=2cm] (rs) {RESTful Service};
-			\node [block, right of=treq] (tapp) {TD Application View};
-			\node [block, right of=tapp] (tr) {TD Receiver};
-			\node [block, below of=treq, node distance=2cm,, fill=yellow!20] (gps) {GPS Data Source};
-			\node [block, right of=gps] (tl) {TD Locator};
-			\node [block, below of=tr, fill=green!20, node distance=2cm] (dispatcher) {Dispatcher};
-			% Draw edges
-			\path [line] (rs) -- (treq);
-			\path [line] (treq) -- (tapp);
-			\path [line] (tapp) -- (tr);
-			\path [line] (gps) -- (tl);
-			\path [line] (tr) -- (dispatcher);
-			\path [line] (tl) -- (dispatcher);
-			\end{tikzpicture}
-			\captionof{figure}{Software Integration Sequence Diagram - Taxi Driver View}
-		\end{center}
-		%
-	\end{frame}
-	\begin{frame}
-		%
-		\begin{center}
-			\begin{tikzpicture}[node distance=2cm, auto]
-			% Place nodes	
-			\node [block, fill=green!20] (qm) {Query Manager};
-			\node [block, right of=qm, node distance=4cm] (admw) {Administrator View};
-			% Draw edges
-			\path [line] (qm) -- (admw);
-			\end{tikzpicture}
-			\captionof{figure}{Software Integration Sequence Diagram - Administrator View}
-		\end{center}
-		%
-	\end{frame}
+	
 	\section{PPD}
 	\begin{frame}{PPD}
-		PPD
+		The \textbf{Project Plan} consists in tables, \textbf{Gantt diagrams}, charts and natural language descriptions of the planning, scheduling and management of \textbf{myTaxiService} development.
 	\end{frame}
 \end{document}
