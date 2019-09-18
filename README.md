@@ -12,4 +12,4 @@ myTaxiService Related Productions:
  - Project Plan Document: [Link to PDF v1.0](./Deliveries/PPD/myTaxiService_PPD_v1.0_Pirovano_Vetere.pdf)
  
 Other Productions:
- - Inspection Document: [Link to PDF v1.0] (./Deliveries/ID/ID_v1.0_Pirovano_Vetere.pdf)
+ - Inspection Document: [Link to PDF v1.0](./Deliveries/ID/ID_v1.0_Pirovano_Vetere.pdf)
